@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "AQt4VjxRfYFxMYm2vf1yCLAG5gPoRzLIwZrPHnC4bZQ=",
+  "Source": "mipBackend",
+  "BasePath": "_content/mipBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
