@@ -3,7 +3,7 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { ToasterComponent, ToasterPlacement } from '@coreui/angular';
+import { ToasterComponent, ToasterPlacement } from '@coreui/angular-pro';
 import { AppToastComponent } from './toast-simple/toast.component';
 
 export enum Colors {

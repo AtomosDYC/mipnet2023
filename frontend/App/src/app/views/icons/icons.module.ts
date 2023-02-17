@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CardModule, GridModule } from '@coreui/angular';
+import { CardModule, GridModule } from '@coreui/angular-pro';
 import { IconModule } from '@coreui/icons-angular';
 
 import { CoreUIIconsComponent } from './coreui-icons.component';

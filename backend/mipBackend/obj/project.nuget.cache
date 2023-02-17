@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lLDlxuLCmwiWAlp3ZwRLdXcxp6kTAVDotkoQiiugNw2qRhfGbwPTYPLr/2wMoVFG3gMr7/HCS6sot6OkMP2ZCg==",
+  "dgSpecHash": "Bt5G3IIxnsdgGshq7rDKKEHZbgZSBS6jN42LkCFrCaRSmbZsoTARVWOTHMycCxWwC5NgiUTDx5o2NvqM2pio2Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\56987\\OneDrive\\Escritorio\\proyectos\\curso-angular\\mipNet 7\\backend\\mipBackend\\mipBackend.csproj",
+  "projectFilePath": "C:\\Users\\56987\\OneDrive\\Escritorio\\proyectos\\mip2023\\mipnet2023\\backend\\mipBackend\\mipBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\56987\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\56987\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

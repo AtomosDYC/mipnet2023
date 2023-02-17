@@ -1,0 +1,58 @@
+<app-spinner *ngIf="loading$ | async"></app-spinner>
+
+<c-card class="mb-4">
+  <c-card-body>
+    <h5 cCardTitle>Mantenimiento de Region</h5>
+    <c-row>
+      <c-col>
+
+
+        <form cForm
+                      [formGroup]="regionForm"
+                      (submit)="onguardarNuevo()">
+
+
+
+         <div class="form-group mb-3">
+            <label cLabel for="txtnombre">Nombre</label>
+            <input cFormControl
+                      id="txtnombre"
+                      formControlName="nombre"
+                      placeholder="Nombre Region"
+                      type="text"
+                      class="form-control"
+
+                />
+          </div>
+          <div class="mb-3">
+            <label cLabel for="txtdescripcion">Descripción</label>
+            <textarea cFormControl
+                      id="txtdescripcion"
+                      formControlName="descripcion"
+                      rows="3"
+                      class="form-control"
+
+                      ></textarea>
+          </div>
+          <div class="mb-3">
+            <label cLabel for="txtorden">Orden en el listado</label>
+            <input cFormControl
+                      id="txtorden"
+                      class="form-control"
+                      type="text"
+                      formControlName="orden"
+                      />
+          </div>
+          <div class="mb-3">
+            <button cButton color="secondary" [routerLink]="['/dashboard/region/list']">Cancelar</button>  &nbsp;&nbsp;
+            <button cButton color="primary" type="submit" [disabled]="regionForm.invalid">+ Guardar</button>
+
+
+          </div>
+          </form>
+
+      </c-col>
+    </c-row>
+
+  </c-card-body>
+</c-card>

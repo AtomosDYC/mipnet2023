@@ -13,8 +13,8 @@ namespace mipBackend.Models
         public string? Direccion { get; set; }
 
         [Required]
-        [Column(TypeName ="decimal(18,4)")]
-        public decimal Precio { get; set; }
+       // [Column(TypeName ="int(18,4)")]
+        public int Precio { get; set; }
 
         public string? Picture { get; set; }
 

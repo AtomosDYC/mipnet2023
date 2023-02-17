@@ -2,8 +2,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    "baseUrl": "src",
+    "noImplicitAny": false,
+    "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -13,6 +14,9 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    /* Experimental Options */
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,

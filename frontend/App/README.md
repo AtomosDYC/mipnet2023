@@ -6,10 +6,10 @@
 [![NPM downloads][npm-coreui-download]][npm-coreui]  
 ![angular](https://img.shields.io/badge/angular-^14.2.0-lightgrey.svg?style=flat-square&logo=angular)
 
-[npm-coreui-angular]: https://www.npmjs.com/package/@coreui/angular
-[npm-coreui-angular-badge]: https://img.shields.io/npm/v/@coreui/angular.png?style=flat-square
-[npm-coreui-angular-badge-next]: https://img.shields.io/npm/v/@coreui/angular/next?style=flat-square&color=red
-[npm-coreui-angular-download]: https://img.shields.io/npm/dm/@coreui/angular.svg?style=flat-square
+[npm-coreui-angular]: https://www.npmjs.com/package/@coreui/angular-pro
+[npm-coreui-angular-badge]: https://img.shields.io/npm/v/@coreui/angular-pro.png?style=flat-square
+[npm-coreui-angular-badge-next]: https://img.shields.io/npm/v/@coreui/angular-pro/next?style=flat-square&color=red
+[npm-coreui-angular-download]: https://img.shields.io/npm/dm/@coreui/angular-pro.svg?style=flat-square
 [npm-coreui]: https://www.npmjs.com/package/@coreui/coreui
 [npm-coreui-badge]: https://img.shields.io/npm/v/@coreui/coreui.png?style=flat-square
 [npm-coreui-download]: https://img.shields.io/npm/dm/@coreui/coreui.svg?style=flat-square

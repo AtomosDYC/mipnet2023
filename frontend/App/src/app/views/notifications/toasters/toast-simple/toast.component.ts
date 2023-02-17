@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2 } from '@angular/core';
 
-import { ToastComponent, ToasterService } from '@coreui/angular';
+import { ToastComponent, ToasterService } from '@coreui/angular-pro';
 
 @Component({
   selector: 'app-toast-simple',

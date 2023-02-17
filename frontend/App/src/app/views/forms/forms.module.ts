@@ -11,7 +11,7 @@ import {
   GridModule,
   ListGroupModule,
   SharedModule
-} from '@coreui/angular';
+} from '@coreui/angular-pro';
 
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
 

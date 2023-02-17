@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { CardModule, GridModule } from '@coreui/angular';
-import { ChartjsModule } from '@coreui/angular-chartjs';
+import { CardModule, GridModule } from '@coreui/angular-pro';
+import { ChartjsModule } from '@coreui/angular-pro-chartjs';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../components';

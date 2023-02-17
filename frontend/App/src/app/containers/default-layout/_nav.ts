@@ -1,4 +1,4 @@
-import { INavData } from '@coreui/angular';
+import { INavData } from '@coreui/angular-pro';
 
 export const navItems: INavData[] = [
   {
@@ -11,234 +11,99 @@ export const navItems: INavData[] = [
     }
   },
   {
+    name: 'Inmueble',
+    url: '/dashboard/inmueble/list',
+  },
+
+  {
     title: true,
-    name: 'Theme'
+    name: 'CUENTAS DE USUARIO'
   },
   {
-    name: 'Colors',
+    name: 'cuentas de usuario',
     url: '/theme/colors',
     iconComponent: { name: 'cil-drop' }
   },
   {
-    name: 'Typography',
-    url: '/theme/typography',
-    linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-pencil' }
-  },
-  {
-    name: 'Components',
+    name: 'ADMINISTRADOR',
     title: true
   },
+
   {
-    name: 'Base',
+    name: 'Usuarios',
     url: '/base',
     iconComponent: { name: 'cil-puzzle' },
     children: [
       {
-        name: 'Accordion',
-        url: '/base/accordion'
-      },
-      {
-        name: 'Breadcrumbs',
-        url: '/base/breadcrumbs'
-      },
-      {
-        name: 'Cards',
-        url: '/base/cards'
-      },
-      {
-        name: 'Carousel',
-        url: '/base/carousel'
-      },
-      {
-        name: 'Collapse',
-        url: '/base/collapse'
-      },
-      {
-        name: 'List Group',
-        url: '/base/list-group'
-      },
-      {
-        name: 'Navs & Tabs',
-        url: '/base/navs'
-      },
-      {
-        name: 'Pagination',
-        url: '/base/pagination'
-      },
-      {
-        name: 'Placeholder',
-        url: '/base/placeholder'
-      },
-      {
-        name: 'Popovers',
-        url: '/base/popovers'
-      },
-      {
-        name: 'Progress',
-        url: '/base/progress'
-      },
-      {
-        name: 'Spinners',
-        url: '/base/spinners'
-      },
-      {
-        name: 'Tables',
-        url: '/base/tables'
-      },
-      {
-        name: 'Tabs',
-        url: '/base/tabs'
-      },
-      {
-        name: 'Tooltips',
-        url: '/base/tooltips'
-      }
-    ]
-  },
-  {
-    name: 'Buttons',
-    url: '/buttons',
-    iconComponent: { name: 'cil-cursor' },
-    children: [
-      {
-        name: 'Buttons',
-        url: '/buttons/buttons'
-      },
-      {
-        name: 'Button groups',
-        url: '/buttons/button-groups'
-      },
-      {
-        name: 'Dropdowns',
-        url: '/buttons/dropdowns'
+        name: 'usuarios',
+        url: '/'
       },
     ]
   },
   {
-    name: 'Forms',
-    url: '/forms',
-    iconComponent: { name: 'cil-notes' },
+    name: 'CONFIGURACIÓN',
+    title: true
+  },
+  {
+    name: 'Permisos de Usuarios',
+    url: '/',
+    iconComponent: { name: 'cil-puzzle' },
     children: [
       {
-        name: 'Form Control',
-        url: '/forms/form-control'
+        name: 'Roles',
+        url: '/dashboard/roles/list'
       },
       {
-        name: 'Select',
-        url: '/forms/select'
+        name: 'Plantillas Perfiles',
+        url: '/dashboard/plantilla/list'
       },
-      {
-        name: 'Checks & Radios',
-        url: '/forms/checks-radios'
-      },
-      {
-        name: 'Range',
-        url: '/forms/range'
-      },
-      {
-        name: 'Input Group',
-        url: '/forms/input-group'
-      },
-      {
-        name: 'Floating Labels',
-        url: '/forms/floating-labels'
-      },
-      {
-        name: 'Layout',
-        url: '/forms/layout'
-      },
-      {
-        name: 'Validation',
-        url: '/forms/validation'
-      }
     ]
   },
   {
-    name: 'Charts',
-    url: '/charts',
-    iconComponent: { name: 'cil-chart-pie' }
-  },
-  {
-    name: 'Icons',
-    iconComponent: { name: 'cil-star' },
-    url: '/icons',
+    name: 'Ubicación',
+    url: '/',
+    iconComponent: { name: 'cil-puzzle' },
     children: [
       {
-        name: 'CoreUI Free',
-        url: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
+        name: 'Región',
+        url: '/dashboard/region/list'
       },
       {
-        name: 'CoreUI Flags',
-        url: '/icons/flags'
+        name: 'Comuna',
+        url: '/dashboard/comuna/list'
       },
       {
-        name: 'CoreUI Brands',
-        url: '/icons/brands'
-      }
+        name: 'Zona',
+        url: '/dashboard/zona/list'
+      },
     ]
   },
   {
-    name: 'Notifications',
-    url: '/notifications',
-    iconComponent: { name: 'cil-bell' },
+    name: 'Especie',
+    url: '/',
+    iconComponent: { name: 'cil-puzzle' },
     children: [
       {
-        name: 'Alerts',
-        url: '/notifications/alerts'
+        name: 'Tipo Especie',
+        url: '/dashboard/tipoespecie/list'
       },
       {
-        name: 'Badges',
-        url: '/notifications/badges'
+        name: 'Medida de Umbrales',
+        url: '/dashboard/medidaumbral/list'
       },
       {
-        name: 'Modal',
-        url: '/notifications/modal'
+        name: 'Umbrales de Daño',
+        url: '/'
+      },
+
+      {
+        name: 'Estados de Daños',
+        url: '/dashboard/estadodanio/list'
       },
       {
-        name: 'Toast',
-        url: '/notifications/toasts'
-      }
-    ]
-  },
-  {
-    name: 'Widgets',
-    url: '/widgets',
-    iconComponent: { name: 'cil-calculator' },
-    badge: {
-      color: 'info',
-      text: 'NEW'
-    }
-  },
-  {
-    title: true,
-    name: 'Extras'
-  },
-  {
-    name: 'Pages',
-    url: '/login',
-    iconComponent: { name: 'cil-star' },
-    children: [
-      {
-        name: 'Login',
-        url: '/login'
+        name: 'Reglas de Especie',
+        url: '/'
       },
-      {
-        name: 'Register',
-        url: '/register'
-      },
-      {
-        name: 'Error 404',
-        url: '/404'
-      },
-      {
-        name: 'Error 500',
-        url: '/500'
-      }
     ]
   },
 ];

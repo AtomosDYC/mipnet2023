@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BadgeModule, CardModule, GridModule } from '@coreui/angular';
-import { ChartjsModule } from '@coreui/angular-chartjs';
+import { BadgeModule, CardModule, GridModule } from '@coreui/angular-pro';
+import { ChartjsModule } from '@coreui/angular-pro-chartjs';
 
 import { ChartsComponent } from './charts.component';
 import { ChartsRoutingModule } from './charts-routing.module';

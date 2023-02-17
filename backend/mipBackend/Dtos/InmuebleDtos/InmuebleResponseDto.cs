@@ -8,7 +8,7 @@
 
         public string? Direccion { get; set; }
 
-        public decimal Precio { get; set; }
+        public int Precio { get; set; }
 
         public string? Picture { get; set; }
 

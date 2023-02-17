@@ -155,6 +155,3582 @@ namespace mipBackend.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("mipBackend.Models.Blk01Bloqueo", b =>
+                {
+                    b.Property<int>("Blk01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("BLK01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Blk01Llave"), 1L, 1);
+
+                    b.Property<int?>("Blk01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("BLK01_Activo");
+
+                    b.Property<string>("Blk01Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("BLK01_Descripcion");
+
+                    b.Property<int?>("Blk01MaxDuraciondia")
+                        .HasColumnType("int")
+                        .HasColumnName("BLK01_MaxDuraciondia");
+
+                    b.Property<int?>("Blk01MinDuraciondia")
+                        .HasColumnType("int")
+                        .HasColumnName("BLK01_MinDuraciondia");
+
+                    b.Property<string>("Blk01NombreBloqueo")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("BLK01_NombreBloqueo");
+
+                    b.Property<int?>("Blk01Permanente")
+                        .HasColumnType("int")
+                        .HasColumnName("BLK01_Permanente");
+
+                    b.Property<int?>("Blk02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("BLK02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Blk01Llave");
+
+                    b.HasIndex("Blk02Llave");
+
+                    b.ToTable("BLK01_Bloqueos", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Blk02TipoBloqueo", b =>
+                {
+                    b.Property<int>("Blk02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("BLK02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Blk02Llave"), 1L, 1);
+
+                    b.Property<int?>("Blk02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("BLK02_Activo");
+
+                    b.Property<string>("Blk02Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("BLK02_Descripcion");
+
+                    b.Property<string>("Blk02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("BLK02_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Blk02Llave");
+
+                    b.ToTable("BLK02_TipoBloqueo", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Blk03BloqueoUsuario", b =>
+                {
+                    b.Property<int>("Blk03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("BLK03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Blk03Llave"), 1L, 1);
+
+                    b.Property<int?>("Blk01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("BLK01_Llave");
+
+                    b.Property<int?>("Blk03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("BLK03_Activo");
+
+                    b.Property<DateTime?>("Blk03FechaInicio")
+                        .HasColumnType("datetime")
+                        .HasColumnName("BLK03_FechaInicio");
+
+                    b.Property<DateTime?>("Blk03FechaTermino")
+                        .HasColumnType("datetime")
+                        .HasColumnName("BLK03_FechaTermino");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Blk03Llave");
+
+                    b.HasIndex("Blk01Llave");
+
+                    b.ToTable("BLK03_BloqueoUsuario", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Clbr01Calibracion", b =>
+                {
+                    b.Property<int>("Clbr01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CLBR01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Clbr01Llave"), 1L, 1);
+
+                    b.Property<int?>("Clbr01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CLBR01_Activo");
+
+                    b.Property<string>("Clbr01Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CLBR01_Descripcion");
+
+                    b.Property<DateTime?>("Clbr01FechaCalibracion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CLBR01_FechaCalibracion");
+
+                    b.Property<string>("Clbr01Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CLBR01_Nombre");
+
+                    b.Property<string>("Clbr01UrlPdf")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("CLBR01_UrlPdf");
+
+                    b.Property<int?>("Clbr02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CLBR02_Llave");
+
+                    b.Property<int?>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<int?>("Sercl01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SERCL01_Llave");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Clbr01Llave");
+
+                    b.HasIndex("Clbr02Llave");
+
+                    b.ToTable("CLBR01_Calibracion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Clbr02TipoCalibracion", b =>
+                {
+                    b.Property<int>("Clbr02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CLBR02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Clbr02Llave"), 1L, 1);
+
+                    b.Property<int?>("Clbr02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CLBR02_Activo");
+
+                    b.Property<string>("Clbr02Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CLBR02_Descripcion");
+
+                    b.Property<string>("Clbr02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CLBR02_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Clbr02Llave");
+
+                    b.ToTable("CLBR02_TipoCalibracion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt01CuentaCliente", b =>
+                {
+                    b.Property<int>("Cnt01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt01Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Activo");
+
+                    b.Property<DateTime?>("Cnt01AnioIngreso")
+                        .HasColumnType("date")
+                        .HasColumnName("CNT01_anioIngreso");
+
+                    b.Property<int?>("Cnt01CuentaSap")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_CuentaSap");
+
+                    b.Property<DateTime?>("Cnt01FechaIngresoSap")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CNT01_FechaIngresoSap");
+
+                    b.Property<string>("Cnt01Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT01_Nombre");
+
+                    b.Property<int?>("Cnt01NumeroSap")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_NumeroSap");
+
+                    b.Property<int?>("Cnt02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT02_Llave");
+
+                    b.Property<int?>("Cnt03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT03_Llave");
+
+                    b.Property<int?>("Per01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt01Llave");
+
+                    b.HasIndex("Cnt02Llave");
+
+                    b.HasIndex("Cnt03Llave");
+
+                    b.HasIndex("Per01Llave");
+
+                    b.ToTable("CNT01_CuentaCliente", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt02TipoCuenta", b =>
+                {
+                    b.Property<int>("Cnt02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt02Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT02_Activo");
+
+                    b.Property<string>("Cnt02Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT02_Descripcion");
+
+                    b.Property<string>("Cnt02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT02_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt02Llave");
+
+                    b.ToTable("CNT02_TipoCuenta", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt03TipoCliente", b =>
+                {
+                    b.Property<int>("Cnt03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt03Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT03_Activo");
+
+                    b.Property<string>("Cnt03Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT03_Descripcion");
+
+                    b.Property<string>("Cnt03Nombre")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT03_Nombre");
+
+                    b.Property<int?>("Per03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER03_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt03Llave");
+
+                    b.HasIndex("Per03Llave");
+
+                    b.ToTable("CNT03_TipoCliente", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt04ContactoCliente", b =>
+                {
+                    b.Property<int>("Cnt04Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt04Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<int?>("Cnt04Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT04_Activo");
+
+                    b.Property<int?>("Cnt05Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT05_llave");
+
+                    b.Property<int?>("Per01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt04Llave");
+
+                    b.HasIndex("Cnt01Llave");
+
+                    b.HasIndex("Cnt05Llave");
+
+                    b.ToTable("CNT04_ContactoCliente", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt05TipoContacto", b =>
+                {
+                    b.Property<int>("Cnt05Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT05_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt05Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt05Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT05_Activo");
+
+                    b.Property<string>("Cnt05Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT05_descripcion");
+
+                    b.Property<string>("Cnt05Nombre")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT05_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt05Llave");
+
+                    b.ToTable("CNT05_TipoContacto", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt06ComunicacionCliente", b =>
+                {
+                    b.Property<int>("Cnt06Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT06_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt06Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<int?>("Cnt06Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT06_Activo");
+
+                    b.Property<string>("Cnt06Casilla")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT06_casilla");
+
+                    b.Property<string>("Cnt06Celular1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT06_Celular1");
+
+                    b.Property<string>("Cnt06Celular2")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT06_Celular2");
+
+                    b.Property<string>("Cnt06CodigoPostal")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT06_CodigoPostal");
+
+                    b.Property<string>("Cnt06Direccion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT06_Direccion");
+
+                    b.Property<string>("Cnt06Email")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT06_Email");
+
+                    b.Property<string>("Cnt06Fax")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT06_Fax");
+
+                    b.Property<string>("Cnt06SitioWeb")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT06_SitioWeb");
+
+                    b.Property<string>("Cnt06Telefono1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT06_Telefono1");
+
+                    b.Property<string>("Cnt06Telefono2")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT06_Telefono2");
+
+                    b.Property<int?>("Cnt06TieneCasilla")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT06_TieneCasilla");
+
+                    b.Property<int?>("Cnt06TipoMail")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT06_TipoMail");
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Cnt10Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT10_Llave");
+
+                    b.Property<int?>("Sist03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt06Llave");
+
+                    b.HasIndex("Cnt01Llave");
+
+                    b.HasIndex("Cnt08Llave");
+
+                    b.HasIndex("Cnt10Llave");
+
+                    b.HasIndex("Sist03Llave");
+
+                    b.ToTable("CNT06_ComunicacionCliente", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt07TipoSegmentacion", b =>
+                {
+                    b.Property<int>("Cnt07Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT07_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt07Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT02_Llave");
+
+                    b.Property<int?>("Cnt07Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT07_Activo");
+
+                    b.Property<string>("Cnt07Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT07_Descripcion");
+
+                    b.Property<string>("Cnt07Nombre")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT07_Nombre");
+
+                    b.Property<int?>("Cnt18Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT18_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt07Llave");
+
+                    b.HasIndex("Cnt18Llave");
+
+                    b.ToTable("CNT07_TipoSegmentacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt08Segmentacion", b =>
+                {
+                    b.Property<int>("Cnt08Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt08Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<int?>("Cnt07Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT07_Llave");
+
+                    b.Property<int?>("Cnt08Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Activo");
+
+                    b.Property<int?>("Cnt08LlavePadre")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_LlavePadre");
+
+                    b.Property<string>("Cnt08Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT08_Nombre");
+
+                    b.Property<int?>("Cnt21Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT21_Llave")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<int?>("Sist03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt08Llave");
+
+                    b.HasIndex("Cnt01Llave");
+
+                    b.HasIndex("Cnt07Llave");
+
+                    b.HasIndex("Cnt08LlavePadre");
+
+                    b.ToTable("CNT08_Segmentacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt09ComunicacionSegmentacion", b =>
+                {
+                    b.Property<int>("Cnt09Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT09_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt09Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Cnt09Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT09_Activo");
+
+                    b.Property<string>("Cnt09Casilla")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT09_casilla");
+
+                    b.Property<string>("Cnt09Celular1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT09_Celular1");
+
+                    b.Property<string>("Cnt09Celular2")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT09_Celular2");
+
+                    b.Property<string>("Cnt09CodigoPostal")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT09_CodigoPostal");
+
+                    b.Property<string>("Cnt09Direccion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT09_Direccion");
+
+                    b.Property<string>("Cnt09Email")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT09_Email");
+
+                    b.Property<string>("Cnt09Fax")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT09_Fax");
+
+                    b.Property<int?>("Cnt09SinCasilla")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT09_SinCasilla");
+
+                    b.Property<string>("Cnt09SitioWeb")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT09_SitioWeb");
+
+                    b.Property<string>("Cnt09Telefono1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT09_Telefono1");
+
+                    b.Property<string>("Cnt09Telefono2")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CNT09_Telefono2");
+
+                    b.Property<int?>("Cnt09TipoMail")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT09_TipoMail");
+
+                    b.Property<int?>("Cnt10Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT10_Llave");
+
+                    b.Property<int?>("Sist03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt09Llave");
+
+                    b.HasIndex("Cnt08Llave");
+
+                    b.ToTable("CNT09_ComunicacionSegmentacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt10TipoComunicacion", b =>
+                {
+                    b.Property<int>("Cnt10Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT10_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt10Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt10Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT10_Activo");
+
+                    b.Property<string>("Cnt10Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT10_Descripcion");
+
+                    b.Property<string>("Cnt10Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT10_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt10Llave");
+
+                    b.ToTable("CNT10_TipoComunicacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt11ContactoSegmentacion", b =>
+                {
+                    b.Property<int>("Cnt11Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT11_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt11Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt05Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT05_llave");
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Cnt11Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT11_Activo");
+
+                    b.Property<int?>("Per01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt11Llave");
+
+                    b.HasIndex("Cnt08Llave");
+
+                    b.ToTable("CNT11_ContactoSegmentacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt12Empleado", b =>
+                {
+                    b.Property<int>("Cnt12Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT12_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt12Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Cnt12Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT12_Activo");
+
+                    b.Property<string>("Cnt12Cargo")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT12_Cargo");
+
+                    b.Property<int?>("Cnt13Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT13_Llave");
+
+                    b.Property<int?>("Per01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt12Llave");
+
+                    b.HasIndex("Cnt01Llave");
+
+                    b.HasIndex("Cnt13Llave");
+
+                    b.HasIndex("Per01Llave");
+
+                    b.ToTable("CNT12_Empleados", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt13TipoEmpleado", b =>
+                {
+                    b.Property<int>("Cnt13Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT13_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt13Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt13Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT13_Activo");
+
+                    b.Property<string>("Cnt13Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT13_Descripcion");
+
+                    b.Property<string>("Cnt13Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT13_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt13Llave");
+
+                    b.ToTable("CNT13_TipoEmpleado", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt14ClienteLicencia", b =>
+                {
+                    b.Property<int>("Cnt14Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT14_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt14Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<bool?>("Cnt14Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("CNT14_Activo");
+
+                    b.Property<int?>("Cnt14CantUsuarios")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT14_CantUsuarios");
+
+                    b.Property<DateTime?>("Cnt14InicioFecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CNT14_InicioFecha");
+
+                    b.Property<DateTime?>("Cnt14TerminoFecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CNT14_TerminoFecha");
+
+                    b.Property<int?>("Lnc01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Llave");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt14Llave");
+
+                    b.HasIndex("Cnt01Llave");
+
+                    b.ToTable("CNT14_ClienteLicencia", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt15EmpleadoLicencia", b =>
+                {
+                    b.Property<int>("Cnt19Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT19_Llave");
+
+                    b.Property<int>("Cnt12Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT12_Llave");
+
+                    b.Property<int?>("Cnt15AceptaContrato")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT15_AceptaContrato");
+
+                    b.Property<DateTime?>("Cnt15Fechafirma")
+                        .HasColumnType("date")
+                        .HasColumnName("CNT15_fechafirma");
+
+                    b.HasKey("Cnt19Llave", "Cnt12Llave")
+                        .HasName("PK_CNT15_EmpleadoLicencia_1");
+
+                    b.HasIndex("Cnt12Llave");
+
+                    b.ToTable("CNT15_EmpleadoLicencia", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt16TipoBloqueoCliente", b =>
+                {
+                    b.Property<int>("Cnt16Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT16_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt16Llave"), 1L, 1);
+
+                    b.Property<bool?>("Cnt16Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("CNT16_Activo");
+
+                    b.Property<string>("Cnt16Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT16_Descripcion");
+
+                    b.Property<string>("Cnt16Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT16_Nombre");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt16Llave");
+
+                    b.ToTable("CNT16_TipoBloqueoCliente", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt17Bloqueo", b =>
+                {
+                    b.Property<int>("Cnt17Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT17_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt17Llave"), 1L, 1);
+
+                    b.Property<int?>("Blk01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("BLK01_Llave");
+
+                    b.Property<int?>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Cnt14Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT14_Llave");
+
+                    b.Property<int?>("Cnt16Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT16_Llave");
+
+                    b.Property<bool?>("Cnt17Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("CNT17_Activo");
+
+                    b.Property<DateTime?>("Cnt17InicioBloqueo")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CNT17_InicioBloqueo");
+
+                    b.Property<DateTime?>("Cnt17TerminoBloqueo")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CNT17_TerminoBloqueo");
+
+                    b.Property<int?>("Per01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt17Llave");
+
+                    b.HasIndex("Blk01Llave");
+
+                    b.HasIndex("Cnt01Llave");
+
+                    b.HasIndex("Cnt08Llave");
+
+                    b.HasIndex("Cnt14Llave");
+
+                    b.HasIndex("Cnt16Llave");
+
+                    b.ToTable("CNT17_Bloqueos", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt18NivelSegmentacion", b =>
+                {
+                    b.Property<int>("Cnt18Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT18_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt18Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt18Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT18_Activo");
+
+                    b.Property<string>("Cnt18Descripccion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT18_Descripccion");
+
+                    b.Property<int?>("Cnt18NivelCapa")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT18_NivelCapa");
+
+                    b.Property<string>("Cnt18Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT18_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt18Llave");
+
+                    b.ToTable("CNT18_NivelSegmentacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt19LicenciaCliente", b =>
+                {
+                    b.Property<int>("Cnt19Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT19_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt19Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<int?>("Cnt19Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT19_Activo");
+
+                    b.Property<DateTime?>("Cnt19FechaInicio")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CNT19_FechaInicio");
+
+                    b.Property<DateTime?>("Cnt19FechaTermino")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CNT19_FechaTermino");
+
+                    b.Property<string>("Cnt19NombreLicencia")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT19_NombreLicencia");
+
+                    b.Property<int?>("Cnt19NumeroDias")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT19_NumeroDias");
+
+                    b.Property<int?>("Cnt19NumeroUsuario")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT19_NumeroUsuario");
+
+                    b.Property<int?>("Cnt19ValorReferencial")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT19_valor_referencial");
+
+                    b.Property<int?>("Cnt23Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT23_Llave");
+
+                    b.Property<int?>("Lnc01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Llave");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt19Llave");
+
+                    b.HasIndex("Cnt01Llave");
+
+                    b.ToTable("CNT19_LicenciaCliente", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt20LicenciaServicio", b =>
+                {
+                    b.Property<int>("Cnt19Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT19_Llave");
+
+                    b.Property<int>("Serv01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SERV01_Llave");
+
+                    b.Property<int?>("Cnt20Habilitaservicio")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT20_habilitaservicio");
+
+                    b.Property<int?>("Cnt20Valor")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT20_Valor");
+
+                    b.HasKey("Cnt19Llave", "Serv01Llave");
+
+                    b.ToTable("CNT20_LicenciaServicio", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt21TipoEstacion", b =>
+                {
+                    b.Property<int>("Cnt21Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT21_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt21Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt21Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT21_Activo");
+
+                    b.Property<string>("Cnt21Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT21_Descripcion");
+
+                    b.Property<string>("Cnt21Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CNT21_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt21Llave");
+
+                    b.ToTable("CNT21_TipoEstacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt22EstacionTipoEstacion", b =>
+                {
+                    b.Property<int>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int>("Cnt21Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT21_llave");
+
+                    b.Property<int?>("Cnt22Estado")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT22_estado");
+
+                    b.HasKey("Cnt08Llave", "Cnt21Llave");
+
+                    b.HasIndex("Cnt21Llave");
+
+                    b.ToTable("CNT22_Estacion_TipoEstacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt23Tipocobro", b =>
+                {
+                    b.Property<int>("Cnt23Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CNT23_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cnt23Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt23Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT23_Activo");
+
+                    b.Property<string>("Cnt23Descripcion")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)")
+                        .HasColumnName("CNT23_Descripcion");
+
+                    b.Property<string>("Cnt23Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CNT23_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cnt23Llave");
+
+                    b.ToTable("CNT23_Tipocobro", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt24AsociarCuenta", b =>
+                {
+                    b.Property<int>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<int>("Cnt01CuentaLlave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Cuenta_Llave");
+
+                    b.HasKey("Cnt01Llave", "Cnt01CuentaLlave");
+
+                    b.ToTable("CNT24_AsociarCuenta", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Comuna", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsCapital")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RegionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool?>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegionId");
+
+                    b.ToTable("Comunas");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cont01Contacto", b =>
+                {
+                    b.Property<int>("Cont01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CONT01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cont01Llave"), 1L, 1);
+
+                    b.Property<string>("Cont01Apellido")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CONT01_Apellido");
+
+                    b.Property<string>("Cont01CodigoValidacion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CONT01_CodigoValidacion");
+
+                    b.Property<string>("Cont01Direccion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CONT01_Direccion");
+
+                    b.Property<string>("Cont01Email")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CONT01_Email");
+
+                    b.Property<string>("Cont01Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CONT01_Nombre");
+
+                    b.Property<string>("Cont01PeticionContacto")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CONT01_PeticionContacto");
+
+                    b.Property<string>("Cont01Telefono")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CONT01_Telefono");
+
+                    b.Property<int?>("Cont01Titulo")
+                        .HasColumnType("int")
+                        .HasColumnName("CONT01_Titulo");
+
+                    b.Property<int?>("Cont02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CONT02_Llave");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.HasKey("Cont01Llave");
+
+                    b.HasIndex("Cont02Llave");
+
+                    b.ToTable("CONT01_Contacto", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cont02TipoContacto", b =>
+                {
+                    b.Property<int>("Cont02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CONT02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Cont02Llave"), 1L, 1);
+
+                    b.Property<string>("Cont02Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CONT02_Descripcion");
+
+                    b.Property<string>("Cont02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CONT02_Nombre");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Cont02Llave");
+
+                    b.ToTable("CONT02_TipoContacto", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo01Conteo", b =>
+                {
+                    b.Property<int>("Conteo01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Conteo01Llave"), 1L, 1);
+
+                    b.Property<int?>("Conteo01EstadoConteo")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO01_EstadoConteo");
+
+                    b.Property<int?>("Conteo01EstadoVisado")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO01_EstadoVisado");
+
+                    b.Property<DateTime?>("Conteo01FechaIngreso")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CONTEO01_FechaIngreso");
+
+                    b.Property<DateTime?>("Conteo01HoraIngreso")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CONTEO01_HoraIngreso");
+
+                    b.Property<string>("Conteo01Observacion")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("CONTEO01_observacion");
+
+                    b.Property<int?>("Conteo01TipoSistema")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO01_TipoSistema");
+
+                    b.Property<int?>("Conteo01Valor")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO01_Valor");
+
+                    b.Property<string>("Conteo01X")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CONTEO01_x");
+
+                    b.Property<string>("Conteo01Y")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CONTEO01_y");
+
+                    b.Property<DateTime?>("Fechacreacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("FECHACREACION");
+
+                    b.Property<string>("Mvl01Llave")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("MVL01_Llave");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<int?>("Trp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TRP01_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.HasKey("Conteo01Llave");
+
+                    b.HasIndex("Temp02Llave");
+
+                    b.ToTable("CONTEO01_Conteos", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo02Procesado", b =>
+                {
+                    b.Property<int>("Conteo02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Conteo02Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Conteo02Cantidad")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO02_Cantidad");
+
+                    b.Property<string>("Conteo02Cotatenado")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("CONTEO02_Cotatenado");
+
+                    b.Property<DateTime?>("Conteo02FechaProceso")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CONTEO02_fechaProceso");
+
+                    b.Property<int?>("Conteo02Promedio")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO02_Promedio");
+
+                    b.Property<int?>("Conteo02Suma")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO02_Suma");
+
+                    b.Property<int?>("Esp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP01_Llave");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.HasKey("Conteo02Llave");
+
+                    b.HasIndex("Cnt08Llave");
+
+                    b.ToTable("CONTEO02_Procesados", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo03Resumen", b =>
+                {
+                    b.Property<int>("Conteo03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Conteo03Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Conteo03Estado")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO03_Estado");
+
+                    b.Property<int?>("Esp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP01_Llave");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.HasKey("Conteo03Llave");
+
+                    b.HasIndex("Cnt08Llave");
+
+                    b.ToTable("CONTEO03_Resumen", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo04ResumenSag", b =>
+                {
+                    b.Property<int>("Conteo04Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Conteo04Llave"), 1L, 1);
+
+                    b.Property<int?>("Conteo04Estado")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO04_Estado");
+
+                    b.Property<int?>("Esp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP01_Llave");
+
+                    b.Property<int?>("Sist03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Llave");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.HasKey("Conteo04Llave");
+
+                    b.HasIndex("Esp01Llave");
+
+                    b.HasIndex("Sist03Llave");
+
+                    b.HasIndex("Temp02Llave");
+
+                    b.ToTable("CONTEO04_ResumenSag", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo05ControlReserva", b =>
+                {
+                    b.Property<int>("Conteo05Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO05_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Conteo05Llave"), 1L, 1);
+
+                    b.Property<string>("Conteo05ColumnaControl")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("CONTEO05_columna_control");
+
+                    b.Property<bool?>("Conteo05Estado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("CONTEO05_Estado")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<int?>("Conteo05EstadoControl")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO05_estado_control");
+
+                    b.Property<DateTime?>("Conteo05Fecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CONTEO05_fecha");
+
+                    b.Property<string>("Conteo05IdMovil")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("CONTEO05_id_movil");
+
+                    b.Property<string>("Conteo05Primer")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("CONTEO05_primer");
+
+                    b.Property<string>("Conteo05Segundo")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("CONTEO05_segundo");
+
+                    b.Property<string>("Conteo05TablaControl")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("CONTEO05_tabla_control");
+
+                    b.Property<string>("Conteo05Tercer")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("CONTEO05_tercer");
+
+                    b.Property<int?>("Conteo05ValorControl")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO05_valor_control");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<DateTime>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.HasKey("Conteo05Llave");
+
+                    b.HasIndex("Secu02Llave");
+
+                    b.ToTable("CONTEO05_Control_Reserva", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Ctt01Contrato", b =>
+                {
+                    b.Property<int>("Ctt01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CTT01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ctt01Llave"), 1L, 1);
+
+                    b.Property<int?>("Ctt01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CTT01_Activo");
+
+                    b.Property<string>("Ctt01ContratoHtml")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CTT01_ContratoHtml");
+
+                    b.Property<string>("Ctt01Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CTT01_Descripcion");
+
+                    b.Property<string>("Ctt01Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CTT01_Nombre");
+
+                    b.Property<int?>("Ctt02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CTT02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Ctt01Llave");
+
+                    b.HasIndex("Ctt02Llave");
+
+                    b.ToTable("CTT01_Contrato", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Ctt02TipoContrato", b =>
+                {
+                    b.Property<int>("Ctt02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CTT02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ctt02Llave"), 1L, 1);
+
+                    b.Property<int?>("Ctt02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CTT02_Activo");
+
+                    b.Property<string>("Ctt02Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("CTT02_Descripcion");
+
+                    b.Property<string>("Ctt02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("CTT02_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Ctt02Llave");
+
+                    b.ToTable("CTT02_TipoContrato", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Ctzr01Cotizacion", b =>
+                {
+                    b.Property<int>("Ctzr01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CTZR01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ctzr01Llave"), 1L, 1);
+
+                    b.Property<int?>("Ctzr01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("CTZR01_Activo");
+
+                    b.Property<string>("Ctzr01Comentario")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CTZR01_comentario");
+
+                    b.Property<DateTime?>("Ctzr01Fecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CTZR01_fecha");
+
+                    b.Property<int?>("Lnc01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Llave");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.HasKey("Ctzr01Llave");
+
+                    b.ToTable("CTZR01_Cotizacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml01BitacoraEmailUsuario", b =>
+                {
+                    b.Property<int>("Eml01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("EML01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Eml01Llave"), 1L, 1);
+
+                    b.Property<int?>("Eml01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("EML01_Activo");
+
+                    b.Property<string>("Eml01Asunto")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML01_Asunto");
+
+                    b.Property<string>("Eml01Contenido")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("EML01_Contenido");
+
+                    b.Property<string>("Eml01De")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML01_De");
+
+                    b.Property<DateTime?>("Eml01Envio")
+                        .HasColumnType("datetime")
+                        .HasColumnName("EML01_Envio");
+
+                    b.Property<int?>("Eml01MailPadre")
+                        .HasColumnType("int")
+                        .HasColumnName("EML01_MailPAdre");
+
+                    b.Property<string>("Eml01Para")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML01_Para");
+
+                    b.Property<string>("Eml01Text")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML01_Text");
+
+                    b.Property<int?>("Eml02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("EML02_Llave");
+
+                    b.Property<int?>("Eml04Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("EML04_Llave");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Eml01Llave")
+                        .HasName("PK_EML01_EmailUsuario");
+
+                    b.HasIndex("Eml02Llave");
+
+                    b.HasIndex("Eml04Llave");
+
+                    b.HasIndex("Secu02Llave");
+
+                    b.ToTable("EML01_BitacoraEmailUsuario", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml02MailBase", b =>
+                {
+                    b.Property<int>("Eml02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("EML02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Eml02Llave"), 1L, 1);
+
+                    b.Property<int?>("Eml02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("EML02_activo");
+
+                    b.Property<string>("Eml02Asunto")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML02_Asunto");
+
+                    b.Property<string>("Eml02CodigoLlamado")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("EML02_CodigoLlamado");
+
+                    b.Property<string>("Eml02ContenidoHtml")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML02_ContenidoHtml");
+
+                    b.Property<string>("Eml02ContenidoText")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML02_ContenidoText");
+
+                    b.Property<string>("Eml02Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML02_Descripcion");
+
+                    b.Property<int?>("Eml03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("EML03_Llave");
+
+                    b.Property<int?>("Eml04Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("EML04_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Eml02Llave");
+
+                    b.HasIndex("Eml03Llave");
+
+                    b.HasIndex("Eml04Llave");
+
+                    b.ToTable("EML02_MailBase", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml03TipoMailAccion", b =>
+                {
+                    b.Property<int>("Eml03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("EML03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Eml03Llave"), 1L, 1);
+
+                    b.Property<int?>("Eml03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("EML03_Activo");
+
+                    b.Property<string>("Eml03Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML03_Descripcion");
+
+                    b.Property<string>("Eml03Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("EML03_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Eml03Llave")
+                        .HasName("PK_EML03_TipoMailAcciones_1");
+
+                    b.ToTable("EML03_TipoMailAcciones", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml04ImportanciaMail", b =>
+                {
+                    b.Property<int>("Eml04Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("EML04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Eml04Llave"), 1L, 1);
+
+                    b.Property<int?>("Eml04Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("EML04_Activo");
+
+                    b.Property<string>("Eml04Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML04_Descripcion");
+
+                    b.Property<string>("Eml04Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("EML04_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Eml04Llave");
+
+                    b.ToTable("EML04_ImportanciaMail", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml05ArchivoMail", b =>
+                {
+                    b.Property<int>("Eml05Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("EML05_Llave");
+
+                    b.Property<int?>("Eml01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("EML01_Llave");
+
+                    b.Property<int?>("Eml05Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("EML05_Activo");
+
+                    b.Property<string>("Eml05Archivo")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML05_Archivo");
+
+                    b.Property<string>("Eml05Ruta")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML05_Ruta");
+
+                    b.Property<int?>("Eml06Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("EML06_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Eml05Llave");
+
+                    b.HasIndex("Eml01Llave");
+
+                    b.ToTable("EML05_ArchivoMail", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml06TipoArchivo", b =>
+                {
+                    b.Property<int>("Eml06Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("EML06_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Eml06Llave"), 1L, 1);
+
+                    b.Property<int?>("Eml06Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("EML06_Activo");
+
+                    b.Property<string>("Eml06Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EML06_Descripcion");
+
+                    b.Property<string>("Eml06Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("EML06_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Eml06Llave");
+
+                    b.ToTable("EML06_TipoArchivo", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp01Especie", b =>
+                {
+                    b.Property<int>("Esp01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp01Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP01_Activo");
+
+                    b.Property<int?>("Esp03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_Llave");
+
+                    b.Property<int?>("Esp04Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP04_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp01Llave");
+
+                    b.HasIndex("Esp03Llave");
+
+                    b.HasIndex("Esp04Llave");
+
+                    b.ToTable("ESP01_Especies", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp02TemporadaEspecie", b =>
+                {
+                    b.Property<int>("Esp02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp02Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP01_Llave");
+
+                    b.Property<int?>("Esp02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP02_Activo");
+
+                    b.Property<DateTime?>("Esp02InicioTemporada")
+                        .HasColumnType("datetime")
+                        .HasColumnName("ESP02_InicioTemporada");
+
+                    b.Property<int?>("Esp02Mexico")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP02_Mexico");
+
+                    b.Property<int?>("Esp02Sag")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP02_Sag");
+
+                    b.Property<DateTime?>("Esp02TerminoTemporada")
+                        .HasColumnType("datetime")
+                        .HasColumnName("ESP02_TerminoTemporada");
+
+                    b.Property<int?>("Temp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP01_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp02Llave");
+
+                    b.HasIndex("Esp01Llave");
+
+                    b.HasIndex("Temp01Llave");
+
+                    b.ToTable("ESP02_TemporadaEspecie", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp03EspecieBase", b =>
+                {
+                    b.Property<int>("Esp03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp03Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_Activo");
+
+                    b.Property<string>("Esp03Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("ESP03_Descripcion");
+
+                    b.Property<string>("Esp03EstadoRegistro")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("ESP03_EstadoRegistro");
+
+                    b.Property<string>("Esp03ImgGrande")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ESP03_ImgGrande");
+
+                    b.Property<string>("Esp03ImgPequenia")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ESP03_ImgPequenia");
+
+                    b.Property<string>("Esp03Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("ESP03_Nombre");
+
+                    b.Property<int?>("Esp03Union")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_Union");
+
+                    b.Property<int?>("Esp08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP08_llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp03Llave");
+
+                    b.HasIndex("Esp08Llave");
+
+                    b.ToTable("ESP03_EspecieBase", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp04EstadoDanio", b =>
+                {
+                    b.Property<int>("Esp04Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp04Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp04Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP04_Activo");
+
+                    b.Property<string>("Esp04Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("ESP04_Descripcion");
+
+                    b.Property<string>("Esp04Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("ESP04_Nombre");
+
+                    b.Property<int?>("Esp06Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP06_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp04Llave");
+
+                    b.HasIndex("Esp06Llave");
+
+                    b.ToTable("ESP04_EstadoDanio", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp05Umbral", b =>
+                {
+                    b.Property<int>("Esp05Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP05_LLave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp05Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP01_Llave");
+
+                    b.Property<int?>("Esp05Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP05_Activo");
+
+                    b.Property<string>("Esp05Color")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("ESP05_Color");
+
+                    b.Property<int?>("Esp05MaxUmbral")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP05_MaxUmbral");
+
+                    b.Property<int?>("Esp05MinUmbral")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP05_MinUmbral");
+
+                    b.Property<int?>("Esp09Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP09_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp05Llave");
+
+                    b.HasIndex("Esp01Llave");
+
+                    b.HasIndex("Esp09Llave");
+
+                    b.ToTable("ESP05_Umbral", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp06MedidaUmbral", b =>
+                {
+                    b.Property<int>("Esp06Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP06_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp06Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp06Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP06_Activo");
+
+                    b.Property<string>("Esp06Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("ESP06_Descripcion");
+
+                    b.Property<string>("Esp06Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("ESP06_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp06Llave");
+
+                    b.ToTable("ESP06_MedidaUmbral", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp07Union", b =>
+                {
+                    b.Property<int?>("Esp03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_Llave");
+
+                    b.Property<int?>("Esp03LlaveUnion")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_LlaveUnion");
+
+                    b.Property<int>("Esp07Llave")
+                        .HasColumnType("int");
+
+                    b.HasKey("Esp03Llave", "Esp03LlaveUnion");
+
+                    b.ToTable("ESP07_Union", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp08TipoBase", b =>
+                {
+                    b.Property<int>("Esp08Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP08_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp08Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp08Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP08_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("Esp08Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ESP08_Descripcion");
+
+                    b.Property<string>("Esp08Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("ESP08_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp08Llave");
+
+                    b.ToTable("ESP08_TipoBase", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp09TipoBaseUmbral", b =>
+                {
+                    b.Property<int>("Esp09Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP09_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp09Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp09Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP09_Activo");
+
+                    b.Property<string>("Esp09Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("ESP09_Descripcion");
+
+                    b.Property<string>("Esp09Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("ESP09_Nombre");
+
+                    b.Property<int?>("Esp09Orden")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP09_Orden");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp09Llave");
+
+                    b.ToTable("ESP09_TipoBaseUmbral", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp10TipoRegla", b =>
+                {
+                    b.Property<int>("Esp10Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP10_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp10Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp10Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP10_Activo");
+
+                    b.Property<string>("Esp10Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("ESP10_Descripcion");
+
+                    b.Property<string>("Esp10Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("ESP10_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp10Llave");
+
+                    b.ToTable("ESP10_TipoRegla", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp11ReglaGrafico", b =>
+                {
+                    b.Property<int>("Esp11Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ESP11_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Esp11Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_Llave");
+
+                    b.Property<int?>("Esp10Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP10_Llave");
+
+                    b.Property<int?>("Esp11Estado")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP11_Estado");
+
+                    b.Property<string>("Esp11Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("ESP11_Nombre");
+
+                    b.Property<string>("Esp11Signo1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("ESP11_Signo1");
+
+                    b.Property<string>("Esp11Signo2")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("ESP11_Signo2");
+
+                    b.Property<string>("Esp11SignoResultado")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("ESP11_SignoResultado");
+
+                    b.Property<int?>("Esp11Valor1")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP11_Valor1");
+
+                    b.Property<int?>("Esp11Valor2")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP11_Valor2");
+
+                    b.Property<int?>("Esp11ValorResultado")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP11_ValorResultado");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Esp11Llave");
+
+                    b.HasIndex("Esp10Llave");
+
+                    b.ToTable("ESP11_ReglaGrafico", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Frm01TipoFormulario", b =>
+                {
+                    b.Property<int>("Frm01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("FRM01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Frm01Llave"), 1L, 1);
+
+                    b.Property<int?>("Frm01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("FRM01_Activo");
+
+                    b.Property<string>("Frm01Nombre")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("FRM01_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Frm01Llave");
+
+                    b.ToTable("FRM01_TipoFormulario", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Frm02Formulario", b =>
+                {
+                    b.Property<int>("Frm02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("FRM02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Frm02Llave"), 1L, 1);
+
+                    b.Property<int?>("Eml01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("EML01_Llave");
+
+                    b.Property<int?>("Frm01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("FRM01_Llave");
+
+                    b.Property<int?>("Frm02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("FRM02_Activo");
+
+                    b.Property<string>("Frm02Celular")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("FRM02_Celular");
+
+                    b.Property<string>("Frm02Ciudad")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("FRM02_Ciudad");
+
+                    b.Property<string>("Frm02Direccion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("FRM02_Direccion");
+
+                    b.Property<string>("Frm02Empresa")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("FRM02_Empresa");
+
+                    b.Property<int?>("Frm02EstadoRespuesta")
+                        .HasColumnType("int")
+                        .HasColumnName("FRM02_EstadoRespuesta");
+
+                    b.Property<string>("Frm02Mail")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("FRM02_Mail");
+
+                    b.Property<string>("Frm02Mensaje")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("FRM02_Mensaje");
+
+                    b.Property<string>("Frm02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("FRM02_Nombre");
+
+                    b.Property<string>("Frm02Telefono")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("FRM02_Telefono");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Frm02Llave");
+
+                    b.HasIndex("Eml01Llave");
+
+                    b.HasIndex("Frm01Llave");
+
+                    b.ToTable("FRM02_Formulario", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Grfc01GraficoGenerado", b =>
+                {
+                    b.Property<int>("Grfc01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("GRFC01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Grfc01Llave"), 1L, 1);
+
+                    b.Property<string>("Grfc01CodigoGrafico")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
+                        .HasColumnName("GRFC01_codigo_grafico");
+
+                    b.Property<int?>("Grfc01Estado")
+                        .HasColumnType("int")
+                        .HasColumnName("GRFC01_estado");
+
+                    b.Property<DateTime?>("Grfc01FechaGrafico")
+                        .HasColumnType("datetime")
+                        .HasColumnName("GRFC01_FechaGrafico");
+
+                    b.Property<int?>("Grfc02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("GRFC02_Llave");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.HasKey("Grfc01Llave");
+
+                    b.ToTable("GRFC01_GraficoGenerado", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Grfc02TipoGrafico", b =>
+                {
+                    b.Property<int>("Grfc02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("GRFC02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Grfc02Llave"), 1L, 1);
+
+                    b.Property<int?>("Grfc02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("GRFC02_Activo");
+
+                    b.Property<string>("Grfc02Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("GRFC02_Descripcion");
+
+                    b.Property<string>("Grfc02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("GRFC02_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Grfc02Llave");
+
+                    b.ToTable("GRFC02_TipoGrafico", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Grfc03RespaldoGrafico", b =>
+                {
+                    b.Property<int>("Grfc03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("GRFC03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Grfc03Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Esp03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_Llave");
+
+                    b.Property<int?>("Grfc03Estado")
+                        .HasColumnType("int")
+                        .HasColumnName("GRFC03_Estado");
+
+                    b.Property<DateTime?>("Grfc03UltimaFecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("GRFC03_ultimaFecha");
+
+                    b.Property<string>("Grfc03XmlDatos")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("GRFC03_xmlDatos");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.HasKey("Grfc03Llave");
+
+                    b.ToTable("GRFC03_respaldoGrafico", (string)null);
+                });
+
             modelBuilder.Entity("mipBackend.Models.Inmueble", b =>
                 {
                     b.Property<int>("Id")
@@ -175,8 +3751,8 @@ namespace mipBackend.Migrations
                     b.Property<string>("Picture")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Precio")
-                        .HasColumnType("decimal(18,4)");
+                    b.Property<int>("Precio")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
@@ -184,6 +3760,3711 @@ namespace mipBackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Inmuebles");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Ins01Inscripcion", b =>
+                {
+                    b.Property<int>("Ins01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("INS01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ins01Llave"), 1L, 1);
+
+                    b.Property<int?>("Ins01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("INS01_Activo");
+
+                    b.Property<string>("Ins01Apellido")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("INS01_Apellido");
+
+                    b.Property<string>("Ins01Direccion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("INS01_Direccion");
+
+                    b.Property<string>("Ins01Email")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("INS01_Email");
+
+                    b.Property<string>("Ins01Empresa")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("INS01_Empresa");
+
+                    b.Property<DateTime?>("Ins01FechaInscripcion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("INS01_FechaInscripcion");
+
+                    b.Property<DateTime?>("Ins01FechaNacimiento")
+                        .HasColumnType("datetime")
+                        .HasColumnName("INS01_FechaNacimiento");
+
+                    b.Property<string>("Ins01Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("INS01_Nombre");
+
+                    b.Property<string>("Ins01Password")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("INS01_Password");
+
+                    b.Property<int?>("Ins01Rut")
+                        .HasColumnType("int")
+                        .HasColumnName("INS01_Rut");
+
+                    b.Property<string>("Ins01Telefono")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("INS01_Telefono");
+
+                    b.Property<string>("Ins01UserName")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("INS01_UserName");
+
+                    b.Property<DateTime?>("Ins01fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("INS01_fechaactivacion");
+
+                    b.Property<int?>("Per02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER02_Llave");
+
+                    b.Property<int?>("Sist03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Llave");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Ins01Llave");
+
+                    b.ToTable("INS01_Inscripcion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Ins02RecuperarClave", b =>
+                {
+                    b.Property<int>("Ins02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("INS02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ins02Llave"), 1L, 1);
+
+                    b.Property<string>("Ins02ClaveTemporal")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("INS02_ClaveTemporal");
+
+                    b.Property<int?>("Ins02Estado")
+                        .HasColumnType("int")
+                        .HasColumnName("INS02_Estado");
+
+                    b.Property<DateTime?>("Ins02FechaRecupera")
+                        .HasColumnType("datetime")
+                        .HasColumnName("INS02_FechaRecupera");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Ins02Llave");
+
+                    b.HasIndex("Ins02Estado");
+
+                    b.ToTable("INS02_RecuperarClave", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc01Licencia", b =>
+                {
+                    b.Property<int>("Lnc01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Lnc01Llave"), 1L, 1);
+
+                    b.Property<int?>("Lnc01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Activo");
+
+                    b.Property<string>("Lnc01Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("LNC01_Descripcion");
+
+                    b.Property<string>("Lnc01Html")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LNC01_HTML");
+
+                    b.Property<string>("Lnc01Imagen")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("LNC01_Imagen");
+
+                    b.Property<int?>("Lnc01MaximoUsuarios")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_MaximoUsuarios");
+
+                    b.Property<string>("Lnc01Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("LNC01_Nombre");
+
+                    b.Property<int?>("Lnc01NumeroDias")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_NumeroDias");
+
+                    b.Property<string>("Lnc01TextoDias")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("LNC01_TextoDias");
+
+                    b.Property<int?>("Lnc01VisibleUsuario")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_VisibleUsuario");
+
+                    b.Property<int?>("Lnc04Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC04_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Lnc01Llave");
+
+                    b.ToTable("LNC01_Licencias", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc02ServiciosLicencia", b =>
+                {
+                    b.Property<int>("Lnc01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Llave");
+
+                    b.Property<int>("Serv01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SERV01_Llave");
+
+                    b.Property<int?>("Lnc02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC02_Activo");
+
+                    b.Property<int?>("Lnc02EsIlimitado")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC02_EsIlimitado");
+
+                    b.Property<int?>("Lnc02NumeroElemento")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC02_NumeroElemento");
+
+                    b.Property<int?>("Lnc02PermiteComparar")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC02_PermiteComparar");
+
+                    b.HasKey("Lnc01Llave", "Serv01Llave")
+                        .HasName("PK_LNC02_ServiciosLicencia_1");
+
+                    b.HasIndex("Serv01Llave");
+
+                    b.ToTable("LNC02_ServiciosLicencia", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc03LicenciaContrato", b =>
+                {
+                    b.Property<int>("Lnc01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Llave");
+
+                    b.Property<int>("Ctt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CTT01_Llave");
+
+                    b.Property<int?>("Lnc03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC03_Activo");
+
+                    b.Property<int?>("Lnc03FirmaSimpre")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC03_FirmaSimpre");
+
+                    b.HasKey("Lnc01Llave", "Ctt01Llave")
+                        .HasName("PK_LNC03_LicenciaContrato_1");
+
+                    b.HasIndex("Ctt01Llave");
+
+                    b.ToTable("LNC03_LicenciaContrato", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc04TipoLicencia", b =>
+                {
+                    b.Property<int>("Lnc04Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("LNC04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Lnc04Llave"), 1L, 1);
+
+                    b.Property<int?>("Lnc04Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC04_Activo");
+
+                    b.Property<string>("Lnc04Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("LNC04_Descripcion");
+
+                    b.Property<string>("Lnc04Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("LNC04_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Lnc04Llave");
+
+                    b.ToTable("LNC04_TipoLicencia", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc05ValorLicencia", b =>
+                {
+                    b.Property<int>("Lnc05Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("LNC05_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Lnc05Llave"), 1L, 1);
+
+                    b.Property<int?>("Lnc01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Llave");
+
+                    b.Property<int?>("Lnc05Inicio")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC05_Inicio");
+
+                    b.Property<int?>("Lnc05Termino")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC05_Termino");
+
+                    b.Property<int?>("Lnc05Valor")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC05_Valor");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.HasKey("Lnc05Llave");
+
+                    b.HasIndex("Lnc01Llave");
+
+                    b.ToTable("LNC05_valorLicencia", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc06Cobertura", b =>
+                {
+                    b.Property<int>("Lnc01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Llave");
+
+                    b.Property<int>("Sist03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Llave");
+
+                    b.HasKey("Lnc01Llave", "Sist03Llave")
+                        .HasName("PK_LNC05_Cobertura");
+
+                    b.ToTable("LNC06_Cobertura", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc07Control", b =>
+                {
+                    b.Property<int>("Lnc01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LNC01_Llave");
+
+                    b.Property<int>("Esp03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_Llave");
+
+                    b.HasKey("Lnc01Llave", "Esp03Llave");
+
+                    b.ToTable("LNC07_Control", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Log01Bitacora", b =>
+                {
+                    b.Property<int>("Log01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("LOG01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Log01Llave"), 1L, 1);
+
+                    b.Property<int?>("Log01Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("LOG01_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("Log01Clase")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOG01_Clase");
+
+                    b.Property<string>("Log01Contenido")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOG01_Contenido");
+
+                    b.Property<byte[]>("Log01ElementoSerializado")
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("LOG01_elemento_serializado");
+
+                    b.Property<string>("Log01Info")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOG01_Info");
+
+                    b.Property<int?>("Log01Objeto")
+                        .HasColumnType("int")
+                        .HasColumnName("LOG01_objeto");
+
+                    b.Property<int?>("Log03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("LOG03_Llave");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Log01Llave");
+
+                    b.HasIndex("Log03Llave");
+
+                    b.ToTable("LOG01_Bitacora", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Log02TipoBitacora", b =>
+                {
+                    b.Property<Guid>("Log02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LOG02_Llave")
+                        .HasDefaultValueSql("(newid())");
+
+                    b.Property<int?>("Log02Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("LOG02_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("Log02Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOG02_Descripcion");
+
+                    b.Property<int?>("Log02EsRazor")
+                        .HasColumnType("int")
+                        .HasColumnName("LOG02_EsRazor");
+
+                    b.Property<int?>("Log02EsSistema")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("LOG02_EsSistema")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<string>("Log02Info")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOG02_Info");
+
+                    b.Property<string>("Log02Nombre")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)")
+                        .HasColumnName("LOG02_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Log02Llave")
+                        .HasName("PK__LOG02_Ti__EA456AA523FE4082");
+
+                    b.ToTable("LOG02_TipoBitacora", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Log03MensajeBitacora", b =>
+                {
+                    b.Property<int>("Log03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("LOG03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Log03Llave"), 1L, 1);
+
+                    b.Property<Guid?>("Log02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LOG02_Llave");
+
+                    b.Property<string>("Log03AccesoRapido")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("LOG03_AccesoRapido");
+
+                    b.Property<int?>("Log03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("LOG03_Activo");
+
+                    b.Property<string>("Log03Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOG03_Descripcion");
+
+                    b.Property<string>("Log03Info")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOG03_Info");
+
+                    b.Property<string>("Log03Mensaje")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOG03_Mensaje");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Log03Llave");
+
+                    b.HasIndex("Log02Llave");
+
+                    b.ToTable("LOG03_MensajeBitacora", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Men01Sistema", b =>
+                {
+                    b.Property<int>("Men01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("MEN01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Men01Llave"), 1L, 1);
+
+                    b.Property<string>("Men01Accion")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)")
+                        .HasColumnName("MEN01_Accion");
+
+                    b.Property<string>("Men01Area")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("MEN01_Area");
+
+                    b.Property<string>("Men01Control")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)")
+                        .HasColumnName("MEN01_Control");
+
+                    b.Property<string>("Men01Descripcion")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)")
+                        .HasColumnName("MEN01_descripcion");
+
+                    b.Property<string>("Men01IconoUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("MEN01_IconoUrl");
+
+                    b.Property<int?>("Men01LlavePadre")
+                        .HasColumnType("int")
+                        .HasColumnName("MEN01_Llave_padre");
+
+                    b.Property<bool>("Men01Principal")
+                        .HasColumnType("bit")
+                        .HasColumnName("MEN01_principal");
+
+                    b.Property<string>("Men01Titulo")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)")
+                        .HasColumnName("MEN01_titulo");
+
+                    b.Property<string>("Men01Tooltip")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)")
+                        .HasColumnName("MEN01_tooltip");
+
+                    b.Property<string>("Men01Url")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)")
+                        .HasColumnName("MEN01_url");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Men01Llave")
+                        .HasName("PK__MEN01_Si__4F35303B75CD617E");
+
+                    b.ToTable("MEN01_Sistema", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mnt01Monitor", b =>
+                {
+                    b.Property<int>("Mnt01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("MNT01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Mnt01Llave"), 1L, 1);
+
+                    b.Property<int?>("Mnt01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("MNT01_Activo");
+
+                    b.Property<string>("Mnt01Cargo")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("MNT01_Cargo");
+
+                    b.Property<DateTime?>("Mnt01Iniciolabores")
+                        .HasColumnType("datetime")
+                        .HasColumnName("MNT01_iniciolabores");
+
+                    b.Property<int?>("Mnt04Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("MNT04_Llave");
+
+                    b.Property<int?>("Per01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Mnt01Llave");
+
+                    b.HasIndex("Mnt04Llave");
+
+                    b.ToTable("MNT01_Monitores", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mnt03PeriodosTrampa", b =>
+                {
+                    b.Property<int>("Mnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("MNT01_Llave");
+
+                    b.Property<int>("Trp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TRP01_Llave");
+
+                    b.Property<int>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<int?>("Mnt03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("MNT03_Activo");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.HasKey("Mnt01Llave", "Trp01Llave", "Temp02Llave")
+                        .HasName("PK_MNT02_EspeciesAsignadas");
+
+                    b.HasIndex("Temp02Llave");
+
+                    b.ToTable("MNT03_PeriodosTrampas", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mnt04TipoMonitor", b =>
+                {
+                    b.Property<int>("Mnt04Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("MNT04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Mnt04Llave"), 1L, 1);
+
+                    b.Property<int?>("Mnt04Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("MNT04_Activo");
+
+                    b.Property<string>("Mnt04Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("MNT04_Descripcion");
+
+                    b.Property<string>("Mnt04Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("MNT04_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Mnt04Llave")
+                        .HasName("PK_MNT05_TipoBase");
+
+                    b.ToTable("MNT04_TipoMonitor", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mvl01AccesoMovil", b =>
+                {
+                    b.Property<int?>("Mvl01DiasUmbralEdicion")
+                        .HasColumnType("int")
+                        .HasColumnName("MVL01_dias_umbral_edicion");
+
+                    b.Property<bool?>("Mvl01EditaFechaMonitoreo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("MVL01_edita_fecha_monitoreo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<bool?>("Mvl01EstaBloqueado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("MVL01_esta_bloqueado")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<DateTime?>("Mvl01FechaMensaje")
+                        .HasColumnType("datetime")
+                        .HasColumnName("MVL01_fecha_mensaje");
+
+                    b.Property<DateTime?>("Mvl01FechaRegistro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("MVL01_fecha_registro")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("Mvl01FechaUltimaActividad")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("MVL01_fecha_ultima_actividad")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("Mvl01FechaUltimaSincro")
+                        .HasColumnType("datetime")
+                        .HasColumnName("MVL01_fecha_ultima_sincro");
+
+                    b.Property<DateTime?>("Mvl01FechaUltimoAcceso")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("MVL01_fecha_ultimo_acceso")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<Guid?>("Mvl01IdUsuario")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("MVL01_id_usuario");
+
+                    b.Property<string>("Mvl01Llave")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("MVL01_Llave");
+
+                    b.Property<string>("Mvl01MensajeMovil")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("MVL01_mensaje_movil");
+
+                    b.Property<string>("Mvl01NumeroMovil")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("MVL01_numero_movil");
+
+                    b.Property<string>("Mvl01SistemaAndroid")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("MVL01_sistema_android");
+
+                    b.Property<int?>("Mvl01TamanoBasedatosCliente")
+                        .HasColumnType("int")
+                        .HasColumnName("MVL01_tamano_basedatos_cliente");
+
+                    b.Property<int?>("Mvl01UbicacionActividadX")
+                        .HasColumnType("int")
+                        .HasColumnName("MVL01_ubicacion_actividad_x");
+
+                    b.Property<int?>("Mvl01UbicacionActividadY")
+                        .HasColumnType("int")
+                        .HasColumnName("MVL01_ubicacion_actividad_y");
+
+                    b.Property<string>("Mvl01VersionAndroid")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("MVL01_version_android");
+
+                    b.Property<string>("Mvl01VersionAplicacion")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("MVL01_version_aplicacion");
+
+                    b.Property<string>("Mvl01VersionDescarga")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("MVL01_version_descarga");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.ToTable("MVL01_AccesoMovil", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mvl02TablaSincronizacion", b =>
+                {
+                    b.Property<DateTime?>("FechaUltimaActualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("Fecha_UltimaActualizacion");
+
+                    b.Property<string>("NombreTabla")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("Nombre_Tabla");
+
+                    b.Property<Guid>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime");
+
+                    b.ToTable("MVL02_TablaSincronizacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mvl03RegistroAcceso", b =>
+                {
+                    b.Property<int>("Mvl03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("MVL03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Mvl03Llave"), 1L, 1);
+
+                    b.Property<Guid?>("ApplicationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("EmailUsuario")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)")
+                        .HasColumnName("email_usuario");
+
+                    b.Property<int?>("EstadoUsuario")
+                        .HasColumnType("int")
+                        .HasColumnName("estado_usuario");
+
+                    b.Property<string>("IsAnonymous")
+                        .HasMaxLength(1)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(1)");
+
+                    b.Property<bool?>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastActivityDate")
+                        .HasMaxLength(1)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(1)");
+
+                    b.Property<string>("LoweredUserName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("MobileAlias")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("Mvl03Fechacreacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("MVL03_FECHACREACION");
+
+                    b.Property<string>("NombreUsuario")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("nombre_usuario");
+
+                    b.Property<string>("Password")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("PasswordFormat")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<Guid?>("PasswordSalt")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("Per01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    b.Property<bool?>("Secu02Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU02_Activo");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Mvl03Llave");
+
+                    b.ToTable("MVL03_RegistroAcceso", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Obsc01ObservacionCampo", b =>
+                {
+                    b.Property<int>("Obsc01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("OBSC01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Obsc01Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP08_Llave");
+
+                    b.Property<int?>("Obsc01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("OBSC01_Activo");
+
+                    b.Property<DateTime?>("Obsc01FechaObservacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("OBSC01_FechaObservacion");
+
+                    b.Property<int?>("Obsc01Interesado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("OBSC01_interesado")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<string>("Obsc01Nombre")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("OBSC01_Nombre");
+
+                    b.Property<string>("Obsc01Resumen")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nchar(1000)")
+                        .HasColumnName("OBSC01_Resumen")
+                        .IsFixedLength();
+
+                    b.Property<string>("Obsc01UrlPdf")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("OBSC01_UrlPdf");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Obsc01Llave");
+
+                    b.HasIndex("Esp08Llave");
+
+                    b.HasIndex("Temp02Llave");
+
+                    b.ToTable("OBSC01_ObservacionCampo", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Obsc02ServicioPostcosecha", b =>
+                {
+                    b.Property<int>("Obsc02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("OBSC02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Obsc02Llave"), 1L, 1);
+
+                    b.Property<int?>("Esp08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP08_Llave");
+
+                    b.Property<int?>("Obsc02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("OBSC02_Activo");
+
+                    b.Property<DateTime?>("Obsc02Fecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("OBSC02_Fecha");
+
+                    b.Property<string>("Obsc02Nombre")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("OBSC02_Nombre");
+
+                    b.Property<string>("Obsc02Resumen")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("OBSC02_Resumen");
+
+                    b.Property<string>("Obsc02UrlPdf")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("OBSC02_UrlPdf");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Obsc02Llave");
+
+                    b.ToTable("OBSC02_ServicioPostcosecha", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pbcd01Publicidad", b =>
+                {
+                    b.Property<int>("Pbcd01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PBCD01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Pbcd01Llave"), 1L, 1);
+
+                    b.Property<int?>("Pbcd01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PBCD01_Activo");
+
+                    b.Property<string>("Pbcd01FrasePrincipal")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PBCD01_FrasePrincipal");
+
+                    b.Property<string>("Pbcd01FraseSecundaria")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PBCD01_FraseSecundaria");
+
+                    b.Property<string>("Pbcd01ImagenNombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PBCD01_ImagenNombre");
+
+                    b.Property<string>("Pbcd01Objetico")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PBCD01_Objetico");
+
+                    b.Property<string>("Pbcd01Problema")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PBCD01_Problema");
+
+                    b.Property<string>("Pbcd01Producto")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PBCD01_Producto");
+
+                    b.Property<string>("Pbcd01SecuenciaHtml")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PBCD01_SecuenciaHtml");
+
+                    b.Property<int?>("Pbcd02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PBCD02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Pbcd01Llave");
+
+                    b.HasIndex("Pbcd02Llave");
+
+                    b.ToTable("PBCD01_Publicidad", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pbcd02TipoPublicidad", b =>
+                {
+                    b.Property<int>("Pbcd02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PBCD02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Pbcd02Llave"), 1L, 1);
+
+                    b.Property<int?>("Pbcd02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PBCD02_Activo");
+
+                    b.Property<string>("Pbcd02Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PBCD02_Descripcion");
+
+                    b.Property<string>("Pbcd02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("PBCD02_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Pbcd02Llave");
+
+                    b.ToTable("PBCD02_TipoPublicidad", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pbcd03Programacion", b =>
+                {
+                    b.Property<int>("Pbcd03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PBCD03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Pbcd03Llave"), 1L, 1);
+
+                    b.Property<int?>("Pbcd01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PBCD01_Llave");
+
+                    b.Property<int?>("Pbcd03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PBCD03_Activo");
+
+                    b.Property<DateTime?>("Pbcd03InicioFecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("PBCD03_InicioFecha");
+
+                    b.Property<DateTime?>("Pbcd03TerminoFecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("PBCD03_TerminoFecha");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Pbcd03Llave");
+
+                    b.HasIndex("Pbcd01Llave");
+
+                    b.ToTable("PBCD03_Programacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per01Persona", b =>
+                {
+                    b.Property<int>("Per01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Per01Llave"), 1L, 1);
+
+                    b.Property<int?>("Per01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Activo");
+
+                    b.Property<int?>("Per01AnioIngreso")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_AnioIngreso");
+
+                    b.Property<string>("Per01Cargo")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PER01_Cargo");
+
+                    b.Property<DateTime?>("Per01FechaNacimiento")
+                        .HasColumnType("datetime")
+                        .HasColumnName("PER01_FechaNacimiento");
+
+                    b.Property<string>("Per01Giro")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PER01_Giro");
+
+                    b.Property<string>("Per01NombreFantasia")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PER01_NombreFantasia");
+
+                    b.Property<string>("Per01NombreRazon")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PER01_NombreRazon");
+
+                    b.Property<int?>("Per01Rut")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Rut");
+
+                    b.Property<int?>("Per02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER02_Llave");
+
+                    b.Property<int?>("Per03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER03_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Per01Llave");
+
+                    b.HasIndex("Per02Llave");
+
+                    b.HasIndex("Per03Llave");
+
+                    b.ToTable("PER01_Persona", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per02Genero", b =>
+                {
+                    b.Property<int>("Per02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PER02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Per02Llave"), 1L, 1);
+
+                    b.Property<int?>("Per02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PER02_Activo");
+
+                    b.Property<string>("Per02Genero1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PER02_Genero");
+
+                    b.Property<int?>("Per02Orden")
+                        .HasColumnType("int")
+                        .HasColumnName("PER02_Orden");
+
+                    b.Property<string>("Per02Sexo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PER02_Sexo");
+
+                    b.Property<string>("Per02Titulo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PER02_Titulo");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Per02Llave");
+
+                    b.ToTable("PER02_Genero", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per03TipoPersona", b =>
+                {
+                    b.Property<int>("Per03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PER03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Per03Llave"), 1L, 1);
+
+                    b.Property<int?>("Per03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PER03_Activo");
+
+                    b.Property<string>("Per03Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PER03_Descripcion");
+
+                    b.Property<string>("Per03Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("PER03_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Per03Llave");
+
+                    b.ToTable("PER03_TipoPersona", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per04TipoComunicacion", b =>
+                {
+                    b.Property<int>("Per04Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PER04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Per04Llave"), 1L, 1);
+
+                    b.Property<int?>("Per04Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PER04_Activo");
+
+                    b.Property<string>("Per04Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PER04_Descripcion");
+
+                    b.Property<string>("Per04Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("PER04_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Per04Llave");
+
+                    b.ToTable("PER04_TipoComunicacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per05Comunicacion", b =>
+                {
+                    b.Property<int>("Per01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    b.Property<int>("Per04Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER04_Llave");
+
+                    b.Property<int>("Per03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER03_Llave");
+
+                    b.Property<string>("Per05Casilla")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PER05_casilla");
+
+                    b.Property<string>("Per05Celular1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PER05_Celular1");
+
+                    b.Property<string>("Per05Celular2")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PER05_Celular2");
+
+                    b.Property<string>("Per05CodigoPostal")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PER05_CodigoPostal");
+
+                    b.Property<string>("Per05Direccion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PER05_Direccion");
+
+                    b.Property<string>("Per05Email")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("PER05_Email");
+
+                    b.Property<string>("Per05Fax")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PER05_Fax");
+
+                    b.Property<string>("Per05SitioWeb")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PER05_SitioWeb");
+
+                    b.Property<string>("Per05Telefono1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PER05_Telefono1");
+
+                    b.Property<string>("Per05Telefono2")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PER05_Telefono2");
+
+                    b.Property<int?>("Per05TieneCasilla")
+                        .HasColumnType("int")
+                        .HasColumnName("PER05_TieneCasilla");
+
+                    b.Property<int?>("Sist03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Per01Llave", "Per04Llave", "Per03Llave");
+
+                    b.HasIndex("Per04Llave");
+
+                    b.HasIndex("Per03Llave", "Per04Llave");
+
+                    b.ToTable("PER05_Comunicacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per06TipoPersonaComunicacion", b =>
+                {
+                    b.Property<int>("Per03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER03_Llave");
+
+                    b.Property<int>("Per04Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER04_Llave");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.HasKey("Per03Llave", "Per04Llave");
+
+                    b.HasIndex("Per04Llave");
+
+                    b.ToTable("PER06_TipoPersonaComunicacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per07PersonaUsuario", b =>
+                {
+                    b.Property<int>("Per07Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PER07_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Per07Llave"), 1L, 1);
+
+                    b.Property<int?>("Per01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER01_Llave");
+
+                    b.Property<int?>("Per07Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PER07_Activo");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Per07Llave");
+
+                    b.HasIndex("Per01Llave");
+
+                    b.ToTable("PER07_PersonaUsuario", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pgo01CompraLicencia", b =>
+                {
+                    b.Property<int>("Pgo1Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PGO1_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Pgo1Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt19Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT19_Llave");
+
+                    b.Property<DateTime?>("Fechacompra")
+                        .HasColumnType("datetime")
+                        .HasColumnName("FECHACOMPRA");
+
+                    b.Property<int?>("Pgo01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PGO01_Activo");
+
+                    b.Property<int?>("Pgo01TotalCompra")
+                        .HasColumnType("int")
+                        .HasColumnName("PGO01_TotalCompra");
+
+                    b.Property<int?>("Pgo03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PGO03_Llave");
+
+                    b.HasKey("Pgo1Llave");
+
+                    b.HasIndex("Cnt19Llave");
+
+                    b.HasIndex("Pgo03Llave");
+
+                    b.ToTable("PGO01_CompraLicencia", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pgo02NotificarPagoLicencia", b =>
+                {
+                    b.Property<int>("Pgo02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PGO02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Pgo02Llave"), 1L, 1);
+
+                    b.Property<DateTime?>("Fechanotificacionpago")
+                        .HasColumnType("datetime")
+                        .HasColumnName("FECHANOTIFICACIONPAGO");
+
+                    b.Property<int?>("Pgo01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PGO01_Llave");
+
+                    b.Property<int?>("Pgo02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PGO02_Activo");
+
+                    b.Property<string>("Pgo02DocumentoAdjunto")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PGO02_DocumentoAdjunto");
+
+                    b.HasKey("Pgo02Llave");
+
+                    b.HasIndex("Pgo01Llave");
+
+                    b.ToTable("PGO02_NotificarPagoLicencia", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pgo03TipoPagoLicencia", b =>
+                {
+                    b.Property<int>("Pgo03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PGO03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Pgo03Llave"), 1L, 1);
+
+                    b.Property<int?>("Pgo03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PGO03_Activo");
+
+                    b.Property<string>("Pgo03Descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("PGO03_Descripcion");
+
+                    b.Property<string>("Pgo03Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("PGO03_Nombre");
+
+                    b.HasKey("Pgo03Llave")
+                        .HasName("PK_PGO03_FormaPago");
+
+                    b.ToTable("PGO03_TipoPagoLicencia", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf01Perfil", b =>
+                {
+                    b.Property<int>("Prf01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PRF01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Prf01Llave"), 1L, 1);
+
+                    b.Property<int?>("Prf01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PRF01_Activo");
+
+                    b.Property<int?>("Prf05Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PRF05_llave");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Prf01Llave");
+
+                    b.HasIndex("Prf05Llave");
+
+                    b.HasIndex("Secu02Llave");
+
+                    b.ToTable("PRF01_Perfiles", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf03Plantilla", b =>
+                {
+                    b.Property<int>("Prf03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PRF03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Prf03Llave"), 1L, 1);
+
+                    b.Property<int?>("Prf03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PRF03_Activo");
+
+                    b.Property<string>("Prf03Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PRF03_Descripcion");
+
+                    b.Property<string>("Prf03EstadoRegistro")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PRF03_estadoRegistro");
+
+                    b.Property<string>("Prf03Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PRF03_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Prf03Llave")
+                        .HasName("PK_PRF03_PlantillaPerfil");
+
+                    b.ToTable("PRF03_Plantilla", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf04PlantillaPerfil", b =>
+                {
+                    b.Property<int>("Prf03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PRF03_Llave");
+
+                    b.Property<int>("Wkf06Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF06_llave");
+
+                    b.Property<int?>("Prf04Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PRF04_activo");
+
+                    b.HasKey("Prf03Llave", "Wkf06Llave");
+
+                    b.HasIndex("Wkf06Llave");
+
+                    b.ToTable("PRF04_plantillaPerfil", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf05TipoAsignacionUsuario", b =>
+                {
+                    b.Property<int>("Prf05Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PRF05_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Prf05Llave"), 1L, 1);
+
+                    b.Property<int?>("Prf05Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PRF05_Activo");
+
+                    b.Property<string>("Prf05Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PRF05_Descripcion");
+
+                    b.Property<string>("Prf05Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PRF05_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Prf05Llave");
+
+                    b.ToTable("PRF05_TipoAsignacionUsuario", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf06PermisosUsuario", b =>
+                {
+                    b.Property<int>("Prf01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PRF01_llave");
+
+                    b.Property<int>("Wkf06Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF06_llave");
+
+                    b.Property<int?>("Prf06Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PRF06_activo");
+
+                    b.HasKey("Prf01Llave", "Wkf06Llave");
+
+                    b.HasIndex("Wkf06Llave");
+
+                    b.ToTable("PRF06_PermisosUsuario", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prm01Seguridad", b =>
+                {
+                    b.Property<int>("Prm01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PRM01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Prm01Llave"), 1L, 1);
+
+                    b.Property<int?>("Prm01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("PRM01_Activo");
+
+                    b.Property<string>("Prm01Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PRM01_Descripcion");
+
+                    b.Property<string>("Prm01Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PRM01_Nombre");
+
+                    b.Property<string>("Prm01UrlError")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PRM01_UrlError");
+
+                    b.Property<int?>("Prm01Valor")
+                        .HasColumnType("int")
+                        .HasColumnName("PRM01_valor");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Prm01Llave");
+
+                    b.ToTable("PRM01_Seguridad", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Region", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Orden")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool?>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Regiones");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu01Rol", b =>
+                {
+                    b.Property<Guid>("Secu01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU01_Llave")
+                        .HasDefaultValueSql("(newid())");
+
+                    b.Property<bool?>("Secu01Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU01_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("Secu01Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SECU01_Descripcion");
+
+                    b.Property<string>("Secu01Info")
+                        .HasColumnType("xml")
+                        .HasColumnName("SECU01_Info");
+
+                    b.Property<string>("Secu01Nombre")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("SECU01_Nombre");
+
+                    b.Property<int?>("Secu01Orden")
+                        .HasColumnType("int")
+                        .HasColumnName("SECU01_Orden");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Secu01Llave")
+                        .HasName("PK__SECU01_R__2E718C9349B338EE");
+
+                    b.ToTable("SECU01_Rol", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu02Usuario", b =>
+                {
+                    b.Property<Guid>("Secu02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave")
+                        .HasDefaultValueSql("(newid())");
+
+                    b.Property<bool?>("Secu02Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU02_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<bool?>("Secu02Bloqueado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU02_Bloqueado")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<string>("Secu02Clave")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("SECU02_Clave");
+
+                    b.Property<string>("Secu02ComplementoClave")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)")
+                        .HasColumnName("SECU02_ComplementoClave");
+
+                    b.Property<string>("Secu02Email")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)")
+                        .HasColumnName("SECU02_Email");
+
+                    b.Property<DateTime?>("Secu02FechaBloqueo")
+                        .HasColumnType("datetime")
+                        .HasColumnName("SECU02_FechaBloqueo");
+
+                    b.Property<DateTime?>("Secu02FechaCambioPass")
+                        .HasColumnType("datetime")
+                        .HasColumnName("SECU02_FechaCambioPass");
+
+                    b.Property<string>("Secu02Movil")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("SECU02_Movil");
+
+                    b.Property<string>("Secu02Pregunta")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SECU02_Pregunta");
+
+                    b.Property<string>("Secu02Respuesta")
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)")
+                        .HasColumnName("SECU02_Respuesta");
+
+                    b.Property<string>("Secu02Usuario1")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("SECU02_Usuario");
+
+                    b.Property<Guid?>("Secu04TipoEncriptacion")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU04_TipoEncriptacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Secu02Llave")
+                        .HasName("PK__SECU02_U__B709E3CA34F4CE22");
+
+                    b.HasIndex("Secu04TipoEncriptacion");
+
+                    b.ToTable("SECU02_Usuario", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu03TipoAcceso", b =>
+                {
+                    b.Property<Guid>("Secu03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU03_Llave")
+                        .HasDefaultValueSql("(newsequentialid())");
+
+                    b.Property<bool?>("Secu03Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU03_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("Secu03Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SECU03_Descripcion");
+
+                    b.Property<string>("Secu03Info")
+                        .HasColumnType("xml")
+                        .HasColumnName("SECU03_Info");
+
+                    b.Property<string>("Secu03Nombre")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)")
+                        .HasColumnName("SECU03_Nombre");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Secu03Llave")
+                        .HasName("PK__SECU03_T__7B6F14E7DEC70462");
+
+                    b.ToTable("SECU03_TipoAcceso", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu04TipoEncriptacion", b =>
+                {
+                    b.Property<Guid>("Secu04Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU04_Llave");
+
+                    b.Property<bool?>("Secu04Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU04_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("Secu04Clase")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SECU04_Clase");
+
+                    b.Property<string>("Secu04Funcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SECU04_Funcion");
+
+                    b.Property<string>("Secu04Info")
+                        .HasColumnType("xml")
+                        .HasColumnName("SECU04_Info");
+
+                    b.Property<string>("Secu04Nombre")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("SECU04_Nombre");
+
+                    b.Property<string>("Secu04Parametros")
+                        .HasColumnType("xml")
+                        .HasColumnName("SECU04_Parametros");
+
+                    b.Property<string>("Secu04Proyecto")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SECU04_Proyecto");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Secu04Llave")
+                        .HasName("PK__SECU04_T__3412AACF89203574");
+
+                    b.ToTable("SECU04_TipoEncriptacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu05UsuarioAcceso", b =>
+                {
+                    b.Property<Guid>("Secu05Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU05_Llave")
+                        .HasDefaultValueSql("(newsequentialid())");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<Guid?>("Secu03TipoAcceso")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU03_TipoAcceso");
+
+                    b.Property<bool?>("Secu05Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU05_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<bool?>("Secu05Bloqueado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU05_Bloqueado")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<DateTime?>("Secu05FechaBloqueo")
+                        .HasColumnType("datetime")
+                        .HasColumnName("SECU05_FechaBloqueo");
+
+                    b.Property<DateTime?>("Secu05FechaMensaje")
+                        .HasColumnType("datetime")
+                        .HasColumnName("SECU05_FechaMensaje");
+
+                    b.Property<DateTime?>("Secu05FechaUltAcceso")
+                        .HasColumnType("datetime")
+                        .HasColumnName("SECU05_FechaUltAcceso");
+
+                    b.Property<DateTime?>("Secu05FechaUltActividad")
+                        .HasColumnType("datetime")
+                        .HasColumnName("SECU05_FechaUltActividad");
+
+                    b.Property<DateTime?>("Secu05FechaUltDescarga")
+                        .HasColumnType("datetime")
+                        .HasColumnName("SECU05_FechaUltDescarga");
+
+                    b.Property<bool?>("Secu05ForzarDescarga")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU05_ForzarDescarga")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<string>("Secu05Info")
+                        .HasColumnType("xml")
+                        .HasColumnName("SECU05_Info");
+
+                    b.Property<string>("Secu05LlaveAcceso")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SECU05_LlaveAcceso");
+
+                    b.Property<string>("Secu05Mensaje")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SECU05_Mensaje");
+
+                    b.Property<string>("Secu05Soacceso")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("SECU05_SOAcceso");
+
+                    b.Property<string>("Secu05VersionActual")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("SECU05_VersionActual");
+
+                    b.Property<string>("Secu05VersionDescarga")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("SECU05_VersionDescarga");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Secu05Llave")
+                        .HasName("PK__SECU05_U__2980F8C26FA412CE");
+
+                    b.HasIndex("Secu02Llave");
+
+                    b.HasIndex("Secu03TipoAcceso");
+
+                    b.ToTable("SECU05_UsuarioAcceso", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu06UsuarioRol", b =>
+                {
+                    b.Property<Guid>("Secu01Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU01_Llave");
+
+                    b.Property<Guid>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<bool?>("Secu06Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU06_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Secu01Llave", "Secu02Llave");
+
+                    b.HasIndex("Secu02Llave");
+
+                    b.ToTable("SECU06_UsuarioRol", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu07Aplicacion", b =>
+                {
+                    b.Property<Guid>("Secu07Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU07_Llave")
+                        .HasDefaultValueSql("(newid())");
+
+                    b.Property<bool?>("Secu07Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU07_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("Secu07Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SECU07_Descripcion");
+
+                    b.Property<string>("Secu07Info")
+                        .HasColumnType("xml")
+                        .HasColumnName("SECU07_Info");
+
+                    b.Property<string>("Secu07Nombre")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("SECU07_Nombre");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Secu07Llave")
+                        .HasName("PK__SECU07_A__148FCE85966FFC87");
+
+                    b.ToTable("SECU07_Aplicacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu08UsuarioAplicacion", b =>
+                {
+                    b.Property<Guid>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<Guid>("Secu07Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU07_Llave");
+
+                    b.Property<bool?>("Secu08Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasColumnName("SECU08_Activo")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("Secu08Info")
+                        .HasColumnType("xml")
+                        .HasColumnName("SECU08_Info");
+
+                    b.Property<string>("Secu08Observacion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SECU08_Observacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Secu02Llave", "Secu07Llave")
+                        .HasName("PK_UsuarioAplicacion");
+
+                    b.HasIndex("Secu07Llave");
+
+                    b.ToTable("SECU08_UsuarioAplicacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu10AccesoPermitido", b =>
+                {
+                    b.Property<int>("Secu10Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SECU10_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Secu10Llave"), 1L, 1);
+
+                    b.Property<bool?>("Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("activo");
+
+                    b.Property<Guid?>("Secu02Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU02_Llave");
+
+                    b.Property<Guid?>("Secu03Llave")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SECU03_Llave");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Secu10Llave");
+
+                    b.HasIndex("Secu02Llave");
+
+                    b.HasIndex("Secu03Llave");
+
+                    b.ToTable("SECU10_AccesoPermitido", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu11TipoPerfil", b =>
+                {
+                    b.Property<int>("Prf02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PRF02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Prf02Llave"), 1L, 1);
+
+                    b.Property<DateTime?>("Fechaactulizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("FECHAACTULIZACION");
+
+                    b.Property<string>("Prf02Descripcion")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)")
+                        .HasColumnName("PRF02_Descripcion");
+
+                    b.Property<string>("Prf02Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("PRF02_Nombre");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Prf02Llave");
+
+                    b.ToTable("SECU11_TipoPerfil", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sercl01ServiciosCliente", b =>
+                {
+                    b.Property<int>("Sercl01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SERCL01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Sercl01Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT01_Llave");
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Cnt19Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT19_Llave");
+
+                    b.Property<int?>("Conteo03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO03_Llave");
+
+                    b.Property<int?>("Esp03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP03_Llave");
+
+                    b.Property<int?>("Esp04Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP04_Llave");
+
+                    b.Property<int?>("Esp08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP08_Llave");
+
+                    b.Property<int?>("Sercl01Cantidad")
+                        .HasColumnType("int")
+                        .HasColumnName("SERCL01_cantidad");
+
+                    b.Property<int?>("Sercl01Costo")
+                        .HasColumnType("int")
+                        .HasColumnName("SERCL01_Costo");
+
+                    b.Property<int?>("Sercl01TipoGrafico")
+                        .HasColumnType("int")
+                        .HasColumnName("SERCL01_TipoGrafico");
+
+                    b.Property<int?>("Serv01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SERV01_Llave");
+
+                    b.Property<int?>("Sist03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Llave");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<int?>("sist04llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SISt04_Llave");
+
+                    b.HasKey("Sercl01Llave");
+
+                    b.ToTable("SERCL01_ServiciosClientes", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sercl02MuestreoFruta", b =>
+                {
+                    b.Property<int>("Sercl02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SERCL02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Sercl02Llave"), 1L, 1);
+
+                    b.Property<int?>("Sercl01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SERCL01_Llave");
+
+                    b.Property<int?>("Sercl02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("SERCL02_Activo");
+
+                    b.Property<DateTime?>("Sercl02Fecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("SERCL02_Fecha");
+
+                    b.Property<string>("Sercl02Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SERCL02_Nombre");
+
+                    b.Property<string>("Sercl02UrlPdf")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("SERCL02_UrlPdf");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Sercl02Llave");
+
+                    b.HasIndex("Sercl01Llave");
+
+                    b.ToTable("SERCL02_MuestreoFruta", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sercltemp01ServiciosClientesTemporal", b =>
+                {
+                    b.Property<int>("Sercltemp01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SERCLTEMP01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Sercltemp01Llave"), 1L, 1);
+
+                    b.Property<int?>("Cntemp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNTEMP01_Llave");
+
+                    b.Property<int?>("Cntemp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNTEMP02_Llave");
+
+                    b.Property<int?>("Conteo03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CONTEO03_Llave");
+
+                    b.Property<int?>("Sercltemp01TipoGrafico")
+                        .HasColumnType("int")
+                        .HasColumnName("SERCLTEMP01_TipoGrafico");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.HasKey("Sercltemp01Llave");
+
+                    b.HasIndex("Conteo03Llave");
+
+                    b.ToTable("SERCLTEMP01_ServiciosClientes_Temporal", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Serv01Servicio", b =>
+                {
+                    b.Property<int>("Serv01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SERV01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Serv01Llave"), 1L, 1);
+
+                    b.Property<int?>("Serv01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("SERV01_Activo");
+
+                    b.Property<string>("Serv01Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SERV01_Descripcion");
+
+                    b.Property<string>("Serv01Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("SERV01_Nombre");
+
+                    b.Property<int?>("Serv02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SERV02_llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Serv01Llave");
+
+                    b.HasIndex("Serv02Llave");
+
+                    b.ToTable("SERV01_Servicio", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Serv02TipoServicio", b =>
+                {
+                    b.Property<int>("Serv02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SERV02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Serv02Llave"), 1L, 1);
+
+                    b.Property<int?>("Serv02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("SERV02_Activo");
+
+                    b.Property<string>("Serv02Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SERV02_Descripcion");
+
+                    b.Property<string>("Serv02Nombre")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("SERV02_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Serv02Llave");
+
+                    b.ToTable("SERV02_TipoServicio", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.setSelect", b =>
+                {
+                    b.Property<int>("Value")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Value"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Value");
+
+                    b.ToTable("SetSelects");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist01Sistema", b =>
+                {
+                    b.Property<int>("Sist01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SIST01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Sist01Llave"), 1L, 1);
+
+                    b.Property<bool?>("Sist01Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("SIST01_Activo");
+
+                    b.Property<string>("Sist01Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SIST01_Descripcion");
+
+                    b.Property<bool?>("Sist01EsPublica")
+                        .HasColumnType("bit")
+                        .HasColumnName("SIST01_EsPublica");
+
+                    b.Property<bool?>("Sist01EsServicios")
+                        .HasColumnType("bit")
+                        .HasColumnName("SIST01_EsServicios");
+
+                    b.Property<string>("Sist01Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("SIST01_Nombre");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Sist01Llave");
+
+                    b.ToTable("SIST01_Sistema", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist02Zona", b =>
+                {
+                    b.Property<int>("Sist02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SIST02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Sist02Llave"), 1L, 1);
+
+                    b.Property<int?>("Sist02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST02_Activo");
+
+                    b.Property<string>("Sist02Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SIST02_Descripcion");
+
+                    b.Property<string>("Sist02Estadoregistro")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("SIST02_estadoregistro");
+
+                    b.Property<string>("Sist02Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SIST02_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Sist02Llave");
+
+                    b.ToTable("SIST02_Zona", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist03Comuna", b =>
+                {
+                    b.Property<int>("sist03llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("sist03llave"), 1L, 1);
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.Property<int?>("sist03activo")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Activo");
+
+                    b.Property<int?>("sist03capital")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Capital");
+
+                    b.Property<string>("sist03descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SIST03_Descripcion");
+
+                    b.Property<string>("sist03nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("SIST03_Nombre");
+
+                    b.Property<int?>("sist04llave")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST04_Llave");
+
+                    b.HasKey("sist03llave");
+
+                    b.HasIndex("sist04llave");
+
+                    b.ToTable("SIST03_Comuna", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist04Region", b =>
+                {
+                    b.Property<int>("sist04llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SIST04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("sist04llave"), 1L, 1);
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.Property<int?>("sist04activo")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST04_Activo");
+
+                    b.Property<string>("sist04descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SIST04_Descripcion");
+
+                    b.Property<string>("sist04nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("SIST04_Nombre");
+
+                    b.Property<int?>("sist04orden")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST04_Orden");
+
+                    b.HasKey("sist04llave");
+
+                    b.ToTable("SIST04_Region", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist05EstadoRegistro", b =>
+                {
+                    b.Property<int>("Sist05Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SIST05_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Sist05Llave"), 1L, 1);
+
+                    b.Property<int?>("Sist03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST03_Activo");
+
+                    b.Property<string>("Sist03Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SIST03_Descripcion");
+
+                    b.Property<string>("Sist05Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("SIST05_Nombre");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Sist05Llave");
+
+                    b.ToTable("SIST05_EstadoRegistro", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist06EstadoGrid", b =>
+                {
+                    b.Property<int>("Sist06Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SIST06_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Sist06Llave"), 1L, 1);
+
+                    b.Property<int?>("Sist06Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST06_Activo");
+
+                    b.Property<string>("Sist06Nombre")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("SIST06_Nombre");
+
+                    b.HasKey("Sist06Llave");
+
+                    b.ToTable("SIST06_EstadoGrid", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist08ContactoUsuario", b =>
+                {
+                    b.Property<int>("Sist08Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SIST08_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Sist08Llave"), 1L, 1);
+
+                    b.Property<int?>("Per02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("PER02_Llave");
+
+                    b.Property<string>("Sist08Celular")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)")
+                        .HasColumnName("SIST08_Celular");
+
+                    b.Property<string>("Sist08Comentario")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SIST08_Comentario");
+
+                    b.Property<string>("Sist08Correo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("SIST08_Correo");
+
+                    b.Property<string>("Sist08Empresa")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("SIST08_Empresa");
+
+                    b.Property<int?>("Sist08Estado")
+                        .HasColumnType("int")
+                        .HasColumnName("SIST08_Estado");
+
+                    b.Property<DateTime?>("Sist08Fechacreacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("SIST08_FECHACREACION");
+
+                    b.Property<string>("Sist08Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("SIST08_Nombre");
+
+                    b.Property<string>("Sist08Telefono")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)")
+                        .HasColumnName("SIST08_Telefono");
+
+                    b.HasKey("Sist08Llave");
+
+                    b.HasIndex("Per02Llave");
+
+                    b.ToTable("SIST08_ContactoUsuario", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Temp01Temporada", b =>
+                {
+                    b.Property<int>("Temp01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Temp01Llave"), 1L, 1);
+
+                    b.Property<int?>("Temp01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP01_Activo");
+
+                    b.Property<string>("Temp01Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("TEMP01_Descripcion");
+
+                    b.Property<DateTime?>("Temp01MaxFecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("TEMP01_MaxFecha");
+
+                    b.Property<int?>("Temp01MaxMes")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP01_MaxMes");
+
+                    b.Property<DateTime?>("Temp01MinFecha")
+                        .HasColumnType("datetime")
+                        .HasColumnName("TEMP01_MinFecha");
+
+                    b.Property<int?>("Temp01MinMes")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP01_MinMes");
+
+                    b.Property<string>("Temp01Nombre")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("TEMP01_Nombre");
+
+                    b.Property<int?>("Temp01Periodo")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP01_Periodo");
+
+                    b.Property<int?>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<int?>("Temp03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP03_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Temp01Llave");
+
+                    b.HasIndex("Temp02Llave");
+
+                    b.HasIndex("Temp03Llave");
+
+                    b.ToTable("TEMP01_Temporada", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Temp02TemporadaBase", b =>
+                {
+                    b.Property<int>("Temp02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Temp02Llave"), 1L, 1);
+
+                    b.Property<int?>("Temp02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Activo");
+
+                    b.Property<string>("Temp02Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("TEMP02_Descripcion");
+
+                    b.Property<string>("Temp02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("TEMP02_Nombre");
+
+                    b.Property<int?>("Temp02Predeterminada")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Predeterminada");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Temp02Llave");
+
+                    b.ToTable("TEMP02_TemporadaBase", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Temp03Segmentacion", b =>
+                {
+                    b.Property<int>("Temp03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Temp03Llave"), 1L, 1);
+
+                    b.Property<int?>("Temp03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP03_Activo");
+
+                    b.Property<string>("Temp03Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("TEMP03_Descripcion");
+
+                    b.Property<string>("Temp03Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("TEMP03_Nombre");
+
+                    b.Property<int?>("Temp03NumeroMeses")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP03_NumeroMeses");
+
+                    b.Property<int?>("Temp03NumeroSegmentosTotal")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP03_NumeroSegmentosTotal");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Temp03Llave");
+
+                    b.ToTable("TEMP03_Segmentacion", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Trp01Trampa", b =>
+                {
+                    b.Property<int>("Trp01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("TRP01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Trp01Llave"), 1L, 1);
+
+                    b.Property<int?>("Cnt08Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("CNT08_Llave");
+
+                    b.Property<int?>("Esp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("ESP01_Llave");
+
+                    b.Property<int?>("Trp01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("TRP01_Activo");
+
+                    b.Property<string>("Trp01Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("TRP01_Nombre");
+
+                    b.Property<int?>("Trp01Numero")
+                        .HasColumnType("int")
+                        .HasColumnName("TRP01_Numero");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Trp01Llave");
+
+                    b.HasIndex("Cnt08Llave");
+
+                    b.HasIndex("Esp01Llave");
+
+                    b.ToTable("TRP01_Trampa", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Trp02Temporada", b =>
+                {
+                    b.Property<int>("Trp02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("TRP02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Trp02Llave"), 1L, 1);
+
+                    b.Property<bool?>("Temp02Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("TEMP02_Activo");
+
+                    b.Property<int>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<int>("Trp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TRP01_Llave");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Trp02Llave");
+
+                    b.HasIndex("Temp02Llave");
+
+                    b.HasIndex("Trp01Llave");
+
+                    b.ToTable("TRP02_Temporada", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Trp03Geocordenada", b =>
+                {
+                    b.Property<int>("Trp01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TRP01_Llave");
+
+                    b.Property<int>("Temp02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("TEMP02_Llave");
+
+                    b.Property<string>("X")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("x");
+
+                    b.Property<string>("Y")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("y");
+
+                    b.HasKey("Trp01Llave", "Temp02Llave");
+
+                    b.ToTable("TRP03_geocordenadas", (string)null);
                 });
 
             modelBuilder.Entity("mipBackend.Models.Usuario", b =>
@@ -260,6 +7541,656 @@ namespace mipBackend.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("mipBackend.Models.Wkf01Flujo", b =>
+                {
+                    b.Property<int>("Wkf01Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WKF01_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Wkf01Llave"), 1L, 1);
+
+                    b.Property<int>("Wkf01Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF01_Activo");
+
+                    b.Property<string>("Wkf01Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF01_Descripcion");
+
+                    b.Property<string>("Wkf01Directorio")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("WKF01_Directorio");
+
+                    b.Property<int?>("Wkf01EsInicio")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF01_EsInicio");
+
+                    b.Property<string>("Wkf01EstadoRegistro")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF01_estadoRegistro");
+
+                    b.Property<string>("Wkf01IconoUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF01_iconoUrl");
+
+                    b.Property<string>("Wkf01ImagenGrande")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF01_ImagenGrande");
+
+                    b.Property<string>("Wkf01ImagenPequena")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF01_ImagenPequena");
+
+                    b.Property<int?>("Wkf01LlavePadre")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF01_LlavePadre");
+
+                    b.Property<string>("Wkf01Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("WKF01_Nombre");
+
+                    b.Property<int?>("Wkf01Orden")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF01_Orden");
+
+                    b.Property<int?>("Wkf01Prioridad")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF01_Prioridad");
+
+                    b.Property<string>("Wkf01Url")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("WKF01_url");
+
+                    b.Property<int?>("Wkf01VisibleMenu")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF01_visibleMenu");
+
+                    b.Property<int?>("Wkf03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF03_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Wkf01Llave");
+
+                    b.HasIndex("Wkf03Llave");
+
+                    b.ToTable("WKF01_Flujo", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf02TipoFlujo", b =>
+                {
+                    b.Property<int>("Wkf02Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WKF02_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Wkf02Llave"), 1L, 1);
+
+                    b.Property<int?>("Wkf02Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF02_Activo");
+
+                    b.Property<string>("Wkf02Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF02_Descripcion");
+
+                    b.Property<string>("Wkf02Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("WKF02_Nombre");
+
+                    b.Property<int?>("Wkf02Orden")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF02_orden");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Wkf02Llave");
+
+                    b.ToTable("WKF02_TipoFlujo", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf03Nivel", b =>
+                {
+                    b.Property<int>("Wkf03Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WKF03_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Wkf03Llave"), 1L, 1);
+
+                    b.Property<int?>("Wkf02Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF02_Llave");
+
+                    b.Property<int?>("Wkf03Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF03_Activo");
+
+                    b.Property<string>("Wkf03Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("WKF03_Descripcion");
+
+                    b.Property<int?>("Wkf03Nivel1")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF03_Nivel");
+
+                    b.Property<string>("Wkf03Nombre")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("WKF03_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Wkf03Llave");
+
+                    b.HasIndex("Wkf02Llave");
+
+                    b.ToTable("WKF03_Nivel", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf04NivelPermiso", b =>
+                {
+                    b.Property<int>("Wkf04Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WKF04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Wkf04Llave"), 1L, 1);
+
+                    b.Property<int?>("Wkf03Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF03_llave");
+
+                    b.Property<int?>("Wkf04Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF04_Activo");
+
+                    b.Property<int?>("Wkf05Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF05_llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Wkf04Llave")
+                        .HasName("PK_WKF04_NivelPremiso");
+
+                    b.HasIndex("Wkf03Llave");
+
+                    b.HasIndex("Wkf05Llave");
+
+                    b.ToTable("WKF04_NivelPermiso", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf05TipoPermiso", b =>
+                {
+                    b.Property<int>("Wkf05Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WKF05_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Wkf05Llave"), 1L, 1);
+
+                    b.Property<int?>("Wkf05Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF05_Activo");
+
+                    b.Property<string>("Wkf05Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("WKF05_Descripcion");
+
+                    b.Property<string>("Wkf05Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF05_Nombre");
+
+                    b.Property<string>("Wkf05Sigla")
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)")
+                        .HasColumnName("WKF05_sigla");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Wkf05Llave")
+                        .HasName("PK_WKF05_TipoPerfil");
+
+                    b.ToTable("WKF05_TipoPermiso", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf06Perfil", b =>
+                {
+                    b.Property<int>("Wkf06Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WKF06_llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Wkf06Llave"), 1L, 1);
+
+                    b.Property<int?>("Wkf01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF01_llave");
+
+                    b.Property<int?>("Wkf06Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF06_Activo");
+
+                    b.Property<string>("Wkf06Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("WKF06_Descripcion");
+
+                    b.Property<string>("Wkf06Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF06_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Wkf06Llave");
+
+                    b.HasIndex("Wkf01Llave");
+
+                    b.ToTable("WKF06_Perfiles", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf07PerfilesPermiso", b =>
+                {
+                    b.Property<int>("Wkf06Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF06_llave");
+
+                    b.Property<int>("Wkf05Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF05_llave");
+
+                    b.Property<int>("Wkf07Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF07_activo");
+
+                    b.HasKey("Wkf06Llave", "Wkf05Llave");
+
+                    b.HasIndex("Wkf05Llave");
+
+                    b.ToTable("WKF07_PerfilesPermiso", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf08Area", b =>
+                {
+                    b.Property<int>("Wfk08Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WFK08_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Wfk08Llave"), 1L, 1);
+
+                    b.Property<bool?>("Wfk08Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("WFK08_Activo");
+
+                    b.Property<string>("Wfk08Descripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WFK08_Descripcion");
+
+                    b.Property<string>("Wfk08Nombre")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("WFK08_Nombre");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Wfk08Llave")
+                        .HasName("PK_WFK08_Area");
+
+                    b.ToTable("WKF08_Area", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf09Parametro", b =>
+                {
+                    b.Property<int>("Wkf09Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WKF09_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Wkf09Llave"), 1L, 1);
+
+                    b.Property<int?>("Wkf01Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF01_Llave");
+
+                    b.Property<int?>("Wkf09Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF09_Activo");
+
+                    b.Property<string>("Wkf09Valor")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF09_Valor");
+
+                    b.Property<string>("Wkf09Variable")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF09_Variable");
+
+                    b.Property<int?>("Wkf10Llave")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF10_Llave");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Wkf09Llave");
+
+                    b.HasIndex("Wkf01Llave");
+
+                    b.HasIndex("Wkf10Llave");
+
+                    b.ToTable("WKF09_Parametro", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf10TipoParametro", b =>
+                {
+                    b.Property<int>("Wkf10Llave")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WKF10_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Wkf10Llave"), 1L, 1);
+
+                    b.Property<int?>("Wkf10Activo")
+                        .HasColumnType("int")
+                        .HasColumnName("WKF10_Activo");
+
+                    b.Property<string>("Wkf10Descripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("WKF10_Descripcion");
+
+                    b.Property<string>("Wkf10Nombre")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("WKF10_Nombre");
+
+                    b.Property<Guid?>("approveby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("APPROVE_BY");
+
+                    b.Property<Guid?>("createby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<Guid?>("deleteby")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DELETE_BY");
+
+                    b.Property<DateTime?>("fechaactivacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactivacion");
+
+                    b.Property<DateTime?>("fechaactualizacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaactualizacion");
+
+                    b.Property<DateTime?>("fechaeliminacion")
+                        .HasColumnType("datetime")
+                        .HasColumnName("fechaeliminacion");
+
+                    b.HasKey("Wkf10Llave");
+
+                    b.ToTable("WKF10_TipoParametro", (string)null);
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Zona", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool?>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Zonas");
+                });
+
+            modelBuilder.Entity("Mnt02EspeciesAsignada", b =>
+                {
+                    b.Property<int>("Mnt01Llave")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Esp02Llave")
+                        .HasColumnType("int");
+
+                    b.HasKey("Mnt01Llave", "Esp02Llave")
+                        .HasName("PK_MNT02_EspeciesAsignadas_2");
+
+                    b.HasIndex("Esp02Llave");
+
+                    b.ToTable("MNT02_EspeciesAsignadas", (string)null);
+                });
+
+            modelBuilder.Entity("Prf02PlantillasUsuario", b =>
+                {
+                    b.Property<int>("Prf01Llave")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Prf03Llave")
+                        .HasColumnType("int");
+
+                    b.HasKey("Prf01Llave", "Prf03Llave");
+
+                    b.HasIndex("Prf03Llave");
+
+                    b.ToTable("PRF02_PlantillasUsuario", (string)null);
+                });
+
+            modelBuilder.Entity("Sist07ZonaComuna", b =>
+                {
+                    b.Property<int>("Sist02Llave")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sist03Llave")
+                        .HasColumnType("int");
+
+                    b.HasKey("Sist02Llave", "Sist03Llave");
+
+                    b.HasIndex("Sist03Llave");
+
+                    b.ToTable("SIST07_ZonaComuna", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -309,6 +8240,1688 @@ namespace mipBackend.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Blk01Bloqueo", b =>
+                {
+                    b.HasOne("mipBackend.Models.Blk02TipoBloqueo", "Blk02LlaveNavigation")
+                        .WithMany("Blk01Bloqueos")
+                        .HasForeignKey("Blk02Llave")
+                        .HasConstraintName("FK_BLK01_Bloqueos_BLK02_TipoBloqueo");
+
+                    b.Navigation("Blk02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Blk03BloqueoUsuario", b =>
+                {
+                    b.HasOne("mipBackend.Models.Blk01Bloqueo", "Blk01LlaveNavigation")
+                        .WithMany("Blk03BloqueoUsuarios")
+                        .HasForeignKey("Blk01Llave")
+                        .HasConstraintName("FK_BLK03_BloqueoUsuario_BLK01_Bloqueos");
+
+                    b.Navigation("Blk01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Clbr01Calibracion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Clbr02TipoCalibracion", "Clbr02LlaveNavigation")
+                        .WithMany("Clbr01Calibracions")
+                        .HasForeignKey("Clbr02Llave")
+                        .HasConstraintName("FK_CLBR01_Calibracion_CLBR02_TipoCalibracion");
+
+                    b.Navigation("Clbr02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt01CuentaCliente", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt02TipoCuenta", "Cnt02LlaveNavigation")
+                        .WithMany("Cnt01CuentaClientes")
+                        .HasForeignKey("Cnt02Llave")
+                        .HasConstraintName("FK_CNT01_CuentaCliente_CNT02_TipoCuenta");
+
+                    b.HasOne("mipBackend.Models.Cnt03TipoCliente", "Cnt03LlaveNavigation")
+                        .WithMany("Cnt01CuentaClientes")
+                        .HasForeignKey("Cnt03Llave")
+                        .HasConstraintName("FK_CNT01_CuentaCliente_CNT03_TipoCliente");
+
+                    b.HasOne("mipBackend.Models.Per01Persona", "Per01LlaveNavigation")
+                        .WithMany("Cnt01CuentaClientes")
+                        .HasForeignKey("Per01Llave")
+                        .HasConstraintName("FK_CNT01_CuentaCliente_PER01_Persona");
+
+                    b.Navigation("Cnt02LlaveNavigation");
+
+                    b.Navigation("Cnt03LlaveNavigation");
+
+                    b.Navigation("Per01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt03TipoCliente", b =>
+                {
+                    b.HasOne("mipBackend.Models.Per03TipoPersona", "Per03LlaveNavigation")
+                        .WithMany("Cnt03TipoClientes")
+                        .HasForeignKey("Per03Llave")
+                        .HasConstraintName("FK_CNT03_TipoCliente_PER03_TipoPersona");
+
+                    b.Navigation("Per03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt04ContactoCliente", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt01CuentaCliente", "Cnt01LlaveNavigation")
+                        .WithMany("Cnt04ContactoClientes")
+                        .HasForeignKey("Cnt01Llave")
+                        .HasConstraintName("FK_CNT04_ContactoCliente_CNT01_CuentaCliente1");
+
+                    b.HasOne("mipBackend.Models.Cnt05TipoContacto", "Cnt05LlaveNavigation")
+                        .WithMany("Cnt04ContactoClientes")
+                        .HasForeignKey("Cnt05Llave")
+                        .HasConstraintName("FK_CNT04_ContactoCliente_CNT05_TipoContacto");
+
+                    b.Navigation("Cnt01LlaveNavigation");
+
+                    b.Navigation("Cnt05LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt06ComunicacionCliente", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt01CuentaCliente", "Cnt01LlaveNavigation")
+                        .WithMany("Cnt06ComunicacionClientes")
+                        .HasForeignKey("Cnt01Llave")
+                        .HasConstraintName("FK_CNT06_ComunicacionCliente_CNT01_CuentaCliente");
+
+                    b.HasOne("mipBackend.Models.Cnt08Segmentacion", "Cnt08LlaveNavigation")
+                        .WithMany("Cnt06ComunicacionClientes")
+                        .HasForeignKey("Cnt08Llave")
+                        .HasConstraintName("FK_CNT06_ComunicacionCliente_CNT08_Segmentacion");
+
+                    b.HasOne("mipBackend.Models.Cnt10TipoComunicacion", "Cnt10LlaveNavigation")
+                        .WithMany("Cnt06ComunicacionClientes")
+                        .HasForeignKey("Cnt10Llave")
+                        .HasConstraintName("FK_CNT06_ComunicacionCliente_CNT10_TipoComunicacion");
+
+                    b.HasOne("mipBackend.Models.Sist03Comuna", "Sist03LlaveNavigation")
+                        .WithMany("Cnt06ComunicacionClientes")
+                        .HasForeignKey("Sist03Llave")
+                        .HasConstraintName("FK_CNT06_ComunicacionCliente_SIST03_Comuna");
+
+                    b.Navigation("Cnt01LlaveNavigation");
+
+                    b.Navigation("Cnt08LlaveNavigation");
+
+                    b.Navigation("Cnt10LlaveNavigation");
+
+                    b.Navigation("Sist03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt07TipoSegmentacion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt18NivelSegmentacion", "Cnt18LlaveNavigation")
+                        .WithMany("Cnt07TipoSegmentacions")
+                        .HasForeignKey("Cnt18Llave")
+                        .HasConstraintName("FK_CNT07_TipoSegmentacion_CNT18_NivelSegmentacion");
+
+                    b.Navigation("Cnt18LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt08Segmentacion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt01CuentaCliente", "Cnt01LlaveNavigation")
+                        .WithMany("Cnt08Segmentacions")
+                        .HasForeignKey("Cnt01Llave")
+                        .HasConstraintName("FK_CNT08_Segmentacion_CNT01_CuentaCliente");
+
+                    b.HasOne("mipBackend.Models.Cnt07TipoSegmentacion", "Cnt07LlaveNavigation")
+                        .WithMany("Cnt08Segmentacions")
+                        .HasForeignKey("Cnt07Llave")
+                        .HasConstraintName("FK_CNT08_Segmentacion_CNT07_TipoSegmentacion");
+
+                    b.HasOne("mipBackend.Models.Cnt08Segmentacion", "Cnt08LlavePadreNavigation")
+                        .WithMany("InverseCnt08LlavePadreNavigation")
+                        .HasForeignKey("Cnt08LlavePadre")
+                        .HasConstraintName("FK_CNT08_Segmentacion_CNT08_Segmentacion");
+
+                    b.Navigation("Cnt01LlaveNavigation");
+
+                    b.Navigation("Cnt07LlaveNavigation");
+
+                    b.Navigation("Cnt08LlavePadreNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt09ComunicacionSegmentacion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt08Segmentacion", "Cnt08LlaveNavigation")
+                        .WithMany("Cnt09ComunicacionSegmentacions")
+                        .HasForeignKey("Cnt08Llave")
+                        .HasConstraintName("FK_CNT09_ComunicacionSegmentacion_CNT08_Segmentacion");
+
+                    b.Navigation("Cnt08LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt11ContactoSegmentacion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt08Segmentacion", "Cnt08LlaveNavigation")
+                        .WithMany("Cnt11ContactoSegmentacions")
+                        .HasForeignKey("Cnt08Llave")
+                        .HasConstraintName("FK_CNT11_ContactoSegmentacion_CNT08_Segmentacion");
+
+                    b.Navigation("Cnt08LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt12Empleado", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt01CuentaCliente", "Cnt01LlaveNavigation")
+                        .WithMany("Cnt12Empleados")
+                        .HasForeignKey("Cnt01Llave")
+                        .HasConstraintName("FK_CNT12_Empleados_CNT01_CuentaCliente");
+
+                    b.HasOne("mipBackend.Models.Cnt13TipoEmpleado", "Cnt13LlaveNavigation")
+                        .WithMany("Cnt12Empleados")
+                        .HasForeignKey("Cnt13Llave")
+                        .HasConstraintName("FK_CNT12_Empleados_CNT13_TipoEmpleado");
+
+                    b.HasOne("mipBackend.Models.Per01Persona", "Per01LlaveNavigation")
+                        .WithMany("Cnt12Empleados")
+                        .HasForeignKey("Per01Llave")
+                        .HasConstraintName("FK_CNT12_Empleados_PER01_Persona");
+
+                    b.Navigation("Cnt01LlaveNavigation");
+
+                    b.Navigation("Cnt13LlaveNavigation");
+
+                    b.Navigation("Per01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt14ClienteLicencia", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt01CuentaCliente", "Cnt01LlaveNavigation")
+                        .WithMany("Cnt14ClienteLicencia")
+                        .HasForeignKey("Cnt01Llave")
+                        .HasConstraintName("FK_CNT14_ClienteLicencia_CNT01_CuentaCliente");
+
+                    b.Navigation("Cnt01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt15EmpleadoLicencia", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt12Empleado", "Cnt12LlaveNavigation")
+                        .WithMany("Cnt15EmpleadoLicencia")
+                        .HasForeignKey("Cnt12Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_CNT15_EmpleadoLicencia_CNT12_Empleados");
+
+                    b.HasOne("mipBackend.Models.Cnt19LicenciaCliente", "Cnt19LlaveNavigation")
+                        .WithMany("Cnt15EmpleadoLicencia")
+                        .HasForeignKey("Cnt19Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_CNT15_EmpleadoLicencia_CNT19_LicenciaCliente");
+
+                    b.Navigation("Cnt12LlaveNavigation");
+
+                    b.Navigation("Cnt19LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt17Bloqueo", b =>
+                {
+                    b.HasOne("mipBackend.Models.Blk01Bloqueo", "Blk01LlaveNavigation")
+                        .WithMany("Cnt17Bloqueos")
+                        .HasForeignKey("Blk01Llave")
+                        .HasConstraintName("FK_CNT17_Bloqueos_BLK01_Bloqueos");
+
+                    b.HasOne("mipBackend.Models.Cnt01CuentaCliente", "Cnt01LlaveNavigation")
+                        .WithMany("Cnt17Bloqueos")
+                        .HasForeignKey("Cnt01Llave")
+                        .HasConstraintName("FK_CNT17_Bloqueos_CNT01_CuentaCliente");
+
+                    b.HasOne("mipBackend.Models.Cnt08Segmentacion", "Cnt08LlaveNavigation")
+                        .WithMany("Cnt17Bloqueos")
+                        .HasForeignKey("Cnt08Llave")
+                        .HasConstraintName("FK_CNT17_Bloqueos_CNT08_Segmentacion");
+
+                    b.HasOne("mipBackend.Models.Cnt14ClienteLicencia", "Cnt14LlaveNavigation")
+                        .WithMany("Cnt17Bloqueos")
+                        .HasForeignKey("Cnt14Llave")
+                        .HasConstraintName("FK_CNT17_Bloqueos_CNT14_ClienteLicencia");
+
+                    b.HasOne("mipBackend.Models.Cnt16TipoBloqueoCliente", "Cnt16LlaveNavigation")
+                        .WithMany("Cnt17Bloqueos")
+                        .HasForeignKey("Cnt16Llave")
+                        .HasConstraintName("FK_CNT17_Bloqueos_CNT16_TipoBloqueoCliente");
+
+                    b.Navigation("Blk01LlaveNavigation");
+
+                    b.Navigation("Cnt01LlaveNavigation");
+
+                    b.Navigation("Cnt08LlaveNavigation");
+
+                    b.Navigation("Cnt14LlaveNavigation");
+
+                    b.Navigation("Cnt16LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt19LicenciaCliente", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt01CuentaCliente", "Cnt01LlaveNavigation")
+                        .WithMany("Cnt19LicenciaClientes")
+                        .HasForeignKey("Cnt01Llave")
+                        .HasConstraintName("FK_CNT19_LicenciaCliente_CNT01_CuentaCliente");
+
+                    b.Navigation("Cnt01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt20LicenciaServicio", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt19LicenciaCliente", "Cnt19LlaveNavigation")
+                        .WithMany("Cnt20LicenciaServicios")
+                        .HasForeignKey("Cnt19Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_CNT20_LicenciaServicio_CNT19_LicenciaCliente");
+
+                    b.Navigation("Cnt19LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt22EstacionTipoEstacion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt08Segmentacion", "Cnt08LlaveNavigation")
+                        .WithMany("Cnt22EstacionTipoEstacions")
+                        .HasForeignKey("Cnt08Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_CNT22_Estacion_TipoEstacion_CNT08_Segmentacion");
+
+                    b.HasOne("mipBackend.Models.Cnt21TipoEstacion", "Cnt21LlaveNavigation")
+                        .WithMany("Cnt22EstacionTipoEstacions")
+                        .HasForeignKey("Cnt21Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_CNT22_Estacion_TipoEstacion_CNT21_TipoEstacion");
+
+                    b.Navigation("Cnt08LlaveNavigation");
+
+                    b.Navigation("Cnt21LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Comuna", b =>
+                {
+                    b.HasOne("mipBackend.Models.Region", "Region")
+                        .WithMany("Comunas")
+                        .HasForeignKey("RegionId");
+
+                    b.Navigation("Region");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cont01Contacto", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cont02TipoContacto", "Cont02LlaveNavigation")
+                        .WithMany("Cont01Contactos")
+                        .HasForeignKey("Cont02Llave")
+                        .HasConstraintName("FK_CONT01_Contacto_CONT02_TipoContacto");
+
+                    b.Navigation("Cont02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo01Conteo", b =>
+                {
+                    b.HasOne("mipBackend.Models.Temp02TemporadaBase", "Temp02LlaveNavigation")
+                        .WithMany("Conteo01Conteos")
+                        .HasForeignKey("Temp02Llave")
+                        .HasConstraintName("FK_CONTEO01_Conteos_TEMP02_TemporadaBase");
+
+                    b.Navigation("Temp02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo02Procesado", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt08Segmentacion", "Cnt08LlaveNavigation")
+                        .WithMany("Conteo02Procesados")
+                        .HasForeignKey("Cnt08Llave")
+                        .HasConstraintName("FK_CONTEO02_Procesados_CNT08_Segmentacion");
+
+                    b.Navigation("Cnt08LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo03Resumen", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt08Segmentacion", "Cnt08LlaveNavigation")
+                        .WithMany("Conteo03Resumen")
+                        .HasForeignKey("Cnt08Llave")
+                        .HasConstraintName("FK_CONTEO03_Resumen_CNT08_Segmentacion");
+
+                    b.Navigation("Cnt08LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo04ResumenSag", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp01Especie", "Esp01LlaveNavigation")
+                        .WithMany("Conteo04ResumenSags")
+                        .HasForeignKey("Esp01Llave")
+                        .HasConstraintName("FK_CONTEO04_ResumenSag_ESP01_Especies");
+
+                    b.HasOne("mipBackend.Models.Sist03Comuna", "Sist03LlaveNavigation")
+                        .WithMany("Conteo04ResumenSags")
+                        .HasForeignKey("Sist03Llave")
+                        .HasConstraintName("FK_CONTEO04_ResumenSag_SIST03_Comuna");
+
+                    b.HasOne("mipBackend.Models.Temp02TemporadaBase", "Temp02LlaveNavigation")
+                        .WithMany("Conteo04ResumenSags")
+                        .HasForeignKey("Temp02Llave")
+                        .HasConstraintName("FK_CONTEO04_ResumenSag_TEMP02_TemporadaBase");
+
+                    b.Navigation("Esp01LlaveNavigation");
+
+                    b.Navigation("Sist03LlaveNavigation");
+
+                    b.Navigation("Temp02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo05ControlReserva", b =>
+                {
+                    b.HasOne("mipBackend.Models.Secu02Usuario", "Secu02LlaveNavigation")
+                        .WithMany("Conteo05ControlReservas")
+                        .HasForeignKey("Secu02Llave")
+                        .HasConstraintName("FK_CONTEO05_Control_Reserva_SECU02_Usuario");
+
+                    b.Navigation("Secu02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Ctt01Contrato", b =>
+                {
+                    b.HasOne("mipBackend.Models.Ctt02TipoContrato", "Ctt02LlaveNavigation")
+                        .WithMany("Ctt01Contratos")
+                        .HasForeignKey("Ctt02Llave")
+                        .HasConstraintName("FK_CTT01_Contrato_CTT02_TipoContrato");
+
+                    b.Navigation("Ctt02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml01BitacoraEmailUsuario", b =>
+                {
+                    b.HasOne("mipBackend.Models.Eml02MailBase", "Eml02LlaveNavigation")
+                        .WithMany("Eml01BitacoraEmailUsuarios")
+                        .HasForeignKey("Eml02Llave")
+                        .HasConstraintName("FK_EML01_EmailUsuario_EML02_MailBase");
+
+                    b.HasOne("mipBackend.Models.Eml04ImportanciaMail", "Eml04LlaveNavigation")
+                        .WithMany("Eml01BitacoraEmailUsuarios")
+                        .HasForeignKey("Eml04Llave")
+                        .HasConstraintName("FK_EML01_EmailUsuario_EML04_ImportanciaMail");
+
+                    b.HasOne("mipBackend.Models.Secu02Usuario", "Secu02LlaveNavigation")
+                        .WithMany("Eml01BitacoraEmailUsuarios")
+                        .HasForeignKey("Secu02Llave")
+                        .HasConstraintName("FK_EML01_BitacoraEmailUsuario_SECU02_Usuario");
+
+                    b.Navigation("Eml02LlaveNavigation");
+
+                    b.Navigation("Eml04LlaveNavigation");
+
+                    b.Navigation("Secu02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml02MailBase", b =>
+                {
+                    b.HasOne("mipBackend.Models.Eml03TipoMailAccion", "Eml03LlaveNavigation")
+                        .WithMany("Eml02MailBases")
+                        .HasForeignKey("Eml03Llave")
+                        .HasConstraintName("FK_EML02_MailBase_EML03_TipoMailAcciones");
+
+                    b.HasOne("mipBackend.Models.Eml04ImportanciaMail", "Eml04LlaveNavigation")
+                        .WithMany("Eml02MailBases")
+                        .HasForeignKey("Eml04Llave")
+                        .HasConstraintName("FK_EML02_MailBase_EML04_ImportanciaMail");
+
+                    b.Navigation("Eml03LlaveNavigation");
+
+                    b.Navigation("Eml04LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml05ArchivoMail", b =>
+                {
+                    b.HasOne("mipBackend.Models.Eml01BitacoraEmailUsuario", "Eml01LlaveNavigation")
+                        .WithMany("Eml05ArchivoMails")
+                        .HasForeignKey("Eml01Llave")
+                        .HasConstraintName("FK_EML05_ArchivoMail_EML01_EmailUsuario");
+
+                    b.HasOne("mipBackend.Models.Eml06TipoArchivo", "Eml05LlaveNavigation")
+                        .WithOne("Eml05ArchivoMail")
+                        .HasForeignKey("mipBackend.Models.Eml05ArchivoMail", "Eml05Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_EML05_ArchivoMail_EML06_TipoArchivo");
+
+                    b.Navigation("Eml01LlaveNavigation");
+
+                    b.Navigation("Eml05LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp01Especie", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp03EspecieBase", "Esp03LlaveNavigation")
+                        .WithMany("Esp01Especies")
+                        .HasForeignKey("Esp03Llave")
+                        .HasConstraintName("FK_ESP01_Especies_ESP03_EspecieBase");
+
+                    b.HasOne("mipBackend.Models.Esp04EstadoDanio", "Esp04LlaveNavigation")
+                        .WithMany("Esp01Especies")
+                        .HasForeignKey("Esp04Llave")
+                        .HasConstraintName("FK_ESP01_Especies_ESP04_EstadoDanio");
+
+                    b.Navigation("Esp03LlaveNavigation");
+
+                    b.Navigation("Esp04LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp02TemporadaEspecie", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp01Especie", "Esp01LlaveNavigation")
+                        .WithMany("Esp02TemporadaEspecies")
+                        .HasForeignKey("Esp01Llave")
+                        .HasConstraintName("FK_ESP02_TemporadaEspecie_ESP01_Especies");
+
+                    b.HasOne("mipBackend.Models.Temp01Temporada", "Temp01LlaveNavigation")
+                        .WithMany("Esp02TemporadaEspecies")
+                        .HasForeignKey("Temp01Llave")
+                        .HasConstraintName("FK_ESP02_TemporadaEspecie_TEMP01_Temporada");
+
+                    b.Navigation("Esp01LlaveNavigation");
+
+                    b.Navigation("Temp01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp03EspecieBase", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp08TipoBase", "Esp08LlaveNavigation")
+                        .WithMany("Esp03EspecieBases")
+                        .HasForeignKey("Esp08Llave")
+                        .HasConstraintName("FK_ESP03_EspecieBase_ESP08_TipoBase");
+
+                    b.Navigation("Esp08LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp04EstadoDanio", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp06MedidaUmbral", "Esp06LlaveNavigation")
+                        .WithMany("Esp04EstadoDanios")
+                        .HasForeignKey("Esp06Llave")
+                        .HasConstraintName("FK_ESP04_EstadoDanio_ESP06_MedidaUmbral");
+
+                    b.Navigation("Esp06LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp05Umbral", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp01Especie", "Esp01LlaveNavigation")
+                        .WithMany("Esp05Umbrals")
+                        .HasForeignKey("Esp01Llave")
+                        .HasConstraintName("FK_ESP05_Umbral_ESP01_Especies");
+
+                    b.HasOne("mipBackend.Models.Esp09TipoBaseUmbral", "Esp09LlaveNavigation")
+                        .WithMany("Esp05Umbrals")
+                        .HasForeignKey("Esp09Llave")
+                        .HasConstraintName("FK_ESP05_Umbral_ESP09_TipoBaseUmbral");
+
+                    b.Navigation("Esp01LlaveNavigation");
+
+                    b.Navigation("Esp09LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp07Union", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp03EspecieBase", "Esp03LlaveNavigation")
+                        .WithMany("Esp07Unions")
+                        .HasForeignKey("Esp03Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_ESP07_Union_ESP03_EspecieBase");
+
+                    b.Navigation("Esp03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp11ReglaGrafico", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp10TipoRegla", "Esp10LlaveNavigation")
+                        .WithMany("Esp11ReglaGraficos")
+                        .HasForeignKey("Esp10Llave")
+                        .HasConstraintName("FK_ESP11_ReglaGrafico_ESP10_TipoRegla");
+
+                    b.Navigation("Esp10LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Frm02Formulario", b =>
+                {
+                    b.HasOne("mipBackend.Models.Eml01BitacoraEmailUsuario", "Eml01LlaveNavigation")
+                        .WithMany("Frm02Formularios")
+                        .HasForeignKey("Eml01Llave")
+                        .HasConstraintName("FK_FRM02_Formulario_EML01_BitacoraEmailUsuario");
+
+                    b.HasOne("mipBackend.Models.Frm01TipoFormulario", "Frm01LlaveNavigation")
+                        .WithMany("Frm02Formularios")
+                        .HasForeignKey("Frm01Llave")
+                        .HasConstraintName("FK_FRM02_Formulario_FRM01_TipoFormulario");
+
+                    b.Navigation("Eml01LlaveNavigation");
+
+                    b.Navigation("Frm01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Ins02RecuperarClave", b =>
+                {
+                    b.HasOne("mipBackend.Models.Sist05EstadoRegistro", "Ins02EstadoNavigation")
+                        .WithMany("Ins02RecuperarClaves")
+                        .HasForeignKey("Ins02Estado")
+                        .HasConstraintName("FK_INS02_RecuperarClave_SIST05_EstadoRegistro");
+
+                    b.Navigation("Ins02EstadoNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc02ServiciosLicencia", b =>
+                {
+                    b.HasOne("mipBackend.Models.Lnc01Licencia", "Lnc01LlaveNavigation")
+                        .WithMany("Lnc02ServiciosLicencia")
+                        .HasForeignKey("Lnc01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_LNC02_ServiciosLicencia_LNC01_Licencias");
+
+                    b.HasOne("mipBackend.Models.Serv01Servicio", "Serv01LlaveNavigation")
+                        .WithMany("Lnc02ServiciosLicencia")
+                        .HasForeignKey("Serv01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_LNC02_ServiciosLicencia_SERV01_Servicio");
+
+                    b.Navigation("Lnc01LlaveNavigation");
+
+                    b.Navigation("Serv01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc03LicenciaContrato", b =>
+                {
+                    b.HasOne("mipBackend.Models.Ctt01Contrato", "Ctt01LlaveNavigation")
+                        .WithMany("Lnc03LicenciaContratos")
+                        .HasForeignKey("Ctt01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_LNC03_LicenciaContrato_CTT01_Contrato");
+
+                    b.HasOne("mipBackend.Models.Lnc01Licencia", "Lnc01LlaveNavigation")
+                        .WithMany("Lnc03LicenciaContratos")
+                        .HasForeignKey("Lnc01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_LNC03_LicenciaContrato_LNC01_Licencias");
+
+                    b.Navigation("Ctt01LlaveNavigation");
+
+                    b.Navigation("Lnc01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc05ValorLicencia", b =>
+                {
+                    b.HasOne("mipBackend.Models.Lnc01Licencia", "Lnc01LlaveNavigation")
+                        .WithMany("Lnc05ValorLicencia")
+                        .HasForeignKey("Lnc01Llave")
+                        .HasConstraintName("FK_LNC05_valorLicencia_LNC01_Licencias");
+
+                    b.Navigation("Lnc01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc06Cobertura", b =>
+                {
+                    b.HasOne("mipBackend.Models.Lnc01Licencia", "Lnc01LlaveNavigation")
+                        .WithMany("Lnc06Coberturas")
+                        .HasForeignKey("Lnc01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_LNC06_Cobertura_LNC01_Licencias");
+
+                    b.Navigation("Lnc01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc07Control", b =>
+                {
+                    b.HasOne("mipBackend.Models.Lnc01Licencia", "Lnc01LlaveNavigation")
+                        .WithMany("Lnc07Controls")
+                        .HasForeignKey("Lnc01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_LNC07_Control_LNC01_Licencias");
+
+                    b.Navigation("Lnc01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Log01Bitacora", b =>
+                {
+                    b.HasOne("mipBackend.Models.Log03MensajeBitacora", "Log03LlaveNavigation")
+                        .WithMany("Log01Bitacoras")
+                        .HasForeignKey("Log03Llave")
+                        .HasConstraintName("FK_LOG01_Bitacora_LOG03_MensajeBitacora");
+
+                    b.Navigation("Log03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Log03MensajeBitacora", b =>
+                {
+                    b.HasOne("mipBackend.Models.Log02TipoBitacora", "Log02LlaveNavigation")
+                        .WithMany("Log03MensajeBitacoras")
+                        .HasForeignKey("Log02Llave")
+                        .HasConstraintName("FK_LOG03_MensajeBitacora_LOG02_TipoBitacora");
+
+                    b.Navigation("Log02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mnt01Monitor", b =>
+                {
+                    b.HasOne("mipBackend.Models.Mnt04TipoMonitor", "Mnt04LlaveNavigation")
+                        .WithMany("Mnt01Monitores")
+                        .HasForeignKey("Mnt04Llave")
+                        .HasConstraintName("FK_MNT01_Monitores_MNT04_TipoMonitor");
+
+                    b.Navigation("Mnt04LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mnt03PeriodosTrampa", b =>
+                {
+                    b.HasOne("mipBackend.Models.Mnt01Monitor", "Mnt01LlaveNavigation")
+                        .WithMany("Mnt03PeriodosTrampas")
+                        .HasForeignKey("Mnt01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_MNT03_PeriodosTrampas_MNT01_Monitores");
+
+                    b.HasOne("mipBackend.Models.Temp02TemporadaBase", "Temp02LlaveNavigation")
+                        .WithMany("Mnt03PeriodosTrampas")
+                        .HasForeignKey("Temp02Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_MNT03_PeriodosTrampas_TEMP02_TemporadaBase");
+
+                    b.Navigation("Mnt01LlaveNavigation");
+
+                    b.Navigation("Temp02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Obsc01ObservacionCampo", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp08TipoBase", "Esp08LlaveNavigation")
+                        .WithMany("Obsc01ObservacionCampos")
+                        .HasForeignKey("Esp08Llave")
+                        .HasConstraintName("FK_OBSC01_ObservacionCampo_ESP08_TipoBase");
+
+                    b.HasOne("mipBackend.Models.Temp02TemporadaBase", "Temp02LlaveNavigation")
+                        .WithMany("Obsc01ObservacionCampos")
+                        .HasForeignKey("Temp02Llave")
+                        .HasConstraintName("FK_OBSC01_ObservacionCampo_TEMP02_TemporadaBase");
+
+                    b.Navigation("Esp08LlaveNavigation");
+
+                    b.Navigation("Temp02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pbcd01Publicidad", b =>
+                {
+                    b.HasOne("mipBackend.Models.Pbcd02TipoPublicidad", "Pbcd02LlaveNavigation")
+                        .WithMany("Pbcd01Publicidads")
+                        .HasForeignKey("Pbcd02Llave")
+                        .HasConstraintName("FK_PBCD01_Publicidad_PBCD02_TipoPublicidad");
+
+                    b.Navigation("Pbcd02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pbcd03Programacion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Pbcd01Publicidad", "Pbcd01LlaveNavigation")
+                        .WithMany("Pbcd03Programacions")
+                        .HasForeignKey("Pbcd01Llave")
+                        .HasConstraintName("FK_PBCD03_Programacion_PBCD01_Publicidad");
+
+                    b.Navigation("Pbcd01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per01Persona", b =>
+                {
+                    b.HasOne("mipBackend.Models.Per02Genero", "Per02LlaveNavigation")
+                        .WithMany("Per01Personas")
+                        .HasForeignKey("Per02Llave")
+                        .HasConstraintName("FK_PER01_Persona_PER02_Genero");
+
+                    b.HasOne("mipBackend.Models.Per03TipoPersona", "Per03LlaveNavigation")
+                        .WithMany("Per01Personas")
+                        .HasForeignKey("Per03Llave")
+                        .HasConstraintName("FK_PER01_Persona_PER03_TipoPersona");
+
+                    b.Navigation("Per02LlaveNavigation");
+
+                    b.Navigation("Per03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per05Comunicacion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Per01Persona", "Per01LlaveNavigation")
+                        .WithMany("Per05Comunicacions")
+                        .HasForeignKey("Per01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PER05_Comunicacion_PER01_Persona");
+
+                    b.HasOne("mipBackend.Models.Per03TipoPersona", "Per03LlaveNavigation")
+                        .WithMany("Per05Comunicacions")
+                        .HasForeignKey("Per03Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PER05_Comunicacion_PER03_TipoPersona");
+
+                    b.HasOne("mipBackend.Models.Per04TipoComunicacion", "Per04LlaveNavigation")
+                        .WithMany("Per05Comunicacions")
+                        .HasForeignKey("Per04Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PER05_Comunicacion_PER04_TipoComunicacion");
+
+                    b.HasOne("mipBackend.Models.Per06TipoPersonaComunicacion", "Per0")
+                        .WithMany("Per05Comunicacions")
+                        .HasForeignKey("Per03Llave", "Per04Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PER05_Comunicacion_PER06_TipoPersonaComunicacion");
+
+                    b.Navigation("Per0");
+
+                    b.Navigation("Per01LlaveNavigation");
+
+                    b.Navigation("Per03LlaveNavigation");
+
+                    b.Navigation("Per04LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per06TipoPersonaComunicacion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Per03TipoPersona", "Per03LlaveNavigation")
+                        .WithMany("Per06TipoPersonaComunicacions")
+                        .HasForeignKey("Per03Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PER06_TipoPersonaComunicacion_PER03_TipoPersona");
+
+                    b.HasOne("mipBackend.Models.Per04TipoComunicacion", "Per04LlaveNavigation")
+                        .WithMany("Per06TipoPersonaComunicacions")
+                        .HasForeignKey("Per04Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PER06_TipoPersonaComunicacion_PER04_TipoComunicacion");
+
+                    b.Navigation("Per03LlaveNavigation");
+
+                    b.Navigation("Per04LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per07PersonaUsuario", b =>
+                {
+                    b.HasOne("mipBackend.Models.Per01Persona", "Per01LlaveNavigation")
+                        .WithMany("Per07PersonaUsuarios")
+                        .HasForeignKey("Per01Llave")
+                        .HasConstraintName("FK_PER07_PersonaUsuario_PER01_Persona");
+
+                    b.Navigation("Per01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pgo01CompraLicencia", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt01CuentaCliente", "Cnt19LlaveNavigation")
+                        .WithMany("Pgo01CompraLicencia")
+                        .HasForeignKey("Cnt19Llave")
+                        .HasConstraintName("FK_PGO01_CompraLicencia_CNT01_CuentaCliente");
+
+                    b.HasOne("mipBackend.Models.Cnt19LicenciaCliente", "Cnt19Llave1")
+                        .WithMany("Pgo01CompraLicencia")
+                        .HasForeignKey("Cnt19Llave")
+                        .HasConstraintName("FK_PGO01_CompraLicencia_CNT19_LicenciaCliente");
+
+                    b.HasOne("mipBackend.Models.Pgo03TipoPagoLicencia", "Pgo03LlaveNavigation")
+                        .WithMany("Pgo01CompraLicencia")
+                        .HasForeignKey("Pgo03Llave")
+                        .HasConstraintName("FK_PGO01_CompraLicencia_PGO03_FormaPago1");
+
+                    b.Navigation("Cnt19Llave1");
+
+                    b.Navigation("Cnt19LlaveNavigation");
+
+                    b.Navigation("Pgo03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pgo02NotificarPagoLicencia", b =>
+                {
+                    b.HasOne("mipBackend.Models.Pgo01CompraLicencia", "Pgo01LlaveNavigation")
+                        .WithMany("Pgo02NotificarPagoLicencia")
+                        .HasForeignKey("Pgo01Llave")
+                        .HasConstraintName("FK_PGO02_NotificarPagoLicencia_PGO01_CompraLicencia");
+
+                    b.Navigation("Pgo01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf01Perfil", b =>
+                {
+                    b.HasOne("mipBackend.Models.Prf05TipoAsignacionUsuario", "Prf05LlaveNavigation")
+                        .WithMany("Prf01Perfiles")
+                        .HasForeignKey("Prf05Llave")
+                        .HasConstraintName("FK_PRF01_Perfiles_PRF05_TipoAsignacionUsuario");
+
+                    b.HasOne("mipBackend.Models.Secu02Usuario", "Secu02LlaveNavigation")
+                        .WithMany("Prf01Perfiles")
+                        .HasForeignKey("Secu02Llave")
+                        .HasConstraintName("FK_PRF01_Perfiles_SECU02_Usuario");
+
+                    b.Navigation("Prf05LlaveNavigation");
+
+                    b.Navigation("Secu02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf04PlantillaPerfil", b =>
+                {
+                    b.HasOne("mipBackend.Models.Prf03Plantilla", "Prf03LlaveNavigation")
+                        .WithMany("Prf04PlantillaPerfils")
+                        .HasForeignKey("Prf03Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PRF04_plantillaPerfil_PRF03_Plantilla");
+
+                    b.HasOne("mipBackend.Models.Wkf06Perfil", "Wkf06LlaveNavigation")
+                        .WithMany("Prf04PlantillaPerfils")
+                        .HasForeignKey("Wkf06Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PRF04_plantillaPerfil_WKF06_Perfiles");
+
+                    b.Navigation("Prf03LlaveNavigation");
+
+                    b.Navigation("Wkf06LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf06PermisosUsuario", b =>
+                {
+                    b.HasOne("mipBackend.Models.Prf01Perfil", "Prf01LlaveNavigation")
+                        .WithMany("Prf06PermisosUsuarios")
+                        .HasForeignKey("Prf01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PRF06_PermisosUsuario_PRF01_Perfiles");
+
+                    b.HasOne("mipBackend.Models.Wkf06Perfil", "Wkf06LlaveNavigation")
+                        .WithMany("Prf06PermisosUsuarios")
+                        .HasForeignKey("Wkf06Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PRF06_PermisosUsuario_WKF06_Perfiles");
+
+                    b.Navigation("Prf01LlaveNavigation");
+
+                    b.Navigation("Wkf06LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu02Usuario", b =>
+                {
+                    b.HasOne("mipBackend.Models.Secu04TipoEncriptacion", "Secu04TipoEncriptacionNavigation")
+                        .WithMany("Secu02Usuarios")
+                        .HasForeignKey("Secu04TipoEncriptacion")
+                        .HasConstraintName("FK_SECU02_Usuario_SECU04_TipoEncriptacion1");
+
+                    b.Navigation("Secu04TipoEncriptacionNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu05UsuarioAcceso", b =>
+                {
+                    b.HasOne("mipBackend.Models.Secu02Usuario", "Secu02LlaveNavigation")
+                        .WithMany("Secu05UsuarioAccesos")
+                        .HasForeignKey("Secu02Llave")
+                        .HasConstraintName("FK_SECU05_UsuarioAcceso_SECU02_Usuario");
+
+                    b.HasOne("mipBackend.Models.Secu03TipoAcceso", "Secu03TipoAccesoNavigation")
+                        .WithMany("Secu05UsuarioAccesos")
+                        .HasForeignKey("Secu03TipoAcceso")
+                        .HasConstraintName("FK_SECU05_UsuarioAcceso_SECU03_TipoAcceso");
+
+                    b.Navigation("Secu02LlaveNavigation");
+
+                    b.Navigation("Secu03TipoAccesoNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu06UsuarioRol", b =>
+                {
+                    b.HasOne("mipBackend.Models.Secu01Rol", "Secu01LlaveNavigation")
+                        .WithMany("Secu06UsuarioRols")
+                        .HasForeignKey("Secu01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_SECU06_UsuarioRol_SECU01_Rol");
+
+                    b.HasOne("mipBackend.Models.Secu02Usuario", "Secu02LlaveNavigation")
+                        .WithMany("Secu06UsuarioRols")
+                        .HasForeignKey("Secu02Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_SECU06_UsuarioRol_SECU02_Usuario");
+
+                    b.Navigation("Secu01LlaveNavigation");
+
+                    b.Navigation("Secu02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu08UsuarioAplicacion", b =>
+                {
+                    b.HasOne("mipBackend.Models.Secu02Usuario", "Secu02LlaveNavigation")
+                        .WithMany("Secu08UsuarioAplicacions")
+                        .HasForeignKey("Secu02Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_UsuarioAplicacion_Usuario");
+
+                    b.HasOne("mipBackend.Models.Secu07Aplicacion", "Secu07LlaveNavigation")
+                        .WithMany("Secu08UsuarioAplicacions")
+                        .HasForeignKey("Secu07Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_UsuarioAplicacion_Aplicacion");
+
+                    b.Navigation("Secu02LlaveNavigation");
+
+                    b.Navigation("Secu07LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu10AccesoPermitido", b =>
+                {
+                    b.HasOne("mipBackend.Models.Secu02Usuario", "Secu02LlaveNavigation")
+                        .WithMany("Secu10AccesoPermitidos")
+                        .HasForeignKey("Secu02Llave")
+                        .HasConstraintName("FK_SECU10_AccesoPermitido_SECU02_Usuario");
+
+                    b.HasOne("mipBackend.Models.Secu03TipoAcceso", "Secu03LlaveNavigation")
+                        .WithMany("Secu10AccesoPermitidos")
+                        .HasForeignKey("Secu03Llave")
+                        .HasConstraintName("FK_SECU10_AccesoPermitido_SECU03_TipoAcceso");
+
+                    b.Navigation("Secu02LlaveNavigation");
+
+                    b.Navigation("Secu03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sercl02MuestreoFruta", b =>
+                {
+                    b.HasOne("mipBackend.Models.Sercl01ServiciosCliente", "Sercl01LlaveNavigation")
+                        .WithMany("Sercl02MuestreoFruta")
+                        .HasForeignKey("Sercl01Llave")
+                        .HasConstraintName("FK_SERCL02_MuestreoFruta_SERCL01_ServiciosClientes");
+
+                    b.Navigation("Sercl01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sercltemp01ServiciosClientesTemporal", b =>
+                {
+                    b.HasOne("mipBackend.Models.Conteo03Resumen", "Conteo03LlaveNavigation")
+                        .WithMany("Sercltemp01ServiciosClientesTemporals")
+                        .HasForeignKey("Conteo03Llave")
+                        .HasConstraintName("FK_SERCLTEMP01_ServiciosClientes_Temporal_CONTEO03_Resumen");
+
+                    b.Navigation("Conteo03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Serv01Servicio", b =>
+                {
+                    b.HasOne("mipBackend.Models.Serv02TipoServicio", "Serv02LlaveNavigation")
+                        .WithMany("Serv01Servicios")
+                        .HasForeignKey("Serv02Llave")
+                        .HasConstraintName("FK_SERV01_Servicio_SERV02_TipoServicio");
+
+                    b.Navigation("Serv02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist03Comuna", b =>
+                {
+                    b.HasOne("mipBackend.Models.Sist04Region", "sist04llaveNavigation")
+                        .WithMany("Sist03Comunas")
+                        .HasForeignKey("sist04llave")
+                        .HasConstraintName("FK_SIST03_Comuna_SIST04_Region");
+
+                    b.Navigation("sist04llaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist08ContactoUsuario", b =>
+                {
+                    b.HasOne("mipBackend.Models.Per02Genero", "Per02LlaveNavigation")
+                        .WithMany("Sist08ContactoUsuarios")
+                        .HasForeignKey("Per02Llave")
+                        .HasConstraintName("FK_SIST08_ContactoUsuario_PER02_Genero");
+
+                    b.Navigation("Per02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Temp01Temporada", b =>
+                {
+                    b.HasOne("mipBackend.Models.Temp02TemporadaBase", "Temp02LlaveNavigation")
+                        .WithMany("Temp01Temporada")
+                        .HasForeignKey("Temp02Llave")
+                        .HasConstraintName("FK_TEMP01_Temporada_TEMP02_TemporadaBase");
+
+                    b.HasOne("mipBackend.Models.Temp03Segmentacion", "Temp03LlaveNavigation")
+                        .WithMany("Temp01Temporada")
+                        .HasForeignKey("Temp03Llave")
+                        .HasConstraintName("FK_TEMP01_Temporada_TEMP03_Segmentacion");
+
+                    b.Navigation("Temp02LlaveNavigation");
+
+                    b.Navigation("Temp03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Trp01Trampa", b =>
+                {
+                    b.HasOne("mipBackend.Models.Cnt08Segmentacion", "Cnt08LlaveNavigation")
+                        .WithMany("Trp01Trampas")
+                        .HasForeignKey("Cnt08Llave")
+                        .HasConstraintName("FK_TRP01_Trampa_CNT08_Segmentacion");
+
+                    b.HasOne("mipBackend.Models.Esp01Especie", "Esp01LlaveNavigation")
+                        .WithMany("Trp01Trampas")
+                        .HasForeignKey("Esp01Llave")
+                        .HasConstraintName("FK_TRP01_Trampa_ESP01_Especies");
+
+                    b.Navigation("Cnt08LlaveNavigation");
+
+                    b.Navigation("Esp01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Trp02Temporada", b =>
+                {
+                    b.HasOne("mipBackend.Models.Temp02TemporadaBase", "Temp02LlaveNavigation")
+                        .WithMany("Trp02Temporada")
+                        .HasForeignKey("Temp02Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_TRP02_Temporada_TEMP02_TemporadaBase");
+
+                    b.HasOne("mipBackend.Models.Trp01Trampa", "Trp01LlaveNavigation")
+                        .WithMany("Trp02Temporada")
+                        .HasForeignKey("Trp01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_TRP02_Temporada_TRP01_Trampa");
+
+                    b.Navigation("Temp02LlaveNavigation");
+
+                    b.Navigation("Trp01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf01Flujo", b =>
+                {
+                    b.HasOne("mipBackend.Models.Wkf03Nivel", "Wkf03LlaveNavigation")
+                        .WithMany("Wkf01Flujos")
+                        .HasForeignKey("Wkf03Llave")
+                        .HasConstraintName("FK_WKF01_Flujo_WKF03_Nivel");
+
+                    b.Navigation("Wkf03LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf03Nivel", b =>
+                {
+                    b.HasOne("mipBackend.Models.Wkf02TipoFlujo", "Wkf02LlaveNavigation")
+                        .WithMany("Wkf03Nivels")
+                        .HasForeignKey("Wkf02Llave")
+                        .HasConstraintName("FK_WKF03_Nivel_WKF02_TipoFlujo");
+
+                    b.Navigation("Wkf02LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf04NivelPermiso", b =>
+                {
+                    b.HasOne("mipBackend.Models.Wkf03Nivel", "Wkf03LlaveNavigation")
+                        .WithMany("Wkf04NivelPermisos")
+                        .HasForeignKey("Wkf03Llave")
+                        .HasConstraintName("FK_WKF04_NivelPermiso_WKF03_Nivel");
+
+                    b.HasOne("mipBackend.Models.Wkf05TipoPermiso", "Wkf05LlaveNavigation")
+                        .WithMany("Wkf04NivelPermisos")
+                        .HasForeignKey("Wkf05Llave")
+                        .HasConstraintName("FK_WKF04_NivelPermiso_WKF05_TipoPermiso");
+
+                    b.Navigation("Wkf03LlaveNavigation");
+
+                    b.Navigation("Wkf05LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf06Perfil", b =>
+                {
+                    b.HasOne("mipBackend.Models.Wkf01Flujo", "Wkf01LlaveNavigation")
+                        .WithMany("Wkf06Perfiles")
+                        .HasForeignKey("Wkf01Llave")
+                        .HasConstraintName("FK_WKF06_Perfiles_WKF01_Flujo");
+
+                    b.Navigation("Wkf01LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf07PerfilesPermiso", b =>
+                {
+                    b.HasOne("mipBackend.Models.Wkf05TipoPermiso", "Wkf05LlaveNavigation")
+                        .WithMany("Wkf07PerfilesPermisos")
+                        .HasForeignKey("Wkf05Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_WKF07_PerfilesPermiso_WKF05_TipoPermiso");
+
+                    b.HasOne("mipBackend.Models.Wkf06Perfil", "Wkf06LlaveNavigation")
+                        .WithMany("Wkf07PerfilesPermisos")
+                        .HasForeignKey("Wkf06Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_WKF07_PerfilesPermiso_WKF06_Perfiles");
+
+                    b.Navigation("Wkf05LlaveNavigation");
+
+                    b.Navigation("Wkf06LlaveNavigation");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf09Parametro", b =>
+                {
+                    b.HasOne("mipBackend.Models.Wkf01Flujo", "Wkf01LlaveNavigation")
+                        .WithMany("Wkf09Parametros")
+                        .HasForeignKey("Wkf01Llave")
+                        .HasConstraintName("FK_WKF09_Parametro_WKF01_Flujo");
+
+                    b.HasOne("mipBackend.Models.Wkf10TipoParametro", "Wkf10LlaveNavigation")
+                        .WithMany("Wkf09Parametros")
+                        .HasForeignKey("Wkf10Llave")
+                        .HasConstraintName("FK_WKF09_Parametro_WKF10_TipoParametro");
+
+                    b.Navigation("Wkf01LlaveNavigation");
+
+                    b.Navigation("Wkf10LlaveNavigation");
+                });
+
+            modelBuilder.Entity("Mnt02EspeciesAsignada", b =>
+                {
+                    b.HasOne("mipBackend.Models.Esp02TemporadaEspecie", null)
+                        .WithMany()
+                        .HasForeignKey("Esp02Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_MNT02_EspeciesAsignadas_ESP02_TemporadaEspecie");
+
+                    b.HasOne("mipBackend.Models.Mnt01Monitor", null)
+                        .WithMany()
+                        .HasForeignKey("Mnt01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_MNT02_EspeciesAsignadas_MNT01_Monitores");
+                });
+
+            modelBuilder.Entity("Prf02PlantillasUsuario", b =>
+                {
+                    b.HasOne("mipBackend.Models.Prf01Perfil", null)
+                        .WithMany()
+                        .HasForeignKey("Prf01Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PRF02_PlantillasUsuario_PRF01_Perfiles");
+
+                    b.HasOne("mipBackend.Models.Prf03Plantilla", null)
+                        .WithMany()
+                        .HasForeignKey("Prf03Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_PRF02_PlantillasUsuario_PRF03_Plantilla");
+                });
+
+            modelBuilder.Entity("Sist07ZonaComuna", b =>
+                {
+                    b.HasOne("mipBackend.Models.Sist02Zona", null)
+                        .WithMany()
+                        .HasForeignKey("Sist02Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_SIST07_ZonaComuna_SIST02_Zona");
+
+                    b.HasOne("mipBackend.Models.Sist03Comuna", null)
+                        .WithMany()
+                        .HasForeignKey("Sist03Llave")
+                        .IsRequired()
+                        .HasConstraintName("FK_SIST07_ZonaComuna_SIST03_Comuna");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Blk01Bloqueo", b =>
+                {
+                    b.Navigation("Blk03BloqueoUsuarios");
+
+                    b.Navigation("Cnt17Bloqueos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Blk02TipoBloqueo", b =>
+                {
+                    b.Navigation("Blk01Bloqueos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Clbr02TipoCalibracion", b =>
+                {
+                    b.Navigation("Clbr01Calibracions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt01CuentaCliente", b =>
+                {
+                    b.Navigation("Cnt04ContactoClientes");
+
+                    b.Navigation("Cnt06ComunicacionClientes");
+
+                    b.Navigation("Cnt08Segmentacions");
+
+                    b.Navigation("Cnt12Empleados");
+
+                    b.Navigation("Cnt14ClienteLicencia");
+
+                    b.Navigation("Cnt17Bloqueos");
+
+                    b.Navigation("Cnt19LicenciaClientes");
+
+                    b.Navigation("Pgo01CompraLicencia");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt02TipoCuenta", b =>
+                {
+                    b.Navigation("Cnt01CuentaClientes");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt03TipoCliente", b =>
+                {
+                    b.Navigation("Cnt01CuentaClientes");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt05TipoContacto", b =>
+                {
+                    b.Navigation("Cnt04ContactoClientes");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt07TipoSegmentacion", b =>
+                {
+                    b.Navigation("Cnt08Segmentacions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt08Segmentacion", b =>
+                {
+                    b.Navigation("Cnt06ComunicacionClientes");
+
+                    b.Navigation("Cnt09ComunicacionSegmentacions");
+
+                    b.Navigation("Cnt11ContactoSegmentacions");
+
+                    b.Navigation("Cnt17Bloqueos");
+
+                    b.Navigation("Cnt22EstacionTipoEstacions");
+
+                    b.Navigation("Conteo02Procesados");
+
+                    b.Navigation("Conteo03Resumen");
+
+                    b.Navigation("InverseCnt08LlavePadreNavigation");
+
+                    b.Navigation("Trp01Trampas");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt10TipoComunicacion", b =>
+                {
+                    b.Navigation("Cnt06ComunicacionClientes");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt12Empleado", b =>
+                {
+                    b.Navigation("Cnt15EmpleadoLicencia");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt13TipoEmpleado", b =>
+                {
+                    b.Navigation("Cnt12Empleados");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt14ClienteLicencia", b =>
+                {
+                    b.Navigation("Cnt17Bloqueos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt16TipoBloqueoCliente", b =>
+                {
+                    b.Navigation("Cnt17Bloqueos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt18NivelSegmentacion", b =>
+                {
+                    b.Navigation("Cnt07TipoSegmentacions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt19LicenciaCliente", b =>
+                {
+                    b.Navigation("Cnt15EmpleadoLicencia");
+
+                    b.Navigation("Cnt20LicenciaServicios");
+
+                    b.Navigation("Pgo01CompraLicencia");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cnt21TipoEstacion", b =>
+                {
+                    b.Navigation("Cnt22EstacionTipoEstacions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Cont02TipoContacto", b =>
+                {
+                    b.Navigation("Cont01Contactos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Conteo03Resumen", b =>
+                {
+                    b.Navigation("Sercltemp01ServiciosClientesTemporals");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Ctt01Contrato", b =>
+                {
+                    b.Navigation("Lnc03LicenciaContratos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Ctt02TipoContrato", b =>
+                {
+                    b.Navigation("Ctt01Contratos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml01BitacoraEmailUsuario", b =>
+                {
+                    b.Navigation("Eml05ArchivoMails");
+
+                    b.Navigation("Frm02Formularios");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml02MailBase", b =>
+                {
+                    b.Navigation("Eml01BitacoraEmailUsuarios");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml03TipoMailAccion", b =>
+                {
+                    b.Navigation("Eml02MailBases");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml04ImportanciaMail", b =>
+                {
+                    b.Navigation("Eml01BitacoraEmailUsuarios");
+
+                    b.Navigation("Eml02MailBases");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Eml06TipoArchivo", b =>
+                {
+                    b.Navigation("Eml05ArchivoMail");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp01Especie", b =>
+                {
+                    b.Navigation("Conteo04ResumenSags");
+
+                    b.Navigation("Esp02TemporadaEspecies");
+
+                    b.Navigation("Esp05Umbrals");
+
+                    b.Navigation("Trp01Trampas");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp03EspecieBase", b =>
+                {
+                    b.Navigation("Esp01Especies");
+
+                    b.Navigation("Esp07Unions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp04EstadoDanio", b =>
+                {
+                    b.Navigation("Esp01Especies");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp06MedidaUmbral", b =>
+                {
+                    b.Navigation("Esp04EstadoDanios");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp08TipoBase", b =>
+                {
+                    b.Navigation("Esp03EspecieBases");
+
+                    b.Navigation("Obsc01ObservacionCampos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp09TipoBaseUmbral", b =>
+                {
+                    b.Navigation("Esp05Umbrals");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Esp10TipoRegla", b =>
+                {
+                    b.Navigation("Esp11ReglaGraficos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Frm01TipoFormulario", b =>
+                {
+                    b.Navigation("Frm02Formularios");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Lnc01Licencia", b =>
+                {
+                    b.Navigation("Lnc02ServiciosLicencia");
+
+                    b.Navigation("Lnc03LicenciaContratos");
+
+                    b.Navigation("Lnc05ValorLicencia");
+
+                    b.Navigation("Lnc06Coberturas");
+
+                    b.Navigation("Lnc07Controls");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Log02TipoBitacora", b =>
+                {
+                    b.Navigation("Log03MensajeBitacoras");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Log03MensajeBitacora", b =>
+                {
+                    b.Navigation("Log01Bitacoras");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mnt01Monitor", b =>
+                {
+                    b.Navigation("Mnt03PeriodosTrampas");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Mnt04TipoMonitor", b =>
+                {
+                    b.Navigation("Mnt01Monitores");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pbcd01Publicidad", b =>
+                {
+                    b.Navigation("Pbcd03Programacions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pbcd02TipoPublicidad", b =>
+                {
+                    b.Navigation("Pbcd01Publicidads");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per01Persona", b =>
+                {
+                    b.Navigation("Cnt01CuentaClientes");
+
+                    b.Navigation("Cnt12Empleados");
+
+                    b.Navigation("Per05Comunicacions");
+
+                    b.Navigation("Per07PersonaUsuarios");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per02Genero", b =>
+                {
+                    b.Navigation("Per01Personas");
+
+                    b.Navigation("Sist08ContactoUsuarios");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per03TipoPersona", b =>
+                {
+                    b.Navigation("Cnt03TipoClientes");
+
+                    b.Navigation("Per01Personas");
+
+                    b.Navigation("Per05Comunicacions");
+
+                    b.Navigation("Per06TipoPersonaComunicacions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per04TipoComunicacion", b =>
+                {
+                    b.Navigation("Per05Comunicacions");
+
+                    b.Navigation("Per06TipoPersonaComunicacions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Per06TipoPersonaComunicacion", b =>
+                {
+                    b.Navigation("Per05Comunicacions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pgo01CompraLicencia", b =>
+                {
+                    b.Navigation("Pgo02NotificarPagoLicencia");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Pgo03TipoPagoLicencia", b =>
+                {
+                    b.Navigation("Pgo01CompraLicencia");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf01Perfil", b =>
+                {
+                    b.Navigation("Prf06PermisosUsuarios");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf03Plantilla", b =>
+                {
+                    b.Navigation("Prf04PlantillaPerfils");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Prf05TipoAsignacionUsuario", b =>
+                {
+                    b.Navigation("Prf01Perfiles");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Region", b =>
+                {
+                    b.Navigation("Comunas");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu01Rol", b =>
+                {
+                    b.Navigation("Secu06UsuarioRols");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu02Usuario", b =>
+                {
+                    b.Navigation("Conteo05ControlReservas");
+
+                    b.Navigation("Eml01BitacoraEmailUsuarios");
+
+                    b.Navigation("Prf01Perfiles");
+
+                    b.Navigation("Secu05UsuarioAccesos");
+
+                    b.Navigation("Secu06UsuarioRols");
+
+                    b.Navigation("Secu08UsuarioAplicacions");
+
+                    b.Navigation("Secu10AccesoPermitidos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu03TipoAcceso", b =>
+                {
+                    b.Navigation("Secu05UsuarioAccesos");
+
+                    b.Navigation("Secu10AccesoPermitidos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu04TipoEncriptacion", b =>
+                {
+                    b.Navigation("Secu02Usuarios");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Secu07Aplicacion", b =>
+                {
+                    b.Navigation("Secu08UsuarioAplicacions");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sercl01ServiciosCliente", b =>
+                {
+                    b.Navigation("Sercl02MuestreoFruta");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Serv01Servicio", b =>
+                {
+                    b.Navigation("Lnc02ServiciosLicencia");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Serv02TipoServicio", b =>
+                {
+                    b.Navigation("Serv01Servicios");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist03Comuna", b =>
+                {
+                    b.Navigation("Cnt06ComunicacionClientes");
+
+                    b.Navigation("Conteo04ResumenSags");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist04Region", b =>
+                {
+                    b.Navigation("Sist03Comunas");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Sist05EstadoRegistro", b =>
+                {
+                    b.Navigation("Ins02RecuperarClaves");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Temp01Temporada", b =>
+                {
+                    b.Navigation("Esp02TemporadaEspecies");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Temp02TemporadaBase", b =>
+                {
+                    b.Navigation("Conteo01Conteos");
+
+                    b.Navigation("Conteo04ResumenSags");
+
+                    b.Navigation("Mnt03PeriodosTrampas");
+
+                    b.Navigation("Obsc01ObservacionCampos");
+
+                    b.Navigation("Temp01Temporada");
+
+                    b.Navigation("Trp02Temporada");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Temp03Segmentacion", b =>
+                {
+                    b.Navigation("Temp01Temporada");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Trp01Trampa", b =>
+                {
+                    b.Navigation("Trp02Temporada");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf01Flujo", b =>
+                {
+                    b.Navigation("Wkf06Perfiles");
+
+                    b.Navigation("Wkf09Parametros");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf02TipoFlujo", b =>
+                {
+                    b.Navigation("Wkf03Nivels");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf03Nivel", b =>
+                {
+                    b.Navigation("Wkf01Flujos");
+
+                    b.Navigation("Wkf04NivelPermisos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf05TipoPermiso", b =>
+                {
+                    b.Navigation("Wkf04NivelPermisos");
+
+                    b.Navigation("Wkf07PerfilesPermisos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf06Perfil", b =>
+                {
+                    b.Navigation("Prf04PlantillaPerfils");
+
+                    b.Navigation("Prf06PermisosUsuarios");
+
+                    b.Navigation("Wkf07PerfilesPermisos");
+                });
+
+            modelBuilder.Entity("mipBackend.Models.Wkf10TipoParametro", b =>
+                {
+                    b.Navigation("Wkf09Parametros");
                 });
 #pragma warning restore 612, 618
         }

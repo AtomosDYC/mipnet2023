@@ -2,35 +2,31 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DefaultLayoutComponent, StaticLayoutComponent } from './containers';
-import { Page404Component } from './pages/static/pages/page404/page404.component';
-import { PageInicioComponent } from './pages/static/pages/page-inicio/page-inicio.component';
-import { LoginComponent  } from './pages/auth/login/login.component'
-
-
-
+import { UnauthGuard } from './guards/unauth/unauth.guard';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { RegisterModule } from './pages/auth/pages/register/register.module';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/inicio',
-    pathMatch: 'full',
-
-  },
   {
     path: '',
     component: StaticLayoutComponent,
     children: [
       {
-        path: 'inicio',
-        component: PageInicioComponent
+        path: '',
+        loadChildren:() => import('./pages/static/static.module').then(m=>m.StaticModule)
       },
       {
-        path: 'login',
-        component: LoginComponent
+        path: 'join/login',
+        loadChildren:() => import('./pages/auth/pages/login/login.module').then(m=>m.LoginModule),
+        canActivate: [UnauthGuard]
+      },
+      {
+        path: 'user/registro',
+        loadChildren:() => import('./pages/auth/pages/register/register.module').then(m=>m.RegisterModule)
+
       }
     ]
   },
-
   {
     path: 'dashboard',
     component: DefaultLayoutComponent,
@@ -41,27 +37,66 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
+          canActivate: [AuthGuard]
       },
       {
-        path: 'theme',
+        path: '',
         loadChildren: () =>
-          import('./views/theme/theme.module').then((m) => m.ThemeModule)
+          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+      {
+        path: 'roles',
+        loadChildren: () =>
+          import('./pages/administracion/roles/roles.module').then((m) => m.RolesModule),
+      },
+      {
+        path: 'plantilla',
+        loadChildren: () =>
+          import('./pages/administracion/plantilla/plantilla.module').then((m) => m.PlantillaModule),
+      },
+      {
+        path: 'inmueble',
+        loadChildren: () =>
+          import('./pages/inmueble/inmueble.module').then((m) => m.InmuebleModule),
+      },
+      {
+        path: 'region',
+        loadChildren: () =>
+          import('./pages/administracion/region/region.module').then((m) => m.RegionModule),
+      },
+      {
+        path: 'comuna',
+        loadChildren: () =>
+          import('./pages/administracion/comuna/comuna.module').then((m) => m.ComunaModule),
+      },
+      {
+        path: 'zona',
+        loadChildren: () =>
+          import('./pages/administracion/zona/zona.module').then((m) => m.ZonaModule),
+      },
+      {
+        path: 'tipoespecie',
+        loadChildren: () =>
+          import('./pages/administracion/tipoespecie/tipoespecie.module').then((m) => m.TipoespecieModule),
+      },
+      {
+        path: 'medidaumbral',
+        loadChildren: () =>
+          import('./pages/administracion/medidaumbral/medidaumbral.module').then((m) => m.MedidaumbralModule),
+      },
+      {
+        path: 'estadodanio',
+        loadChildren: () =>
+          import('./pages/administracion/estadodanio/estadodanio.module').then((m) => m.EstadodanioModule),
       }
     ]
-  },
-  {path: '**', component: Page404Component}
+  }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
-      scrollPositionRestoration: 'top',
-      anchorScrolling: 'enabled',
-      initialNavigation: 'enabledBlocking',
-      useHash: false,
-      relativeLinkResolution: 'legacy'
-    })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

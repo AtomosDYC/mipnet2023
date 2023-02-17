@@ -8,7 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using mipBackend.Data;
 using mipBackend.Data.Inmuebles;
+using mipBackend.Data.Roles;
+using mipBackend.Data.Regiones;
+using mipBackend.Data.Comunas;
+using mipBackend.Data.Zonas;
 using mipBackend.Data.Usuarios;
+using mipBackend.Data.TipoEspecie;
+using mipBackend.Data.MedidaUmbrales;
+using mipBackend.Data.EstadosDanios;
+using mipBackend.Data.SetSelect;
+using mipBackend.Data.Plantillas;
+using mipBackend.Data.TipoFlujos;
+using mipBackend.Data.TipoPermisos;
+using mipBackend.Data.NivelFlujos;
+using mipBackend.Data.NivelPermisos;
+using mipBackend.Data.Areas;
 using mipBackend.Middleware;
 using mipBackend.Models;
 using mipBackend.Profiles;
@@ -28,6 +42,20 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 
 builder.Services.AddScoped<IInmuebleRepository, InmuebleRepository>();
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+builder.Services.AddScoped<IComunaRepository, ComunaRepository>();
+builder.Services.AddScoped<ISetSelectRepository, SetSelectRepository>();
+builder.Services.AddScoped<IZonaRepository, ZonaRepository>();
+builder.Services.AddScoped<ITipoEspecieRepository, TipoEspecieRepository>();
+builder.Services.AddScoped<IMedidaUmbralRepository, MedidaUmbralRepository>();
+builder.Services.AddScoped<IEstadosDanioRepository, EstadosDanioRepository>();
+builder.Services.AddScoped<IPlantillaRepository, PlantillaRepository>();
+builder.Services.AddScoped<ITipoFlujosRepository, TipoFlujosRepository>();
+builder.Services.AddScoped<ITipoPermisosRepository, TipoPermisosRepository>();
+builder.Services.AddScoped<IAreaRepository, AreaRepository>();
+builder.Services.AddScoped<INivelFlujoRepository, NivelFlujoRepository>();
+builder.Services.AddScoped<INivelPermisoRepository, NivelPermisoRepository>();
+builder.Services.AddScoped<IRolesRepository, RolesRepository>();
 
 // Add services to the container.
 
@@ -44,6 +72,20 @@ builder.Services.AddSwaggerGen();
 var mapperConfig = new MapperConfiguration(mc =>
 {
     mc.AddProfile(new InmuebleProfile());
+    mc.AddProfile(new ZonaProfile());
+    mc.AddProfile(new RegionProfile());
+    mc.AddProfile(new ComunaProfile());
+    mc.AddProfile(new SetSelectProfile());
+    mc.AddProfile(new TipoEspecieProfile());
+    mc.AddProfile(new MedidaUmbralProfile());
+    mc.AddProfile(new EstadosDanioProfile());
+    mc.AddProfile(new PlantillaProfile());
+    mc.AddProfile(new TipoFlujoProfile());
+    mc.AddProfile(new TipoPermisoProfile());
+    mc.AddProfile(new TipoParametroProfile());
+    mc.AddProfile(new NivelFlujoProfile());
+    mc.AddProfile(new NivelPermisoProfile());
+    mc.AddProfile(new RolProfile());
 });
 
 IMapper mapper = mapperConfig.CreateMapper();

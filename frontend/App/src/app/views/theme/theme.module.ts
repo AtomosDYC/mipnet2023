@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { CardModule, GridModule, NavModule, UtilitiesModule, TabsModule } from '@coreui/angular';
+import { CardModule, GridModule, NavModule, UtilitiesModule, TabsModule } from '@coreui/angular-pro';
 import { IconModule } from '@coreui/icons-angular';
 
 import { ColorsComponent, ThemeColorComponent } from './colors.component';

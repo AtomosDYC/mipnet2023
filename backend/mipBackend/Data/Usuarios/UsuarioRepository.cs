@@ -38,9 +38,6 @@ namespace mipBackend.Data.Usuarios
             return new UsuarioReponseDto
             {
                 Id = usuario.Id,
-                Nombre = usuario.Nombre,
-                Apellido = usuario.apellido,
-                Telefono = usuario.Telefono,
                 Email = usuario.Email,
                 UserName = usuario.UserName,
                 Token = _jwtGenerador.CrearToken(usuario)
@@ -67,7 +64,7 @@ namespace mipBackend.Data.Usuarios
         public async Task<UsuarioReponseDto> Login(UsuarioLoginRequestDto request)
         {
 
-            var usuario = await _userManager.FindByEmailAsync(request.LoginName);
+            var usuario = await _userManager.FindByEmailAsync(request.Email);
 
             if (usuario == null)
             {
@@ -77,7 +74,7 @@ namespace mipBackend.Data.Usuarios
                 );
             }
 
-            var resultado = await _signInManager.CheckPasswordSignInAsync(usuario!, request.LoginPassword!, false);
+            var resultado = await _signInManager.CheckPasswordSignInAsync(usuario!, request.Password!, false);
 
             if (resultado.Succeeded)
             {
@@ -119,9 +116,6 @@ namespace mipBackend.Data.Usuarios
 
             var usuario = new Usuario
             {
-                Nombre = request.Nombre,
-                apellido = request.Apellido,
-                Telefono = request.Telefono,
                 Email = request.Email,
                 UserName = request.UserName,
             };

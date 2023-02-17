@@ -19,7 +19,7 @@
         </a>
       </c-nav-item>
       <c-nav-item>
-        <a cNavLink routerLink="/users" routerLinkActive="active">Users</a>
+        <a cNavLink routerLink="/users" routerLinkActive="active">Usuarios</a>
       </c-nav-item>
       <c-nav-item>
         <a cNavLink routerLink="/settings" routerLinkActive="active">
@@ -77,9 +77,14 @@
     </button>
     <ul cDropdownMenu class="pt-0 pr-5 w-auto">
       <li>
-        <h6 cDropdownHeader class="bg-light fw-semibold py-2">Account</h6>
+        <h6 cDropdownHeader class="fw-semibold py-2">
+          {{ user ? user.nombre + ' ' + user.apellido : null }}
+        </h6>
       </li>
       <li>
+        <h6 cDropdownHeader class="bg-light fw-semibold py-2">Cuenta</h6>
+      </li>
+      <!--<li>
         <a routerLink="./" cDropdownItem>
           <svg cIcon class="me-2" name="cilBell"></svg>
           Updates
@@ -87,17 +92,17 @@
             42
           </c-badge>
         </a>
-      </li>
+      </li>-->
       <li>
         <a routerLink="./" cDropdownItem>
           <svg cIcon class="me-2" name="cilEnvelopeOpen"></svg>
-          Messages
-          <c-badge class="ms-2 float-end" color="success">
+          Mensaje
+            <c-badge class="ms-2 float-end" color="success">
             42
           </c-badge>
         </a>
       </li>
-      <li>
+      <!--<li>
         <a routerLink="./" cDropdownItem>
           <svg cIcon class="me-2" name="cilTask"></svg>
           Tasks
@@ -105,8 +110,8 @@
             42
           </c-badge>
         </a>
-      </li>
-      <li>
+      </li>-->
+      <!--<li>
         <a routerLink="./" cDropdownItem>
           <svg cIcon class="me-2" name='cilCommentSquare'></svg>
           Comments
@@ -114,24 +119,24 @@
             42
           </c-badge>
         </a>
-      </li>
+      </li>-->
       <li>
-        <h6 cDropdownHeader class="bg-light fw-semibold py-2">Settings</h6>
+        <h6 cDropdownHeader class="bg-light fw-semibold py-2">Configuración</h6>
       </li>
       <li></li>
       <li>
         <a routerLink="./" cDropdownItem>
           <svg cIcon class="me-2" name="cilUser"></svg>
-          Profile
+          Perfil
         </a>
       </li>
       <li>
         <a routerLink="./" cDropdownItem>
           <svg cIcon class="me-2" name="cilSettings"></svg>
-          Settings
+          Configuración
         </a>
       </li>
-      <li>
+      <!--<li>
         <a routerLink="./" cDropdownItem>
           <svg cIcon class="me-2" name="cilCreditCard"></svg>
           Payments
@@ -139,8 +144,8 @@
             42
           </c-badge>
         </a>
-      </li>
-      <li>
+      </li>-->
+      <!--<li>
         <a routerLink="./" cDropdownItem>
           <svg cIcon class="me-2" name="cilFile"></svg>
           Projects
@@ -148,14 +153,14 @@
             42
           </c-badge>
         </a>
-      </li>
+      </li>-->
       <li>
         <hr cDropdownDivider/>
       </li>
       <li>
-        <a routerLink="./" cDropdownItem>
+        <a (click)="onSignOut()" cDropdownItem>
           <svg cIcon class="me-2" name="cilLockLocked"></svg>
-          Lock Account
+          Cerrar sesion
         </a>
       </li>
       <li></li>

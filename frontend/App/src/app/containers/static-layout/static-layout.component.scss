@@ -3832,6 +3832,7 @@ textarea.form-control-lg {
 }
 .dropdown-menu-dark .dropdown-header {
   color: #adb5bd;
+  width:250px;
 }
 
 .btn-group,
@@ -11368,7 +11369,7 @@ section {
 
 .device[data-device=iPhoneX][data-orientation=portrait][data-color=black]::after {
   content: "";
-  background-image: url( "../../../assets/img/portrait_black.png");
+  //background-image: url( "../../../assets/img/portrait_black.png");
 }
 
 .device[data-device=iPhoneX][data-orientation=portrait][data-color=black] .button {
