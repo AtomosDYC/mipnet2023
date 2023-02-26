@@ -5,12 +5,13 @@ namespace mipBackend.Data.Usuarios
     public interface IUsuarioRepository
     {
 
-        Task<UsuarioReponseDto> GetUsuario();
+        Task<UserAuthReponseDto> GetUsuario();
 
-        Task<UsuarioReponseDto> Login(UsuarioLoginRequestDto request);
+        Task<UserAuthReponseDto> Login(UsuarioLoginRequestDto request);
         
-        Task<UsuarioReponseDto> RegistroUsuario(UsuarioRegistroRequestDto request);
-        
+        Task<UserAuthReponseDto> RegistroUsuario(UsuarioRegistroRequestDto request);
+
+        Task<IEnumerable<UsuarioResponseDto>> GetAllUsuarios();
 
     }
 }

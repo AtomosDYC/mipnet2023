@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Per04TipoComunicacion
 {
-    public int Per04Llave { get; set; }
+    public int per04llave { get; set; }
 
-    public string? Per04Nombre { get; set; }
+    public string? per04nombre { get; set; }
 
-    public string? Per04Descripcion { get; set; }
+    public string? per04descripcion { get; set; }
 
-    public int? Per04Activo { get; set; }
+    public int? per04activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

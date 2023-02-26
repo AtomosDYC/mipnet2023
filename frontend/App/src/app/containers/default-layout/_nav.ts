@@ -21,8 +21,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'cuentas de usuario',
-    url: '/theme/colors',
-    iconComponent: { name: 'cil-drop' }
+    url: '/dashboard/usuarios/list'
   },
   {
     name: 'ADMINISTRADOR',
@@ -36,7 +35,7 @@ export const navItems: INavData[] = [
     children: [
       {
         name: 'usuarios',
-        url: '/'
+        url: '/dashboard/usuarios/list'
       },
     ]
   },
@@ -57,6 +56,61 @@ export const navItems: INavData[] = [
         name: 'Plantillas Perfiles',
         url: '/dashboard/plantilla/list'
       },
+    ]
+  },
+  {
+    name: 'FLujo de trabajo',
+    url: '/',
+    iconComponent: { name: 'cil-puzzle' },
+    children: [
+
+      {
+        name: 'FLujo de trabajo',
+        url: '/dashboard/flujo/list'
+      },
+      {
+        name: 'Niveles de Permisos',
+        url: '/dashboard/nivelpermiso/list'
+      },
+      {
+        name: 'Tipo de Flujo',
+        url: '/dashboard/tipoflujo/list'
+      },
+      {
+        name: 'Niveles de Flujo',
+        url: '/dashboard/nivelflujo/list'
+      },
+      {
+        name: 'Tipo Permiso',
+        url: '/dashboard/tipopermiso/list'
+      },
+      {
+        name: 'Variables de  parametros',
+        url: '/dashboard/parametros/list'
+      },
+      {
+        name: 'Tipo Parametro',
+        url: '/dashboard/tipoparametro/list'
+      },
+    ]
+  },
+  {
+    name: 'Personas',
+    url: '/',
+    iconComponent: { name: 'cil-puzzle' },
+    children: [
+      {
+        name: 'Tipo de Saludos',
+        url: '/dashboard/saludos/list'
+      },
+      {
+        name: 'Tipo Persona',
+        url: '/dashboard/tipopersona/list'
+      },
+      {
+        name: 'Tipo Comunicación Persona',
+        url: '/dashboard/tipocomunicacionpersona/list'
+      }
     ]
   },
   {

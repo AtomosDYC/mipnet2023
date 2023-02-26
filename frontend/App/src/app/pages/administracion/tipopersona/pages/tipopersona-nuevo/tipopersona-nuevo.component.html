@@ -1,0 +1,47 @@
+<app-spinner *ngIf="loading$ | async"></app-spinner>
+
+<c-card class="mb-4">
+  <c-card-body>
+    <h5 cCardTitle>Mantenimiento de Tipopersona</h5>
+    <c-row>
+      <c-col>
+
+
+        <form cForm
+                      [formGroup]="tipopersonaForm"
+                      (submit)="onguardarNuevo()">
+
+
+
+         <div class="form-group mb-3">
+            <label cLabel for="txtnombre">Nombre</label>
+            <input cFormControl
+                      id="txtnombre"
+                      formControlName="nombre"
+                      placeholder="Nombre Tipo de persona"
+                      type="text"
+                      class="form-control"
+                />
+          </div>
+          <div class="mb-3">
+            <label cLabel for="txtdescripcion">Descripción</label>
+            <textarea cFormControl
+                      id="txtdescripcion"
+                      formControlName="descripcion"
+                      rows="3"
+                      class="form-control"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <button cButton color="secondary" [routerLink]="['/dashboard/tipopersona/list']">Cancelar</button>  &nbsp;&nbsp;
+            <button cButton color="primary" type="submit" [disabled]="tipopersonaForm.invalid">+ Guardar</button>
+
+
+          </div>
+          </form>
+
+      </c-col>
+    </c-row>
+
+  </c-card-body>
+</c-card>

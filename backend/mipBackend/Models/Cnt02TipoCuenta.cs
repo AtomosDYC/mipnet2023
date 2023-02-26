@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Cnt02TipoCuenta
 {
-    public int Cnt02Llave { get; set; }
+    public int cnt02llave { get; set; }
 
-    public string? Cnt02Nombre { get; set; }
+    public string? cnt02nombre { get; set; }
 
-    public string? Cnt02Descripcion { get; set; }
+    public string? cnt02descripcion { get; set; }
 
-    public int? Cnt02Activo { get; set; }
+    public int? cnt02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

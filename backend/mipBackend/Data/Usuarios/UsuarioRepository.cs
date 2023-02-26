@@ -5,6 +5,7 @@ using mipBackend.Middleware;
 using mipBackend.Models;
 using mipBackend.Token;
 using System.Net;
+using AutoMapper;
 
 namespace mipBackend.Data.Usuarios
 {
@@ -15,13 +16,15 @@ namespace mipBackend.Data.Usuarios
         private readonly IJwtGenerador _jwtGenerador;
         private readonly AppDbContext _contexto;
         private readonly IUsuarioSesion _usuarioSesion;
+        private IMapper _mapper;
 
         public UsuarioRepository(
             UserManager<Usuario> userManager,
             SignInManager<Usuario> signInManager,
             IJwtGenerador jwtGenerador,
             AppDbContext contexto,
-            IUsuarioSesion usuarioSesion
+            IUsuarioSesion usuarioSesion,
+            IMapper mapper
             )
         {
 
@@ -30,12 +33,13 @@ namespace mipBackend.Data.Usuarios
             _jwtGenerador = jwtGenerador;
             _contexto = contexto;
             _usuarioSesion = usuarioSesion;
+            _mapper = mapper;
 
         }
 
-        private UsuarioReponseDto TransformerUserToUserDto(Usuario usuario) {
+        private UserAuthReponseDto TransformerUserToUserDto(Usuario usuario) {
 
-            return new UsuarioReponseDto
+            return new UserAuthReponseDto
             {
                 Id = usuario.Id,
                 Email = usuario.Email,
@@ -46,7 +50,7 @@ namespace mipBackend.Data.Usuarios
         
         }
 
-        public async Task<UsuarioReponseDto> GetUsuario()
+        public async Task<UserAuthReponseDto> GetUsuario()
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
             if(usuario == null)
@@ -61,7 +65,7 @@ namespace mipBackend.Data.Usuarios
 
         }
 
-        public async Task<UsuarioReponseDto> Login(UsuarioLoginRequestDto request)
+        public async Task<UserAuthReponseDto> Login(UsuarioLoginRequestDto request)
         {
 
             var usuario = await _userManager.FindByEmailAsync(request.Email);
@@ -90,7 +94,7 @@ namespace mipBackend.Data.Usuarios
 
         }
 
-        public async Task<UsuarioReponseDto> RegistroUsuario(UsuarioRegistroRequestDto request)
+        public async Task<UserAuthReponseDto> RegistroUsuario(UsuarioRegistroRequestDto request)
         {
             var existeEmail = await _contexto.Users.Where(x => x.Email == request.Email).AnyAsync();
 
@@ -132,5 +136,25 @@ namespace mipBackend.Data.Usuarios
             throw new Exception("EL email del usario no existe en la base de datos");
 
         }
+
+        public async Task<IEnumerable<UsuarioResponseDto>> GetAllUsuarios()
+        {
+            using (var db = _contexto)
+            {
+                var query = await (from usr in db.Users
+                                   select new UsuarioResponseDto
+                                   {
+                                       Id = usr.Id,
+                                       UserName = usr.UserName,
+                                       Email = usr.Email
+                                     
+                                   }).ToListAsync();
+
+                return _mapper.Map<IEnumerable<UsuarioResponseDto>>(query);
+
+            }
+        }
+
+
     }
 }

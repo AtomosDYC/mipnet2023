@@ -31,7 +31,7 @@ export class UserEffects {
       ofType(fromActions.Types.SIGN_UP_EMAIL),
       map((action: fromActions.SignUpEmail) => action.user),
       switchMap(userData =>
-        this.httpClient.post<UserResponse>(`${environment.url}api/usuario/registrar`, userData)
+        this.httpClient.post<UserResponse>(`${environment.url}api/UserAuth/registrar`, userData)
           .pipe(
             tap((response: UserResponse) => {
               localStorage.setItem('token', response.token);
@@ -60,7 +60,7 @@ export class UserEffects {
       ofType(fromActions.Types.SIGIN_IN_EMAIL),
       map((action: fromActions.SignInEmail) => action.credentials),
       switchMap(credentials =>
-        this.httpClient.post<UserResponse>(`${environment.url}api/usuario/login`, credentials)
+        this.httpClient.post<UserResponse>(`${environment.url}api/UserAuth/login`, credentials)
           .pipe(
             tap((response: UserResponse) => {
               localStorage.setItem('token', response.token);
@@ -89,7 +89,7 @@ export class UserEffects {
       switchMap(token => {
 
         if (token) {
-          return this.httpClient.get<UserResponse>(`${environment.url}api/usuario`)
+          return this.httpClient.get<UserResponse>(`${environment.url}api/UserAuth`)
             .pipe(
               tap((user: UserResponse) => {
                 console.log('data del usuario en sesion que viene del servidor=>', user);

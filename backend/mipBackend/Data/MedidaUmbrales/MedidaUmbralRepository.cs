@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using mipBackend.Middleware;
 using mipBackend.Models;
 using mipBackend.Token;
+using AutoMapper;
 using System.Net;
 
 namespace mipBackend.Data.MedidaUmbrales
@@ -13,15 +14,18 @@ namespace mipBackend.Data.MedidaUmbrales
         private readonly AppDbContext _contexto;
         private readonly IUsuarioSesion _usuarioSesion;
         private readonly UserManager<Usuario> _userManager;
+        private IMapper _mapper;
 
         public MedidaUmbralRepository(
             AppDbContext context,
             IUsuarioSesion sesion,
-            UserManager<Usuario> userManager)
+            UserManager<Usuario> userManager,
+            IMapper mapper)
         {
             _contexto = context;
             _usuarioSesion = sesion;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
 

@@ -45,6 +45,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
+//usuarios
+      {
+        path: 'usuarios',
+        loadChildren: () =>
+          import('./pages/usuarios/usuario/usuario.module').then((m) => m.UsuarioModule),
+      },
+
       {
         path: 'roles',
         loadChildren: () =>
@@ -55,6 +62,51 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/administracion/plantilla/plantilla.module').then((m) => m.PlantillaModule),
       },
+      //personas
+      {
+        path: 'saludos',
+        loadChildren: () =>
+          import('./pages/administracion/saludo/saludo.module').then((m) => m.SaludoModule),
+      },
+      {
+        path: 'tipopersona',
+        loadChildren: () =>
+          import('./pages/administracion/tipopersona/tipopersona.module').then((m) => m.TipopersonaModule),
+      },
+      {
+        path: 'tipocomunicacionpersona',
+        loadChildren: () =>
+          import('./pages/administracion/tipocomunicacionpersona/tipocomunicacionpersona.module').then((m) => m.TipocomunicacionpersonaModule),
+      },
+
+      //workflow
+      {
+        path: 'tipoflujo',
+        loadChildren: () =>
+          import('./pages/administracion/tipoflujo/tipoflujo.module').then((m) => m.TipoflujoModule),
+      },
+      {
+        path: 'nivelflujo',
+        loadChildren: () =>
+          import('./pages/administracion/nivelflujo/nivelflujo.module').then((m) => m.NivelflujoModule),
+      },
+      {
+        path: 'tipopermiso',
+        loadChildren: () =>
+          import('./pages/administracion/tipopermiso/tipopermiso.module').then((m) => m.TipopermisoModule),
+      },
+      {
+        path: 'nivelpermiso',
+        loadChildren: () =>
+          import('./pages/administracion/nivelpermiso/nivelpermiso.module').then((m) => m.NivelpermisoModule),
+      },
+      {
+        path: 'tipoparametro',
+        loadChildren: () =>
+          import('./pages/administracion/tipoparametro/tipoparametro.module').then((m) => m.TipoparametroModule),
+      },
+
+
       {
         path: 'inmueble',
         loadChildren: () =>

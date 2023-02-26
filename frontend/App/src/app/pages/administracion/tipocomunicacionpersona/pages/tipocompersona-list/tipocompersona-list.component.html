@@ -1,0 +1,78 @@
+<c-card class="mb-4">
+  <c-card-body>
+    <c-row>
+      <c-col>
+        <H4 cCardTitle>Mantenimiento de Tipo de Comunicación Persona</H4>
+      </c-col>
+    </c-row>
+    <c-row>
+      <c-col xs>
+
+        <c-card class="mb-4">
+          <c-card-header>
+            <c-row class="align-items-start">
+              <c-col>
+                <button cButton color="primary" variant="outline"  size="sm" (click)="onactivateTipComPersona()">Activar</button>&nbsp;&nbsp;
+                <button cButton color="primary" variant="outline" size="sm" (click)="OndisableTipComPersona()">Desactivar</button>&nbsp;&nbsp;
+              </c-col>
+              <c-col style="text-align: right;">
+                <a cButton color="primary"  size="sm" [routerLink]="['/dashboard/tipocomunicacionpersona/nuevo']">+ Agregar Nuevo</a>
+              </c-col>
+            </c-row>
+          </c-card-header>
+           <c-card-body *ngIf="tipocompersonas$ | async as tipocompersonas">
+            <c-smart-table
+              [columnSorter]="true"
+              [columns]="columns"
+              [itemsPerPageSelect]="true"
+              [itemsPerPage]="15"
+              [items]="tipocompersonas"
+              [tableBodyProps]="{ align: 'middle' }"
+              [tableProps]="{ hover: true, striped: true, responsive: true }"
+
+              [tableFilter]="true"
+              tableFilterLabel="Buscar"
+              tableFilterPlaceholder="Buscar...."
+
+              (selectedItemsChange)="checkSelected($event)"
+              cleaner
+              clickableRows
+              header
+              pagination
+              selectable
+            >
+            <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
+            let-tdContent="tdContent">
+
+              <td>
+                <ng-container [ngSwitch]="columnName">
+                  <ng-container *ngSwitchCase="'per04activo'">
+
+                    <c-badge [color]="getBadge(item.per04activo)">
+                      {{getBadgeestado(item.per04activo)}}
+                    </c-badge>
+
+                  </ng-container>
+
+                  <ng-container *ngSwitchCase="'show'" class="py-2">
+
+                     <a (click)="onEditar(item.per04llave)">
+                      <svg cIcon name="cil-pencil" size="xl" title="Editar"></svg>
+                    </a>&nbsp;&nbsp;
+                    <a  (click)="onEliminar(item.per04llave, item.per04activo)">
+                     <svg cIcon name="cil-trash" size="xl" title="Eliminar"></svg>
+                    </a>
+                  </ng-container>
+                  <ng-container *ngSwitchDefault>
+                    {{tdContent}}
+                  </ng-container>
+                </ng-container>
+              </td>
+            </ng-template>
+          </c-smart-table>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-card-body>
+</c-card>

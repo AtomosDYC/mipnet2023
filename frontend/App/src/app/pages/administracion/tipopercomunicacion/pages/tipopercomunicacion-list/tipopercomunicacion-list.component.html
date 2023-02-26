@@ -1,0 +1,93 @@
+<c-card class="mb-4">
+  <c-card-body>
+    <c-row>
+      <c-col>
+        <h5 cCardTitle>Tipo de Comunicación por Persona</h5>
+      </c-col>
+    </c-row>
+
+
+    <c-row>
+      <c-col>
+        <form cForm
+        [formGroup]="tipopercomunicacionForm"
+        (submit)="onguardarNuevo()">
+
+
+
+         <div class="form-group mb-3">
+            <label cLabel for="cbxtipocomunicacion">Tipo Comunicación</label>
+            <select cSelect
+              id="cbxtipocomunicacion"
+              formControlName="tipocomunicacion">
+
+              <option selected>Seleccione Tipo Comunicación</option>
+              <option *ngFor="let tipocomunicaciones of TipoComunicacionlist" [ngValue]="tipocomunicaciones.value">
+                {{tipocomunicaciones.description}}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group mb-3">
+            <label cLabel for="cbxtipopersona">Tipo Persona</label>
+            <select cSelect
+              id="cbxtipopersona"
+              formControlName="tipopersona">
+              <option value="" selected>Seleccione Tipo Persona</option>
+              <option *ngFor="let tipopersonas of TipoPersonalist" [ngValue]="tipopersonas.value">
+                {{tipopersonas.description}}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+
+            <button cButton color="primary" type="submit" [disabled]="tipopercomunicacionForm.invalid">+ Agregar Tipo de Persona</button>
+
+          </div>
+          </form>
+
+      </c-col>
+    </c-row>
+
+
+    <c-row>
+      <c-col xs>
+
+        <c-card class="mb-4">
+           <c-card-body *ngIf="tipopercomunicaciones$ | async as tipopercomunicaciones">
+            <c-smart-table
+              [columns]="columns"
+              [items]="tipopercomunicaciones"
+              [tableBodyProps]="{ align: 'middle' }"
+              [tableProps]="{ hover: true, striped: true, responsive: true }"
+
+              clickableRows
+              header
+              pagination
+
+            >
+            <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
+            let-tdContent="tdContent">
+
+              <td>
+                <ng-container [ngSwitch]="columnName">
+
+                  <ng-container *ngSwitchCase="'show'" class="py-2">
+                    <a  (click)="onEliminar(item.per03llave)">
+                     <svg cIcon name="cil-trash" size="xl" title="Eliminar"></svg>
+                    </a>
+                  </ng-container>
+                  <ng-container *ngSwitchDefault>
+                    {{tdContent}}
+                  </ng-container>
+                </ng-container>
+              </td>
+            </ng-template>
+          </c-smart-table>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-card-body>
+</c-card>

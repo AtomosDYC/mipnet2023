@@ -268,20 +268,20 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Cnt02TipoCuenta>(entity =>
             {
-                entity.HasKey(e => e.Cnt02Llave);
+                entity.HasKey(e => e.cnt02llave);
 
                 entity.ToTable("CNT02_TipoCuenta");
 
-                entity.Property(e => e.Cnt02Llave)
+                entity.Property(e => e.cnt02llave)
                     .ValueGeneratedOnAdd()
                     
                     .HasColumnName("CNT02_Llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt02Activo).HasColumnName("CNT02_Activo");
-                entity.Property(e => e.Cnt02Descripcion)
+                entity.Property(e => e.cnt02activo).HasColumnName("CNT02_Activo");
+                entity.Property(e => e.cnt02descripcion)
                     .HasMaxLength(250)
                     .HasColumnName("CNT02_Descripcion");
-                entity.Property(e => e.Cnt02Nombre)
+                entity.Property(e => e.cnt02nombre)
                     .HasMaxLength(250)
                     .HasColumnName("CNT02_Nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
@@ -3382,11 +3382,11 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Per02Genero>(entity =>
             {
-                entity.HasKey(e => e.Per02Llave);
+                entity.HasKey(e => e.per02llave);
 
                 entity.ToTable("PER02_Genero");
 
-                entity.Property(e => e.Per02Llave)
+                entity.Property(e => e.per02llave)
                     .ValueGeneratedOnAdd()
                     
                     .HasColumnName("PER02_Llave");
@@ -3402,28 +3402,22 @@ namespace mipBackend.Data
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
                     .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per02Activo).HasColumnName("PER02_Activo");
-                entity.Property(e => e.Per02Genero1)
-                    .HasMaxLength(50)
-                    .HasColumnName("PER02_Genero");
-                entity.Property(e => e.Per02Orden)
+                entity.Property(e => e.per02activo).HasColumnName("PER02_Activo");
+                entity.Property(e => e.per02orden)
                     
                     .HasColumnName("PER02_Orden");
-                entity.Property(e => e.Per02Sexo)
-                    .HasMaxLength(50)
-                    .HasColumnName("PER02_Sexo");
-                entity.Property(e => e.Per02Titulo)
+                entity.Property(e => e.per02titulo)
                     .HasMaxLength(50)
                     .HasColumnName("PER02_Titulo");
             });
 
             modelBuilder.Entity<Per03TipoPersona>(entity =>
             {
-                entity.HasKey(e => e.Per03Llave);
+                entity.HasKey(e => e.per03llave);
 
                 entity.ToTable("PER03_TipoPersona");
 
-                entity.Property(e => e.Per03Llave)
+                entity.Property(e => e.per03llave)
                     .ValueGeneratedOnAdd()
                     
                     .HasColumnName("PER03_Llave");
@@ -3439,22 +3433,22 @@ namespace mipBackend.Data
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
                     .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per03Activo).HasColumnName("PER03_Activo");
-                entity.Property(e => e.Per03Descripcion)
+                entity.Property(e => e.per03activo).HasColumnName("PER03_Activo");
+                entity.Property(e => e.per03descripcion)
                     .HasMaxLength(500)
                     .HasColumnName("PER03_Descripcion");
-                entity.Property(e => e.Per03Nombre)
+                entity.Property(e => e.per03nombre)
                     .HasMaxLength(250)
                     .HasColumnName("PER03_Nombre");
             });
 
             modelBuilder.Entity<Per04TipoComunicacion>(entity =>
             {
-                entity.HasKey(e => e.Per04Llave);
+                entity.HasKey(e => e.per04llave);
 
                 entity.ToTable("PER04_TipoComunicacion");
 
-                entity.Property(e => e.Per04Llave)
+                entity.Property(e => e.per04llave)
                     .ValueGeneratedOnAdd()
                     
                     .HasColumnName("PER04_Llave");
@@ -3470,11 +3464,11 @@ namespace mipBackend.Data
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
                     .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per04Activo).HasColumnName("PER04_Activo");
-                entity.Property(e => e.Per04Descripcion)
+                entity.Property(e => e.per04activo).HasColumnName("PER04_Activo");
+                entity.Property(e => e.per04descripcion)
                     .HasMaxLength(500)
                     .HasColumnName("PER04_Descripcion");
-                entity.Property(e => e.Per04Nombre)
+                entity.Property(e => e.per04nombre)
                     .HasMaxLength(250)
                     .HasColumnName("PER04_Nombre");
             });
@@ -3564,14 +3558,14 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Per06TipoPersonaComunicacion>(entity =>
             {
-                entity.HasKey(e => new { e.Per03Llave, e.Per04Llave });
+                entity.HasKey(e => new { e.per03llave, e.per04llave });
 
                 entity.ToTable("PER06_TipoPersonaComunicacion");
 
-                entity.Property(e => e.Per03Llave)
+                entity.Property(e => e.per03llave)
                     
                     .HasColumnName("PER03_Llave");
-                entity.Property(e => e.Per04Llave)
+                entity.Property(e => e.per04llave)
                     
                     .HasColumnName("PER04_Llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
@@ -3580,12 +3574,12 @@ namespace mipBackend.Data
                     .HasColumnName("fechaactualizacion");
 
                 entity.HasOne(d => d.Per03LlaveNavigation).WithMany(p => p.Per06TipoPersonaComunicacions)
-                    .HasForeignKey(d => d.Per03Llave)
+                    .HasForeignKey(d => d.per03llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PER06_TipoPersonaComunicacion_PER03_TipoPersona");
 
                 entity.HasOne(d => d.Per04LlaveNavigation).WithMany(p => p.Per06TipoPersonaComunicacions)
-                    .HasForeignKey(d => d.Per04Llave)
+                    .HasForeignKey(d => d.per04llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PER06_TipoPersonaComunicacion_PER04_TipoComunicacion");
             });

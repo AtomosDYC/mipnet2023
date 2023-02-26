@@ -73,6 +73,7 @@ namespace mipBackend.Data.NivelFlujos
             {
                 var query = await (from niv in db.Wkf03Niveles
                                    join flu in db.Wkf02TipoFlujos! on niv.wkf02llave equals flu.wkf02llave
+                                   where (flu.wkf02activo == 1)
                                    select new NivelFlujoResponseDto
                                    {
                                        wkf03llave = niv.wkf03llave,
@@ -80,6 +81,7 @@ namespace mipBackend.Data.NivelFlujos
                                        wkf03descripcion = niv.wkf03descripcion,
                                        wkf03activo = niv.wkf03activo,
                                        wkf02llave = flu.wkf02llave,
+                                       wkf03nivel1 = niv.wkf03nivel1,
                                        wkf02nombre = flu.wkf02nombre
                                    }).ToListAsync();
 

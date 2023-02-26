@@ -5,17 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Per02Genero
 {
-    public int Per02Llave { get; set; }
+    public int per02llave { get; set; }
 
-    public string? Per02Titulo { get; set; }
+    public string? per02titulo { get; set; }
 
-    public string? Per02Genero1 { get; set; }
+    public int? per02orden { get; set; }
 
-    public string? Per02Sexo { get; set; }
-
-    public int? Per02Orden { get; set; }
-
-    public int? Per02Activo { get; set; }
+    public int? per02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

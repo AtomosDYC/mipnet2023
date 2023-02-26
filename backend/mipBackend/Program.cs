@@ -22,6 +22,11 @@ using mipBackend.Data.TipoFlujos;
 using mipBackend.Data.TipoPermisos;
 using mipBackend.Data.NivelFlujos;
 using mipBackend.Data.NivelPermisos;
+using mipBackend.Data.TipoParametros;
+using mipBackend.Data.Saludos;
+using mipBackend.Data.TipoPersonas;
+using mipBackend.Data.TipoComPersonas;
+using mipBackend.Data.TipoPerComunicaciones;
 using mipBackend.Data.Areas;
 using mipBackend.Middleware;
 using mipBackend.Models;
@@ -55,6 +60,12 @@ builder.Services.AddScoped<ITipoPermisosRepository, TipoPermisosRepository>();
 builder.Services.AddScoped<IAreaRepository, AreaRepository>();
 builder.Services.AddScoped<INivelFlujoRepository, NivelFlujoRepository>();
 builder.Services.AddScoped<INivelPermisoRepository, NivelPermisoRepository>();
+builder.Services.AddScoped<ITipoParametroRepository, TipoParametroRepository>();
+builder.Services.AddScoped<ISaludoRepository, SaludoRepository>();
+builder.Services.AddScoped<ITipoPersonaRepository, TipoPersonaRepository>();
+builder.Services.AddScoped<ITipoComPersonaRepository, TipoComPersonaRepository>();
+builder.Services.AddScoped<ITipoPerComunicacionRepository, TipoPerComunicacionRepository>();
+
 builder.Services.AddScoped<IRolesRepository, RolesRepository>();
 
 // Add services to the container.
@@ -80,11 +91,26 @@ var mapperConfig = new MapperConfiguration(mc =>
     mc.AddProfile(new MedidaUmbralProfile());
     mc.AddProfile(new EstadosDanioProfile());
     mc.AddProfile(new PlantillaProfile());
+
+    //usuarios
+    mc.AddProfile(new UsuarioProfile());
+
+    //personas
+    mc.AddProfile(new SaludoProfile());
+    mc.AddProfile(new TipoPersonaProfile());
+    mc.AddProfile(new TipoComPersonaProfile());
+    mc.AddProfile(new TipoPerComunicacionProfile());
+
+    //workflow
     mc.AddProfile(new TipoFlujoProfile());
     mc.AddProfile(new TipoPermisoProfile());
     mc.AddProfile(new TipoParametroProfile());
     mc.AddProfile(new NivelFlujoProfile());
     mc.AddProfile(new NivelPermisoProfile());
+
+    //Cliente
+    mc.AddProfile(new TipoCuentaProfile());
+
     mc.AddProfile(new RolProfile());
 });
 

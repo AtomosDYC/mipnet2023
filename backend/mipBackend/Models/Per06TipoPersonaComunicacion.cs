@@ -5,9 +5,9 @@ namespace mipBackend.Models;
 
 public partial class Per06TipoPersonaComunicacion
 {
-    public int Per03Llave { get; set; }
+    public int per03llave { get; set; }
 
-    public int Per04Llave { get; set; }
+    public int per04llave { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

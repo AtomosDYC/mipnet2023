@@ -19,37 +19,15 @@ namespace mipBackend.Controllers
 
         }
 
-        [AllowAnonymous]
-        [HttpPost("login")]
-        public async Task<ActionResult<UsuarioReponseDto>> Login
-            (
-            [FromBody] UsuarioLoginRequestDto request
-            )
-        {
-
-            return await _repository.Login(request);
-
-        }
-
-        [AllowAnonymous]
-        [HttpPost("registrar")]
-        public async Task<ActionResult<UsuarioReponseDto>> Registrar
-            (
-            [FromBody] UsuarioRegistroRequestDto request
-            )
-        {
-
-            return await _repository.RegistroUsuario(request);
-
-        }
-
         [HttpGet]
-        public async Task<ActionResult<UsuarioReponseDto>> DevolverUsuario()
+        public async Task<ActionResult<IEnumerable<UsuarioResponseDto>>> GetUsuario()
         {
 
-            return await _repository.GetUsuario();
+            var Usuarios = await _repository.GetAllUsuarios();
+            return Ok(Usuarios);
 
         }
+
 
 
     }

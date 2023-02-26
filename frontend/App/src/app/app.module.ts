@@ -66,7 +66,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { effects, reducers } from './store';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
-
+import { MenuLayoutComponent } from './containers/menu-layout/menu-layout.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -87,6 +87,7 @@ const APP_CONTAINERS = [
     StaticLayoutComponent,
     StaticHeaderComponent,
     StaticFooterComponent,
+    MenuLayoutComponent,
 
   ],
   imports: [
@@ -94,6 +95,7 @@ const APP_CONTAINERS = [
     BrowserAnimationsModule,
     IndicatorsModule,
     NotificationModule,
+
 
     AppRoutingModule,
     AvatarModule,

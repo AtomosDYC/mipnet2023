@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { navItems } from './_nav';
+import { navItems } from '../default-layout/_nav';
 
 import * as fromRoot from '../../store';
 import * as fromUser from '../../store/user';
 import { Store, select} from '@ngrx/store';
 import { Observable, } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 
@@ -24,7 +24,8 @@ export class DefaultLayoutComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private _routeParams: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +34,10 @@ export class DefaultLayoutComponent implements OnInit {
     this.isAuthorized$ = this.store.pipe(select(fromUser.getIsAuthorized)) as Observable<boolean>;
 
     this.store.dispatch(new fromUser.Init());
+
+    this._routeParams.paramMap.subscribe(params => {
+
+    })
 
   }
 
