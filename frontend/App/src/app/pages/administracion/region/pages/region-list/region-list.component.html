@@ -53,20 +53,19 @@
                     </c-badge>
 
                   </ng-container>
-
-                  <ng-container *ngSwitchCase="'show'" class="py-2">
-
-                     <a (click)="onEditar(item.sist04llave)">
-                      <svg cIcon name="cil-pencil" size="xl" title="Editar"></svg>
-                    </a>&nbsp;&nbsp;
-                    <a  (click)="onEliminar(item.sist04llave, item.sist04activo)">
-                     <svg cIcon name="cil-trash" size="xl" title="Eliminar"></svg>
-                    </a>
-                  </ng-container>
                   <ng-container *ngSwitchDefault>
                     {{tdContent}}
                   </ng-container>
                 </ng-container>
+                <ng-container *ngSwitchCase="'show'" class="py-2">
+
+                  <a (click)="onEditar(item.sist04llave)">
+                   <svg cIcon name="cil-pencil" size="xl" title="Editar"></svg>
+                 </a>&nbsp;&nbsp;
+                 <a  (click)="onEliminar(item.sist04llave, item.sist04activo)">
+                  <svg cIcon name="cil-trash" size="xl" title="Eliminar"></svg>
+                 </a>
+               </ng-container>
               </td>
             </ng-template>
           </c-smart-table>

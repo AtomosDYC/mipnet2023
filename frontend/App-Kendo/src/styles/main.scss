@@ -2,6 +2,18 @@
 @import './typography';
 @import './common';
 
+@import "~@progress/kendo-theme-bootstrap/dist/all.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+
+.row {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-top: 0px;
+}
+
 //Grid
 .customer-photo {
     display: inline-block;
@@ -128,3 +140,10 @@ kendo-recurrence-frequency-editor .k-edit-field {
 .daterange-center {
     align-self: center;
 }
+
+
+.make-row {
+    margin-top: 0px important;
+    margin-right: 0px important;
+    margin-left: 0px important;
+  }

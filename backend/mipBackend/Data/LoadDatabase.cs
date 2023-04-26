@@ -229,6 +229,32 @@ namespace mipBackend.Data
 
             context.SaveChanges();
 
+            if (!context.Per08TipoDocumentos!.Any())
+            {
+                context.Per08TipoDocumentos!.AddRange(
+                    new Per08TipoDocumento
+                    {
+                        per08nombre = "Rut",
+                        per08descripcion = "Personas con nacionalidad chilena o residencia permanente",
+                        per08activo = 1,
+                    },
+                    new Per08TipoDocumento
+                    {
+                        per08nombre = "DNI",
+                        per08descripcion = "Personas Con nacionalidad extranjera sin rut",
+                        per08activo = 1,
+                    },
+                    new Per08TipoDocumento
+                    {
+                        per08nombre = "Numero pasaporte",
+                        per08descripcion = "Personas con extranjeras que no tienen DNI",
+                        per08activo = 1,
+                    }
+                );
+            }
+
+            context.SaveChanges();
+
             if (!context.Wkf10TipoParametros!.Any())
             {
                 context.Wkf10TipoParametros!.AddRange(

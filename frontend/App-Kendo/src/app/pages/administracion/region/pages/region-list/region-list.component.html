@@ -1,0 +1,109 @@
+<div class="card-container">
+    <div class="card-header-wrapper  col-lg-12">
+        <h3 class="card-title  col-lg-10"> {{ customMsgService.translate('mantenimientoregion') }} </h3>
+        <div class="card-buttons col-md-2 right">
+            <kendo-buttongroup selection="single">
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="OnNuevo()"
+                >
+                    {{ customMsgService.translate('MantNuevo') }}
+                </button>
+            </kendo-buttongroup>
+        </div>  
+        <span></span>
+    </div>
+
+
+    <div class="card-component">
+        <kendo-grid [data]="regiones$ | async"
+        
+        kendoGridSelectBy="sist04llave"
+        [(selectedKeys)]="mySelection"
+        [pageable]="true"
+        [sortable]="true"
+        [pageSize]="20"
+        [reorderable]="true"
+        [resizable]="true"
+        [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
+        >
+        <ng-template kendoGridToolbarTemplate>
+            <kendo-grid-spacer></kendo-grid-spacer>
+            <button type="button" icon="k-i-check k-i-checkmark" kendoButton (click)="onactivateRegion()">Activar</button>
+            <button type="button" icon="k-i-close k-i-x" kendoButton (click)="OndisableRegion()">Desactivar</button>
+            <button kendoButton kendoGridExcelCommand type="button" icon="file-excel">
+                Export to Excel
+            </button>
+            <button kendoButton kendoGridPDFCommand icon="file-pdf">Export to PDF</button>
+        </ng-template>
+
+
+            <kendo-grid-checkbox-column
+                [width]="45"
+                [headerClass]="{ 'text-center': true }"
+                [class]="{ 'text-center': true }"
+                [resizable]="false"
+                [columnMenu]="false"
+                [showSelectAll]="true">
+            </kendo-grid-checkbox-column>
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                    <button
+                    kendoButton
+                    iconClass="fa fa-pencil"
+                    title="Editar"
+                    
+                    (click)="OnEditar(dataItem.sist04llave)"
+                  ></button>
+                  <button
+                    kendoButton
+                    iconClass="fa-solid fa-trash-can"
+                    title="Eliminar"
+                    (click)="OnEliminar(dataItem.sist04llave, dataItem.sist04activo)"
+                  ></button>
+                </ng-template>
+              </kendo-grid-command-column>
+            <kendo-grid-column field="sist04nombre" title="Nombre"> </kendo-grid-column>
+            <kendo-grid-column field="sist04descripcion" title="Descripcion"> </kendo-grid-column>
+            <kendo-grid-column
+                field="sist04activo"
+                title="Status"
+                [width]="100"
+                [class]="{ 'text-center': true }"
+                [resizable]="false"
+                filter="boolean"
+                >
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span
+                    *ngIf="dataItem.sist04activo === 1"
+                    class="badge badge-success"
+                    >Activo</span
+                    >
+                    <span
+                    *ngIf="dataItem.sist04activo != 1"
+                    class="badge badge-danger"
+                    >Desactivado</span
+                    >
+                </ng-template>
+                </kendo-grid-column>    
+                <kendo-grid-excel
+                    fileName="regiones.xlsx">
+                    <kendo-excelexport-column field="sist04nombre" title="Nombre Región"></kendo-excelexport-column>
+                    <kendo-excelexport-column field="sist04descripcion" title="Descripción Región"></kendo-excelexport-column>
+                </kendo-grid-excel>
+                <kendo-grid-pdf
+                    fileName="Regiones.pdf"
+                    paperSize="A4"
+                    [scale]="0.8"
+                    [repeatHeaders]="true"
+                    [margin]="{ top: '1cm', left: '1cm', right: '1cm', bottom: '1cm' }"
+                >
+                    <kendo-grid-column field="sist04nombre" title="Nombre Región"></kendo-grid-column>
+                    <kendo-grid-column field="sist04descripcion" title="Descripción Region"> </kendo-grid-column>
+                </kendo-grid-pdf>
+        </kendo-grid>
+    </div>
+
+</div>

@@ -1,5 +1,25 @@
 // Custom Messages
 export const enCustomMessages = {
+    mantenimientoregion: 'Region Maintenance',
+    mantenimientoSaludo: 'Greetings',
+
+//material base de un mantenedor
+
+    MantNuevo: 'Add New',
+    MantActivar: 'On',
+    MantDesactivar: 'Off',
+    MantExpExcel: 'Export to Excel',
+    MantExpPDF: 'Export to PDF',
+    Nodisponibles:'No data.',
+    estado: 'Status',
+    Activo: 'Online',
+    Desactivado: 'Offline',
+    
+//saludo
+    
+        saludoNombre: 'Greetings',
+
+    nuevo: 'Add New',
     teamEfficiency: 'Team Efficiency',
     teamMembers: 'Team Members',
     dashboard: 'Dashboard',

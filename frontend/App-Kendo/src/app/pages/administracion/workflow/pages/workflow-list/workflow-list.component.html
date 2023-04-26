@@ -1,0 +1,55 @@
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-10"> {{ customMsgService.translate('mantenimientoWorkflow') }} </h3>
+        <div class="card-buttons col-md-2 right">
+            <kendo-buttongroup selection="single">
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="OnNuevo()"
+                >
+                    {{ customMsgService.translate('MantNuevo') }}
+                </button>
+            </kendo-buttongroup>
+        </div>  
+        <span></span>
+    </div>
+
+
+
+    <div class="card-component">
+        <kendo-treelist
+        [kendoTreeListFlatBinding]="data"
+
+        kendoTreeListExpandable
+        [initiallyExpanded]="true"
+        idField="wkf01llave"
+        parentIdField="wkf01llavepadre"
+        >
+        
+        <kendo-treelist-column [expandable]="true" field="wkf01nombre" title="Workflow">
+        </kendo-treelist-column>
+        <kendo-treelist-column
+            field="wkf03nombre"
+            title="NIvel del Workflow"
+        ></kendo-treelist-column>
+        <kendo-treelist-column [width]="100">
+            <ng-template kendoTreeListCellTemplate 
+              let-dataItem="dataItem"
+            >
+              
+              <button
+                kendoButton
+                 title="Edit" [primary]="true"
+                iconClass="fa fa-pencil"
+                title="{{ customMsgService.translate('edit') }}"
+                (click)="(OnEditar(dataItem.wkf01llave))"
+              ></button>
+            </ng-template>
+          </kendo-treelist-column>
+        
+        </kendo-treelist>
+
+    </div>
+</div>

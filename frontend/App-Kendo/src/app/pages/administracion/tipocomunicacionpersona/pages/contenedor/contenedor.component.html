@@ -1,0 +1,62 @@
+<div id="tipocomunicacion" *ngIf="selectedItem === 'Tipo Comunicacion'">
+    <div class="card-container">
+        <div class="card-header-wrapper">
+            <h3 class="card-title"> {{ customMsgService.translate('mantenimientoTipopersona')}} </h3>
+            <div class="card-buttons col-md-2 right">
+                <kendo-buttongroup selection="single">
+                    <button
+                        kendoButton
+                        [toggleable]="true"
+                        [selected]="true"
+                        (click)="onFinalizar()"
+                    >
+                    {{ customMsgService.translate('finalizar')}}
+                    </button>
+                </kendo-buttongroup>
+            </div>
+            
+        </div>
+        <div class="card-component">
+
+            <form class="k-form" [formGroup]="Form">
+                <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtNombre" text="{{ customMsgService.translate('nombre')}}"></kendo-label>
+                    <kendo-textbox
+                        formControlName="txtNombre"
+                        #txtNombre
+                        required
+                    ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+                
+                
+                <kendo-formfield>
+                    <kendo-label [for]="txtDescripcion" text="{{ customMsgService.translate('descripcion')}}"></kendo-label>
+                    <kendo-textbox
+                    formControlName="txtDescripcion"
+                    #txtDescripcion
+                    required
+                ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorDescripcion')}}</kendo-formerror>
+                </kendo-formfield>
+
+                    <div class="k-form-buttons">
+                        <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/saludos/list']">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                        <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('continuar')}}</button>
+
+
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+    
+</div>
+<div id="asociarpersona" *ngIf="selectedItem === 'Asociar con Persona'">
+    <app-tipopercomunicacion-list [ID]="ID"></app-tipopercomunicacion-list>
+</div>

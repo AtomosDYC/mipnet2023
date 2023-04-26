@@ -27,8 +27,6 @@ public partial class Wkf06Perfil
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Prf04PlantillaPerfil> Prf04PlantillaPerfils { get; } = new List<Prf04PlantillaPerfil>();
-
     public virtual ICollection<Prf06PermisosUsuario> Prf06PermisosUsuarios { get; } = new List<Prf06PermisosUsuario>();
 
     public virtual Wkf01Flujo? Wkf01LlaveNavigation { get; set; }

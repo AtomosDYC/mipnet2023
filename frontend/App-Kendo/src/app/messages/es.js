@@ -1,5 +1,166 @@
 // Custom Messages
 export const esCustomMessages = {
+    mantenimientoregion: 'Mantenimiento de regiones',
+    mantenimientoSaludo: 'Mantenimiento de Saludos',
+
+    //tipopersona
+    mantenimientoTipopersona: 'Mantenimiento de tipo de persona',
+    tipopersona: 'Tipo de Persona',
+    errorTipopersona: 'El tipo de persona es de ingreso obligatorio',
+
+    //tipodocumento
+    mantenimientoTipodocumento: 'Mantenimiento de tipo de Documento',
+    tipodocumento: 'Tipo de documento de indentificacion',
+    errorTipodocumento: 'EL Tipo de documento de indentificacion es de ingreso obligtorio',
+
+
+    //tipo comunicacion persona
+    mantenimientoTipocompersona: 'Mantenimiento de tipo comunicación para personas',
+
+    //tipoEspecie
+    mantenimientoTipoespecie: 'Mantenimiento de tipo de Especies',
+
+    //MedidaUmbral
+    mantenimientoMedidaumbral: 'Mantenimiento de Medida de umbrales de Especies',
+
+    //Usuarios
+    mantenimientoUsuarios: 'Mantenimiento de Usuarios',
+    nombreUsuario: 'Nombre Completo',
+    emailUsuario: 'Email de Usuario / Username',
+    passwordUsuario: 'Password de Acceso',
+
+    //comuna
+    mantenimientoComuna: 'Mantenimiento de Comuna',
+    region: 'Región',
+    errorRegion:'La región de de ingreso obligatorio',
+    comuna: 'Comuna',
+
+    //Estado danio
+    mantenimientoEstadodanio: 'Mantenimiento de Estados de Daños',
+    medidaumbral: 'Medida del Umbral',
+    errormMedidaumbral: 'Medida del Umbral',
+    estadodanio: 'Estado del Daño',
+    errorEstadodanio: 'Medida del Umbral',
+
+    //Roles
+    mantenimientoRoles: 'Mantenimiento de Roles de Usuario',
+
+    //nivel de flujo
+    mantenimientoNivelFlujo: 'Mantenimiento de Nivel de flujo',
+    tipoflujo: 'Tipo Flujo',
+    errorTipoflujo: 'El Tipo Flujo es de ingreso Obligatorio',
+    nivelflujo: 'Nivel de Flujo',
+    errorNivelflujo: 'El Nivel de Flujo es de ingreso Obligatorio',
+    nivel: 'Nivel gerarquico',
+    errorNivel: 'EL nivel es de ingreso obligatorio',
+
+    //tipo flujo
+    mantenimientoTipoflujo: 'Mantenimiento de Tipo de Flujo',
+    orden:'Orden en el listado',
+
+    //tipo Tpo permiso
+    mantenimientoTipopermiso: 'Mantenimiento de Tipo de Permisos',
+    sigla:'Sigla para abreviar el contenido',
+    errorSigla: 'La sigla o abreviación es de ingreso obligatorio',
+
+    //mantenimiento nivel de permiso
+    mantenimientoNivelPermiso: 'Mantenimiento de Nivel de Permisos',
+    nivelpermiso: 'Nivel de Permiso',
+    errornivelpermiso: 'El Nivel de permiso es de ingreso obligatorio',
+    tipopermiso: 'Tipo de Permiso',
+    errortipopermiso: 'el Tipo de Permiso es de ingreso obligatorio',
+    
+    //tipoparametro
+    mantenimientoTipoparametro: 'Mantenimiento Tipo de Parametro',
+
+    //default user
+    mantenimientoDefaultuser: 'Configuracion por defecto para crear un cuenta de usuario',
+    rol: 'Roles de Usuario',
+    errorRol: 'El Rol de usuario es de ingreso obligatorio',
+    plantilla: 'Plantilla de permisos de usuario',
+    errorPlantilla: 'La plantilla de persmisos de usuario es de ingreso obligatorio',
+
+    //mantenimiento workflow
+    mantenimientoWorkflow: 'Mantenimiento de Workflow',
+
+    //
+    mantenimientoWorkflowDatosgenerles: 'WorkFLow Datos Generales',
+
+    //
+    mantenimientoWorkflownodopadre: 'WorkFLow Nodo Padre',
+    nodopadre: 'Nodo Padre',
+    errorNodopadre: 'El Nodo Padre es de ingreso obligatorio',
+
+     //
+     mantenimientoWorkflowconfiguracionweb: 'WorkFLow Datos Configuración Web',
+     url: 'Url del menu',
+     errorUrl: 'Error la url es de ingreso obligatorio',
+     iconomenu: 'Icono del menu',
+     errorIconomenu: 'Error el icono del menu es de ingreso obligatorio',
+
+     //mantenimiento de parametros
+     mantenimientoWorkflowParametros: 'Workflow Segridad en Parametros',
+     tipoparametro :'Tipo de Parametros',
+     errorTipoparametro : 'El tipo de parametro es de ingresso obligatorio',
+     Variable : 'La variable de parametro',
+     errorVariable :'La variable de parametro es de ingreso obligatorio',
+     Valor: 'Valor de la Variable',
+     errorValor : 'El valor de la variable es de ingreso obligatorio',
+
+     //plantilla
+     mantenimientoPlantilla: 'Mantenimiento de Plantillas de permisos de Usuario',
+     plantilla: 'Plantilla de Permisos',
+     errorPlantilla: 'La plantilla de permisos es de ingreso obligatorio',
+
+     //uSUARIO
+     email: 'Email de Usuario / Username',
+     errorEmail: 'El Email de Usuario / Username es de ingreso obligatorio',
+     errorEmailvalid: 'El Email de Usuario / Username es invalido',
+     password: 'Password',
+     errorPassword: 'El password es de ingreso obligatorio',
+     confirmpassword: 'Confirmar Password',
+     errorconfirmpassword: 'Debe confirmar el password',
+     
+
+
+//material base de un mantenedor
+
+    mensajenomodificar: 'La información de esta pantalla no puede ser modificada o agregar nueva información',
+    MantNuevo: 'Agregar Nuevo',
+    MantActivar: 'Activar',
+    MantDesactivar: 'Desactivar',
+    MantExpExcel: 'Export to Excel',
+    MantExpPDF: 'Export to Excel',
+    Nodisponibles:'No hay datos disponibles.',
+    estado: 'Estado',
+    Activo: 'Activo',
+    Desactivado: 'Desactivado',
+    Delete:'Eliminar',
+    Edit:'Editar',
+
+    rut:'Rut / DNI',
+    errorRut:'El rut es de ingreso obligatorio',
+    nombre:'Nombre',
+    errorNombre:'Nombre es de ingreso obligatorio',
+    descripcion: 'Descripcion',
+    errordescripcion:'Descripcion es de ingreso obligatorio',
+
+    cancelar: 'Cancelar',
+    guardar: '+ Guardar',
+    continuar: '-> Continuar',
+    agregar: '+ Agregar',
+    volver: '<- Volver',
+    finalizar: '-- finalizar',
+    
+//saludo
+
+    saludo: 'Saludo de bienvenida',
+    errorSaludo:'El Saludo de bienvenida es de ingreso obligatorio',
+
+
+
+//termino material base de un mantenedor
+
     teamEfficiency: 'Eficiencia del equipo',
     teamMembers: 'Miembros del equipo',
     dashboard: 'Tablero',

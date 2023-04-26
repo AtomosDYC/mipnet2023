@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using mipBackend.Models;
+using mipBackend.Dtos.UsuarioDtos;
 
 namespace mipBackend.Data
 {
@@ -14,7 +15,20 @@ namespace mipBackend.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-
+            modelBuilder.Entity<UsuarioRegistroResponseDto>(entity =>
+            { 
+                entity.HasNoKey();
+                /*
+                entity.ToTable("userid");
+                entity.ToTable("username");
+                entity.ToTable("roleid");
+                entity.ToTable("rolename");
+                entity.ToTable("per01llave");
+                entity.ToTable("per01nombre");
+                entity.ToTable("prf03llave");
+                entity.ToTable("prf03nombre");
+                */
+            });
             
             modelBuilder.Entity<Blk01Bloqueo>(entity =>
             {
@@ -3322,11 +3336,11 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Per01Persona>(entity =>
             {
-                entity.HasKey(e => e.Per01Llave);
+                entity.HasKey(e => e.per01llave);
 
                 entity.ToTable("PER01_Persona");
 
-                entity.Property(e => e.Per01Llave)
+                entity.Property(e => e.per01llave)
                     .ValueGeneratedOnAdd()
                     
                     .HasColumnName("PER01_Llave");
@@ -3342,41 +3356,44 @@ namespace mipBackend.Data
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
                     .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per01Activo).HasColumnName("PER01_Activo");
-                entity.Property(e => e.Per01AnioIngreso)
+                entity.Property(e => e.per01activo).HasColumnName("PER01_Activo");
+                entity.Property(e => e.per01anioingreso)
                     
                     .HasColumnName("PER01_AnioIngreso");
-                entity.Property(e => e.Per01Cargo)
+                entity.Property(e => e.per01cargo)
                     .HasMaxLength(500)
                     .HasColumnName("PER01_Cargo");
-                entity.Property(e => e.Per01FechaNacimiento)
+                entity.Property(e => e.per01fechanacimiento)
                     .HasColumnType("datetime")
                     .HasColumnName("PER01_FechaNacimiento");
-                entity.Property(e => e.Per01Giro)
+                entity.Property(e => e.per01giro)
                     .HasMaxLength(500)
                     .HasColumnName("PER01_Giro");
-                entity.Property(e => e.Per01NombreFantasia)
+                entity.Property(e => e.per01nombrefantasia)
                     .HasMaxLength(500)
                     .HasColumnName("PER01_NombreFantasia");
-                entity.Property(e => e.Per01NombreRazon)
+                entity.Property(e => e.per01nombrerazon)
                     .HasMaxLength(500)
                     .HasColumnName("PER01_NombreRazon");
-                entity.Property(e => e.Per01Rut)
+                entity.Property(e => e.per01rut)
                     
                     .HasColumnName("PER01_Rut");
-                entity.Property(e => e.Per02Llave)
+                entity.Property(e => e.per02llave)
                     
                     .HasColumnName("PER02_Llave");
-                entity.Property(e => e.Per03Llave)
+                entity.Property(e => e.per03llave)
                     
                     .HasColumnName("PER03_Llave");
+                entity.Property(e => e.per08llave)
+
+                   .HasColumnName("PER08_Llave");
 
                 entity.HasOne(d => d.Per02LlaveNavigation).WithMany(p => p.Per01Personas)
-                    .HasForeignKey(d => d.Per02Llave)
+                    .HasForeignKey(d => d.per02llave)
                     .HasConstraintName("FK_PER01_Persona_PER02_Genero");
 
                 entity.HasOne(d => d.Per03LlaveNavigation).WithMany(p => p.Per01Personas)
-                    .HasForeignKey(d => d.Per03Llave)
+                    .HasForeignKey(d => d.per03llave)
                     .HasConstraintName("FK_PER01_Persona_PER03_TipoPersona");
             });
 
@@ -3617,6 +3634,62 @@ namespace mipBackend.Data
                     .HasConstraintName("FK_PER07_PersonaUsuario_PER01_Persona");
             });
 
+            modelBuilder.Entity<Per08TipoDocumento>(entity =>
+            {
+                entity.HasKey(e => e.per08llave);
+
+                entity.ToTable("PER08_TipoDocumento");
+
+                entity.Property(e => e.per08llave)
+                    .ValueGeneratedOnAdd()
+
+                    .HasColumnName("PER08_Llave");
+                entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
+                entity.Property(e => e.createby).HasColumnName("CREATE_BY");
+                entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
+                entity.Property(e => e.fechaactivacion)
+                    .HasColumnType("datetime")
+                    .HasColumnName("fechaactivacion");
+                entity.Property(e => e.fechaactualizacion)
+                    .HasColumnType("datetime")
+                    .HasColumnName("fechaactualizacion");
+                entity.Property(e => e.fechaeliminacion)
+                    .HasColumnType("datetime")
+                    .HasColumnName("fechaeliminacion");
+                entity.Property(e => e.per08activo).HasColumnName("PER08_Activo");
+                entity.Property(e => e.per08descripcion)
+                    .HasMaxLength(500)
+                    .HasColumnName("PER08_Descripcion");
+                entity.Property(e => e.per08nombre)
+                    .HasMaxLength(250)
+                    .HasColumnName("PER08_Nombre");
+            });
+
+            modelBuilder.Entity<Per09DefaultUser>(entity =>
+            {
+                entity.HasKey(e => e.per09llave);
+
+                entity.ToTable("PER09_DefaultUser");
+
+                entity.Property(e => e.per09llave)
+                    .ValueGeneratedOnAdd()
+
+                    .HasColumnName("PER09_Llave");
+
+                entity.Property(e => e.rolid)
+                    .HasMaxLength(50)
+                    .HasColumnName("Rol_id");
+
+                entity.Property(e => e.tipodocumentoid).HasColumnName("TipoDocumento_id");
+                entity.Property(e => e.tipopersonaid).HasColumnName("TipoPersona_id");
+                entity.Property(e => e.plantillaid).HasColumnName("Plantilla_id");
+                entity.Property(e => e.saludoid).HasColumnName("Saludo_id");
+                
+                entity.Property(e => e.per09nombre)
+                    .HasMaxLength(250)
+                    .HasColumnName("PER09_Nombre");
+            });
+
             modelBuilder.Entity<Pgo01CompraLicencia>(entity =>
             {
                 entity.HasKey(e => e.Pgo1Llave);
@@ -3751,7 +3824,7 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Prf03Plantilla>(entity =>
             {
-                entity.HasKey(e => e.prf03llave).HasName("PK_PRF03_PlantillaPerfil");
+                entity.HasKey(e => e.prf03llave).HasName("PK_PRF03_PlantillaFlujo");
 
                 entity.ToTable("PRF03_Plantilla");
 
@@ -3778,29 +3851,15 @@ namespace mipBackend.Data
                     .HasColumnName("PRF03_Nombre");
             });
 
-            modelBuilder.Entity<Prf04PlantillaPerfil>(entity =>
+            modelBuilder.Entity<Prf04PlantillaFlujo>(entity =>
             {
-                entity.HasKey(e => new { e.Prf03Llave, e.Wkf06Llave });
+                entity.HasKey(e => e.prf04llave).HasName("PK_PRF04_plantillaFlujo");
 
-                entity.ToTable("PRF04_plantillaPerfil");
+                entity.ToTable("PRF04_PlantillaFlujo");
 
-                entity.Property(e => e.Prf03Llave)
-                    
-                    .HasColumnName("PRF03_Llave");
-                entity.Property(e => e.Wkf06Llave)
-                    
-                    .HasColumnName("WKF06_llave");
-                entity.Property(e => e.Prf04Activo).HasColumnName("PRF04_activo");
-
-                entity.HasOne(d => d.Prf03LlaveNavigation).WithMany(p => p.Prf04PlantillaPerfils)
-                    .HasForeignKey(d => d.Prf03Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PRF04_plantillaPerfil_PRF03_Plantilla");
-
-                entity.HasOne(d => d.Wkf06LlaveNavigation).WithMany(p => p.Prf04PlantillaPerfils)
-                    .HasForeignKey(d => d.Wkf06Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PRF04_plantillaPerfil_WKF06_Perfiles");
+                entity.Property(e => e.prf04llave).HasColumnName("PRF04_llave");
+                entity.Property(e => e.prf03llave).HasColumnName("PRF03_Llave");
+                entity.Property(e => e.wkf01llave).HasColumnName("WKF01_Llave");
             });
 
             modelBuilder.Entity<Prf05TipoAsignacionUsuario>(entity =>
@@ -5123,7 +5182,7 @@ namespace mipBackend.Data
                     .HasColumnName("fechaeliminacion");
                 entity.Property(e => e.wkf01llave)
                     
-                    .HasColumnName("WKF01_llave");
+                    .HasColumnName("WKF01_Llave");
                 entity.Property(e => e.wkf06activo).HasColumnName("WKF06_Activo");
                 entity.Property(e => e.wkf06descripcion).HasColumnName("WKF06_Descripcion");
                 entity.Property(e => e.wkf06nombre)
@@ -5269,6 +5328,8 @@ namespace mipBackend.Data
         }
 
 
+
+        public virtual DbSet<UsuarioRegistroResponseDto> UsuarioRegistros { get; set; }
 
         public DbSet<Inmueble>? Inmuebles { get; set; }
 
@@ -5462,6 +5523,10 @@ namespace mipBackend.Data
 
         public virtual DbSet<Per07PersonaUsuario>? Per07PersonaUsuarios { get; set; }
 
+        public virtual DbSet<Per08TipoDocumento>? Per08TipoDocumentos { get; set; }
+
+        public virtual DbSet<Per09DefaultUser>? Per09DefaultUsers { get; set; }
+
         public virtual DbSet<Pgo01CompraLicencia>? Pgo01CompraLicencias { get; set; }
 
         public virtual DbSet<Pgo02NotificarPagoLicencia>? Pgo02NotificarPagoLicencias { get; set; }
@@ -5472,7 +5537,8 @@ namespace mipBackend.Data
 
         public virtual DbSet<Prf03Plantilla>? Prf03Plantillas { get; set; }
 
-        public virtual DbSet<Prf04PlantillaPerfil>? Prf04PlantillaPerfiles { get; set; }
+
+        public virtual DbSet<Prf04PlantillaFlujo> Prf04PlantillaFlujos { get; set; }
 
         public virtual DbSet<Prf05TipoAsignacionUsuario>? Prf05TipoAsignacionUsuarios { get; set; }
 

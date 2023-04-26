@@ -1,0 +1,123 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoWorkflowDatosgenerles')}} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxTipoflujo" text="{{ customMsgService.translate('tipoflujo')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="Tipoflujolist"
+                        placeholder="Seleccione {{ customMsgService.translate('tipoflujo')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxTipoflujo"
+                        (valueChange)="handleTipoFlujoChange($event)"
+                        #cbxTipoflujo
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+            
+                <kendo-formfield>
+                    <kendo-label [for]="cbxNivelflujo" text="{{ customMsgService.translate('nivelflujo')}} "></kendo-label>
+                    <kendo-combobox
+                        placeholder="Seleccione Nivel Flujo"
+                        defaultItem="{text:'Seleccione Nivel Flujo', value=null}"
+                        [data]="Nivelflujolist"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxNivelflujo"
+                        #cbxNivelflujo
+
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+
+            
+
+                <kendo-formfield>
+                    <kendo-label [for]="chxEsinicio" text="Es Inicio del workflow"></kendo-label>
+                    
+                    <input type="checkbox" kendoCheckBox 
+                    formControlName="chxEsinicio" #chxEsinicio
+                    text="Es inicio del workflow"
+                    />
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtNombre" text="{{ customMsgService.translate('nombre')}}"></kendo-label>
+                    <kendo-textbox
+                        formControlName="txtNombre"
+                        #txtNombre
+                        required
+                    ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+                
+                
+                <kendo-formfield>
+                    <kendo-label [for]="txtDescripcion" text="{{ customMsgService.translate('descripcion')}}"></kendo-label>
+                    <kendo-textbox
+                    formControlName="txtDescripcion"
+                    #txtDescripcion
+                    required
+                ></kendo-textbox>
+                </kendo-formfield>
+
+                
+
+            
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtOrden" text="Orden en el listado"></kendo-label>
+                    <kendo-numerictextbox
+                    formControlName="txtOrden"
+                    [style.width.px]="170"
+                    [min]="0"
+                    [max]="100"
+                    #txtOrden
+                    format="n"
+                    required=""
+                    >
+                    </kendo-numerictextbox>
+    
+                    <kendo-formerror>Error: Orden en el listado es de ingreso obligatorio</kendo-formerror>
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtPrioridad" text="Prioridad en el listado"></kendo-label>
+                    <kendo-numerictextbox
+                    formControlName="txtPrioridad"
+                    [style.width.px]="170"
+                    [min]="0"
+                    [max]="100"
+                    #txtPrioridad
+                    format="n"
+                    required=""
+                    >
+                    </kendo-numerictextbox>
+    
+                    <kendo-formerror>Error: Orden en el listado es de ingreso obligatorio</kendo-formerror>
+                </kendo-formfield>
+
+                
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary">Cancelar</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">+ Guardar</button>
+
+
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+    

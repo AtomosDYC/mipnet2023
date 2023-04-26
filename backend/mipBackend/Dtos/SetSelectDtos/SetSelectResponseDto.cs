@@ -3,7 +3,7 @@
     public class SetSelectResponseDto
     {
 
-        public int? Value { get; set; }
+        public string? Value { get; set; }
 
         public string? Description { get; set; }
 

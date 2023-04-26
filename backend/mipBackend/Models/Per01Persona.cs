@@ -5,27 +5,29 @@ namespace mipBackend.Models;
 
 public partial class Per01Persona
 {
-    public int Per01Llave { get; set; }
+    public int per01llave { get; set; }
 
-    public int? Per01Rut { get; set; }
+    public int? per01rut { get; set; }
 
-    public int? Per03Llave { get; set; }
+    public int? per03llave { get; set; }
 
-    public int? Per02Llave { get; set; }
+    public int? per08llave { get; set; }
 
-    public string? Per01NombreRazon { get; set; }
+    public int? per02llave { get; set; }
 
-    public string? Per01NombreFantasia { get; set; }
+    public string? per01nombrerazon { get; set; }
 
-    public string? Per01Giro { get; set; }
+    public string? per01nombrefantasia { get; set; }
 
-    public string? Per01Cargo { get; set; }
+    public string? per01giro { get; set; }
 
-    public DateTime? Per01FechaNacimiento { get; set; }
+    public string? per01cargo { get; set; }
 
-    public int? Per01AnioIngreso { get; set; }
+    public DateTime? per01fechanacimiento { get; set; }
 
-    public int? Per01Activo { get; set; }
+    public int? per01anioingreso { get; set; }
+
+    public int? per01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

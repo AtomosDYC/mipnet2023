@@ -80,7 +80,6 @@ export class RegionListComponent implements OnInit {
   };
 
   onEditar(id: number): void {
-    console.log('dentro del click editar');
     this._Route.navigate(['/dashboard/region/edit/', id.toString()]);
   }
 

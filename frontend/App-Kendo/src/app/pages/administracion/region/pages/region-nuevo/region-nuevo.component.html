@@ -1,0 +1,56 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoregion') }} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="regionForm">
+            <fieldset class="k-form-fieldset">
+
+            <kendo-formfield>
+                <kendo-label [for]="txtNombre" text="Nombre Región"></kendo-label>
+                <kendo-textbox
+                    formControlName="txtNombre"
+                    #txtNombre
+                    required
+                ></kendo-textbox>
+
+                <kendo-formerror>Error: Nombre Región es Obligatorio</kendo-formerror>
+            </kendo-formfield>
+            <kendo-formfield>
+                <kendo-label [for]="txtDescripcion" text="Descripción"></kendo-label>
+                <kendo-textbox
+                    formControlName="txtDescripcion"
+                    #txtDescripcion
+                    required
+                ></kendo-textbox>
+
+                <kendo-formerror>Error: Descripción de Región es Obligatorio</kendo-formerror>
+            </kendo-formfield>
+            <kendo-formfield>
+                <kendo-label [for]="txtOrden" text="Orden en el listado"></kendo-label>
+                <kendo-numerictextbox
+                formControlName="txtOrden"
+                [style.width.px]="170"
+                [min]="0"
+                [max]="100"
+                #txtOrden
+                format="n"
+                required=""
+                >
+                </kendo-numerictextbox>
+
+                <kendo-formerror>Error: Orden en el listado es de ingreso obligatorio</kendo-formerror>
+            </kendo-formfield>
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/region/list']">Cancelar</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">+ Guardar</button>
+
+
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>

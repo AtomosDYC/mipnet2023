@@ -1,0 +1,101 @@
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-10"> {{ customMsgService.translate('mantenimientoUsuarios') }} </h3>
+        <div class="card-buttons col-md-2 right">
+            <kendo-buttongroup selection="single">
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="OnNuevo()"
+                >
+                    {{ customMsgService.translate('MantNuevo') }}
+                </button>
+            </kendo-buttongroup>
+        </div>  
+        <span></span>
+    </div>
+
+
+    <div class="card-component">
+        <kendo-grid [data]="loadData() | async"
+        
+        kendoGridSelectBy="per03llave"
+        [(selectedKeys)]="mySelection"
+       
+        [pageable]="true"
+        [sortable]="true"
+        [pageSize]="20"
+        [reorderable]="true"
+        [resizable]="true"
+        [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
+        >
+        <ng-template kendoGridToolbarTemplate>
+            <kendo-textbox
+                [placeholder]="customMsgService.translate('gridSearch')"
+                kendoTextBox
+                (valueChange)="onFilter($event)"
+                class="col-md-12"
+            >
+            </kendo-textbox>
+            <kendo-grid-spacer></kendo-grid-spacer>
+            <button type="button" icon="k-i-check k-i-checkmark" kendoButton (click)="onactivateRegion()">{{ customMsgService.translate('MantActivar') }}</button>
+            <button type="button" icon="k-i-close k-i-x" kendoButton (click)="OndisableRegion()">{{ customMsgService.translate('MantDesactivar') }}</button>
+           
+            
+        </ng-template>
+
+
+            <kendo-grid-checkbox-column
+                [width]="45"
+                [headerClass]="{ 'text-center': true }"
+                [class]="{ 'text-center': true }"
+                [resizable]="false"
+                [columnMenu]="false"
+                [showSelectAll]="true">
+            </kendo-grid-checkbox-column>
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                    <button
+                    kendoButton
+                    iconClass="fa fa-pencil"
+                    title="{{ customMsgService.translate('Edit') }}"
+                    
+                    (click)="OnEditar(dataItem.id)"
+                  ></button>
+                  <button
+                    kendoButton
+                    iconClass="fa-solid fa-trash-can"
+                    title="{{ customMsgService.translate('Delete') }}"
+                    (click)="OnEliminar(dataItem.id)"
+                  ></button>
+                </ng-template>
+              </kendo-grid-command-column>
+            <kendo-grid-column field="username" title="{{ customMsgService.translate('nombre') }}"> </kendo-grid-column>
+            <kendo-grid-column field="email" title="{{ customMsgService.translate('descripcion') }}"> </kendo-grid-column>
+            <kendo-grid-column
+                field="per03activo"
+                title="{{ customMsgService.translate('estado') }}"
+                [width]="100"
+                [class]="{ 'text-center': true }"
+                [resizable]="false"
+                filter="boolean"
+                >
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span
+                    *ngIf="dataItem.per03activo === 1"
+                    class="badge badge-success"
+                    >{{ customMsgService.translate('Activo') }}</span
+                    >
+                    <span
+                    *ngIf="dataItem.per03activo != 1"
+                    class="badge badge-danger"
+                    >{{ customMsgService.translate('Desactivado') }}</span
+                    >
+                </ng-template>
+                </kendo-grid-column>    
+                
+        </kendo-grid>
+    </div>
+
+</div>

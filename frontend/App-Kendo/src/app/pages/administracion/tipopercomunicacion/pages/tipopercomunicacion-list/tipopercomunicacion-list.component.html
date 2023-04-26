@@ -1,0 +1,65 @@
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-10">Asociar Personas con Tipo de comunicacion</h3>
+        <div class="card-buttons col-md-2 right">
+            <kendo-buttongroup selection="single">
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="onFinalizar()"
+                >
+                {{ customMsgService.translate('finalizar')}}
+                </button>
+            </kendo-buttongroup>
+        </div>  
+        
+    </div>
+
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="cmbTipopersona" text="Tipo de Persona"></kendo-label>
+                    <kendo-combobox
+                        [data]="TipoPersonalist"
+                        placeholder="Seleccione Tipo de persona"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cmbTipopersona"
+                        #cmbTipopersona
+                        required
+                        [allowCustom]="true"
+                    >
+                    </kendo-combobox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+
+                <div class="k-form-buttons">
+                   <button kendoButton themeColor="primary" (click)="onAgregar()">{{ customMsgService.translate('agregar')}}</button>&nbsp;&nbsp;
+
+                </div>
+            </fieldset>
+        </form>
+        <p></p><p></p>
+        <kendo-grid [data]="data$ | async">
+        
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                  <button
+                    kendoButton
+                    iconClass="fa-solid fa-trash-can"
+                    title="{{ customMsgService.translate('Delete') }}"
+                    (click)="onEliminar(dataItem.per03llave)"
+                  ></button>
+                </ng-template>
+              </kendo-grid-command-column>
+            <kendo-grid-column field="per04nombre" title="Tipo Comunicación"> </kendo-grid-column>
+            <kendo-grid-column field="per03nombre" title="Tipo Persona"> </kendo-grid-column>
+        </kendo-grid>
+    </div>
+
+</div>

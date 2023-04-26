@@ -1,0 +1,72 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoWorkflownodopadre')}} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxTipoflujo" text="{{ customMsgService.translate('tipoflujo')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="Tipoflujolist"
+                        placeholder="Seleccione {{ customMsgService.translate('tipoflujo')}}"
+                        textField="description"
+                        valueField="value"
+                        (valueChange)="handleTipoFlujoChange($event)"
+                        formControlName="cbxTipoflujo"
+                        #cbxTipoflujo
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxNivelflujo" text="{{ customMsgService.translate('nivelflujo')}} "></kendo-label>
+                    <kendo-combobox
+                        placeholder="Seleccione Nivel Flujo"
+                        defaultItem="{text:'Seleccione Nivel Flujo', value=null}"
+                        [data]="Nivelflujolist"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxNivelflujo"
+                        (valueChange)="handleNivelflujoChange($event)"
+                        #cbxNivelflujo
+
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxNodopadre" text="{{ customMsgService.translate('nodopadre')}} "></kendo-label>
+                    <kendo-combobox
+                        placeholder="Seleccione Nodo padre"
+                        defaultItem="{text:'Seleccione Nodo Padre', value=null}"
+                        [data]="Nodopadrelist"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxNodopadre"
+                        #cbxNodopadre
+
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+
+                
+
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary">Cancelar</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">+ Guardar</button>
+
+
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+    

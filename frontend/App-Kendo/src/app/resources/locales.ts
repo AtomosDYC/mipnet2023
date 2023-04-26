@@ -1,14 +1,13 @@
 export const locales = [
+    
+    {
+        locale: 'Español',
+        localeId: 'es'
+    },
     {
         locale: 'English',
         localeId: 'en-US'
     },
-    {
-        locale: 'French',
-        localeId: 'fr'
-    },
-    {
-        locale: 'Spanish',
-        localeId: 'es'
-    }
+    
+    
 ];

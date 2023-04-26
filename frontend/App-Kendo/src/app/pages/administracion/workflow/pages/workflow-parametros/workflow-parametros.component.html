@@ -1,0 +1,103 @@
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-10"> {{ customMsgService.translate('mantenimientoWorkflowParametros') }} </h3>
+        <div class="card-buttons col-md-2 right">
+            <kendo-buttongroup selection="single">
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="OnNuevo()"
+                >
+                    {{ customMsgService.translate('MantNuevo') }}
+                </button>
+            </kendo-buttongroup>
+        </div>  
+        <span></span>
+    </div>
+
+    <div class="card-container" *ngIf="verNuevo==true">
+        <div class="card-component">
+
+            <form class="k-form" [formGroup]="Form">
+                <fieldset class="k-form-fieldset">
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxTipoparametro" text="{{ customMsgService.translate('tipoparametro')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="Tipoparametrolist"
+                            placeholder="Seleccione {{ customMsgService.translate('tipoflujo')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxTipoparametro"
+                            #cbxTipoparametro
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorTipoparametro')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txtVariable" text="{{ customMsgService.translate('Variable')}}"></kendo-label>
+                        <kendo-textbox
+                            formControlName="txtVariable"
+                            #txtVariable
+                            required
+                        ></kendo-textbox>
+
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorVariable')}}</kendo-formerror>
+                    </kendo-formfield>
+                    
+                    
+                    <kendo-formfield>
+                        <kendo-label [for]="txtValor" text="{{ customMsgService.translate('descripcion')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txtValor"
+                        #txtValor
+                        required
+                    ></kendo-textbox>
+
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorValor')}}</kendo-formerror>
+                    </kendo-formfield>
+
+                    <div class="k-form-buttons">
+                        <button kendoButton themeColor="secondary" (click)="OnCancelar()">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                        <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="card-component">
+        <kendo-grid [data]="data$ | async"
+        
+        kendoGridSelectBy="wkf09llave"
+        [(selectedKeys)]="mySelection"
+       
+        [pageable]="true"
+        [sortable]="true"
+        [pageSize]="20"
+        [reorderable]="true"
+        [resizable]="true"
+        [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
+        >
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                  <button
+                    kendoButton
+                    iconClass="fa-solid fa-trash-can"
+                    title="{{ customMsgService.translate('Delete') }}"
+                    (click)="OnEliminar(dataItem.wkf09llave)"
+                  ></button>
+                </ng-template>
+              </kendo-grid-command-column>
+            <kendo-grid-column field="wkf10nombre" title="{{ customMsgService.translate('tipoparametro') }}"></kendo-grid-column>
+            <kendo-grid-column field="wkf09variable" title="{{ customMsgService.translate('variable') }}"></kendo-grid-column>
+            <kendo-grid-column field="wkf09valor" title="{{ customMsgService.translate('valor') }}"></kendo-grid-column>
+        </kendo-grid>
+    </div>
+
+</div>

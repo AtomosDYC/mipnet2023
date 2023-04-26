@@ -1,5 +1,7 @@
 // Custom Messages
 export const frCustomMessages = {
+    mantenimientoregion: 'Entretien de la Région',
+    nuevo: 'ajouter nouveau',
     teamEfficiency: "Efficacité de l'équipe",
     teamMembers: "Membres de l'équipe",
     dashboard: 'Tableau de bord',

@@ -1,0 +1,94 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoPlantilla')}} hola</h3>
+    </div>
+
+    <div class="card-container">
+        <div class="card-component">
+
+            <form class="k-form" [formGroup]="Form">
+                <fieldset class="k-form-fieldset">
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxTipoflujo" text="{{ customMsgService.translate('tipoflujo')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="Tipoflujolist"
+                            placeholder="Seleccione {{ customMsgService.translate('tipoflujo')}}"
+                            textField="description"
+                            valueField="value"
+                            (valueChange)="handleTipoFlujoChange($event)"
+                            formControlName="cbxTipoflujo"
+                            #cbxTipoflujo
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>                    
+                    </kendo-formfield>
+    
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxNivelflujo" text="{{ customMsgService.translate('nivelflujo')}} "></kendo-label>
+                        <kendo-combobox
+                            placeholder="Seleccione Nivel Flujo"
+                            defaultItem="{text:'Seleccione Nivel Flujo', value=null}"
+                            [data]="Nivelflujolist"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxNivelflujo"
+                            (valueChange)="handleNivelflujoChange($event)"
+                            #cbxNivelflujo
+    
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                    </kendo-formfield>
+    
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxWorkflow" text="{{ customMsgService.translate('workflow')}} "></kendo-label>
+                        <kendo-combobox
+                            placeholder="Seleccione Flujo de datos"
+                            defaultItem="{text:'Seleccione Flujo de datos', value=null}"
+                            [data]="Workflowlist"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxWorkflow"
+                            #cbxWorkflow
+    
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                    </kendo-formfield>
+
+
+                    <div class="k-form-buttons">
+                        <button kendoButton themeColor="secondary">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                        <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+
+    <div class="card-component">
+
+        <kendo-treelist
+            [kendoTreeListFlatBinding]="data"
+            [height]="410"
+            kendoTreeListExpandable
+            [initiallyExpanded]="true"
+            idField="wkf01llave"
+            parentIdField="wkf01llavepadre"
+            >
+            <kendo-treelist-column
+                [expandable]="true"
+                field="wkf01nombre"
+                title="Menu"
+                [width]="250"
+            >
+            </kendo-treelist-column>
+        </kendo-treelist>
+
+    </div>
+</div>

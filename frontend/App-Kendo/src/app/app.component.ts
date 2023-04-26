@@ -1,12 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationStart, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
+
 import { MessageService } from '@progress/kendo-angular-l10n';
 import { DrawerComponent, DrawerMode, DrawerSelectEvent } from '@progress/kendo-angular-layout';
 import { CustomMessagesService } from './services/custom-messages.service';
 
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as fromRoot from './store';
+import * as fromUser from './store/user';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html'
+    selector: 'body',
+  template: '<router-outlet></router-outlet>',
 })
 export class AppComponent implements OnInit, OnDestroy {
     public selected = 'Team';
@@ -15,11 +21,31 @@ export class AppComponent implements OnInit, OnDestroy {
     public mode: DrawerMode = 'push';
     public mini = true;
 
-    constructor(private router: Router, public msgService: MessageService) {
-        this.customMsgService = this.msgService as CustomMessagesService;
+    user$! : Observable<fromUser.UserResponse>;
+    isAuthorized$!: Observable<boolean>;
+
+    constructor(
+        private router: Router, 
+        public msgService: MessageService,
+        private store: Store<fromRoot.State>
+        ) {
+            this.customMsgService = this.msgService as CustomMessagesService;
     }
 
     ngOnInit() {
+
+        this.user$ = this.store.pipe(select(fromUser.getUser)) as Observable<fromUser.UserResponse>;
+        this.isAuthorized$ = this.store.pipe(select(fromUser.getIsAuthorized)) as Observable<boolean>;
+
+        this.store.dispatch(new fromUser.Init());
+
+
+        this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        });
+
         // Update Drawer selected state when change router path
         this.router.events.subscribe((route: any) => {
             if (route instanceof NavigationStart) {
@@ -76,8 +102,5 @@ export class AppComponent implements OnInit, OnDestroy {
         drawer.toggle();
     }
 
-    public onSelect(ev: DrawerSelectEvent): void {
-        this.router.navigate([ev.item.path]);
-        this.selected = ev.item.text;
-    }
+    
 }

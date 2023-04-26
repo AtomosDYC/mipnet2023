@@ -1,0 +1,38 @@
+.k-avatar {
+    margin-left: 80px;
+    font-size: 30px;
+}
+.example {
+    display: flex;
+    justify-content: center;
+}
+.k-form {
+    width: 100%;
+    padding: 30px;
+}
+
+.k-form-fieldset h4{
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--cui-heading-color);
+}
+
+.k-form-buttons{
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.k-form .k-label, .k-form kendo-label, .k-form .k-form-label {
+    margin-top: 0.5rem;
+    margin-bottom: 0rem;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.suscribirse{
+    padding: 35px 30px;
+}

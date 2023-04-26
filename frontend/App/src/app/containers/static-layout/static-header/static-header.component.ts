@@ -5,11 +5,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './static-header.component.html',
   styleUrls: ['./static-header.component.scss']
 })
-export class StaticHeaderComponent implements OnInit {
+export class StaticHeaderComponent {
 
-  constructor() { }
+  isExpanded = false;
 
-  ngOnInit(): void {
+  collapse() {
+    this.isExpanded = false;
+  }
+
+  toggle() {
+    this.isExpanded = !this.isExpanded;
   }
 
 }

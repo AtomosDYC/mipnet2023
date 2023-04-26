@@ -1,0 +1,74 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoNivelFlujo')}} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxTipoFlujo" text="Tipo Flujo"></kendo-label>
+                    <kendo-combobox
+                        [data]="TipoFlujolist"
+                        placeholder="Seleccione Tipo de FLujo"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxTipoFlujo"
+                        #cbxTipoFlujo
+                        [allowCustom]="true"
+                    >
+                    </kendo-combobox>
+                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtNombre" text="{{ customMsgService.translate('nivelflujo')}}"></kendo-label>
+                    <kendo-textbox
+                        formControlName="txtNombre"
+                        #txtNombre
+                        required
+                    ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+                
+                
+                <kendo-formfield>
+                    <kendo-label [for]="txtDescripcion" text="{{ customMsgService.translate('descripcion')}}"></kendo-label>
+                    <kendo-textbox
+                    formControlName="txtDescripcion"
+                    #txtDescripcion
+                    required
+                ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorDescripcion')}}</kendo-formerror>
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtNivel" text="{{ customMsgService.translate('nivel')}}"></kendo-label>
+                    <kendo-numerictextbox
+                    [style.width.px]="170"
+                    [min]="0"
+                    [max]="100"
+                    #txtNivel
+                    formControlName="txtNivel"
+                    
+                  >
+                  </kendo-numerictextbox>
+    
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+    
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/nivelflujo/list']">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>

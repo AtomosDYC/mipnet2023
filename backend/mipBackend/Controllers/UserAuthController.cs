@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using mipBackend.Data.Usuarios;
+using mipBackend.Data.UserAuths;
 using mipBackend.Dtos.UsuarioDtos;
 
 namespace mipBackend.Controllers
@@ -9,9 +9,9 @@ namespace mipBackend.Controllers
     [ApiController]
     public class UserAuthController : ControllerBase
     {
-        private readonly IUsuarioRepository _repository;
+        private readonly IUserAuthsRepository _repository;
 
-        public UserAuthController(IUsuarioRepository repository)
+        public UserAuthController(IUserAuthsRepository repository)
         {
 
             _repository = repository;

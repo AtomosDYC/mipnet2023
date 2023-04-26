@@ -5788,30 +5788,34 @@ namespace mipBackend.Migrations
                         .HasColumnName("PRF03_Nombre");
 
                     b.HasKey("Prf03Llave")
-                        .HasName("PK_PRF03_PlantillaPerfil");
+                        .HasName("PK_PRF03_PlantillaFlujo");
 
                     b.ToTable("PRF03_Plantilla", (string)null);
                 });
 
-            modelBuilder.Entity("mipBackend.Models.Prf04PlantillaPerfil", b =>
+            modelBuilder.Entity("mipBackend.Models.Prf04PlantillaFlujo", b =>
                 {
+                    b.Property<int>("Prf04Llave")
+                       .ValueGeneratedOnAdd()
+                       .HasColumnType("int")
+                       .HasColumnName("PRF04_Llave");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Prf04Llave"), 1L, 1);
+
                     b.Property<int>("Prf03Llave")
                         .HasColumnType("int")
                         .HasColumnName("PRF03_Llave");
 
-                    b.Property<int>("Wkf06Llave")
+                    b.Property<int>("Wkf01Llave")
                         .HasColumnType("int")
-                        .HasColumnName("WKF06_llave");
+                        .HasColumnName("WKF01_Llave");
 
-                    b.Property<int?>("Prf04Activo")
-                        .HasColumnType("int")
-                        .HasColumnName("PRF04_activo");
+                    
+                    b.HasKey("Prf04Llave");
 
-                    b.HasKey("Prf03Llave", "Wkf06Llave");
+                    b.HasIndex("Wkf01Llave");
 
-                    b.HasIndex("Wkf06Llave");
-
-                    b.ToTable("PRF04_plantillaPerfil", (string)null);
+                    b.ToTable("PRF04_PlantillaFlujo", (string)null);
                 });
 
             modelBuilder.Entity("mipBackend.Models.Prf05TipoAsignacionUsuario", b =>
@@ -7898,7 +7902,7 @@ namespace mipBackend.Migrations
 
                     b.Property<int?>("Wkf01Llave")
                         .HasColumnType("int")
-                        .HasColumnName("WKF01_llave");
+                        .HasColumnName("WKF01_Llave");
 
                     b.Property<int?>("Wkf06Activo")
                         .HasColumnType("int")
@@ -9084,23 +9088,23 @@ namespace mipBackend.Migrations
                     b.Navigation("Secu02LlaveNavigation");
                 });
 
-            modelBuilder.Entity("mipBackend.Models.Prf04PlantillaPerfil", b =>
+            modelBuilder.Entity("mipBackend.Models.Prf04PlantillaFlujo", b =>
                 {
                     b.HasOne("mipBackend.Models.Prf03Plantilla", "Prf03LlaveNavigation")
-                        .WithMany("Prf04PlantillaPerfils")
+                        .WithMany("Prf04PlantillaFlujos")
                         .HasForeignKey("Prf03Llave")
                         .IsRequired()
-                        .HasConstraintName("FK_PRF04_plantillaPerfil_PRF03_Plantilla");
+                        .HasConstraintName("FK_PRF04_PlantillaFlujo_PRF03_Plantilla");
 
                     b.HasOne("mipBackend.Models.Wkf06Perfil", "Wkf06LlaveNavigation")
-                        .WithMany("Prf04PlantillaPerfils")
-                        .HasForeignKey("Wkf06Llave")
+                        .WithMany("Prf04PlantillaFlujos")
+                        .HasForeignKey("Wkf01Llave")
                         .IsRequired()
-                        .HasConstraintName("FK_PRF04_plantillaPerfil_WKF06_Perfiles");
+                        .HasConstraintName("FK_PRF04_PlantillaFlujo_WKF01_Flujo");
 
                     b.Navigation("Prf03LlaveNavigation");
 
-                    b.Navigation("Wkf06LlaveNavigation");
+                    b.Navigation("Wkf01LlaveNavigation");
                 });
 
             modelBuilder.Entity("mipBackend.Models.Prf06PermisosUsuario", b =>
@@ -9756,7 +9760,7 @@ namespace mipBackend.Migrations
 
             modelBuilder.Entity("mipBackend.Models.Prf03Plantilla", b =>
                 {
-                    b.Navigation("Prf04PlantillaPerfils");
+                    b.Navigation("Prf04PlantillaFlujos");
                 });
 
             modelBuilder.Entity("mipBackend.Models.Prf05TipoAsignacionUsuario", b =>
@@ -9875,6 +9879,8 @@ namespace mipBackend.Migrations
                     b.Navigation("Wkf06Perfiles");
 
                     b.Navigation("Wkf09Parametros");
+
+                    b.Navigation("Prf04PlantillaFlujos");
                 });
 
             modelBuilder.Entity("mipBackend.Models.Wkf02TipoFlujo", b =>
@@ -9898,7 +9904,7 @@ namespace mipBackend.Migrations
 
             modelBuilder.Entity("mipBackend.Models.Wkf06Perfil", b =>
                 {
-                    b.Navigation("Prf04PlantillaPerfils");
+                   
 
                     b.Navigation("Prf06PermisosUsuarios");
 

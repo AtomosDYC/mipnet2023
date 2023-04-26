@@ -1,0 +1,19 @@
+<app-default-header (toggle)="toggleDrawer(drawer)" [selectedPage]="selected"></app-default-header>
+<kendo-drawer-container>
+    <kendo-drawer
+        #drawer
+        [items]="navItems"
+        mode="push"
+        [mini]="mini"
+        [expanded]="true"
+        (select)="onSelect($event)"
+        [autoCollapse]="false"
+        [isItemExpanded]="isItemExpanded"
+        [animation]="true"
+        [width]="300"
+    >
+    </kendo-drawer>
+    <kendo-drawer-content>
+        <router-outlet></router-outlet>        
+    </kendo-drawer-content>
+</kendo-drawer-container>

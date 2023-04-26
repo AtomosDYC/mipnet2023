@@ -13,6 +13,7 @@ using mipBackend.Data.Regiones;
 using mipBackend.Data.Comunas;
 using mipBackend.Data.Zonas;
 using mipBackend.Data.Usuarios;
+using mipBackend.Data.UserAuths;
 using mipBackend.Data.TipoEspecie;
 using mipBackend.Data.MedidaUmbrales;
 using mipBackend.Data.EstadosDanios;
@@ -27,7 +28,11 @@ using mipBackend.Data.Saludos;
 using mipBackend.Data.TipoPersonas;
 using mipBackend.Data.TipoComPersonas;
 using mipBackend.Data.TipoPerComunicaciones;
+using mipBackend.Data.TipoDocumentos;
+using mipBackend.Data.WorkflowParametros;
 using mipBackend.Data.Areas;
+using mipBackend.Data.DefaultUsers;
+using mipBackend.Data.Workflows;
 using mipBackend.Middleware;
 using mipBackend.Models;
 using mipBackend.Profiles;
@@ -65,6 +70,12 @@ builder.Services.AddScoped<ISaludoRepository, SaludoRepository>();
 builder.Services.AddScoped<ITipoPersonaRepository, TipoPersonaRepository>();
 builder.Services.AddScoped<ITipoComPersonaRepository, TipoComPersonaRepository>();
 builder.Services.AddScoped<ITipoPerComunicacionRepository, TipoPerComunicacionRepository>();
+builder.Services.AddScoped<ITipoDocumentoRepository, TipoDocumentoRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IDefaultUserRepository, DefaultUserRepository>();
+builder.Services.AddScoped<IWorkflowParametroRepository, WorkflowParametroRepository>();
+builder.Services.AddScoped<IWorkflowRepository, WorkflowRepository>();
+builder.Services.AddScoped<IPlantillaFlujoRepository, PlantillaFlujoRepository>();
 
 builder.Services.AddScoped<IRolesRepository, RolesRepository>();
 
@@ -91,13 +102,19 @@ var mapperConfig = new MapperConfiguration(mc =>
     mc.AddProfile(new MedidaUmbralProfile());
     mc.AddProfile(new EstadosDanioProfile());
     mc.AddProfile(new PlantillaProfile());
-
+    mc.AddProfile(new PlantillaFlujoProfile());
     //usuarios
     mc.AddProfile(new UsuarioProfile());
+    mc.AddProfile(new DefaultUserProfile());
+
+    //workflow
+    mc.AddProfile(new WorkflowProfile());
+    mc.AddProfile(new WorkflowParametroProfile());
 
     //personas
     mc.AddProfile(new SaludoProfile());
     mc.AddProfile(new TipoPersonaProfile());
+    mc.AddProfile(new TipoDocumentoProfile());
     mc.AddProfile(new TipoComPersonaProfile());
     mc.AddProfile(new TipoPerComunicacionProfile());
 
@@ -131,7 +148,7 @@ builder.Services.AddScoped<IJwtGenerador, JwtGenerador>();
 
 builder.Services.AddScoped<IUsuarioSesion, UsuarioSesion>(); 
 
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUserAuthsRepository, UserAuthsRepository>();
 
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Mi palabra secreta"));
 

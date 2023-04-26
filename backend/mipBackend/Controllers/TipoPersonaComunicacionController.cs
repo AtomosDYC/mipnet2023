@@ -60,7 +60,7 @@ namespace mipBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TipoPerComunicacionResponseDto>> CreateTipoPersonaCOmunicacion
+        public async Task<ActionResult<TipoPerComunicacionResponseDto>> CreateTipoPersonaComunicacion
             (
                [FromBody] TipoPerComunicacionRequestDto request
             )
@@ -78,8 +78,8 @@ namespace mipBackend.Controllers
         }
 
 
-        [HttpPost("~/api/TipoPersonaComunicacion/DeleteTipoPerComunicacion")]
-        public async Task<ActionResult<TipoPerComunicacionResponseDto>> DeleteTipoPerComunicacion(TipoPerComunicacionRequestDto request)
+        [HttpPost("~/api/TipoPersonaComunicacion/borrarTipoPerComunicacion")]
+        public async Task<ActionResult<TipoPerComunicacionResponseDto>> borrarTipoPerComunicacion(TipoPerComunicacionRequestDto request)
         {
 
             var tipoPerComunicacionResponses = await _repository.GetTipoPerComunicacionById(request.per04llave);

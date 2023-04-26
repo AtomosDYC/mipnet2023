@@ -33,7 +33,7 @@ namespace mipBackend.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<SetSelectResponseDto>>> GetInmueble(SetSelectRequestDto request)
+        public async Task<ActionResult<IEnumerable<SetSelectResponseDto>>> GetSelectIdnum(SetSelectRequestDto request)
         {
 
             var result = await _repository.GetAllSelect(request);

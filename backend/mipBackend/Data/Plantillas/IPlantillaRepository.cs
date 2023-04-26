@@ -1,4 +1,4 @@
-﻿using mipBackend.Models;
+﻿using mipBackend.Models;    
 
 namespace mipBackend.Data.Plantillas
 {

@@ -933,7 +933,7 @@ namespace mipBackend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PRF03_PlantillaPerfil", x => x.PRF03_Llave);
+                    table.PrimaryKey("PK_PRF03_PlantillaFlujo", x => x.PRF03_Llave);
                 });
 
             migrationBuilder.CreateTable(
@@ -3344,7 +3344,7 @@ namespace mipBackend.Migrations
                 {
                     WKF06_llave = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    WKF01_llave = table.Column<int>(type: "int", nullable: true),
+                    WKF01_Llave = table.Column<int>(type: "int", nullable: true),
                     WKF06_Nombre = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     WKF06_Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WKF06_Activo = table.Column<int>(type: "int", nullable: true),
@@ -3360,7 +3360,7 @@ namespace mipBackend.Migrations
                     table.PrimaryKey("PK_WKF06_Perfiles", x => x.WKF06_llave);
                     table.ForeignKey(
                         name: "FK_WKF06_Perfiles_WKF01_Flujo",
-                        column: x => x.WKF01_llave,
+                        column: x => x.WKF01_Llave,
                         principalTable: "WKF01_Flujo",
                         principalColumn: "WKF01_Llave");
                 });
@@ -3768,26 +3768,27 @@ namespace mipBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PRF04_plantillaPerfil",
+                name: "PRF04_PlantillaFlujo",
                 columns: table => new
                 {
+                    PRF04_Llave = table.Column<int>(type: "int", nullable: false),
                     PRF03_Llave = table.Column<int>(type: "int", nullable: false),
-                    WKF06_llave = table.Column<int>(type: "int", nullable: false),
-                    PRF04_activo = table.Column<int>(type: "int", nullable: true)
+                    WKF01_Llave = table.Column<int>(type: "int", nullable: false)
+
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PRF04_plantillaPerfil", x => new { x.PRF03_Llave, x.WKF06_llave });
+                    table.PrimaryKey("PK_PRF04_PlantillaFlujo", x => new { x.PRF03_Llave, x.WKF01_Llave });
                     table.ForeignKey(
-                        name: "FK_PRF04_plantillaPerfil_PRF03_Plantilla",
+                        name: "FK_PRF04_PlantillaFlujo_PRF03_Plantilla",
                         column: x => x.PRF03_Llave,
                         principalTable: "PRF03_Plantilla",
                         principalColumn: "PRF03_Llave");
                     table.ForeignKey(
-                        name: "FK_PRF04_plantillaPerfil_WKF06_Perfiles",
-                        column: x => x.WKF06_llave,
-                        principalTable: "WKF06_Perfiles",
-                        principalColumn: "WKF06_llave");
+                        name: "FK_PRF04_PlantillaFlujo_WKF01_Flujo",
+                        column: x => x.WKF01_Llave,
+                        principalTable: "WKF01_Flujos",
+                        principalColumn: "WKF01_Llave");
                 });
 
             migrationBuilder.CreateTable(
@@ -4362,9 +4363,9 @@ namespace mipBackend.Migrations
                 column: "Prf03Llave");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PRF04_plantillaPerfil_WKF06_llave",
-                table: "PRF04_plantillaPerfil",
-                column: "WKF06_llave");
+                name: "IX_PRF04_PlantillaFlujo_WKF01_Llave",
+                table: "PRF04_PlantillaFlujo",
+                column: "WKF01_Llave");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PRF06_PermisosUsuario_WKF06_llave",
@@ -4487,9 +4488,9 @@ namespace mipBackend.Migrations
                 column: "WKF05_llave");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WKF06_Perfiles_WKF01_llave",
+                name: "IX_WKF06_Perfiles_WKF01_Llave",
                 table: "WKF06_Perfiles",
-                column: "WKF01_llave");
+                column: "WKF01_Llave");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WKF07_PerfilesPermiso_WKF05_llave",
@@ -4675,7 +4676,7 @@ namespace mipBackend.Migrations
                 name: "PRF02_PlantillasUsuario");
 
             migrationBuilder.DropTable(
-                name: "PRF04_plantillaPerfil");
+                name: "PRF04_PlantillaFlujo");
 
             migrationBuilder.DropTable(
                 name: "PRF06_PermisosUsuario");

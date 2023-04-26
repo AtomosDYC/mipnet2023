@@ -1,0 +1,52 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoWorkflowconfiguracionweb')}} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtUrl" text="{{ customMsgService.translate('url')}}"></kendo-label>
+                    <kendo-textbox
+                        formControlName="txtUrl"
+                        #txtUrl
+                        required
+                    ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorUrl')}}</kendo-formerror>
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtIconomenu" text="{{ customMsgService.translate('iconomenu')}}"></kendo-label>
+                    <kendo-textbox
+                        formControlName="txtIconomenu"
+                        #txtIconomenu
+                        required
+                    ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorIconomenu')}}</kendo-formerror>
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="chkVisiblemenu" text="Es visible en el menu"></kendo-label>
+                    
+                    <input type="checkbox" kendoCheckBox 
+                    formControlName="chkVisiblemenu" #chkVisiblemenu
+                    text="Es Visible en el menu"
+                    />
+                </kendo-formfield>
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary">Volver</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">+ Guardar</button>
+
+
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+    

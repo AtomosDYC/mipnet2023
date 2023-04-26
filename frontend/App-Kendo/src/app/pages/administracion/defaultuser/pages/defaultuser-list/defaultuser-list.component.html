@@ -1,0 +1,106 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoDefaultuser')}} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtNombre" text="{{ customMsgService.translate('nombre')}}"></kendo-label>
+                    <kendo-textbox
+                        formControlName="txtNombre"
+                        #txtNombre
+                        required
+                    ></kendo-textbox>
+    
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxRol" text="{{ customMsgService.translate('rol')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="Rollist"
+                        placeholder="Seleccione {{ customMsgService.translate('rol')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxRol"
+                        #cbxRol
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxTipopersona" text="{{ customMsgService.translate('tipopersona')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="TipoPersonalist"
+                        placeholder="Seleccione {{ customMsgService.translate('tipopersona')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxTipopersona"
+                        #cbxTipopersona
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+            
+                <kendo-formfield>
+                    <kendo-label [for]="cbxTipodocumento" text="{{ customMsgService.translate('tipodocumento')}} "></kendo-label>
+                    <kendo-combobox
+                        placeholder="Seleccione Tipo documento"
+                        defaultItem="{text:'Seleccione Tipo de Documento de identificación', value=null}"
+                        [data]="TipoDocumentolist"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxTipodocumento"
+                        #cbxTipodocumento
+
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror> 
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxSaludo" text="{{ customMsgService.translate('saludo')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="Saludolist"
+                        placeholder="Seleccione {{ customMsgService.translate('saludo')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxSaludo"
+                        #cbxSaludo
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxPlantilla" text="{{ customMsgService.translate('plantilla')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="Plantillalist"
+                        placeholder="Seleccione {{ customMsgService.translate('plantilla')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxPlantilla"
+                        #cbxPlantilla
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+
+                
+            
+                
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/nivelpermiso/list']">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>

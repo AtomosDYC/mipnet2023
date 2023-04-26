@@ -27,7 +27,6 @@ export const navItems: INavData[] = [
     name: 'ADMINISTRADOR',
     title: true
   },
-
   {
     name: 'Usuarios',
     url: '/base',

@@ -1,0 +1,27 @@
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-10"> {{ customMsgService.translate('mantenimientoRoles') }} </h3>
+    </div>
+    <div class="alert alert-danger" role="alert">
+        {{ customMsgService.translate('mensajenomodificar') }}
+    </div>
+
+    <div class="card-component">
+        <kendo-grid [data]="loadData() | async"
+        
+        kendoGridSelectBy="Id"
+        [(selectedKeys)]="mySelection"
+       
+        [pageable]="true"
+        [sortable]="true"
+        [pageSize]="20"
+        [reorderable]="true"
+        [resizable]="true"
+        [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
+        >
+            <kendo-grid-column field="name" title="{{ customMsgService.translate('nombre') }}"> </kendo-grid-column>
+            
+        </kendo-grid>
+    </div>
+
+</div>

@@ -53,5 +53,6 @@ public partial class Wkf01Flujo
 
     public virtual ICollection<Wkf06Perfil> Wkf06Perfiles { get; } = new List<Wkf06Perfil>();
 
+
     public virtual ICollection<Wkf09Parametro> Wkf09Parametros { get; } = new List<Wkf09Parametro>();
 }

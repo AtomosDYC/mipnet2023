@@ -136,16 +136,8 @@ namespace mipBackend.Controllers
             }
             else
             {
-                if (NivelPermisodto.wkf04activo == 0)
-                {
-                    await _repository.DeleteNivelPermiso(id);
-                    await _repository.SaveChanges();
-                }
-                else
-                {
-                    await _repository.DisableNivelPermiso(id);
-                    await _repository.SaveChanges();
-                }
+                await _repository.DeleteNivelPermiso(id);
+                await _repository.SaveChanges();
             }
 
 

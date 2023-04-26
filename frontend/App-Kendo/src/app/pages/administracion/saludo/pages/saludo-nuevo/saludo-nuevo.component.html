@@ -1,0 +1,48 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoSaludo')}} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+            <kendo-formfield>
+                <kendo-label [for]="txtTitulo" text="Nombre"></kendo-label>
+                <kendo-textbox
+                    formControlName="txtTitulo"
+                    #txtTitulo
+                    required
+                ></kendo-textbox>
+
+                <kendo-formerror>Error: Titulo del saludo es obligatorio</kendo-formerror>
+            </kendo-formfield>
+            
+            
+            <kendo-formfield>
+                <kendo-label [for]="txtOrden" text="Orden en el listado"></kendo-label>
+                <kendo-numerictextbox
+                formControlName="txtOrden"
+                [style.width.px]="170"
+                [min]="0"
+                [max]="100"
+                #txtOrden
+                format="n"
+                required=""
+                >
+                </kendo-numerictextbox>
+
+                <kendo-formerror>Error: Orden en el listado es de ingreso obligatorio</kendo-formerror>
+            </kendo-formfield>
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/saludos/list']">Cancelar</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">+ Guardar</button>
+
+
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>
