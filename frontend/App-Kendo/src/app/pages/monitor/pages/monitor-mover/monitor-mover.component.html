@@ -1,0 +1,34 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title col-md-8"> {{ customMsgService.translate('mantenimientoMonitoresMoverTrampas') }} </h3>
+        <div class="card-buttons col-md-4 float-right">
+            
+                <button 
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="onContinuarMT()"
+                    themeColor="light"
+                    [disabled]="isDisabledContinuarMT"
+                >
+                    {{ customMsgService.translate('continuar') }}
+                </button>
+            
+        </div> 
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+                
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary">Cancelar</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardardatosgenerales()">+ Guardar</button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Eml04ImportanciaMail
 {
-    public int Eml04Llave { get; set; }
+    public int Eml04llave { get; set; }
 
-    public string? Eml04Nombre { get; set; }
+    public string? Eml04nombre { get; set; }
 
-    public string? Eml04Descripcion { get; set; }
+    public string? Eml04descripcion { get; set; }
 
-    public int? Eml04Activo { get; set; }
+    public int? Eml04activo { get; set; }
 
     public DateTime? fechaeliminacion { get; set; }
 

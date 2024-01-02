@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Esp08TipoBase
+public partial class esp08TipoBase
 {
     public int esp08llave { get; set; }
 
@@ -25,7 +25,7 @@ public partial class Esp08TipoBase
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Esp03EspecieBase> Esp03EspecieBases { get; } = new List<Esp03EspecieBase>();
+    public virtual ICollection<esp03especieBase> esp03especieBases { get; } = new List<esp03especieBase>();
 
     public virtual ICollection<Obsc01ObservacionCampo> Obsc01ObservacionCampos { get; } = new List<Obsc01ObservacionCampo>();
 }

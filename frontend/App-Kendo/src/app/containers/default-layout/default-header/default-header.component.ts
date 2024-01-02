@@ -20,18 +20,23 @@ export class DefaultHeaderComponent {
   public locales = locales;
   public popupSettings = { width: '150' };
   public themes: {href: string, text: string}[] = [
-      {
-          href: 'assets/kendo-theme-default/dist/all.css',
-          text: 'Default'
-      },
-      {
-          href: 'assets/kendo-theme-bootstrap/dist/all.css',
-          text: 'Bootstrap'
-      },
-      {
-          href: 'assets/kendo-theme-material/dist/all.css',
-          text: 'Material'
-      }
+    {
+        href: 'assets/kendo-theme-fluent/dist/all.css',
+        text: 'Material'
+    },
+    {
+        href: 'assets/kendo-theme-default/dist/all.css',
+        text: 'Default'
+    },
+    {
+        href: 'assets/kendo-theme-bootstrap/dist/all.css',
+        text: 'Bootstrap'
+    },
+    {
+        href: 'assets/kendo-theme-material/dist/all.css',
+        text: 'Material'
+    },
+      
   ];
 
   public selectedTheme = this.themes[0];
@@ -46,7 +51,6 @@ export class DefaultHeaderComponent {
 
   public changeTheme(theme: {href: string, text: string}) {
 
-    console.log('this.selectedTheme', this.selectedTheme);
       this.selectedTheme = theme;
       const themeEl: any = document.getElementById('theme');
       themeEl.href = theme.href;

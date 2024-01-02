@@ -5,15 +5,15 @@ namespace mipBackend.Models;
 
 public partial class Temp02TemporadaBase
 {
-    public int Temp02Llave { get; set; }
+    public int temp02llave { get; set; }
 
-    public string? Temp02Nombre { get; set; }
+    public string? temp02nombre { get; set; }
 
-    public string? Temp02Descripcion { get; set; }
+    public string? temp02descripcion { get; set; }
 
-    public int? Temp02Predeterminada { get; set; }
+    public int? temp02predeterminada { get; set; }
 
-    public int? Temp02Activo { get; set; }
+    public int? temp02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -31,7 +31,7 @@ public partial class Temp02TemporadaBase
 
     public virtual ICollection<Conteo04ResumenSag> Conteo04ResumenSags { get; } = new List<Conteo04ResumenSag>();
 
-    public virtual ICollection<Mnt03PeriodosTrampa> Mnt03PeriodosTrampas { get; } = new List<Mnt03PeriodosTrampa>();
+    public virtual ICollection<Mnt03periodosTrampa> Mnt03periodosTrampas { get; } = new List<Mnt03periodosTrampa>();
 
     public virtual ICollection<Obsc01ObservacionCampo> Obsc01ObservacionCampos { get; } = new List<Obsc01ObservacionCampo>();
 

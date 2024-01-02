@@ -9,7 +9,7 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { ComboBoxModule, DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { IconsModule } from '@progress/kendo-angular-icons';
+
 import { LayoutModule } from '@progress/kendo-angular-layout';
 
 
@@ -31,7 +31,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
     DropDownsModule,
     ComboBoxModule,
     LayoutModule,
-    IconsModule,
+    
   
   ]
 })

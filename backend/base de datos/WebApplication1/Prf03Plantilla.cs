@@ -27,5 +27,5 @@ public partial class Prf03Plantilla
 
     public Guid? DeleteBy { get; set; }
 
-    public virtual ICollection<Prf01Perfile> Prf01Perfiles { get; set; } = new List<Prf01Perfile>();
+    public virtual ICollection<Prf01Perfile> prf01perfiles { get; set; } = new List<Prf01Perfile>();
 }

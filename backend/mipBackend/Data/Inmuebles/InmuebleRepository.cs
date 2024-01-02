@@ -46,7 +46,7 @@ namespace mipBackend.Data.Inmuebles
             }
 
             inmueble.FechaCreacion = DateTime.Now;
-            inmueble.UsuarioId = Guid.Parse(usuario.Id);
+            inmueble.UsuarioId = usuario.Id;
 
             await _contexto.Inmuebles!.AddAsync(inmueble);
 

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt24AsociarCuenta
+public partial class cnt24AsociarCuenta
 {
 
-    public int Cnt01Llave { get; set; }
+    public int cnt01llave { get; set; }
 
-    public int Cnt01CuentaLlave { get; set; }
+    public int cnt01Cuentallave { get; set; }
 }

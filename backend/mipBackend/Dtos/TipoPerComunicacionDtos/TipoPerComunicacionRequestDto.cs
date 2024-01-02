@@ -1,6 +1,6 @@
-﻿namespace mipBackend.Dtos.TipoPerComunicacionDtos
+﻿namespace mipBackend.Dtos.TipoperComunicacionDtos
 {
-    public class TipoPerComunicacionRequestDto
+    public class TipoperComunicacionRequestDto
     {
         public int per03llave { get; set; }
 

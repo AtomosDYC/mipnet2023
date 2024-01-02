@@ -9,8 +9,8 @@ namespace mipBackend.Profiles
         public PlantillaProfile()
         {
 
-            CreateMap<Prf03Plantilla, PlantillaResponseDto>();
-            CreateMap<PlantillaRequestDto, Prf03Plantilla>();
+            CreateMap<prf03Plantilla, PlantillaResponseDto>();
+            CreateMap<PlantillaRequestDto, prf03Plantilla>();
 
         }
     }

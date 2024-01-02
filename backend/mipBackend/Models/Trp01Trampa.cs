@@ -5,15 +5,15 @@ namespace mipBackend.Models;
 
 public partial class Trp01Trampa
 {
-    public int Trp01Llave { get; set; }
+    public int Trp01llave { get; set; }
 
-    public int? Cnt08Llave { get; set; }
+    public int? cnt08llave { get; set; }
 
-    public int? Esp01Llave { get; set; }
+    public int? esp01llave { get; set; }
 
-    public string? Trp01Nombre { get; set; }
+    public string? Trp01nombre { get; set; }
 
-    public int? Trp01Activo { get; set; }
+    public int? Trp01activo { get; set; }
 
     public int? Trp01Numero { get; set; }
 
@@ -29,9 +29,9 @@ public partial class Trp01Trampa
 
     public Guid? deleteby { get; set; }
 
-    public virtual Cnt08Segmentacion? Cnt08LlaveNavigation { get; set; }
+    public virtual cnt08Segmentacion? cnt08llaveNavigation { get; set; }
 
-    public virtual Esp01Especie? Esp01LlaveNavigation { get; set; }
+    public virtual esp01especie? esp01llaveNavigation { get; set; }
 
     public virtual ICollection<Trp02Temporada> Trp02Temporada { get; } = new List<Trp02Temporada>();
 }

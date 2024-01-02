@@ -3,37 +3,37 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Per05Comunicacion
+public partial class per05Comunicacion
 {
-    public int Per01Llave { get; set; }
+    public int per01llave { get; set; }
 
-    public int Per04Llave { get; set; }
+    public int per04llave { get; set; }
 
-    public int Per03Llave { get; set; }
+    public int per03llave { get; set; }
 
-    public string? Per05Direccion { get; set; }
+    public string? per05direccion { get; set; }
 
-    public int? Sist03Llave { get; set; }
+    public int? sist03llave { get; set; }
 
-    public string? Per05Casilla { get; set; }
+    public string? per05casilla { get; set; }
 
-    public int? Per05TieneCasilla { get; set; }
+    public int? per05tienecasilla { get; set; }
 
-    public string? Per05CodigoPostal { get; set; }
+    public string? per05codigopostal { get; set; }
 
-    public string? Per05Email { get; set; }
+    public string? per05email { get; set; }
 
-    public string? Per05Telefono1 { get; set; }
+    public string? per05telefono1 { get; set; }
 
-    public string? Per05Telefono2 { get; set; }
+    public string? per05telefono2 { get; set; }
 
-    public string? Per05Celular1 { get; set; }
+    public string? per05celular1 { get; set; }
 
-    public string? Per05Celular2 { get; set; }
+    public string? per05celular2 { get; set; }
 
-    public string? Per05Fax { get; set; }
+    public string? per05fax { get; set; }
 
-    public string? Per05SitioWeb { get; set; }
+    public string? per05sitioWeb { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -47,11 +47,11 @@ public partial class Per05Comunicacion
 
     public Guid? deleteby { get; set; }
 
-    public virtual Per06TipoPersonaComunicacion Per0 { get; set; } = null!;
+    public virtual per06TipopersonaComunicacion per0 { get; set; } = null!;
 
-    public virtual Per01Persona Per01LlaveNavigation { get; set; } = null!;
+    public virtual per01persona per01llaveNavigation { get; set; } = null!;
 
-    public virtual Per03TipoPersona Per03LlaveNavigation { get; set; } = null!;
+    public virtual per03Tipopersona per03llaveNavigation { get; set; } = null!;
 
-    public virtual Per04TipoComunicacion Per04LlaveNavigation { get; set; } = null!;
+    public virtual per04TipoComunicacion per04llaveNavigation { get; set; } = null!;
 }

@@ -1,24 +1,24 @@
 ﻿using mipBackend.Models;
-namespace mipBackend.Data.TipoEspecie
+namespace mipBackend.Data.Tipoespecie
 {
-    public interface ITipoEspecieRepository
+    public interface ITipoespecieRepository
     {
 
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Esp08TipoBase>> GetAllTipoEspecies();
+        Task<IEnumerable<esp08TipoBase>> GetAllTipoespecies();
 
-        Task<Esp08TipoBase> GetTipoEspecieById(int id);
+        Task<esp08TipoBase> GetTipoespecieById(int id);
 
-        Task CreateTipoEspecie(Esp08TipoBase tipoespecie);
+        Task CreateTipoespecie(esp08TipoBase tipoespecie);
 
-        Task UpdateTipoEspecie(Esp08TipoBase tipoespecie);
+        Task UpdateTipoespecie(esp08TipoBase tipoespecie);
 
-        Task DeleteTipoEspecie(int id);
+        Task DeleteTipoespecie(int id);
 
-        Task DisableTipoEspecie(int id);
+        Task DisableTipoespecie(int id);
 
-        Task ActivateTipoEspecie(int id);
+        Task ActivateTipoespecie(int id);
 
     }
 }

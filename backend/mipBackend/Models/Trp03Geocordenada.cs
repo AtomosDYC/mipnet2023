@@ -5,9 +5,9 @@ namespace mipBackend.Models;
 
 public partial class Trp03Geocordenada
 {
-    public int Trp01Llave { get; set; }
+    public int Trp01llave { get; set; }
 
-    public int Temp02Llave { get; set; }
+    public int Temp02llave { get; set; }
 
     public string X { get; set; } = null!;
 

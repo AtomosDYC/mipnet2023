@@ -5,31 +5,31 @@ namespace mipBackend.Models;
 
 public partial class Sercl01ServiciosCliente
 {
-    public int Sercl01Llave { get; set; }
+    public int Sercl01llave { get; set; }
 
-    public int? Cnt19Llave { get; set; }
+    public int? cnt19llave { get; set; }
 
-    public int? Serv01Llave { get; set; }
+    public int? Serv01llave { get; set; }
 
-    public int? Cnt01Llave { get; set; }
+    public int? cnt01llave { get; set; }
 
-    public int? Cnt08Llave { get; set; }
+    public int? cnt08llave { get; set; }
 
-    public int? Temp02Llave { get; set; }
+    public int? Temp02llave { get; set; }
 
-    public int? Esp03Llave { get; set; }
+    public int? esp03llave { get; set; }
 
-    public int? Esp04Llave { get; set; }
+    public int? esp04llave { get; set; }
 
-    public int? Esp08Llave { get; set; }
+    public int? esp08llave { get; set; }
 
     public int? sist04llave { get; set; }
 
-    public int? Sist03Llave { get; set; }
+    public int? sist03llave { get; set; }
 
     public int? Sercl01TipoGrafico { get; set; }
 
-    public int? Conteo03Llave { get; set; }
+    public int? Conteo03llave { get; set; }
 
     public int? Sercl01Costo { get; set; }
 

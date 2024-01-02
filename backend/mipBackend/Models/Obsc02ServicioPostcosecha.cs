@@ -5,17 +5,17 @@ namespace mipBackend.Models;
 
 public partial class Obsc02ServicioPostcosecha
 {
-    public int Obsc02Llave { get; set; }
+    public int Obsc02llave { get; set; }
 
-    public int? Esp08Llave { get; set; }
+    public int? esp08llave { get; set; }
 
-    public int? Temp02Llave { get; set; }
+    public int? Temp02llave { get; set; }
 
-    public string? Obsc02Nombre { get; set; }
+    public string? Obsc02nombre { get; set; }
 
     public string? Obsc02Resumen { get; set; }
 
-    public int? Obsc02Activo { get; set; }
+    public int? Obsc02activo { get; set; }
 
     public DateTime? Obsc02Fecha { get; set; }
 

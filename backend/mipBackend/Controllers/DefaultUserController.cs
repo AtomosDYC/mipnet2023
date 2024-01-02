@@ -75,7 +75,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var DefaultUserModel = _mapper.Map<Per09DefaultUser>(DefaultUser);
+            var DefaultUserModel = _mapper.Map<per09DefaultUser>(DefaultUser);
 
             await _repository.CreateDefaultUser(DefaultUserModel);
             await _repository.SaveChanges();
@@ -106,7 +106,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var DefaultUserModel = _mapper.Map<Per09DefaultUser>(DefaultUser);
+            var DefaultUserModel = _mapper.Map<per09DefaultUser>(DefaultUser);
 
             await _repository.UpdateDefaultUser(DefaultUserModel);
             await _repository.SaveChanges();

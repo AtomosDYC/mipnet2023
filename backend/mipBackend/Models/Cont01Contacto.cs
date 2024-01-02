@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Cont01Contacto
 {
-    public int Cont01Llave { get; set; }
+    public int Cont01llave { get; set; }
 
-    public int? Cont02Llave { get; set; }
+    public int? Cont02llave { get; set; }
 
     public int? Cont01Titulo { get; set; }
 
-    public string? Cont01Nombre { get; set; }
+    public string? Cont01nombre { get; set; }
 
     public string? Cont01Apellido { get; set; }
 
@@ -31,5 +31,5 @@ public partial class Cont01Contacto
 
     public DateTime? fechaeliminacion { get; set; }
 
-    public virtual Cont02TipoContacto? Cont02LlaveNavigation { get; set; }
+    public virtual Cont02TipoContacto? Cont02llaveNavigation { get; set; }
 }

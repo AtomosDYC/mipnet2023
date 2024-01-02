@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using mipBackend.Data.TipoPermisos;
-using mipBackend.Dtos.TipoPermisoDtos;
+using mipBackend.Data.Tipopermisos;
+using mipBackend.Dtos.TipopermisoDtos;
 using mipBackend.Middleware;
 using mipBackend.Models;
 using System.Net;
@@ -10,17 +10,17 @@ namespace mipBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TipoPermisoController : ControllerBase
+    public class TipopermisoController : ControllerBase
     {
-        private readonly ITipoPermisosRepository _repository;
+        private readonly ITipopermisosRepository _repository;
 
         private IMapper _mapper;
         private HttpStatusCode httpStatusCode;
 
-        public TipoPermisoController
+        public TipopermisoController
             (
 
-                ITipoPermisosRepository repository,
+                ITipopermisosRepository repository,
                 IMapper mapper
 
             )
@@ -30,21 +30,21 @@ namespace mipBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoPermisoResponseDto>>> GetTipoPermiso()
+        public async Task<ActionResult<IEnumerable<TipopermisoResponseDto>>> GetTipopermiso()
         {
 
-            var TipoPermisos = await _repository.GetAllTipoPermisos();
-            return Ok(_mapper.Map<IEnumerable<TipoPermisoResponseDto>>(TipoPermisos));
+            var Tipopermisos = await _repository.GetAllTipopermisos();
+            return Ok(_mapper.Map<IEnumerable<TipopermisoResponseDto>>(Tipopermisos));
 
         }
 
-        [HttpGet("~/api/TipoPermiso/GetTipoPermisoById/{id}")]
-        [ActionName(nameof(GetTipoPermisoById))]
-        public async Task<ActionResult<TipoPermisoResponseDto>> GetTipoPermisoById(int id)
+        [HttpGet("~/api/Tipopermiso/GetTipopermisoById/{id}")]
+        [ActionName(nameof(GetTipopermisoById))]
+        public async Task<ActionResult<TipopermisoResponseDto>> GetTipopermisoById(int id)
         {
 
 
-            var tipopermiso = await _repository.GetTipoPermisoById(id);
+            var tipopermiso = await _repository.GetTipopermisoById(id);
 
             if (tipopermiso == null)
             {
@@ -55,25 +55,25 @@ namespace mipBackend.Controllers
                     );
             }
 
-            return Ok(_mapper.Map<TipoPermisoResponseDto>(tipopermiso));
+            return Ok(_mapper.Map<TipopermisoResponseDto>(tipopermiso));
 
         }
 
         [HttpPost]
-        public async Task<ActionResult<TipoPermisoResponseDto>> CreateTipoPermiso
+        public async Task<ActionResult<TipopermisoResponseDto>> CreateTipopermiso
             (
-               [FromBody] TipoPermisoRequestDto tipopermiso
+               [FromBody] TipopermisoRequestDto tipopermiso
             )
         {
 
-            var tipopermisoModel = _mapper.Map<Wkf05TipoPermiso>(tipopermiso);
+            var tipopermisoModel = _mapper.Map<wkf05Tipopermiso>(tipopermiso);
 
-            await _repository.CreateTipoPermiso(tipopermisoModel);
+            await _repository.CreateTipopermiso(tipopermisoModel);
             await _repository.SaveChanges();
 
-            var tipopermisoResponse = _mapper.Map<TipoPermisoResponseDto>(tipopermisoModel);
+            var tipopermisoResponse = _mapper.Map<TipopermisoResponseDto>(tipopermisoModel);
 
-            var tipopermisodto = await _repository.GetTipoPermisoById(tipopermisoResponse.wkf05llave);
+            var tipopermisodto = await _repository.GetTipopermisoById(tipopermisoResponse.wkf05llave);
 
             if (tipopermisodto == null)
             {
@@ -84,27 +84,27 @@ namespace mipBackend.Controllers
                     );
             }
 
-            return Ok(_mapper.Map<TipoPermisoResponseDto>(tipopermisodto));
+            return Ok(_mapper.Map<TipopermisoResponseDto>(tipopermisodto));
 
 
 
         }
 
         [HttpPut]
-        public async Task<ActionResult<TipoPermisoResponseDto>> UpdateTipoPermiso
+        public async Task<ActionResult<TipopermisoResponseDto>> UpdateTipopermiso
             (
-                [FromBody] TipoPermisoResponseDto tipopermiso
+                [FromBody] TipopermisoResponseDto tipopermiso
             )
         {
 
-            var tipopermisoModel = _mapper.Map<Wkf05TipoPermiso>(tipopermiso);
+            var tipopermisoModel = _mapper.Map<wkf05Tipopermiso>(tipopermiso);
 
-            await _repository.UpdateTipoPermiso(tipopermisoModel);
+            await _repository.UpdateTipopermiso(tipopermisoModel);
             await _repository.SaveChanges();
 
-            var tipopermisoResponse = _mapper.Map<TipoPermisoResponseDto>(tipopermisoModel);
+            var tipopermisoResponse = _mapper.Map<TipopermisoResponseDto>(tipopermisoModel);
 
-            var tipopermisodto = await _repository.GetTipoPermisoById(tipopermisoResponse.wkf05llave);
+            var tipopermisodto = await _repository.GetTipopermisoById(tipopermisoResponse.wkf05llave);
 
             if (tipopermisodto == null)
             {
@@ -115,15 +115,15 @@ namespace mipBackend.Controllers
                     );
             }
 
-            return Ok(_mapper.Map<TipoPermisoResponseDto>(tipopermisodto));
+            return Ok(_mapper.Map<TipopermisoResponseDto>(tipopermisodto));
 
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteTipoPermiso(int id)
+        public async Task<ActionResult> DeleteTipopermiso(int id)
         {
 
-            var tipopermisodto = await _repository.GetTipoPermisoById(id);
+            var tipopermisodto = await _repository.GetTipopermisoById(id);
 
             if (tipopermisodto == null)
             {
@@ -138,62 +138,62 @@ namespace mipBackend.Controllers
             {
                 if (tipopermisodto.wkf05activo == 0)
                 {
-                    await _repository.DeleteTipoPermiso(id);
+                    await _repository.DeleteTipopermiso(id);
                     await _repository.SaveChanges();
                 }
                 else
                 {
-                    await _repository.DisableTipoPermiso(id);
+                    await _repository.DisableTipopermiso(id);
                     await _repository.SaveChanges();
                 }
             }
 
 
-            var listtipopermisos = await _repository.GetAllTipoPermisos();
-            return Ok(_mapper.Map<TipoPermisoResponseDto[]>(listtipopermisos));
+            var listtipopermisos = await _repository.GetAllTipopermisos();
+            return Ok(_mapper.Map<TipopermisoResponseDto[]>(listtipopermisos));
 
         }
 
         [HttpPost("~/api/tipopermiso/disabletipopermiso")]
-        public async Task<ActionResult<TipoPermisoResponseDto[]>> DisableTipoPermiso
+        public async Task<ActionResult<TipopermisoResponseDto[]>> DisableTipopermiso
             (
-                 [FromBody] TipoPermisoResponseDto[] tipopermisos
+                 [FromBody] TipopermisoResponseDto[] tipopermisos
             )
         {
 
-            foreach (TipoPermisoResponseDto item in tipopermisos)
+            foreach (TipopermisoResponseDto item in tipopermisos)
             {
-                var a = _mapper.Map<TipoPermisoResponseDto>(item);
+                var a = _mapper.Map<TipopermisoResponseDto>(item);
 
-                await _repository.DisableTipoPermiso(a.wkf05llave);
+                await _repository.DisableTipopermiso(a.wkf05llave);
                 await _repository.SaveChanges();
             }
 
 
-            var listtipopermisos = await _repository.GetAllTipoPermisos();
-            return Ok(_mapper.Map<TipoPermisoResponseDto[]>(listtipopermisos));
+            var listtipopermisos = await _repository.GetAllTipopermisos();
+            return Ok(_mapper.Map<TipopermisoResponseDto[]>(listtipopermisos));
 
         }
 
 
-        [HttpPost("~/api/TipoPermiso/ActivateTipoPermiso")]
-        public async Task<ActionResult<TipoPermisoResponseDto[]>> ActivateTipoPermiso
+        [HttpPost("~/api/Tipopermiso/ActivateTipopermiso")]
+        public async Task<ActionResult<TipopermisoResponseDto[]>> ActivateTipopermiso
             (
-                 [FromBody] TipoPermisoResponseDto[] tipopermisos
+                 [FromBody] TipopermisoResponseDto[] tipopermisos
             )
         {
 
-            foreach (TipoPermisoResponseDto item in tipopermisos)
+            foreach (TipopermisoResponseDto item in tipopermisos)
             {
-                var a = _mapper.Map<TipoPermisoResponseDto>(item);
+                var a = _mapper.Map<TipopermisoResponseDto>(item);
 
-                await _repository.ActivateTipoPermiso(a.wkf05llave);
+                await _repository.ActivateTipopermiso(a.wkf05llave);
                 await _repository.SaveChanges();
             }
 
 
-            var listtipopermisos = await _repository.GetAllTipoPermisos();
-            return Ok(_mapper.Map<TipoPermisoResponseDto[]>(listtipopermisos));
+            var listtipopermisos = await _repository.GetAllTipopermisos();
+            return Ok(_mapper.Map<TipopermisoResponseDto[]>(listtipopermisos));
 
         }
 

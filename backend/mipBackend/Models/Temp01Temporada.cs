@@ -5,27 +5,27 @@ namespace mipBackend.Models;
 
 public partial class Temp01Temporada
 {
-    public int Temp01Llave { get; set; }
+    public int temp01llave { get; set; }
 
-    public string Temp01Nombre { get; set; } = null!;
+    public string temp01nombre { get; set; } = null!;
 
-    public string? Temp01Descripcion { get; set; }
+    public string? temp01descripcion { get; set; }
 
-    public int? Temp02Llave { get; set; }
+    public int? temp02llave { get; set; }
 
-    public int? Temp03Llave { get; set; }
+    public int? temp03llave { get; set; }
 
-    public DateTime? Temp01MinFecha { get; set; }
+    public DateTime? temp01minfecha { get; set; }
 
-    public DateTime? Temp01MaxFecha { get; set; }
+    public DateTime? temp01maxfecha { get; set; }
 
-    public int? Temp01MinMes { get; set; }
+    public int? temp01minmes { get; set; }
 
-    public int? Temp01MaxMes { get; set; }
+    public int? temp01maxmes { get; set; }
 
-    public int? Temp01Periodo { get; set; }
+    public int? temp01periodo { get; set; }
 
-    public int? Temp01Activo { get; set; }
+    public int? temp01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -39,9 +39,9 @@ public partial class Temp01Temporada
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Esp02TemporadaEspecie> Esp02TemporadaEspecies { get; } = new List<Esp02TemporadaEspecie>();
+    public virtual ICollection<esp02Temporadaespecie> esp02Temporadaespecies { get; } = new List<esp02Temporadaespecie>();
 
-    public virtual Temp02TemporadaBase? Temp02LlaveNavigation { get; set; }
+    public virtual Temp02TemporadaBase? Temp02llaveNavigation { get; set; }
 
-    public virtual Temp03Segmentacion? Temp03LlaveNavigation { get; set; }
+    public virtual Temp03Segmentacion? Temp03llaveNavigation { get; set; }
 }

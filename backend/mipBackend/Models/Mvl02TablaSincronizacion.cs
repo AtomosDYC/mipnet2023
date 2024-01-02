@@ -5,9 +5,10 @@ namespace mipBackend.Models;
 
 public partial class Mvl02TablaSincronizacion
 {
-    public Guid Secu02Llave { get; set; }
 
-    public string? NombreTabla { get; set; }
+    public Guid userid { get; set; }
+
+    public string? nombreTabla { get; set; }
 
     public DateTime? FechaUltimaActualizacion { get; set; }
 

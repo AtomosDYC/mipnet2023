@@ -1,6 +1,6 @@
-﻿namespace mipBackend.Dtos.TipoPersonaDtos
+﻿namespace mipBackend.Dtos.TipopersonaDtos
 {
-    public class TipoPersonaResponseDto
+    public class TipopersonaResponseDto
     {
         public int per03llave { get; set; }
 

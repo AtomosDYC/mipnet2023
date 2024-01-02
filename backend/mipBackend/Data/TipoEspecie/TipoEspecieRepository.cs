@@ -6,15 +6,15 @@ using mipBackend.Token;
 using System.Net;
 
 
-namespace mipBackend.Data.TipoEspecie
+namespace mipBackend.Data.Tipoespecie
 {
-    public class TipoEspecieRepository : ITipoEspecieRepository
+    public class TipoespecieRepository : ITipoespecieRepository
     {
         private readonly AppDbContext _contexto;
         private readonly IUsuarioSesion _usuarioSesion;
         private readonly UserManager<Usuario> _userManager;
 
-        public TipoEspecieRepository(
+        public TipoespecieRepository(
             AppDbContext context,
             IUsuarioSesion sesion,
             UserManager<Usuario> userManager)
@@ -25,7 +25,7 @@ namespace mipBackend.Data.TipoEspecie
         }
 
 
-        public async Task CreateTipoEspecie(Esp08TipoBase tipoespecie)
+        public async Task CreateTipoespecie(esp08TipoBase tipoespecie)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -46,33 +46,33 @@ namespace mipBackend.Data.TipoEspecie
             }
 
             tipoespecie.fechaactivacion = DateTime.Now;
-            tipoespecie.createby = Guid.Parse(usuario.Id);
+            tipoespecie.createby = usuario.Id;
             tipoespecie.esp08activo = 1;
 
-            await _contexto.Esp08TipoBases!.AddAsync(tipoespecie);
+            await _contexto.esp08TipoBases!.AddAsync(tipoespecie);
 
         }
 
-        public async Task DeleteTipoEspecie(int id)
+        public async Task DeleteTipoespecie(int id)
         {
 
 
 
 
-            var tipoespecie = await _contexto.Esp08TipoBases!
+            var tipoespecie = await _contexto.esp08TipoBases!
                 .FirstOrDefaultAsync(x => x.esp08llave == id);
 
-            _contexto.Esp08TipoBases!.Remove(tipoespecie!);
+            _contexto.esp08TipoBases!.Remove(tipoespecie!);
         }
 
-        public async Task<IEnumerable<Esp08TipoBase>> GetAllTipoEspecies()
+        public async Task<IEnumerable<esp08TipoBase>> GetAllTipoespecies()
         {
-            return await _contexto.Esp08TipoBases!.ToListAsync();
+            return await _contexto.esp08TipoBases!.ToListAsync();
         }
 
-        public async Task<Esp08TipoBase> GetTipoEspecieById(int id)
+        public async Task<esp08TipoBase> GetTipoespecieById(int id)
         {
-            return await _contexto.Esp08TipoBases!.FirstOrDefaultAsync(x => x.esp08llave == id)!;
+            return await _contexto.esp08TipoBases!.FirstOrDefaultAsync(x => x.esp08llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -80,7 +80,7 @@ namespace mipBackend.Data.TipoEspecie
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateTipoEspecie(Esp08TipoBase request)
+        public async Task UpdateTipoespecie(esp08TipoBase request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -100,22 +100,22 @@ namespace mipBackend.Data.TipoEspecie
                    );
             }
 
-            var tipoespecie = await _contexto.Esp08TipoBases!
+            var tipoespecie = await _contexto.esp08TipoBases!
                 .FirstOrDefaultAsync(x => x.esp08llave == request.esp08llave);
 
             tipoespecie.fechaactualizacion = DateTime.Now;
-            tipoespecie.approveby = Guid.Parse(usuario.Id);
+            tipoespecie.approveby = usuario.Id;
             tipoespecie.esp08nombre = request.esp08nombre;
             tipoespecie.esp08descripcion = request.esp08descripcion;
 
-            _contexto.Esp08TipoBases!.Update(tipoespecie!);
+            _contexto.esp08TipoBases!.Update(tipoespecie!);
 
         }
 
-        public async Task DisableTipoEspecie(int id)
+        public async Task DisableTipoespecie(int id)
         {
 
-            var tipoespecie = await _contexto.Esp08TipoBases!
+            var tipoespecie = await _contexto.esp08TipoBases!
                 .FirstOrDefaultAsync(x => x.esp08llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -139,15 +139,15 @@ namespace mipBackend.Data.TipoEspecie
 
             tipoespecie.esp08activo = 0;
 
-            _contexto.Esp08TipoBases!.Update(tipoespecie);
+            _contexto.esp08TipoBases!.Update(tipoespecie);
 
 
         }
 
-        public async Task ActivateTipoEspecie(int id)
+        public async Task ActivateTipoespecie(int id)
         {
 
-            var tipoespecie = await _contexto.Esp08TipoBases!
+            var tipoespecie = await _contexto.esp08TipoBases!
                 .FirstOrDefaultAsync(x => x.esp08llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -171,7 +171,7 @@ namespace mipBackend.Data.TipoEspecie
 
             tipoespecie.esp08activo = 1;
 
-            _contexto.Esp08TipoBases!.Update(tipoespecie);
+            _contexto.esp08TipoBases!.Update(tipoespecie);
 
 
         }

@@ -5,11 +5,11 @@ namespace mipBackend.Models;
 
 public partial class Frm02Formulario
 {
-    public int Frm02Llave { get; set; }
+    public int Frm02llave { get; set; }
 
-    public int? Frm01Llave { get; set; }
+    public int? Frm01llave { get; set; }
 
-    public string? Frm02Nombre { get; set; }
+    public string? Frm02nombre { get; set; }
 
     public string? Frm02Empresa { get; set; }
 
@@ -25,11 +25,11 @@ public partial class Frm02Formulario
 
     public string? Frm02Mensaje { get; set; }
 
-    public int? Frm02Activo { get; set; }
+    public int? Frm02activo { get; set; }
 
     public int? Frm02EstadoRespuesta { get; set; }
 
-    public int? Eml01Llave { get; set; }
+    public int? Eml01llave { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -43,7 +43,7 @@ public partial class Frm02Formulario
 
     public Guid? deleteby { get; set; }
 
-    public virtual Eml01BitacoraEmailUsuario? Eml01LlaveNavigation { get; set; }
+    public virtual Eml01BitacoraEmailUsuario? Eml01llaveNavigation { get; set; }
 
-    public virtual Frm01TipoFormulario? Frm01LlaveNavigation { get; set; }
+    public virtual Frm01TipoFormulario? Frm01llaveNavigation { get; set; }
 }

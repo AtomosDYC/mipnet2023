@@ -28,7 +28,7 @@ namespace mipBackend.Data.TipoFlujos
 
 
 
-        public async Task CreateTipoFlujo(Wkf02TipoFlujo tipoflujo)
+        public async Task CreateTipoFlujo(wkf02TipoFlujo tipoflujo)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -49,10 +49,10 @@ namespace mipBackend.Data.TipoFlujos
             }
 
             tipoflujo.fechaactivacion = DateTime.Now;
-            tipoflujo.createby = Guid.Parse(usuario.Id);
+            tipoflujo.createby = usuario.Id;
             tipoflujo.wkf02activo = 1;
 
-            await _contexto.Wkf02TipoFlujos!.AddAsync(tipoflujo);
+            await _contexto.wkf02TipoFlujos!.AddAsync(tipoflujo);
 
         }
 
@@ -62,20 +62,20 @@ namespace mipBackend.Data.TipoFlujos
 
 
 
-            var tipoflujo = await _contexto.Wkf02TipoFlujos!
+            var tipoflujo = await _contexto.wkf02TipoFlujos!
                 .FirstOrDefaultAsync(x => x.wkf02llave == id);
 
-            _contexto.Wkf02TipoFlujos!.Remove(tipoflujo!);
+            _contexto.wkf02TipoFlujos!.Remove(tipoflujo!);
         }
 
-        public async Task<IEnumerable<Wkf02TipoFlujo>> GetAllTipoFlujos()
+        public async Task<IEnumerable<wkf02TipoFlujo>> GetAllTipoFlujos()
         {
-            return await _contexto.Wkf02TipoFlujos!.ToListAsync();
+            return await _contexto.wkf02TipoFlujos!.ToListAsync();
         }
 
-        public async Task<Wkf02TipoFlujo> GetTipoFlujoById(int id)
+        public async Task<wkf02TipoFlujo> GetTipoFlujoById(int id)
         {
-            return await _contexto.Wkf02TipoFlujos!.FirstOrDefaultAsync(x => x.wkf02llave == id)!;
+            return await _contexto.wkf02TipoFlujos!.FirstOrDefaultAsync(x => x.wkf02llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -83,7 +83,7 @@ namespace mipBackend.Data.TipoFlujos
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateTipoFlujo(Wkf02TipoFlujo request)
+        public async Task UpdateTipoFlujo(wkf02TipoFlujo request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -103,23 +103,23 @@ namespace mipBackend.Data.TipoFlujos
                    );
             }
 
-            var tipoflujo = await _contexto.Wkf02TipoFlujos!
+            var tipoflujo = await _contexto.wkf02TipoFlujos!
                 .FirstOrDefaultAsync(x => x.wkf02llave == request.wkf02llave);
 
             tipoflujo.fechaactualizacion = DateTime.Now;
-            tipoflujo.approveby = Guid.Parse(usuario.Id);
+            tipoflujo.approveby = usuario.Id;
             tipoflujo.wkf02nombre = request.wkf02nombre;
             tipoflujo.wkf02descripcion = request.wkf02descripcion;
             tipoflujo.wkf02orden = request.wkf02orden;
 
-            _contexto.Wkf02TipoFlujos!.Update(tipoflujo!);
+            _contexto.wkf02TipoFlujos!.Update(tipoflujo!);
 
         }
 
         public async Task DisableTipoFlujo(int id)
         {
 
-            var tipoflujo = await _contexto.Wkf02TipoFlujos!
+            var tipoflujo = await _contexto.wkf02TipoFlujos!
                 .FirstOrDefaultAsync(x => x.wkf02llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -143,7 +143,7 @@ namespace mipBackend.Data.TipoFlujos
 
             tipoflujo.wkf02activo = 0;
 
-            _contexto.Wkf02TipoFlujos!.Update(tipoflujo);
+            _contexto.wkf02TipoFlujos!.Update(tipoflujo);
 
 
         }
@@ -151,7 +151,7 @@ namespace mipBackend.Data.TipoFlujos
         public async Task ActivateTipoFlujo(int id)
         {
 
-            var tipoflujo = await _contexto.Wkf02TipoFlujos!
+            var tipoflujo = await _contexto.wkf02TipoFlujos!
                 .FirstOrDefaultAsync(x => x.wkf02llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -175,7 +175,7 @@ namespace mipBackend.Data.TipoFlujos
 
             tipoflujo.wkf02activo = 1;
 
-            _contexto.Wkf02TipoFlujos!.Update(tipoflujo);
+            _contexto.wkf02TipoFlujos!.Update(tipoflujo);
 
 
         }

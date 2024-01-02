@@ -55,7 +55,7 @@ export function reducer(state: ListState = initialState, action: fromActions.All
       }
 
       case fromActions.Types.CREATE_PLANTILLAFLUJO_SUCCESS: {
-        return {...state, loading: false, error: null, plantillaflujo: action.plantillaflujo, success: false}
+        return {...state, loading: false, error: null, plantillaflujo: action.plantillaflujo, success: true}
       }
 
       case fromActions.Types.CREATE_PLANTILLAFLUJO_ERROR : {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Wkf01Flujo
+public partial class wkf01Flujo
 {
     public int wkf01llave { get; set; }
 
@@ -49,10 +49,10 @@ public partial class Wkf01Flujo
 
     public Guid? deleteby { get; set; }
 
-    public virtual Wkf03Nivel? Wkf03LlaveNavigation { get; set; }
+    public virtual wkf03Nivel? wkf03llaveNavigation { get; set; }
 
-    public virtual ICollection<Wkf06Perfil> Wkf06Perfiles { get; } = new List<Wkf06Perfil>();
+    public virtual ICollection<wkf06perfil> wkf06perfiles { get; } = new List<wkf06perfil>();
 
 
-    public virtual ICollection<Wkf09Parametro> Wkf09Parametros { get; } = new List<Wkf09Parametro>();
+    public virtual ICollection<wkf09Parametro> wkf09Parametros { get; } = new List<wkf09Parametro>();
 }

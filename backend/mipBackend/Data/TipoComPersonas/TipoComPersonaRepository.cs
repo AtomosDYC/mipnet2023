@@ -6,17 +6,17 @@ using mipBackend.Token;
 
 using System.Net;
 using AutoMapper;
-using mipBackend.Dtos.TipoComPersonaDtos;
+using mipBackend.Dtos.TipoCompersonaDtos;
 
-namespace mipBackend.Data.TipoComPersonas
+namespace mipBackend.Data.TipoCompersonas
 {
-    public class TipoComPersonaRepository : ITipoComPersonaRepository
+    public class TipoCompersonaRepository : ITipoCompersonaRepository
     {
         private readonly AppDbContext _contexto;
         private readonly IUsuarioSesion _usuarioSesion;
         private readonly UserManager<Usuario> _userManager;
 
-        public TipoComPersonaRepository(
+        public TipoCompersonaRepository(
             AppDbContext context,
             IUsuarioSesion sesion,
             UserManager<Usuario> userManager)
@@ -28,7 +28,7 @@ namespace mipBackend.Data.TipoComPersonas
 
 
 
-        public async Task CreateTipoComPersona(Per04TipoComunicacion TipoComPersona)
+        public async Task CreateTipoCompersona(per04TipoComunicacion TipoCompersona)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -40,7 +40,7 @@ namespace mipBackend.Data.TipoComPersonas
                     );
             }
 
-            if (TipoComPersona is null)
+            if (TipoCompersona is null)
             {
                 throw new MiddlewareException(
                    HttpStatusCode.BadRequest,
@@ -48,31 +48,31 @@ namespace mipBackend.Data.TipoComPersonas
                    );
             }
 
-            TipoComPersona.fechaactivacion = DateTime.Now;
-            TipoComPersona.createby = Guid.Parse(usuario.Id);
-            TipoComPersona.per04activo = 1;
+            TipoCompersona.fechaactivacion = DateTime.Now;
+            TipoCompersona.createby = usuario.Id;
+            TipoCompersona.per04activo = 1;
 
-            await _contexto.Per04TipoComunicaciones!.AddAsync(TipoComPersona);
+            await _contexto.per04TipoComunicaciones!.AddAsync(TipoCompersona);
 
         }
 
-        public async Task DeleteTipoComPersona(int id)
+        public async Task DeleteTipoCompersona(int id)
         {
             
-            var TipoComPersona = await _contexto.Per04TipoComunicaciones!
+            var TipoCompersona = await _contexto.per04TipoComunicaciones!
                 .FirstOrDefaultAsync(x => x.per04llave == id);
 
-            _contexto.Per04TipoComunicaciones!.Remove(TipoComPersona!);
+            _contexto.per04TipoComunicaciones!.Remove(TipoCompersona!);
         }
 
-        public async Task<IEnumerable<Per04TipoComunicacion>> GetAllTipoComPersonas()
+        public async Task<IEnumerable<per04TipoComunicacion>> GetAllTipoCompersonas()
         {
-            return await _contexto.Per04TipoComunicaciones!.ToListAsync();
+            return await _contexto.per04TipoComunicaciones!.ToListAsync();
         }
 
-        public async Task<Per04TipoComunicacion> GetTipoComPersonaById(int id)
+        public async Task<per04TipoComunicacion> GetTipoCompersonaById(int id)
         {
-            return await _contexto.Per04TipoComunicaciones!.FirstOrDefaultAsync(x => x.per04llave == id)!;
+            return await _contexto.per04TipoComunicaciones!.FirstOrDefaultAsync(x => x.per04llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -80,7 +80,7 @@ namespace mipBackend.Data.TipoComPersonas
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateTipoComPersona(Per04TipoComunicacion request)
+        public async Task UpdateTipoCompersona(per04TipoComunicacion request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -100,22 +100,22 @@ namespace mipBackend.Data.TipoComPersonas
                    );
             }
 
-            var TipoComPersona = await _contexto.Per04TipoComunicaciones!
+            var TipoCompersona = await _contexto.per04TipoComunicaciones!
                 .FirstOrDefaultAsync(x => x.per04llave == request.per04llave);
 
-            TipoComPersona.fechaactualizacion = DateTime.Now;
-            TipoComPersona.approveby = Guid.Parse(usuario.Id);
-            TipoComPersona.per04nombre = request.per04nombre;
-            TipoComPersona.per04descripcion = request.per04descripcion;
+            TipoCompersona.fechaactualizacion = DateTime.Now;
+            TipoCompersona.approveby = usuario.Id;
+            TipoCompersona.per04nombre = request.per04nombre;
+            TipoCompersona.per04descripcion = request.per04descripcion;
             
-            _contexto.Per04TipoComunicaciones!.Update(TipoComPersona!);
+            _contexto.per04TipoComunicaciones!.Update(TipoCompersona!);
 
         }
 
-        public async Task DisableTipoComPersona(int id)
+        public async Task DisableTipoCompersona(int id)
         {
 
-            var TipoComPersona = await _contexto.Per04TipoComunicaciones!
+            var TipoCompersona = await _contexto.per04TipoComunicaciones!
                 .FirstOrDefaultAsync(x => x.per04llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -128,26 +128,26 @@ namespace mipBackend.Data.TipoComPersonas
                     );
             }
 
-            if (TipoComPersona is null)
+            if (TipoCompersona is null)
             {
                 throw new MiddlewareException(
                    HttpStatusCode.BadRequest,
-                   new { mensaje = "La TipoComPersona no existe en los listados" }
+                   new { mensaje = "La TipoCompersona no existe en los listados" }
                    );
             }
 
 
-            TipoComPersona.per04activo = 0;
+            TipoCompersona.per04activo = 0;
 
-            _contexto.Per04TipoComunicaciones!.Update(TipoComPersona);
+            _contexto.per04TipoComunicaciones!.Update(TipoCompersona);
 
 
         }
 
-        public async Task ActivateTipoComPersona(int id)
+        public async Task ActivateTipoCompersona(int id)
         {
 
-            var TipoComPersona = await _contexto.Per04TipoComunicaciones!
+            var TipoCompersona = await _contexto.per04TipoComunicaciones!
                 .FirstOrDefaultAsync(x => x.per04llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -160,18 +160,18 @@ namespace mipBackend.Data.TipoComPersonas
                     );
             }
 
-            if (TipoComPersona is null)
+            if (TipoCompersona is null)
             {
                 throw new MiddlewareException(
                    HttpStatusCode.BadRequest,
-                   new { mensaje = "La TipoComPersona no existe en los listados" }
+                   new { mensaje = "La TipoCompersona no existe en los listados" }
                    );
             }
 
 
-            TipoComPersona.per04activo = 1;
+            TipoCompersona.per04activo = 1;
 
-            _contexto.Per04TipoComunicaciones!.Update(TipoComPersona);
+            _contexto.per04TipoComunicaciones!.Update(TipoCompersona);
 
 
         }

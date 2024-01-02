@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt02TipoCuenta
+public partial class cnt02TipoCuenta
 {
     public int cnt02llave { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Cnt02TipoCuenta
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Cnt01CuentaCliente> Cnt01CuentaClientes { get; } = new List<Cnt01CuentaCliente>();
+    public virtual ICollection<cnt01CuentaCliente> cnt01CuentaClientes { get; } = new List<cnt01CuentaCliente>();
 }

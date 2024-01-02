@@ -20,7 +20,7 @@ namespace mipBackend.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<UserAuthReponseDto>> Login
+        public async Task<ActionResult<UsuarioLoginResponseDto>> Login
             (
             [FromBody] UsuarioLoginRequestDto request
             )
@@ -43,11 +43,54 @@ namespace mipBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<UserAuthReponseDto>> DevolverUsuario()
+        public async Task<ActionResult<UsuarioLoginResponseDto>> DevolverUsuario()
         {
 
             return await _repository.GetUsuario();
 
         }
+
+        [AllowAnonymous]
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword
+            (
+            [FromBody] ResetPasswordResponseDto ResetPasswordDto
+            )
+        {
+
+            await _repository.ResetPassword(ResetPasswordDto);
+
+            return Ok();
+
+        }
+
+        [AllowAnonymous]
+        [HttpPost("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword
+            (
+            [FromBody] ForgotPasswordResponseDto forgotPasswordDto
+            )
+        {
+            
+            await _repository.ForgotPassword(forgotPasswordDto);
+
+            return Ok();
+
+        }
+
+        [AllowAnonymous]
+        [HttpGet("EmailConfirmation")]
+        public async Task<IActionResult> EmailConfirmation
+            (
+                [FromQuery] string email, 
+                [FromQuery] string token
+            )
+        {
+
+            await _repository.EmailConfirmation(email, token);
+
+            return Ok();
+        }
+
     }
 }

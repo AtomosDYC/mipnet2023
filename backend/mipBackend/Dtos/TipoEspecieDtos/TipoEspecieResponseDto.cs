@@ -1,6 +1,6 @@
-﻿namespace mipBackend.Dtos.TipoEspecieDtos
+﻿namespace mipBackend.Dtos.TipoespecieDtos
 {
-    public class TipoEspecieResponseDto
+    public class TipoespecieResponseDto
     {
         public int esp08llave { get; set; }
 

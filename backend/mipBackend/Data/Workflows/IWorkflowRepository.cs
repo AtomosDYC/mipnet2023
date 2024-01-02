@@ -11,13 +11,13 @@ namespace mipBackend.Data.Workflows
 
         Task<WorkflowResponseDto> GetWorkflowById(int id);
 
-        Task CreateDatosgenerales(Wkf01Flujo workflow);
+        Task CreateDatosgenerales(wkf01Flujo workflow);
 
-        Task UpdateDatosgenerales(Wkf01Flujo workflow);
+        Task UpdateDatosgenerales(wkf01Flujo workflow);
 
-        Task UpdateNodopadre(Wkf01Flujo workflow);
+        Task UpdateNodopadre(wkf01Flujo workflow);
 
-        Task UpdateConfiguracionWeb(Wkf01Flujo workflow);
+        Task UpdateConfiguracionWeb(wkf01Flujo workflow);
 
         Task<WorkflowResponseDto> GetWorkflowNodopadreById(int id);
 

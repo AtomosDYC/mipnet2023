@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using mipBackend.Dtos.TipoComPersonaDtos;
+using mipBackend.Dtos.TipoCompersonaDtos;
 using mipBackend.Models;
 
 namespace mipBackend.Profiles
 {
-    public class TipoComPersonaProfile : Profile
+    public class TipoCompersonaProfile : Profile
     {
-        public TipoComPersonaProfile()
+        public TipoCompersonaProfile()
         {
 
-            CreateMap<Per04TipoComunicacion, TipoComPersonaResponseDto>();
-            CreateMap<TipoComPersonaResponseDto, Per04TipoComunicacion>();
-            CreateMap<TipoComPersonaRequestDto, Per04TipoComunicacion>();
+            CreateMap<per04TipoComunicacion, TipoCompersonaResponseDto>();
+            CreateMap<TipoCompersonaResponseDto, per04TipoComunicacion>();
+            CreateMap<TipoCompersonaRequestDto, per04TipoComunicacion>();
 
         }
     }

@@ -26,7 +26,7 @@ namespace mipBackend.Data.Saludos
 
 
 
-        public async Task CreateSaludo(Per02Genero region)
+        public async Task CreateSaludo(per02Genero region)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -47,10 +47,10 @@ namespace mipBackend.Data.Saludos
             }
 
             region.fechaactivacion = DateTime.Now;
-            region.createby = Guid.Parse(usuario.Id);
+            region.createby = usuario.Id;
             region.per02activo = 1;
 
-            await _contexto.Per02Generos!.AddAsync(region);
+            await _contexto.per02Generos!.AddAsync(region);
 
         }
 
@@ -60,20 +60,20 @@ namespace mipBackend.Data.Saludos
 
 
 
-            var region = await _contexto.Per02Generos!
+            var region = await _contexto.per02Generos!
                 .FirstOrDefaultAsync(x => x.per02llave == id);
 
-            _contexto.Per02Generos!.Remove(region!);
+            _contexto.per02Generos!.Remove(region!);
         }
 
-        public async Task<IEnumerable<Per02Genero>> GetAllSaludos()
+        public async Task<IEnumerable<per02Genero>> GetAllSaludos()
         {
-            return await _contexto.Per02Generos!.ToListAsync();
+            return await _contexto.per02Generos!.ToListAsync();
         }
 
-        public async Task<Per02Genero> GetSaludoById(int id)
+        public async Task<per02Genero> GetSaludoById(int id)
         {
-            return await _contexto.Per02Generos!.FirstOrDefaultAsync(x => x.per02llave == id)!;
+            return await _contexto.per02Generos!.FirstOrDefaultAsync(x => x.per02llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -81,7 +81,7 @@ namespace mipBackend.Data.Saludos
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateSaludo(Per02Genero request)
+        public async Task UpdateSaludo(per02Genero request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -101,22 +101,22 @@ namespace mipBackend.Data.Saludos
                    );
             }
 
-            var region = await _contexto.Per02Generos!
+            var region = await _contexto.per02Generos!
                 .FirstOrDefaultAsync(x => x.per02llave == request.per02llave);
 
             region.fechaactualizacion = DateTime.Now;
-            region.approveby = Guid.Parse(usuario.Id);
+            region.approveby = usuario.Id;
             region.per02titulo = request.per02titulo;
             region.per02orden = request.per02orden;
 
-            _contexto.Per02Generos!.Update(region!);
+            _contexto.per02Generos!.Update(region!);
 
         }
 
         public async Task DisableSaludo(int id)
         {
 
-            var region = await _contexto.Per02Generos!
+            var region = await _contexto.per02Generos!
                 .FirstOrDefaultAsync(x => x.per02llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -140,7 +140,7 @@ namespace mipBackend.Data.Saludos
 
             region.per02activo = 0;
 
-            _contexto.Per02Generos!.Update(region);
+            _contexto.per02Generos!.Update(region);
 
 
         }
@@ -148,7 +148,7 @@ namespace mipBackend.Data.Saludos
         public async Task ActivateSaludo(int id)
         {
 
-            var region = await _contexto.Per02Generos!
+            var region = await _contexto.per02Generos!
                 .FirstOrDefaultAsync(x => x.per02llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -172,7 +172,7 @@ namespace mipBackend.Data.Saludos
 
             region.per02activo = 1;
 
-            _contexto.Per02Generos!.Update(region);
+            _contexto.per02Generos!.Update(region);
 
 
         }

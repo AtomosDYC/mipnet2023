@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Ctt02TipoContrato
 {
-    public int Ctt02Llave { get; set; }
+    public int Ctt02llave { get; set; }
 
-    public string? Ctt02Nombre { get; set; }
+    public string? Ctt02nombre { get; set; }
 
-    public string? Ctt02Descripcion { get; set; }
+    public string? Ctt02descripcion { get; set; }
 
-    public int? Ctt02Activo { get; set; }
+    public int? Ctt02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

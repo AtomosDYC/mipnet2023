@@ -53,40 +53,40 @@ namespace mipBackend.Data
                 );
             }
 
-            if (!context.Prf03Plantillas!.Any())
+            if (!context.prf03Plantillas!.Any())
             {
-                context.Prf03Plantillas!.AddRange(
-                    new Prf03Plantilla
+                context.prf03Plantillas!.AddRange(
+                    new prf03Plantilla
                     {
                         prf03nombre = "Administrador Full",
                         prf03descripcion = "plantilla con todos los permisos habilitados"
                     },
-                    new Prf03Plantilla
+                    new prf03Plantilla
                     {
                         prf03nombre = "Administrador Operacional",
                         prf03descripcion = "administrador para el manejo de datos asociados a las trampas y monitoreos"
                     },
-                    new Prf03Plantilla
+                    new prf03Plantilla
                     {
                         prf03nombre = "Administrador Clientes",
                         prf03descripcion = "administrador para el manejo de datos asociados a las trampas y monitoreos"
                     },
-                    new Prf03Plantilla
+                    new prf03Plantilla
                     {
                         prf03nombre = "Usuario",
                         prf03descripcion = "plantilla para usuarios visualiza la opciones adquiridas"
                     },
-                    new Prf03Plantilla
+                    new prf03Plantilla
                     {
                         prf03nombre = "Operador",
                         prf03descripcion = "esta plantilla asiga a los operadortes las opciones de vizualizar contenido y bloquea el ingreso, edicion o eliminacion de datos"
                     },
-                    new Prf03Plantilla
+                    new prf03Plantilla
                     {
                         prf03nombre = "Syngenta",
                         prf03descripcion = "perfil utilizado para usuarios syngenta"
                     },
-                    new Prf03Plantilla
+                    new prf03Plantilla
                     {
                         prf03nombre = "Invitado",
                         prf03descripcion = "plantilla con opciones para adquirir licencias"
@@ -96,10 +96,10 @@ namespace mipBackend.Data
 
 
 
-            if (!context.Wkf02TipoFlujos!.Any())
+            if (!context.wkf02TipoFlujos!.Any())
             {
-                context.Wkf02TipoFlujos!.AddRange(
-                    new Wkf02TipoFlujo
+                context.wkf02TipoFlujos!.AddRange(
+                    new wkf02TipoFlujo
                     {
                         wkf02nombre = "Flujo Principal",
                         wkf02descripcion = "flujo principal",
@@ -110,10 +110,10 @@ namespace mipBackend.Data
 
             context.SaveChanges();
 
-            if (!context.Wkf03Niveles!.Any())
+            if (!context.wkf03Niveles!.Any())
             {
-                context.Wkf03Niveles!.AddRange(
-                    new Wkf03Nivel
+                context.wkf03Niveles!.AddRange(
+                    new wkf03Nivel
                     {
                         wkf02llave = 1,
                         wkf03nombre = "Raiz",
@@ -121,7 +121,7 @@ namespace mipBackend.Data
                         wkf03activo = 1,
                         wkf03nivel1 = 1
                     },
-                    new Wkf03Nivel
+                    new wkf03Nivel
                     {
                         wkf02llave = 1,
                         wkf03nombre = "Modulo",
@@ -129,7 +129,7 @@ namespace mipBackend.Data
                         wkf03activo = 1,
                         wkf03nivel1 = 2
                     },
-                    new Wkf03Nivel
+                    new wkf03Nivel
                     {
                         wkf02llave = 1,
                         wkf03nombre = "Item",
@@ -137,7 +137,7 @@ namespace mipBackend.Data
                         wkf03activo = 1,
                         wkf03nivel1 = 3
                     },
-                    new Wkf03Nivel
+                    new wkf03Nivel
                     {
                         wkf02llave = 1,
                         wkf03nombre = "Pagina Web",
@@ -150,73 +150,73 @@ namespace mipBackend.Data
 
             context.SaveChanges();
 
-            if (!context.Wkf05TipoPermisos!.Any())
+            if (!context.wkf05Tipopermisos!.Any())
             {
-                context.Wkf05TipoPermisos!.AddRange(
-                    new Wkf05TipoPermiso
+                context.wkf05Tipopermisos!.AddRange(
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "vizualizar",
                         wkf05descripcion = "vizualizar elementos, modulos, items, contenido",
                         wkf05sigla = "V",
                         wkf05activo = 1,
                     },
-                    new Wkf05TipoPermiso
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "Listar",
                         wkf05descripcion = "habilita las opciones de listar contenido",
                         wkf05sigla = "L",
                         wkf05activo = 1,
                     },
-                    new Wkf05TipoPermiso
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "Crear",
                         wkf05descripcion = "habilita las opciones de crear contenido",
                         wkf05sigla = "C",
                         wkf05activo = 1,
                     },
-                    new Wkf05TipoPermiso
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "Modificar",
                         wkf05descripcion = "habilita las opciones de modificar o editar contenido",
                         wkf05sigla = "M",
                         wkf05activo = 1,
                     },
-                    new Wkf05TipoPermiso
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "Eliminar",
                         wkf05descripcion = "habilita las opciones de Desabilitar o eliminar contenido",
                         wkf05sigla = "D",
                         wkf05activo = 1,
                     },
-                    new Wkf05TipoPermiso
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "habilitar",
                         wkf05descripcion = "habilita las opciones de importar contenido",
                         wkf05sigla = "A",
                         wkf05activo = 1,
                     },
-                    new Wkf05TipoPermiso
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "Buscar",
                         wkf05descripcion = "habilita las opciones del buscador",
                         wkf05sigla = "F",
                         wkf05activo = 1,
                     },
-                    new Wkf05TipoPermiso
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "Exportar",
                         wkf05descripcion = "habilita las opciones del exportar contenido",
                         wkf05sigla = "E",
                         wkf05activo = 1,
                     },
-                    new Wkf05TipoPermiso
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "Importar",
                         wkf05descripcion = "habilita las opciones de importar contenido",
                         wkf05sigla = "I",
                         wkf05activo = 1,
                     },
-                    new Wkf05TipoPermiso
+                    new wkf05Tipopermiso
                     {
                         wkf05nombre = "Enviar por e-Mail",
                         wkf05descripcion = "habilita las opciones de enviar contenido por e-mail",
@@ -229,25 +229,25 @@ namespace mipBackend.Data
 
             context.SaveChanges();
 
-            if (!context.Per08TipoDocumentos!.Any())
+            if (!context.per08TipoDocumentos!.Any())
             {
-                context.Per08TipoDocumentos!.AddRange(
-                    new Per08TipoDocumento
+                context.per08TipoDocumentos!.AddRange(
+                    new per08TipoDocumento
                     {
                         per08nombre = "Rut",
-                        per08descripcion = "Personas con nacionalidad chilena o residencia permanente",
+                        per08descripcion = "personas con nacionalidad chilena o residencia permanente",
                         per08activo = 1,
                     },
-                    new Per08TipoDocumento
+                    new per08TipoDocumento
                     {
                         per08nombre = "DNI",
-                        per08descripcion = "Personas Con nacionalidad extranjera sin rut",
+                        per08descripcion = "personas Con nacionalidad extranjera sin rut",
                         per08activo = 1,
                     },
-                    new Per08TipoDocumento
+                    new per08TipoDocumento
                     {
                         per08nombre = "Numero pasaporte",
-                        per08descripcion = "Personas con extranjeras que no tienen DNI",
+                        per08descripcion = "personas con extranjeras que no tienen DNI",
                         per08activo = 1,
                     }
                 );
@@ -255,46 +255,46 @@ namespace mipBackend.Data
 
             context.SaveChanges();
 
-            if (!context.Wkf10TipoParametros!.Any())
+            if (!context.wkf10TipoParametros!.Any())
             {
-                context.Wkf10TipoParametros!.AddRange(
-                    new Wkf10TipoParametro
+                context.wkf10TipoParametros!.AddRange(
+                    new wkf10TipoParametro
                     {
                         wkf10nombre = "cookie",
                         wkf10descripcion = "acciones sobre cookies",
                         wkf10activo = 1,
                     },
-                    new Wkf10TipoParametro
+                    new wkf10TipoParametro
                     {
                         wkf10nombre = "control",
                         wkf10descripcion = "acciones sobre controles de formularios",
                         wkf10activo = 1,
                     },
-                    new Wkf10TipoParametro
+                    new wkf10TipoParametro
                     {
                         wkf10nombre = "form",
                         wkf10descripcion = "acciones sobre controles de envios de post o request de formularios",
                         wkf10activo = 1,
                     },
-                    new Wkf10TipoParametro
+                    new wkf10TipoParametro
                     {
                         wkf10nombre = "profile",
                         wkf10descripcion = "acciones sobre profiles",
                         wkf10activo = 1,
                     },
-                    new Wkf10TipoParametro
+                    new wkf10TipoParametro
                     {
                         wkf10nombre = "querystring",
                         wkf10descripcion = "acciones sobre querystring",
                         wkf10activo = 1,
                     },
-                    new Wkf10TipoParametro
+                    new wkf10TipoParametro
                     {
                         wkf10nombre = "sesion",
                         wkf10descripcion = "acciones sobre sesion",
                         wkf10activo = 1,
                     },
-                    new Wkf10TipoParametro
+                    new wkf10TipoParametro
                     {
                         wkf10nombre = "routerdata",
                         wkf10descripcion = "acciones sobre routerdata",
@@ -305,82 +305,82 @@ namespace mipBackend.Data
 
             context.SaveChanges();
 
-            if (!context.Wkf04NivelPermisos!.Any())
+            if (!context.wkf04Nivelpermisos!.Any())
             {
-                context.Wkf04NivelPermisos!.AddRange(
-                    new Wkf04NivelPermiso   
+                context.wkf04Nivelpermisos!.AddRange(
+                    new wkf04Nivelpermiso   
                     {
                         wkf03llave = 1,
                         wkf05llave= 1,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 2,
                         wkf05llave = 1,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 3,
                         wkf05llave = 1,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 1,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 2,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 3,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 4,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 5,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 6,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 7,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 8,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 9,
                         wkf04activo = 1
                     },
-                    new Wkf04NivelPermiso
+                    new wkf04Nivelpermiso
                     {
                         wkf03llave = 4,
                         wkf05llave = 10,

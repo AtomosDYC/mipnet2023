@@ -34,11 +34,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
+        this.store.dispatch(new fromUser.Init());
+
         this.user$ = this.store.pipe(select(fromUser.getUser)) as Observable<fromUser.UserResponse>;
         this.isAuthorized$ = this.store.pipe(select(fromUser.getIsAuthorized)) as Observable<boolean>;
 
-        this.store.dispatch(new fromUser.Init());
+        
 
+        /*
 
         this.router.events.subscribe((evt) => {
         if (!(evt instanceof NavigationEnd)) {
@@ -70,11 +73,14 @@ export class AppComponent implements OnInit, OnDestroy {
         window.addEventListener('resize', () => {
             this.setDrawerConfig();
         });
+        */
     }
 
     ngOnDestroy() {
         window.removeEventListener('resize', () => {});
     }
+
+    /*
 
     public setDrawerConfig() {
         const pageWidth = window.innerWidth;
@@ -86,7 +92,8 @@ export class AppComponent implements OnInit, OnDestroy {
             this.mini = true;
         }
     }
-
+*/
+    /*
     public drawerItems() {
         return [
             { text: this.customMsgService.translate('team'), icon: 'k-i-grid', path: '/', selected: true },
@@ -101,6 +108,6 @@ export class AppComponent implements OnInit, OnDestroy {
     public toggleDrawer(drawer: DrawerComponent): void {
         drawer.toggle();
     }
-
+*/
     
 }

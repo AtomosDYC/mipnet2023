@@ -67,7 +67,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var regionModel = _mapper.Map<Sist04Region>(region);
+            var regionModel = _mapper.Map<sist04Region>(region);
 
             await _repository.CreateRegion(regionModel);
             await _repository.SaveChanges();
@@ -98,7 +98,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var regionModel = _mapper.Map<Sist04Region>(region);
+            var regionModel = _mapper.Map<sist04Region>(region);
 
             await _repository.UpdateRegion(regionModel);
             await _repository.SaveChanges();

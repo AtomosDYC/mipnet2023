@@ -5,15 +5,15 @@ namespace mipBackend.Models;
 
 public partial class Pbcd03Programacion
 {
-    public int Pbcd03Llave { get; set; }
+    public int Pbcd03llave { get; set; }
 
-    public int? Pbcd01Llave { get; set; }
+    public int? Pbcd01llave { get; set; }
 
     public DateTime? Pbcd03InicioFecha { get; set; }
 
     public DateTime? Pbcd03TerminoFecha { get; set; }
 
-    public int? Pbcd03Activo { get; set; }
+    public int? Pbcd03activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -27,5 +27,5 @@ public partial class Pbcd03Programacion
 
     public Guid? deleteby { get; set; }
 
-    public virtual Pbcd01Publicidad? Pbcd01LlaveNavigation { get; set; }
+    public virtual Pbcd01Publicidad? Pbcd01llaveNavigation { get; set; }
 }

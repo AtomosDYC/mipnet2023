@@ -30,10 +30,10 @@ namespace mipBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlantillaFlujoResponseDto>>> GetPlantilla()
+        public async Task<ActionResult<IEnumerable<PlantillaFlujoResponseDto>>> GetPlantilla(int Id)
         {
 
-            var plantillas = await _repository.GetAllPlantillaFlujos();
+            var plantillas = await _repository.GetAllPlantillaFlujos(Id);
             return Ok(_mapper.Map<IEnumerable<PlantillaFlujoResponseDto>>(plantillas));
 
         }
@@ -47,7 +47,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var plantillaModel = _mapper.Map<Prf04PlantillaFlujo>(plantilla);
+            var plantillaModel = _mapper.Map<prf04PlantillaFlujo>(plantilla);
 
             await _repository.CreatePlantilla(plantillaModel);
             await _repository.SaveChanges();
@@ -71,6 +71,18 @@ namespace mipBackend.Controllers
 
         }
 
-        
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeletePlantilla(int id)
+        {
+
+           await _repository.DeletePlantilla(id);
+           await _repository.SaveChanges();
+
+            return Ok();
+           
+        }
+
+
+
     }
 }

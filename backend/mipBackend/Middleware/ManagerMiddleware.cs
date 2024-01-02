@@ -28,7 +28,7 @@ namespace mipBackend.Middleware
             catch (Exception ex)
             {
                 await ManagerExceptionAsync(context, ex, _logger);
-            }
+             }
                 
 
         }

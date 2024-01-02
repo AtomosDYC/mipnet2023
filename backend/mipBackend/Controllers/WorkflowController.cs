@@ -69,7 +69,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var workflowModel = _mapper.Map<Wkf01Flujo>(workflow);
+            var workflowModel = _mapper.Map<wkf01Flujo>(workflow);
 
             await _repository.CreateDatosgenerales(workflowModel);
             await _repository.SaveChanges();
@@ -99,7 +99,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var workflowModel = _mapper.Map<Wkf01Flujo>(request);
+            var workflowModel = _mapper.Map<wkf01Flujo>(request);
 
             await _repository.UpdateDatosgenerales(workflowModel);
             await _repository.SaveChanges();
@@ -113,7 +113,7 @@ namespace mipBackend.Controllers
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la TipoPersona por este id {WorkflowResponse.wkf01llave}" }
+                        new { mensaje = $"No se encontro la Tipopersona por este id {WorkflowResponse.wkf01llave}" }
                     );
             }
 
@@ -122,7 +122,7 @@ namespace mipBackend.Controllers
         }
 
 
-        [HttpPut("~/api/workflow/UpdateNodopadre")]
+        [HttpPost("~/api/workflow/UpdateNodopadre")]
         [ActionName(nameof(UpdateNodopadre))]
         public async Task<ActionResult<WorkflowResponseDto>> UpdateNodopadre
             (
@@ -130,7 +130,7 @@ namespace mipBackend.Controllers
             )
         {
 
-             var workflowModel = _mapper.Map<Wkf01Flujo>(request);
+             var workflowModel = _mapper.Map<wkf01Flujo>(request);
 
             await _repository.UpdateNodopadre(workflowModel);
             await _repository.SaveChanges();
@@ -144,7 +144,7 @@ namespace mipBackend.Controllers
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la TipoPersona por este id {WorkflowResponse.wkf01llave}" }
+                        new { mensaje = $"No se encontro la Tipopersona por este id {WorkflowResponse.wkf01llave}" }
                     );
             }
 
@@ -175,15 +175,15 @@ namespace mipBackend.Controllers
 
 
 
-        [HttpPut("~/api/workflow/UpdateConfiguracionWeb")]
-        [ActionName(nameof(UpdateConfiguracionWeb))]
-        public async Task<ActionResult<WorkflowResponseDto>> UpdateConfiguracionWeb
+        [HttpPost("~/api/workflow/UpdateConfiguracionweb")]
+        [ActionName(nameof(UpdateConfiguracionweb))]
+        public async Task<ActionResult<WorkflowResponseDto>> UpdateConfiguracionweb
             (
                 [FromBody] WorkflowConfiguracionwebDto request
             )
         {
 
-            var workflowModel = _mapper.Map<Wkf01Flujo>(request);
+            var workflowModel = _mapper.Map<wkf01Flujo>(request);
 
             await _repository.UpdateConfiguracionWeb(workflowModel);
             await _repository.SaveChanges();
@@ -197,7 +197,7 @@ namespace mipBackend.Controllers
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la TipoPersona por este id {WorkflowResponse.wkf01llave}" }
+                        new { mensaje = $"No se encontro la Tipopersona por este id {WorkflowResponse.wkf01llave}" }
                     );
             }
 

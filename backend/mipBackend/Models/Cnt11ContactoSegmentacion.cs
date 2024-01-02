@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt11ContactoSegmentacion
+public partial class cnt11ContactoSegmentacion
 {
-    public int Cnt11Llave { get; set; }
+    public int cnt11llave { get; set; }
 
-    public int? Cnt08Llave { get; set; }
+    public int? cnt08llave { get; set; }
 
-    public int? Per01Llave { get; set; }
+    public int? per01llave { get; set; }
 
-    public int? Cnt05Llave { get; set; }
+    public int? cnt05llave { get; set; }
 
-    public int? Cnt11Activo { get; set; }
+    public int? cnt11activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -27,5 +27,5 @@ public partial class Cnt11ContactoSegmentacion
 
     public Guid? deleteby { get; set; }
 
-    public virtual Cnt08Segmentacion Cnt08LlaveNavigation { get; set; } = null!;
+    public virtual cnt08Segmentacion cnt08llaveNavigation { get; set; } = null!;
 }

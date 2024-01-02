@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Wkf08Area
+public partial class wkf08Area
 {
     public int wfk08llave { get; set; }
 

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt21TipoEstacion
+public partial class cnt21TipoEstacion
 {
-    public int Cnt21Llave { get; set; }
+    public int cnt21llave { get; set; }
 
-    public string? Cnt21Nombre { get; set; }
+    public string? cnt21nombre { get; set; }
 
-    public string? Cnt21Descripcion { get; set; }
+    public string? cnt21descripcion { get; set; }
 
-    public int? Cnt21Activo { get; set; }
+    public int? cnt21activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Cnt21TipoEstacion
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Cnt22EstacionTipoEstacion> Cnt22EstacionTipoEstacions { get; } = new List<Cnt22EstacionTipoEstacion>();
+    public virtual ICollection<cnt22EstacionTipoEstacion> cnt22EstacionTipoEstacions { get; } = new List<cnt22EstacionTipoEstacion>();
 }

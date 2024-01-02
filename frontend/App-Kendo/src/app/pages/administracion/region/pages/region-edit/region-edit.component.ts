@@ -77,7 +77,7 @@ export class RegionEditComponent implements OnInit {
 
   onguardarNuevo(): void {
 
-    console.log('dentro del onguardar');
+    //console.log('dentro del onguardar');
 
     const { nombre, descripcion, orden } = this.regionForm.value;
 
@@ -91,7 +91,7 @@ export class RegionEditComponent implements OnInit {
           sist04activo : 0
         }
 
-        console.log(`create onguardar ${regionResponse}`);
+        //console.log(`create onguardar ${regionResponse}`);
 
         this.store.dispatch(new fromList.Update(regionResponse));
 

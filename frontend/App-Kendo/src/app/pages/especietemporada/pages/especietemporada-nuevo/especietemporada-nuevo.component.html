@@ -1,0 +1,118 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoEspecietemporada')}} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="FormEspecieTemporada">
+            <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxTipoEspecie" text="{{ customMsgService.translate('tipoespecie')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="tipoespecielist"
+                        placeholder="{{ customMsgService.translate('Seleccione')}} {{ customMsgService.translate('tipoespecie')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxTipoEspecie"
+                        (valueChange)="handleTipoespecieChange($event)"
+                        #cbxTipoEspecie
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errortipoespecie')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxEspecie" text="{{ customMsgService.translate('especie')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="especielist"
+                        placeholder="{{ customMsgService.translate('Seleccione')}} {{ customMsgService.translate('especie')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxEspecie"
+                        (valueChange)="handleEspecieChange($event)"
+                        #cbxEspecie
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorespecie')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxTipodanio" text="{{ customMsgService.translate('tipodanio')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="tipodaniolist"
+                        placeholder="{{ customMsgService.translate('Seleccione')}} {{ customMsgService.translate('tipodanio')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxTipodanio"
+                        #cbxTipodanio
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errortipodanio')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxTemporada" text="{{ customMsgService.translate('temporada')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="temporadalist"
+                        placeholder="{{ customMsgService.translate('Seleccione')}} {{ customMsgService.translate('temporada')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxTemporada"
+                        #cbxTemporada
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errortemporada')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="dtpInicio" text="{{ customMsgService.translate('fechainicio')}} "></kendo-label>
+                    <kendo-datepicker
+                    formControlName="dtpInicio"
+                    #dtpInicio
+                    format="dd/MM/yyyy"
+                    required
+                    ></kendo-datepicker>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorfechainicio')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="dtpTermino" text="{{ customMsgService.translate('fechatermino')}} "></kendo-label>
+                    <kendo-datepicker
+                    format="dd/MM/yyyy"
+                    formControlName="dtpTermino"
+                    #dtpTermino
+                    required
+                    ></kendo-datepicker>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorfechatermino')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="chxsag" text="Es especie SAG"></kendo-label>
+                    
+                    <input type="checkbox" kendoCheckBox 
+                    formControlName="chxsag" #chxsag
+                    text="Activar si es especie Sag"
+                    />
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="chxmexico" text="Es especie MEXICO"></kendo-label>
+                    
+                    <input type="checkbox" kendoCheckBox 
+                    formControlName="chxmexico" #chxmexico
+                    text="Activar si es especie Mexico"
+                    />
+                </kendo-formfield>
+                
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/especies/especietemporada/list']">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>

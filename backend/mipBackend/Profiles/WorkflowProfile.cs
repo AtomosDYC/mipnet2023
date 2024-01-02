@@ -9,11 +9,11 @@ namespace mipBackend.Profiles
         public WorkflowProfile()
         {
 
-            CreateMap<Wkf01Flujo, WorkflowResponseDto>();
-            CreateMap<WorkflowResponseDto, Wkf01Flujo>();
-            CreateMap<WorkflowRequestDto, Wkf01Flujo>();
-            CreateMap<WorkflowNodopadreRequestDto, Wkf01Flujo>();
-            CreateMap<WorkflowConfiguracionwebDto, Wkf01Flujo>();
+            CreateMap<wkf01Flujo, WorkflowResponseDto>();
+            CreateMap<WorkflowResponseDto, wkf01Flujo>();
+            CreateMap<WorkflowRequestDto, wkf01Flujo>();
+            CreateMap<WorkflowNodopadreRequestDto, wkf01Flujo>();
+            CreateMap<WorkflowConfiguracionwebDto, wkf01Flujo>();
 
         }
     }

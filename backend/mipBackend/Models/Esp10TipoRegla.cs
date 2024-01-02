@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Esp10TipoRegla
+public partial class esp10TipoRegla
 {
-    public int Esp10Llave { get; set; }
+    public int esp10llave { get; set; }
 
-    public string? Esp10Nombre { get; set; }
+    public string? esp10nombre { get; set; }
 
-    public string? Esp10Descripcion { get; set; }
+    public string? esp10descripcion { get; set; }
 
-    public int? Esp10Activo { get; set; }
+    public int? esp10activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Esp10TipoRegla
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Esp11ReglaGrafico> Esp11ReglaGraficos { get; } = new List<Esp11ReglaGrafico>();
+    public virtual ICollection<esp11ReglaGrafico> esp11ReglaGraficos { get; } = new List<esp11ReglaGrafico>();
 }

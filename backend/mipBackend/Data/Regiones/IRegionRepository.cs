@@ -6,13 +6,13 @@ namespace mipBackend.Data.Regiones
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Sist04Region>> GetAllRegiones();
+        Task<IEnumerable<sist04Region>> GetAllRegiones();
 
-        Task<Sist04Region> GetRegionById(int id);
+        Task<sist04Region> GetRegionById(int id);
 
-        Task CreateRegion(Sist04Region region);
+        Task CreateRegion(sist04Region region);
 
-        Task UpdateRegion(Sist04Region region);
+        Task UpdateRegion(sist04Region region);
 
         Task DeleteRegion(int id);
 

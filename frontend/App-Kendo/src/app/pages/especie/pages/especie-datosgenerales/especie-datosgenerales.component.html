@@ -1,0 +1,79 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title col-md-8"> {{ customMsgService.translate('mantenimientoespeciedatosgenerales') }} </h3>
+        <div class="card-buttons col-md-4 float-right">
+            
+                <button 
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="onContinuar()"
+                    themeColor="light"
+                    [disabled]="isDisabledContinuarDG"
+                >
+                    {{ customMsgService.translate('continuar') }}
+                </button>
+            
+        </div> 
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxTipoespecie" text="{{ customMsgService.translate('tipoespecie')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="Tipoespecielist"
+                        placeholder="{{ customMsgService.translate('Seleccione')}} {{ customMsgService.translate('tipoespecie')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxTipoespecie"
+                        #cbxTipoespecie
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorTipoespecie')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtNombre" text="{{ customMsgService.translate('nombre')}}"></kendo-label>
+                    <kendo-textbox
+                        formControlName="txtNombre"
+                        #txtNombre
+                        required
+                    ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+                
+                
+                <kendo-formfield>
+                    <kendo-label [for]="txtDescripcion" text="{{ customMsgService.translate('descripcion')}}"></kendo-label>
+                    <kendo-textbox
+                    formControlName="txtDescripcion"
+                    #txtDescripcion
+                    required
+                ></kendo-textbox>
+                </kendo-formfield>
+
+            
+                <kendo-formfield>
+                    <kendo-label [for]="chxUnirespecie" text="Unir Especies"></kendo-label>
+                    
+                    <input type="checkbox" kendoCheckBox 
+                    formControlName="chxUnirespecie" #chxUnirespecie
+                    text="Unir Especies"
+                    />
+                </kendo-formfield>
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary">Cancelar</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardardatosgenerales()">+ Guardar</button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+    

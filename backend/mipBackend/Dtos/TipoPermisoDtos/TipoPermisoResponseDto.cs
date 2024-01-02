@@ -1,6 +1,6 @@
-﻿namespace mipBackend.Dtos.TipoPermisoDtos
+﻿namespace mipBackend.Dtos.TipopermisoDtos
 {
-    public class TipoPermisoResponseDto
+    public class TipopermisoResponseDto
     {
         public int wkf05llave { get; set; }
 

@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Pbcd02TipoPublicidad
 {
-    public int Pbcd02Llave { get; set; }
+    public int Pbcd02llave { get; set; }
 
-    public string? Pbcd02Nombre { get; set; }
+    public string? Pbcd02nombre { get; set; }
 
-    public string? Pbcd02Descripcion { get; set; }
+    public string? Pbcd02descripcion { get; set; }
 
-    public int? Pbcd02Activo { get; set; }
+    public int? Pbcd02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

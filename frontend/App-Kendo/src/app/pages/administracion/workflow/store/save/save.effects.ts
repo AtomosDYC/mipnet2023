@@ -74,7 +74,7 @@ export class SaveEffects {
             }),
             map((workflow: WorkflowResponse) => new fromActions.CreateSuccess(workflow)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -96,7 +96,7 @@ export class SaveEffects {
             }),
             map((workflow: WorkflowResponse) => new fromActions.UpdateSuccess(workflow)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -109,7 +109,7 @@ export class SaveEffects {
       ofType(fromActions.Types.UPDATE_WORKFLOW_NODOPADRE),
       map((action: fromActions.UpdateNodopadre) => action.workflow),
       switchMap((request: WorkflowNodopadreRequest) =>
-        this.httpClient.put<WorkflowResponse>(`${environment.url}api/workflow/UpdateNodopadre`, request)
+        this.httpClient.post<WorkflowResponse>(`${environment.url}api/workflow/UpdateNodopadre`, request)
           .pipe(
             delay(1000),
             tap((response: WorkflowResponse) => {
@@ -118,7 +118,7 @@ export class SaveEffects {
             }),
             map((workflow: WorkflowResponse) => new fromActions.UpdateNodopadreSuccess(workflow)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.UpdateNodopadreError(err.message));
             })
           )
@@ -131,7 +131,7 @@ export class SaveEffects {
       ofType(fromActions.Types.UPDATE_WORKFLOW_CONFIGURACIONWEB),
       map((action: fromActions.UpdateConfiguracionweb) => action.workflow),
       switchMap((request: WorkflowConfiguracionwebRequest) =>
-        this.httpClient.put<WorkflowResponse>(`${environment.url}api/workflow/UpdateConfiguracionWeb`, request)
+        this.httpClient.post<WorkflowResponse>(`${environment.url}api/workflow/UpdateConfiguracionWeb`, request)
           .pipe(
             delay(1000),
             tap((response: WorkflowResponse) => {
@@ -140,7 +140,7 @@ export class SaveEffects {
             }),
             map((workflow: WorkflowResponse) => new fromActions.UpdateConfiguracionwebSuccess(workflow)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.UpdateConfiguracionwebError(err.message));
             })
           )

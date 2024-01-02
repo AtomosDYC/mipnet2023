@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using mipBackend.Data.TipoPersonas;
-using mipBackend.Dtos.TipoPersonaDtos;
+using mipBackend.Data.Tipopersonas;
+using mipBackend.Dtos.TipopersonaDtos;
 using mipBackend.Middleware;
 using mipBackend.Models;
 using System.Net;
@@ -10,18 +10,18 @@ namespace mipBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TipoPersonaController : ControllerBase
+    public class TipopersonaController : ControllerBase
     {
 
-        private readonly ITipoPersonaRepository _repository;
+        private readonly ITipopersonaRepository _repository;
 
         private IMapper _mapper;
         private HttpStatusCode httpStatusCode;
 
-        public TipoPersonaController
+        public TipopersonaController
             (
 
-                ITipoPersonaRepository repository,
+                ITipopersonaRepository repository,
                 IMapper mapper
 
             )
@@ -31,170 +31,170 @@ namespace mipBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoPersonaResponseDto>>> GetTipoPersona()
+        public async Task<ActionResult<IEnumerable<TipopersonaResponseDto>>> GetTipopersona()
         {
 
-            var TipoPersonas = await _repository.GetAllTipoPersonas();
-            return Ok(_mapper.Map<IEnumerable<TipoPersonaResponseDto>>(TipoPersonas));
+            var Tipopersonas = await _repository.GetAllTipopersonas();
+            return Ok(_mapper.Map<IEnumerable<TipopersonaResponseDto>>(Tipopersonas));
 
         }
 
-        [HttpGet("~/api/TipoPersona/GetTipoPersonaById/{id}")]
-        [ActionName(nameof(GetTipoPersonaById))]
-        public async Task<ActionResult<TipoPersonaResponseDto>> GetTipoPersonaById(int id)
+        [HttpGet("~/api/Tipopersona/GetTipopersonaById/{id}")]
+        [ActionName(nameof(GetTipopersonaById))]
+        public async Task<ActionResult<TipopersonaResponseDto>> GetTipopersonaById(int id)
         {
 
 
-            var TipoPersona = await _repository.GetTipoPersonaById(id);
+            var Tipopersona = await _repository.GetTipopersonaById(id);
 
-            if (TipoPersona == null)
+            if (Tipopersona == null)
             {
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la TipoPersona por este id {id}" }
+                        new { mensaje = $"No se encontro la Tipopersona por este id {id}" }
                     );
             }
 
-            return Ok(_mapper.Map<TipoPersonaResponseDto>(TipoPersona));
+            return Ok(_mapper.Map<TipopersonaResponseDto>(Tipopersona));
 
         }
 
         [HttpPost]
-        public async Task<ActionResult<TipoPersonaResponseDto>> CreateTipoPersona
+        public async Task<ActionResult<TipopersonaResponseDto>> CreateTipopersona
             (
-               [FromBody] TipoPersonaRequestDto TipoPersona
+               [FromBody] TipopersonaRequestDto Tipopersona
             )
         {
 
-            var TipoPersonaModel = _mapper.Map<Per03TipoPersona>(TipoPersona);
+            var TipopersonaModel = _mapper.Map<per03Tipopersona>(Tipopersona);
 
-            await _repository.CreateTipoPersona(TipoPersonaModel);
+            await _repository.CreateTipopersona(TipopersonaModel);
             await _repository.SaveChanges();
 
-            var TipoPersonaResponse = _mapper.Map<TipoPersonaResponseDto>(TipoPersonaModel);
+            var TipopersonaResponse = _mapper.Map<TipopersonaResponseDto>(TipopersonaModel);
 
-            var TipoPersonadto = await _repository.GetTipoPersonaById(TipoPersonaResponse.per03llave);
+            var Tipopersonadto = await _repository.GetTipopersonaById(TipopersonaResponse.per03llave);
 
-            if (TipoPersonadto == null)
+            if (Tipopersonadto == null)
             {
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la TipoPersona por este id {TipoPersonaResponse.per03llave}" }
+                        new { mensaje = $"No se encontro la Tipopersona por este id {TipopersonaResponse.per03llave}" }
                     );
             }
 
-            return Ok(_mapper.Map<TipoPersonaResponseDto>(TipoPersonadto));
+            return Ok(_mapper.Map<TipopersonaResponseDto>(Tipopersonadto));
 
 
 
         }
 
         [HttpPut]
-        public async Task<ActionResult<TipoPersonaResponseDto>> UpdateTipoPersona
+        public async Task<ActionResult<TipopersonaResponseDto>> UpdateTipopersona
             (
-                [FromBody] TipoPersonaResponseDto TipoPersona
+                [FromBody] TipopersonaResponseDto Tipopersona
             )
         {
 
-            var TipoPersonaModel = _mapper.Map<Per03TipoPersona>(TipoPersona);
+            var TipopersonaModel = _mapper.Map<per03Tipopersona>(Tipopersona);
 
-            await _repository.UpdateTipoPersona(TipoPersonaModel);
+            await _repository.UpdateTipopersona(TipopersonaModel);
             await _repository.SaveChanges();
 
-            var TipoPersonaResponse = _mapper.Map<TipoPersonaResponseDto>(TipoPersonaModel);
+            var TipopersonaResponse = _mapper.Map<TipopersonaResponseDto>(TipopersonaModel);
 
-            var TipoPersonadto = await _repository.GetTipoPersonaById(TipoPersonaResponse.per03llave);
+            var Tipopersonadto = await _repository.GetTipopersonaById(TipopersonaResponse.per03llave);
 
-            if (TipoPersonadto == null)
+            if (Tipopersonadto == null)
             {
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la TipoPersona por este id {TipoPersonaResponse.per03llave}" }
+                        new { mensaje = $"No se encontro la Tipopersona por este id {TipopersonaResponse.per03llave}" }
                     );
             }
 
-            return Ok(_mapper.Map<TipoPersonaResponseDto>(TipoPersonadto));
+            return Ok(_mapper.Map<TipopersonaResponseDto>(Tipopersonadto));
 
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteTipoPersona(int id)
+        public async Task<ActionResult> DeleteTipopersona(int id)
         {
 
-            var TipoPersonadto = await _repository.GetTipoPersonaById(id);
+            var Tipopersonadto = await _repository.GetTipopersonaById(id);
 
-            if (TipoPersonadto == null)
+            if (Tipopersonadto == null)
             {
 
                 throw new MiddlewareException
                 (
                     HttpStatusCode.NotFound,
-                    new { mensaje = $"No se encontro la TipoPersona por este id {id}" }
+                    new { mensaje = $"No se encontro la Tipopersona por este id {id}" }
                 );
             }
             else
             {
-                if (TipoPersonadto.per03activo == 0)
+                if (Tipopersonadto.per03activo == 0)
                 {
-                    await _repository.DeleteTipoPersona(id);
+                    await _repository.DeleteTipopersona(id);
                     await _repository.SaveChanges();
                 }
                 else
                 {
-                    await _repository.DisableTipoPersona(id);
+                    await _repository.DisableTipopersona(id);
                     await _repository.SaveChanges();
                 }
             }
 
 
-            var listTipoPersonas = await _repository.GetAllTipoPersonas();
-            return Ok(_mapper.Map<TipoPersonaResponseDto[]>(listTipoPersonas));
+            var listTipopersonas = await _repository.GetAllTipopersonas();
+            return Ok(_mapper.Map<TipopersonaResponseDto[]>(listTipopersonas));
 
         }
 
-        [HttpPost("~/api/TipoPersona/disableTipoPersona")]
-        public async Task<ActionResult<TipoPersonaResponseDto[]>> DisableTipoPersona
+        [HttpPost("~/api/Tipopersona/disableTipopersona")]
+        public async Task<ActionResult<TipopersonaResponseDto[]>> DisableTipopersona
             (
-                 [FromBody] TipoPersonaResponseDto[] TipoPersonas
+                 [FromBody] TipopersonaResponseDto[] Tipopersonas
             )
         {
 
-            foreach (TipoPersonaResponseDto item in TipoPersonas)
+            foreach (TipopersonaResponseDto item in Tipopersonas)
             {
-                var a = _mapper.Map<TipoPersonaResponseDto>(item);
+                var a = _mapper.Map<TipopersonaResponseDto>(item);
 
-                await _repository.DisableTipoPersona(a.per03llave);
+                await _repository.DisableTipopersona(a.per03llave);
                 await _repository.SaveChanges();
             }
 
 
-            var listTipoPersonas = await _repository.GetAllTipoPersonas();
-            return Ok(_mapper.Map<TipoPersonaResponseDto[]>(listTipoPersonas));
+            var listTipopersonas = await _repository.GetAllTipopersonas();
+            return Ok(_mapper.Map<TipopersonaResponseDto[]>(listTipopersonas));
 
         }
 
 
-        [HttpPost("~/api/TipoPersona/ActivateTipoPersona")]
-        public async Task<ActionResult<TipoPersonaResponseDto[]>> ActivateTipoPersona
+        [HttpPost("~/api/Tipopersona/ActivateTipopersona")]
+        public async Task<ActionResult<TipopersonaResponseDto[]>> ActivateTipopersona
             (
-                 [FromBody] TipoPersonaResponseDto[] TipoPersonas
+                 [FromBody] TipopersonaResponseDto[] Tipopersonas
             )
         {
 
-            foreach (TipoPersonaResponseDto item in TipoPersonas)
+            foreach (TipopersonaResponseDto item in Tipopersonas)
             {
-                var a = _mapper.Map<TipoPersonaResponseDto>(item);
+                var a = _mapper.Map<TipopersonaResponseDto>(item);
 
-                await _repository.ActivateTipoPersona(a.per03llave);
+                await _repository.ActivateTipopersona(a.per03llave);
                 await _repository.SaveChanges();
             }
 
 
-            var listTipoPersonas = await _repository.GetAllTipoPersonas();
-            return Ok(_mapper.Map<TipoPersonaResponseDto[]>(listTipoPersonas));
+            var listTipopersonas = await _repository.GetAllTipopersonas();
+            return Ok(_mapper.Map<TipopersonaResponseDto[]>(listTipopersonas));
 
         }
 

@@ -1,25 +1,25 @@
 ﻿using mipBackend.Models;
-using mipBackend.Dtos.NivelPermisoDtos;
+using mipBackend.Dtos.NivelpermisoDtos;
 
-namespace mipBackend.Data.NivelPermisos
+namespace mipBackend.Data.Nivelpermisos
 {
-    public interface INivelPermisoRepository
+    public interface INivelpermisoRepository
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<NivelPermisoResponseDto>> GetAllNivelPermisos();
+        Task<IEnumerable<NivelpermisoResponseDto>> GetAllNivelpermisos();
 
-        Task<Wkf04NivelPermiso> GetNivelPermisoById(int id);
+        Task<wkf04Nivelpermiso> GetNivelpermisoById(int id);
 
-        Task CreateNivelPermiso(Wkf04NivelPermiso region);
+        Task CreateNivelpermiso(wkf04Nivelpermiso region);
 
-        Task UpdateNivelPermiso(Wkf04NivelPermiso region);
+        Task UpdateNivelpermiso(wkf04Nivelpermiso region);
 
-        Task DeleteNivelPermiso(int id);
+        Task DeleteNivelpermiso(int id);
 
-        Task DisableNivelPermiso(int id);
+        Task DisableNivelpermiso(int id);
 
-        Task ActivateNivelPermiso(int id);
+        Task ActivateNivelpermiso(int id);
 
     }
 }

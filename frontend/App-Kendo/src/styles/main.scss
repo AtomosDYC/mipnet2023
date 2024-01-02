@@ -147,3 +147,61 @@ kendo-recurrence-frequency-editor .k-edit-field {
     margin-right: 0px important;
     margin-left: 0px important;
   }
+
+  .k-form-buttons {
+    padding-top: 40px;
+  }
+  .k-notification {
+    margin-top: 50px;
+}
+
+.example-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000000;
+  }
+  .example-text {
+    font-size: 1.5rem;
+  }
+  
+  .k-button {
+    margin-bottom: 10px;
+  }
+
+  /* Loader Panel Styles */
+  .k-loading-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
+
+  .k-loading-panel-mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    opacity: 0.8;
+  }
+
+  .k-loading-panel-wrapper {
+    position: relative;
+    z-index: 2;
+  }
+
+  .k-loading-panel-text {
+    margin-top: 20px;
+    text-align: center;
+    color: #ffffff;
+  }

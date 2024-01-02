@@ -66,7 +66,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var ZonaModel = _mapper.Map<Sist02Zona>(Zona);
+            var ZonaModel = _mapper.Map<sist02Zona>(Zona);
 
             await _repository.CreateZona(ZonaModel);
             await _repository.SaveChanges();
@@ -97,7 +97,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var ZonaModel = _mapper.Map<Sist02Zona>(Zona);
+            var ZonaModel = _mapper.Map<sist02Zona>(Zona);
 
             await _repository.UpdateZona(ZonaModel);
             await _repository.SaveChanges();

@@ -6,13 +6,13 @@ namespace mipBackend.Data.Plantillas
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Prf03Plantilla>> GetAllPlantillas();
+        Task<IEnumerable<prf03Plantilla>> GetAllPlantillas();
 
-        Task<Prf03Plantilla> GetPlantillaById(int id);
+        Task<prf03Plantilla> GetPlantillaById(int id);
 
-        Task CreatePlantilla(Prf03Plantilla plantilla);
+        Task CreatePlantilla(prf03Plantilla plantilla);
 
-        Task UpdatePlantilla(Prf03Plantilla plantilla);
+        Task UpdatePlantilla(prf03Plantilla plantilla);
 
         Task DeletePlantilla(int id);
 

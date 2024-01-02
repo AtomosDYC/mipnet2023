@@ -29,7 +29,7 @@ namespace mipBackend.Data.MedidaUmbrales
         }
 
 
-        public async Task CreateMedidaUmbral(Esp06MedidaUmbral medidaumbral)
+        public async Task CreateMedidaUmbral(esp06MedidaUmbral medidaumbral)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -50,30 +50,30 @@ namespace mipBackend.Data.MedidaUmbrales
             }
 
             medidaumbral.fechaactivacion = DateTime.Now;
-            medidaumbral.createby = Guid.Parse(usuario.Id);
+            medidaumbral.createby = usuario.Id;
             medidaumbral.esp06activo = 1;
 
-            await _contexto.Esp06MedidaUmbrales!.AddAsync(medidaumbral);
+            await _contexto.esp06MedidaUmbrales!.AddAsync(medidaumbral);
 
         }
 
         public async Task DeleteMedidaUmbral(int id)
         {
 
-            var medidaumbral = await _contexto.Esp06MedidaUmbrales!
+            var medidaumbral = await _contexto.esp06MedidaUmbrales!
                 .FirstOrDefaultAsync(x => x.esp06llave == id);
 
-            _contexto.Esp06MedidaUmbrales!.Remove(medidaumbral!);
+            _contexto.esp06MedidaUmbrales!.Remove(medidaumbral!);
         }
 
-        public async Task<IEnumerable<Esp06MedidaUmbral>> GetAllMedidaUmbrales()
+        public async Task<IEnumerable<esp06MedidaUmbral>> GetAllMedidaUmbrales()
         {
-            return await _contexto.Esp06MedidaUmbrales!.ToListAsync();
+            return await _contexto.esp06MedidaUmbrales!.ToListAsync();
         }
 
-        public async Task<Esp06MedidaUmbral> GetMedidaUmbralById(int id)
+        public async Task<esp06MedidaUmbral> GetMedidaUmbralById(int id)
         {
-            return await _contexto.Esp06MedidaUmbrales!.FirstOrDefaultAsync(x => x.esp06llave == id)!;
+            return await _contexto.esp06MedidaUmbrales!.FirstOrDefaultAsync(x => x.esp06llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -81,7 +81,7 @@ namespace mipBackend.Data.MedidaUmbrales
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateMedidaUmbral(Esp06MedidaUmbral request)
+        public async Task UpdateMedidaUmbral(esp06MedidaUmbral request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -101,22 +101,22 @@ namespace mipBackend.Data.MedidaUmbrales
                    );
             }
 
-            var medidaumbral = await _contexto.Esp06MedidaUmbrales!
+            var medidaumbral = await _contexto.esp06MedidaUmbrales!
                 .FirstOrDefaultAsync(x => x.esp06llave == request.esp06llave);
 
             medidaumbral.fechaactualizacion = DateTime.Now;
-            medidaumbral.approveby = Guid.Parse(usuario.Id);
+            medidaumbral.approveby = usuario.Id;
             medidaumbral.esp06nombre = request.esp06nombre;
             medidaumbral.esp06descripcion = request.esp06descripcion;
 
-            _contexto.Esp06MedidaUmbrales!.Update(medidaumbral!);
+            _contexto.esp06MedidaUmbrales!.Update(medidaumbral!);
 
         }
 
         public async Task DisableMedidaUmbral(int id)
         {
 
-            var medidaumbral = await _contexto.Esp06MedidaUmbrales!
+            var medidaumbral = await _contexto.esp06MedidaUmbrales!
                 .FirstOrDefaultAsync(x => x.esp06llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -140,7 +140,7 @@ namespace mipBackend.Data.MedidaUmbrales
 
             medidaumbral.esp06activo = 0;
 
-            _contexto.Esp06MedidaUmbrales!.Update(medidaumbral);
+            _contexto.esp06MedidaUmbrales!.Update(medidaumbral);
 
 
         }
@@ -148,7 +148,7 @@ namespace mipBackend.Data.MedidaUmbrales
         public async Task ActivateMedidaUmbral(int id)
         {
 
-            var medidaumbral = await _contexto.Esp06MedidaUmbrales!
+            var medidaumbral = await _contexto.esp06MedidaUmbrales!
                 .FirstOrDefaultAsync(x => x.esp06llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -171,7 +171,7 @@ namespace mipBackend.Data.MedidaUmbrales
 
             medidaumbral.esp06activo = 1;
 
-            _contexto.Esp06MedidaUmbrales!.Update(medidaumbral);
+            _contexto.esp06MedidaUmbrales!.Update(medidaumbral);
 
         }
 

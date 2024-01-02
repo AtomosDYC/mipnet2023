@@ -26,7 +26,7 @@ namespace mipBackend.Data.TipoParametros
 
 
 
-        public async Task CreateTipoParametro(Wkf10TipoParametro tipoparametro)
+        public async Task CreateTipoParametro(wkf10TipoParametro tipoparametro)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -47,30 +47,30 @@ namespace mipBackend.Data.TipoParametros
             }
 
             tipoparametro.fechaactivacion = DateTime.Now;
-            tipoparametro.createby = Guid.Parse(usuario.Id);
+            tipoparametro.createby = usuario.Id;
             tipoparametro.wkf10activo = 1;
 
-            await _contexto.Wkf10TipoParametros!.AddAsync(tipoparametro);
+            await _contexto.wkf10TipoParametros!.AddAsync(tipoparametro);
 
         }
 
         public async Task DeleteTipoParametro(int id)
         {
 
-            var tipoparametro = await _contexto.Wkf10TipoParametros!
+            var tipoparametro = await _contexto.wkf10TipoParametros!
                 .FirstOrDefaultAsync(x => x.wkf10llave == id);
 
-            _contexto.Wkf10TipoParametros!.Remove(tipoparametro!);
+            _contexto.wkf10TipoParametros!.Remove(tipoparametro!);
         }
 
-        public async Task<IEnumerable<Wkf10TipoParametro>> GetAllTipoParametros()
+        public async Task<IEnumerable<wkf10TipoParametro>> GetAllTipoParametros()
         {
-            return await _contexto.Wkf10TipoParametros!.ToListAsync();
+            return await _contexto.wkf10TipoParametros!.ToListAsync();
         }
 
-        public async Task<Wkf10TipoParametro> GetTipoParametroById(int id)
+        public async Task<wkf10TipoParametro> GetTipoParametroById(int id)
         {
-            return await _contexto.Wkf10TipoParametros!.FirstOrDefaultAsync(x => x.wkf10llave == id)!;
+            return await _contexto.wkf10TipoParametros!.FirstOrDefaultAsync(x => x.wkf10llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -78,7 +78,7 @@ namespace mipBackend.Data.TipoParametros
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateTipoParametro(Wkf10TipoParametro request)
+        public async Task UpdateTipoParametro(wkf10TipoParametro request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -98,22 +98,22 @@ namespace mipBackend.Data.TipoParametros
                    );
             }
 
-            var tipoparametro = await _contexto.Wkf10TipoParametros!
+            var tipoparametro = await _contexto.wkf10TipoParametros!
                 .FirstOrDefaultAsync(x => x.wkf10llave == request.wkf10llave);
 
             tipoparametro.fechaactualizacion = DateTime.Now;
-            tipoparametro.approveby = Guid.Parse(usuario.Id);
+            tipoparametro.approveby = usuario.Id;
             tipoparametro.wkf10nombre = request.wkf10nombre;
             tipoparametro.wkf10descripcion = request.wkf10descripcion;
 
-            _contexto.Wkf10TipoParametros!.Update(tipoparametro!);
+            _contexto.wkf10TipoParametros!.Update(tipoparametro!);
 
         }
 
         public async Task DisableTipoParametro(int id)
         {
 
-            var tipoparametro = await _contexto.Wkf10TipoParametros!
+            var tipoparametro = await _contexto.wkf10TipoParametros!
                 .FirstOrDefaultAsync(x => x.wkf10llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -137,7 +137,7 @@ namespace mipBackend.Data.TipoParametros
 
             tipoparametro.wkf10activo = 0;
 
-            _contexto.Wkf10TipoParametros!.Update(tipoparametro);
+            _contexto.wkf10TipoParametros!.Update(tipoparametro);
 
 
         }
@@ -145,7 +145,7 @@ namespace mipBackend.Data.TipoParametros
         public async Task ActivateTipoParametro(int id)
         {
 
-            var tipoparametro = await _contexto.Wkf10TipoParametros!
+            var tipoparametro = await _contexto.wkf10TipoParametros!
                 .FirstOrDefaultAsync(x => x.wkf10llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -169,7 +169,7 @@ namespace mipBackend.Data.TipoParametros
 
             tipoparametro.wkf10activo = 1;
 
-            _contexto.Wkf10TipoParametros!.Update(tipoparametro);
+            _contexto.wkf10TipoParametros!.Update(tipoparametro);
 
 
         }

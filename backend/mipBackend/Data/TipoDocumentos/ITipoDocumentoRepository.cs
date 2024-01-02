@@ -8,13 +8,13 @@ namespace mipBackend.Data.TipoDocumentos
 
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Per08TipoDocumento>> GetAllTipoDocumentos();
+        Task<IEnumerable<per08TipoDocumento>> GetAllTipoDocumentos();
 
-        Task<Per08TipoDocumento> GetTipoDocumentoById(int id);
+        Task<per08TipoDocumento> GetTipoDocumentoById(int id);
 
-        Task CreateTipoDocumento(Per08TipoDocumento TipoDocumento);
+        Task CreateTipoDocumento(per08TipoDocumento TipoDocumento);
 
-        Task UpdateTipoDocumento(Per08TipoDocumento TipoDocumento);
+        Task UpdateTipoDocumento(per08TipoDocumento TipoDocumento);
 
         Task DeleteTipoDocumento(int id);
 

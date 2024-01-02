@@ -5,17 +5,17 @@ namespace mipBackend.Models;
 
 public partial class Prm01Seguridad
 {
-    public int Prm01Llave { get; set; }
+    public int Prm01llave { get; set; }
 
-    public string? Prm01Nombre { get; set; }
+    public string? Prm01nombre { get; set; }
 
-    public string? Prm01Descripcion { get; set; }
+    public string? Prm01descripcion { get; set; }
 
     public int? Prm01Valor { get; set; }
 
     public string? Prm01UrlError { get; set; }
 
-    public int? Prm01Activo { get; set; }
+    public int? Prm01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

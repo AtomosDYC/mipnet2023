@@ -64,7 +64,7 @@ export class WorkflowListComponent implements OnInit {
 
     this._fillworkflowService.Getdata().subscribe(
       allrecords => {
-        this.data = allrecords        
+        this.data = allrecords    
       },
       error => this.errorMessage = <any>error
     );

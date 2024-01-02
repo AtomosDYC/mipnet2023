@@ -6,13 +6,13 @@ namespace mipBackend.Data.Areas
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Wkf08Area>> GetAllAreas();
+        Task<IEnumerable<wkf08Area>> GetAllAreas();
 
-        Task<Wkf08Area> GetAreaById(int id);
+        Task<wkf08Area> GetAreaById(int id);
 
-        Task CreateArea(Wkf08Area region);
+        Task CreateArea(wkf08Area region);
 
-        Task UpdateArea(Wkf08Area region);
+        Task UpdateArea(wkf08Area region);
 
         Task DeleteArea(int id);
 

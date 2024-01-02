@@ -9,9 +9,9 @@ namespace mipBackend.Data.WorkflowParametros
 
         Task<IEnumerable<WorkflowParametroResponseDto>> GetAllWorkflowParametros(int id);
 
-        Task CreateWorkflowParametro(Wkf09Parametro workflowparametro);
+        Task CreateWorkflowParametro(wkf09Parametro workflowparametro);
 
-        Task<Wkf09Parametro> GetWorkflowParametroById(int id);
+        Task<wkf09Parametro> GetWorkflowParametroById(int id);
 
         Task DeleteWorkflowParametro(int id);
 

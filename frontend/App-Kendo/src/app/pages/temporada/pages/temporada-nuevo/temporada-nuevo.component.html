@@ -1,0 +1,109 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoSegmentartemporada')}} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtNombre" text="{{ customMsgService.translate('nombre')}}"></kendo-label>
+                    <kendo-textbox
+                        formControlName="txtNombre"
+                        #txtNombre
+                        required
+                    ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+                </kendo-formfield>
+                
+                
+                <kendo-formfield>
+                    <kendo-label [for]="txtDescripcion" text="{{ customMsgService.translate('descripcion')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txtDescripcion"
+                        #txtDescripcion
+                        required
+                    ></kendo-textbox>
+
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorDescripcion')}}</kendo-formerror>
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxBaseTemporada" text="{{ customMsgService.translate('base')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="Baselist"
+                        placeholder="Seleccione {{ customMsgService.translate('base')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxBaseTemporada"
+                        #cbxBaseTemporada
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorTemporadabase')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="cbxSegmentacion" text="{{ customMsgService.translate('segmentacion')}} "></kendo-label>
+                    <kendo-combobox
+                        [data]="Segmentacionlist"
+                        placeholder="Seleccione {{ customMsgService.translate('segmentacion')}}"
+                        textField="description"
+                        valueField="value"
+                        formControlName="cbxSegmentacion"
+                        #cbxSegmentacion
+                    >
+                    </kendo-combobox>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorSegmentacion')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="dtpMinfecha" text="{{ customMsgService.translate('minfecha')}} "></kendo-label>
+                    <kendo-datepicker
+                    formControlName="dtpMinfecha"
+                    #dtpMinfecha
+                    format="dd/MM/yyyy"
+                    required
+                    ></kendo-datepicker>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorMinFecha')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="dtpMaxfecha" text="{{ customMsgService.translate('maxfecha')}} "></kendo-label>
+                    <kendo-datepicker
+                    format="dd/MM/yyyy"
+                    formControlName="dtpMaxfecha"
+                    #dtpMaxfecha
+                    required
+                    ></kendo-datepicker>
+                    <kendo-formerror>Error: {{ customMsgService.translate('errorMaxFecha')}}</kendo-formerror>                    
+                </kendo-formfield>
+
+                <kendo-formfield>
+                    <kendo-label [for]="txtperiodos" text="Numero de Periodos"></kendo-label>
+                    <kendo-numerictextbox
+                    formControlName="txtperiodos"
+                    [style.width.px]="170"
+                    [min]="0"
+                    [max]="100"
+                    #txtperiodos
+                    format="n"
+                    required=""
+                    >
+                    </kendo-numerictextbox>
+    
+                    <kendo-formerror>Error: Numero de Periodos</kendo-formerror>
+                </kendo-formfield>
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/temporadas/temporadabase/list']">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>

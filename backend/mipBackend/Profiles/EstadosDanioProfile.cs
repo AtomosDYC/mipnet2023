@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public EstadosDanioProfile()
         {
 
-            CreateMap<Esp04EstadoDanio, EstadosDanioResponseDto>();
-            CreateMap<EstadosDanioResponseDto, Esp04EstadoDanio>();
-            CreateMap<EstadosDanioRequestDto, Esp04EstadoDanio>();
+            CreateMap<esp04EstadoDanio, EstadosDanioResponseDto>();
+            CreateMap<EstadosDanioResponseDto, esp04EstadoDanio>();
+            CreateMap<EstadosDanioRequestDto, esp04EstadoDanio>();
 
         }
     }

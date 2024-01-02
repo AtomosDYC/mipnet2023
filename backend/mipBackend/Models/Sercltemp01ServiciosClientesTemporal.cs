@@ -5,17 +5,17 @@ namespace mipBackend.Models;
 
 public partial class Sercltemp01ServiciosClientesTemporal
 {
-    public int Sercltemp01Llave { get; set; }
+    public int Sercltemp01llave { get; set; }
 
     public int? Sercltemp01TipoGrafico { get; set; }
 
-    public int? Cntemp01Llave { get; set; }
+    public int? cntemp01llave { get; set; }
 
-    public int? Cntemp02Llave { get; set; }
+    public int? cntemp02llave { get; set; }
 
-    public int? Conteo03Llave { get; set; }
+    public int? Conteo03llave { get; set; }
 
-    public int? Temp02Llave { get; set; }
+    public int? Temp02llave { get; set; }
 
-    public virtual Conteo03Resumen? Conteo03LlaveNavigation { get; set; }
+    public virtual Conteo03Resumen? Conteo03llaveNavigation { get; set; }
 }

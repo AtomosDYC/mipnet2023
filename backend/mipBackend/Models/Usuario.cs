@@ -2,7 +2,7 @@
 
 namespace mipBackend.Models
 {
-    public class Usuario: IdentityUser
+    public class Usuario: IdentityUser<Guid>
     {
 
     }

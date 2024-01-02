@@ -66,7 +66,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var NivelFlujoModel = _mapper.Map<Wkf03Nivel>(nivelflujo);
+            var NivelFlujoModel = _mapper.Map<wkf03Nivel>(nivelflujo);
 
             await _repository.CreateNivelFlujo(NivelFlujoModel);
             await _repository.SaveChanges();
@@ -97,7 +97,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var NivelFlujoModel = _mapper.Map<Wkf03Nivel>(nivelflujo);
+            var NivelFlujoModel = _mapper.Map<wkf03Nivel>(nivelflujo);
 
             await _repository.UpdateNivelFlujo(NivelFlujoModel);
             await _repository.SaveChanges();

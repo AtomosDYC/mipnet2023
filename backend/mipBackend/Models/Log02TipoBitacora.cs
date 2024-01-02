@@ -5,19 +5,19 @@ namespace mipBackend.Models;
 
 public partial class Log02TipoBitacora
 {
-    public Guid Log02Llave { get; set; }
+    public Guid Log02llave { get; set; }
 
-    public string? Log02Nombre { get; set; }
+    public string? Log02nombre { get; set; }
 
-    public string? Log02Descripcion { get; set; }
+    public string? Log02descripcion { get; set; }
 
-    public int? Log02EsSistema { get; set; }
+    public int? Log02Essistema { get; set; }
 
     public int? Log02EsRazor { get; set; }
 
     public string? Log02Info { get; set; }
 
-    public int? Log02Activo { get; set; }
+    public int? Log02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

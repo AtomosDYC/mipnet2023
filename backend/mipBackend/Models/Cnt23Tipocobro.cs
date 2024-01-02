@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt23Tipocobro
+public partial class cnt23Tipocobro
 {
-    public int Cnt23Llave { get; set; }
+    public int cnt23llave { get; set; }
 
-    public string? Cnt23Nombre { get; set; }
+    public string? cnt23nombre { get; set; }
 
-    public string? Cnt23Descripcion { get; set; }
+    public string? cnt23descripcion { get; set; }
 
-    public int? Cnt23Activo { get; set; }
+    public int? cnt23activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

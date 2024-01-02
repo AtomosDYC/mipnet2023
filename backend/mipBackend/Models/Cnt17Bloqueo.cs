@@ -3,27 +3,27 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt17Bloqueo
+public partial class cnt17Bloqueo
 {
-    public int Cnt17Llave { get; set; }
+    public int cnt17llave { get; set; }
 
-    public int? Blk01Llave { get; set; }
+    public int? Blk01llave { get; set; }
 
-    public int? Cnt16Llave { get; set; }
+    public int? cnt16llave { get; set; }
 
-    public int? Cnt01Llave { get; set; }
+    public int? cnt01llave { get; set; }
 
-    public int? Cnt08Llave { get; set; }
+    public int? cnt08llave { get; set; }
 
-    public int? Cnt14Llave { get; set; }
+    public int? cnt14llave { get; set; }
 
-    public int? Per01Llave { get; set; }
+    public int? per01llave { get; set; }
 
-    public DateTime? Cnt17InicioBloqueo { get; set; }
+    public DateTime? cnt17InicioBloqueo { get; set; }
 
-    public DateTime? Cnt17TerminoBloqueo { get; set; }
+    public DateTime? cnt17TerminoBloqueo { get; set; }
 
-    public bool? Cnt17Activo { get; set; }
+    public bool? cnt17activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -31,13 +31,13 @@ public partial class Cnt17Bloqueo
 
     public DateTime? fechaactivacion { get; set; }
 
-    public virtual Blk01Bloqueo? Blk01LlaveNavigation { get; set; }
+    public virtual Blk01Bloqueo? Blk01llaveNavigation { get; set; }
 
-    public virtual Cnt01CuentaCliente? Cnt01LlaveNavigation { get; set; }
+    public virtual cnt01CuentaCliente? cnt01llaveNavigation { get; set; }
 
-    public virtual Cnt08Segmentacion? Cnt08LlaveNavigation { get; set; }
+    public virtual cnt08Segmentacion? cnt08llaveNavigation { get; set; }
 
-    public virtual Cnt14ClienteLicencia? Cnt14LlaveNavigation { get; set; }
+    public virtual cnt14ClienteLicencia? cnt14llaveNavigation { get; set; }
 
-    public virtual Cnt16TipoBloqueoCliente? Cnt16LlaveNavigation { get; set; }
+    public virtual cnt16TipoBloqueoCliente? cnt16llaveNavigation { get; set; }
 }

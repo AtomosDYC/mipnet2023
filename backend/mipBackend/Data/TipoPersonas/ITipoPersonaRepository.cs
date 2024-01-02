@@ -1,24 +1,26 @@
 ﻿using mipBackend.Models;
-using mipBackend.Dtos.TipoPersonaDtos;
+using mipBackend.Dtos.TipopersonaDtos;
 
-namespace mipBackend.Data.TipoPersonas
+namespace mipBackend.Data.Tipopersonas
 {
-    public interface ITipoPersonaRepository
+    public interface ITipopersonaRepository
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Per03TipoPersona>> GetAllTipoPersonas();
+        Task<IEnumerable<per03Tipopersona>> GetAllTipopersonas();
 
-        Task<Per03TipoPersona> GetTipoPersonaById(int id);
+        Task<per03Tipopersona> GetTipopersonaById(int id);
 
-        Task CreateTipoPersona(Per03TipoPersona TipoPersona);
+        Task CreateTipopersona(per03Tipopersona Tipopersona);
 
-        Task UpdateTipoPersona(Per03TipoPersona TipoPersona);
+        Task UpdateTipopersona(per03Tipopersona Tipopersona);
 
-        Task DeleteTipoPersona(int id);
+        Task DeleteTipopersona(int id);
 
-        Task DisableTipoPersona(int id);
+        Task DisableTipopersona(int id);
 
-        Task ActivateTipoPersona(int id);
+        Task ActivateTipopersona(int id);
+
+
     }
 }

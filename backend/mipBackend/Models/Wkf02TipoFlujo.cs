@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Wkf02TipoFlujo
+public partial class wkf02TipoFlujo
 {
     public int wkf02llave { get; set; }
 
@@ -27,5 +27,5 @@ public partial class Wkf02TipoFlujo
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Wkf03Nivel> Wkf03Nivels { get; } = new List<Wkf03Nivel>();
+    public virtual ICollection<wkf03Nivel> wkf03Nivels { get; } = new List<wkf03Nivel>();
 }

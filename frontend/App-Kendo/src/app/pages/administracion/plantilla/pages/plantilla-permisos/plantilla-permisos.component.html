@@ -60,7 +60,7 @@
 
                     <div class="k-form-buttons">
                         <button kendoButton themeColor="secondary">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
-                        <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('guardar')}}</button>
+                        <button kendoButton themeColor="primary" (click)="onguardarNuevoPermiso()">{{ customMsgService.translate('guardar')}}</button>
 
 
                     </div>
@@ -88,6 +88,20 @@
                 [width]="250"
             >
             </kendo-treelist-column>
+            <kendo-treelist-column [width]="100">
+                <ng-template kendoTreeListCellTemplate 
+                  let-dataItem="dataItem"
+                >
+                  
+                  <button
+                    kendoButton
+                     title="Edit" [primary]="true"
+                    iconClass="fa fa-pencil"
+                    title="{{ customMsgService.translate('eliminar') }}"
+                    (click)="(OnDelete(dataItem.prf04llave))"
+                  ></button>
+                </ng-template>
+              </kendo-treelist-column>
         </kendo-treelist>
 
     </div>

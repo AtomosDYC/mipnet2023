@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Mvl01AccesoMovil
 {
-    public string Mvl01Llave { get; set; } = null!;
+    public Guid Mvl01llave { get; set; }
 
-    public Guid? Mvl01IdUsuario { get; set; }
+    public Guid Mvl01IdUsuario { get; set; }
 
     public string? Mvl01NumeroMovil { get; set; }
 
-    public string? Mvl01SistemaAndroid { get; set; }
+    public string? Mvl01sistemaAndroid { get; set; }
 
     public string? Mvl01VersionAndroid { get; set; }
 
@@ -33,7 +33,7 @@ public partial class Mvl01AccesoMovil
 
     public DateTime? Mvl01FechaUltimaSincro { get; set; }
 
-    public int? Mvl01TamanoBasedatosCliente { get; set; }
+    public decimal? Mvl01TamanoBasedatosCliente { get; set; }
 
     public int? Mvl01UbicacionActividadX { get; set; }
 

@@ -5,11 +5,11 @@ namespace mipBackend.Models;
 
 public partial class Cont02TipoContacto
 {
-    public int Cont02Llave { get; set; }
+    public int Cont02llave { get; set; }
 
-    public string? Cont02Nombre { get; set; }
+    public string? Cont02nombre { get; set; }
 
-    public string? Cont02Descripcion { get; set; }
+    public string? Cont02descripcion { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

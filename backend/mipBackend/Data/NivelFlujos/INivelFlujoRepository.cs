@@ -9,11 +9,11 @@ namespace mipBackend.Data.NivelFlujos
 
         Task<IEnumerable<NivelFlujoResponseDto>> GetAllNivelFlujos();
 
-        Task<Wkf03Nivel> GetNivelFlujoById(int id);
+        Task<wkf03Nivel> GetNivelFlujoById(int id);
 
-        Task CreateNivelFlujo(Wkf03Nivel nivelflujo);
+        Task CreateNivelFlujo(wkf03Nivel nivelflujo);
 
-        Task UpdateNivelFlujo(Wkf03Nivel nivelflujo);
+        Task UpdateNivelFlujo(wkf03Nivel nivelflujo);
 
         Task DeleteNivelFlujo(int id);
 

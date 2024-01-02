@@ -3,29 +3,29 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Esp11ReglaGrafico
+public partial class esp11ReglaGrafico
 {
-    public int Esp11Llave { get; set; }
+    public int esp11llave { get; set; }
 
-    public int? Esp03Llave { get; set; }
+    public int? esp03llave { get; set; }
 
-    public int? Esp10Llave { get; set; }
+    public int? esp10llave { get; set; }
 
-    public string? Esp11Nombre { get; set; }
+    public string? esp11nombre { get; set; }
 
-    public string? Esp11Signo1 { get; set; }
+    public string? esp11signo1 { get; set; }
 
-    public int? Esp11Valor1 { get; set; }
+    public int? esp11valor1 { get; set; }
 
-    public string? Esp11Signo2 { get; set; }
+    public string? esp11signo2 { get; set; }
 
-    public int? Esp11Valor2 { get; set; }
+    public int? esp11valor2 { get; set; }
 
-    public string? Esp11SignoResultado { get; set; }
+    public string? esp11signoresultado { get; set; }
 
-    public int? Esp11ValorResultado { get; set; }
+    public int? esp11valorresultado { get; set; }
 
-    public int? Esp11Estado { get; set; }
+    public int? esp11estado { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -39,5 +39,5 @@ public partial class Esp11ReglaGrafico
 
     public Guid? deleteby { get; set; }
 
-    public virtual Esp10TipoRegla? Esp10LlaveNavigation { get; set; }
+    public virtual esp10TipoRegla? esp10llaveNavigation { get; set; }
 }

@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public AreaProfile()
         {
 
-            CreateMap<Wkf08Area, AreaResponseDto>();
-            CreateMap<AreaResponseDto, Wkf08Area>();
-            CreateMap<AreaRequestDto, Wkf08Area>();
+            CreateMap<wkf08Area, AreaResponseDto>();
+            CreateMap<AreaResponseDto, wkf08Area>();
+            CreateMap<AreaRequestDto, wkf08Area>();
 
         }
     }

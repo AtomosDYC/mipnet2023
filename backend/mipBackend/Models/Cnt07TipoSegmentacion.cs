@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt07TipoSegmentacion
+public partial class cnt07TipoSegmentacion
 {
-    public int Cnt07Llave { get; set; }
+    public int cnt07llave { get; set; }
 
-    public string? Cnt07Nombre { get; set; }
+    public string? cnt07nombre { get; set; }
 
-    public string? Cnt07Descripcion { get; set; }
+    public string? cnt07descripcion { get; set; }
 
-    public int? Cnt18Llave { get; set; }
+    public int? cnt18llave { get; set; }
 
-    public int? Cnt02Llave { get; set; }
+    public int? cnt02llave { get; set; }
 
-    public int? Cnt07Activo { get; set; }
+    public int? cnt07activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -29,7 +29,7 @@ public partial class Cnt07TipoSegmentacion
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Cnt08Segmentacion> Cnt08Segmentacions { get; } = new List<Cnt08Segmentacion>();
+    public virtual ICollection<cnt08Segmentacion> cnt08Segmentacions { get; } = new List<cnt08Segmentacion>();
 
-    public virtual Cnt18NivelSegmentacion? Cnt18LlaveNavigation { get; set; }
+    public virtual cnt18NivelSegmentacion? cnt18llaveNavigation { get; set; }
 }

@@ -9,7 +9,7 @@ import { GridModule, ExcelModule, PDFModule } from '@progress/kendo-angular-grid
 import { SharedModule, InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { IconsModule } from '@progress/kendo-angular-icons';
+
 import { TreeListModule } from '@progress/kendo-angular-treelist';
 
 
@@ -28,7 +28,7 @@ import { TreeListModule } from '@progress/kendo-angular-treelist';
     LabelModule,
     ButtonGroupModule,
     DropDownsModule,
-    IconsModule,
+    
     ExcelModule,
     PDFModule,
     TreeListModule

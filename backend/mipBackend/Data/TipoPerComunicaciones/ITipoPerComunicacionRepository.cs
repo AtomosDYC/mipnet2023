@@ -1,19 +1,19 @@
 ﻿using mipBackend.Models;
-using mipBackend.Dtos.TipoPerComunicacionDtos;
+using mipBackend.Dtos.TipoperComunicacionDtos;
 
-namespace mipBackend.Data.TipoPerComunicaciones
+namespace mipBackend.Data.TipoperComunicaciones
 {
-    public interface ITipoPerComunicacionRepository
+    public interface ITipoperComunicacionRepository
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<TipoPerComunicacionResponseDto>> GetAllTipoPerComunicaciones();
+        Task<IEnumerable<TipoperComunicacionResponseDto>> GetAllTipoperComunicaciones();
 
-        Task<IEnumerable<TipoPerComunicacionResponseDto>> GetTipoPerComunicacionById(int id);
+        Task<IEnumerable<TipoperComunicacionResponseDto>> GetTipoperComunicacionById(int id);
 
-        Task CreateTipoPerComunicacion(Per06TipoPersonaComunicacion tipopercomunicacion);
+        Task CreateTipoperComunicacion(per06TipopersonaComunicacion tipopercomunicacion);
 
-        Task DeleteTipoPerComunicacion(TipoPerComunicacionRequestDto tipopercomunicacion);
+        Task DeleteTipoperComunicacion(TipoperComunicacionRequestDto tipopercomunicacion);
 
   }
 }

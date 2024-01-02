@@ -26,8 +26,8 @@ export class WorkflowConfiguracionwebComponent implements OnInit {
   
   public Form: FormGroup = new FormGroup(
     {
-      txtUrl: new FormControl( null , [Validators.required]),
-      txtIconomenu: new FormControl(null, [Validators.required]),
+      txtUrl: new FormControl( null),
+      txtIconomenu: new FormControl(null),
       chkVisiblemenu: new FormControl(null)
     }
   );
@@ -49,8 +49,8 @@ export class WorkflowConfiguracionwebComponent implements OnInit {
   ngOnInit(): void {
     
     this.Form = new FormGroup({
-      txtUrl: new FormControl( null , [Validators.required]),
-      txtIconomenu: new FormControl(null, [Validators.required]),
+      txtUrl: new FormControl( null),
+      txtIconomenu: new FormControl(null),
       chkVisiblemenu: new FormControl(null)
     });
 
@@ -69,8 +69,8 @@ export class WorkflowConfiguracionwebComponent implements OnInit {
               const esvisible = data.wkf01visiblemenu ? true : false;
 
               this.Form = new FormGroup({
-                txtUrl: new FormControl( data.wkf01url , [Validators.required]),
-                txtIconomenu: new FormControl(data.wkf01iconourl, [Validators.required]),
+                txtUrl: new FormControl( data.wkf01url),
+                txtIconomenu: new FormControl(data.wkf01iconourl),
                 chkVisiblemenu: new FormControl(esvisible),
               });
                
@@ -81,8 +81,8 @@ export class WorkflowConfiguracionwebComponent implements OnInit {
       } else {
 
          this.Form = new FormGroup({
-          txtUrl: new FormControl( null , [Validators.required]),
-          txtIconomenu: new FormControl(null, [Validators.required]),
+          txtUrl: new FormControl( null),
+          txtIconomenu: new FormControl(null),
           chkVisiblemenu: new FormControl(null)
         });
       }
@@ -92,7 +92,7 @@ export class WorkflowConfiguracionwebComponent implements OnInit {
 
   
 
-  onguardarNuevo(): void {
+  onguardarNuevoConfiguracion(): void {
 
     this.Form.markAllAsTouched();
 

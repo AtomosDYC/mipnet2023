@@ -30,7 +30,7 @@ namespace mipBackend.Data.DefaultUsers
         }
 
 
-        public async Task CreateDefaultUser(Per09DefaultUser defaultuser)
+        public async Task CreateDefaultUser(per09DefaultUser defaultuser)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -51,17 +51,17 @@ namespace mipBackend.Data.DefaultUsers
             }
 
             var ID = 1;
-            var defaults = await _contexto.Per09DefaultUsers!.FirstOrDefaultAsync(x => x.per09llave == ID)!;
+            var defaults = await _contexto.per09DefaultUsers!.FirstOrDefaultAsync(x => x.per09llave == ID)!;
 
             if (defaults is null)
             {
-                await _contexto.Per09DefaultUsers!.AddAsync(defaultuser!);
+                await _contexto.per09DefaultUsers!.AddAsync(defaultuser!);
             } 
             else
             {
 
                 defaultuser.per09llave = defaults.per09llave;
-                _contexto.Per09DefaultUsers!.Update(defaultuser);
+                _contexto.per09DefaultUsers!.Update(defaultuser);
             }
 
             
@@ -72,21 +72,21 @@ namespace mipBackend.Data.DefaultUsers
         {
             using (var db = _contexto)
             {
-                var query = await (from df in db.Per09DefaultUsers!
+                var query = await (from df in db.per09DefaultUsers!
 
                                    join rol in db.Roles! on df.rolid equals rol.Id into nubrol
                                    from rl in nubrol.DefaultIfEmpty()
 
-                                   join plan in db.Prf03Plantillas! on df.plantillaid equals plan.prf03llave into nubplan
+                                   join plan in db.prf03Plantillas! on df.plantillaid equals plan.prf03llave into nubplan
                                    from pl in nubplan.DefaultIfEmpty()
 
-                                   join saludo in db.Per02Generos! on df.saludoid equals saludo.per02llave into nubsaludo
+                                   join saludo in db.per02Generos! on df.saludoid equals saludo.per02llave into nubsaludo
                                    from sl in nubsaludo.DefaultIfEmpty()
 
-                                   join doc in db.Per08TipoDocumentos! on df.tipodocumentoid equals doc.per08llave into nubdoc
+                                   join doc in db.per08TipoDocumentos! on df.tipodocumentoid equals doc.per08llave into nubdoc
                                    from dc in nubdoc.DefaultIfEmpty()
 
-                                   join persona in db.Per03TipoPersonas! on df.tipopersonaid equals persona.per03llave into nubpersona
+                                   join persona in db.per03Tipopersonas! on df.tipopersonaid equals persona.per03llave into nubpersona
                                    from pr in nubpersona.DefaultIfEmpty()
 
 
@@ -113,9 +113,9 @@ namespace mipBackend.Data.DefaultUsers
             }
         }
 
-        public async Task<Per09DefaultUser> GetDefaultUserById(int id)
+        public async Task<per09DefaultUser> GetDefaultUserById(int id)
         {
-            return await _contexto.Per09DefaultUsers!.FirstOrDefaultAsync(x => x.per09llave == id)!;
+            return await _contexto.per09DefaultUsers!.FirstOrDefaultAsync(x => x.per09llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -123,7 +123,7 @@ namespace mipBackend.Data.DefaultUsers
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateDefaultUser(Per09DefaultUser request)
+        public async Task UpdateDefaultUser(per09DefaultUser request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -143,13 +143,13 @@ namespace mipBackend.Data.DefaultUsers
                    );
             }
 
-            var defaultuser = await _contexto.Per09DefaultUsers!
+            var defaultuser = await _contexto.per09DefaultUsers!
                 .FirstOrDefaultAsync(x => x.per09llave == request.per09llave);
 
             defaultuser.per09nombre = request.per09nombre;
 
 
-            _contexto.Per09DefaultUsers!.Update(defaultuser!);
+            _contexto.per09DefaultUsers!.Update(defaultuser!);
 
         }
 

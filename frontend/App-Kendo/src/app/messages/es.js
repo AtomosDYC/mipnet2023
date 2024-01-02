@@ -3,6 +3,61 @@ export const esCustomMessages = {
     mantenimientoregion: 'Mantenimiento de regiones',
     mantenimientoSaludo: 'Mantenimiento de Saludos',
 
+    descargarpdf:'Descargar en PDF',
+
+    //eespecie temporada
+    mantenimientoEspecietemporada: 'Mantenimiento de Temporadas de Especies',
+    tipodanio: 'Tipo de daño',
+    errortipodanio: 'El tipo de daño es obligatorio',
+    temporada: 'Temporada',
+    errortemporada: 'La temporada es obligatoria',
+    fechainicio: 'Fecha inicio de Temporada',
+    fechatermino: 'Fecha termino de Temporada',
+
+    //monitor asignacion de especie
+    temporadaactiva: 'Temporada',
+    errorTemporadaactiva: 'La temporada es de ingreso obligatorio',
+    tipoespecie: 'Tipo Especie',
+    errorTipoespecie: 'EL tipo de especie es de ingreso obligatorio',
+    MantNuevoasignarespecie: 'Asignar Especies',
+
+    //monitor trampa
+    estacion : 'Estación',
+    errorestacion : 'La Estación es de ingreso obligatorio',
+    trampa : 'Trampas',
+    asignar : 'Asignar Trampas a Monitor',
+    asignadaa : 'Asignada al Monitor',
+    replicartrampas: 'Replicar Asignación de trampas de temporada anterior',
+
+    //monitor sincronizacion
+    actuaizartodo :'Actuallizar Todas las tablas',
+
+    //persona
+    mantenimientodepersonas: 'Mantenimiento de Personas',
+    titulo: 'Saludo de bienvenida',
+    alias: 'Alias / Nombre de fantasia',
+    girocomercial: 'Girocomercial',
+    cargo: 'cargo',
+    dni: 'DNI',
+    pasaporte: 'Pasaporte',
+    fechanaciemiento: 'Fecha Nacimiento',
+    actualizarpassword: 'Actualizar Password',
+
+    mantenimientopersonacomunicacion: 'Comunicación',
+    MantNuevoPersonaComunicacion: 'Agregar nueva comunicación',
+    tipocomunicacion: 'Tipo de Comunicación',
+    direccion: 'Dirección',
+    casilla: 'Casilla',
+    codigopostal: 'Codigo Postal',
+    email: 'E-mail',
+    telefono: 'N° Telefono',
+    telefono2: 'N° Telefono 2',
+    celular: 'N° Celular',
+    celular2: 'N° Celular 2',
+    sitioweb: 'Sitio Web',
+
+    
+
     //tipopersona
     mantenimientoTipopersona: 'Mantenimiento de tipo de persona',
     tipopersona: 'Tipo de Persona',
@@ -13,12 +68,35 @@ export const esCustomMessages = {
     tipodocumento: 'Tipo de documento de indentificacion',
     errorTipodocumento: 'EL Tipo de documento de indentificacion es de ingreso obligtorio',
 
+    //monitores
+    mantenimientoMonitores: 'Mantenimiento Monitores',
+    buscadorpersona: 'Buscador de Usuarios',
+    ingresedocumento: 'ingrese un numero de documento para la busqueda',
+    mantenimientoMonitoresDatosGenerales: 'Monitores - Datos Generales',
+    mantenimientoMonitoresDatosComunicacion: 'Monitores - Datos de comunicación',
+    mantenimientoMonitoresDatosAcceso: 'Monitores - Datos de Acceso',
+    mantenimientoMonitoresEspeciesasignadas: 'Monitores - Especies Asignadas',
+    mantenimientoMonitoresTrampasAsignadas: 'Monitores - Trampas Asignadas',
+    mantenimientoMonitoresMoverTrampas: 'Monitores - Mover Trampas',
+    mantenimientoMonitoresDatosCelulares: 'Monitores - Datos Celulares',
+    tipomonitor: 'Tipo de Monitor MIPnet',
+    cargomonitor: 'Cargo Monitor MIPnet',
 
     //tipo comunicacion persona
     mantenimientoTipocompersona: 'Mantenimiento de tipo comunicación para personas',
 
-    //tipoEspecie
+    //especie
+    mantenimientoEspecies: 'Mantenimiento de Especies',
+    especie: 'Especie Base',
+    danioespecie: 'Daño en especie',
+    mantenimientounirespecie: 'Unir especies',
     mantenimientoTipoespecie: 'Mantenimiento de tipo de Especies',
+    mantenimientoespeciedatosgenerales: 'Datos generales',
+    mantenimientoespecietipodato: 'Daños en especies',
+    mantenimientoespecieumbral: 'Umbrales de Daño',
+    umbralminimo: 'Umbral Minimo',
+    umbralmaximo: 'Umbral Maximo',
+    umbralcolor: 'Color Umbral',
 
     //MedidaUmbral
     mantenimientoMedidaumbral: 'Mantenimiento de Medida de umbrales de Especies',
@@ -28,6 +106,12 @@ export const esCustomMessages = {
     nombreUsuario: 'Nombre Completo',
     emailUsuario: 'Email de Usuario / Username',
     passwordUsuario: 'Password de Acceso',
+    Rol: 'Rol de Usuario',
+    Username: 'Username',
+    Usuario: 'Usuario',
+    Plantilla: 'Plantilla de permisos',
+    confirmado: 'Confirmado',
+    sendconfirmation: 'Enviar Confirmación',
 
     //comuna
     mantenimientoComuna: 'Mantenimiento de Comuna',
@@ -80,6 +164,19 @@ export const esCustomMessages = {
     plantilla: 'Plantilla de permisos de usuario',
     errorPlantilla: 'La plantilla de persmisos de usuario es de ingreso obligatorio',
 
+    //mantenimiento Segmentar temporada
+    mantenimientoSegmentartemporada: 'Mantenimiento Segmentar Temporada',
+    
+    //mantenimiento temporada Base
+    mantenimientoTemporadaBase: 'Mantenimiento Temporada Base',
+
+    //mantenimiento Temporada
+    mantenimientoTemporada: 'Mantenimiento Temporada',
+    base: 'Temporada Base',
+    segmentacion: 'Segmentación',
+    minfecha: 'Inicio temporada',
+    maxfecha: 'Termino temporada',
+
     //mantenimiento workflow
     mantenimientoWorkflow: 'Mantenimiento de Workflow',
 
@@ -130,13 +227,15 @@ export const esCustomMessages = {
     MantActivar: 'Activar',
     MantDesactivar: 'Desactivar',
     MantExpExcel: 'Export to Excel',
-    MantExpPDF: 'Export to Excel',
+    MantExpPDF: 'Export to PDF',
     Nodisponibles:'No hay datos disponibles.',
     estado: 'Estado',
     Activo: 'Activo',
     Desactivado: 'Desactivado',
     Delete:'Eliminar',
     Edit:'Editar',
+    seleccione: 'Seleccione',
+    continuar: 'Continuar ',
 
     rut:'Rut / DNI',
     errorRut:'El rut es de ingreso obligatorio',
@@ -147,10 +246,11 @@ export const esCustomMessages = {
 
     cancelar: 'Cancelar',
     guardar: '+ Guardar',
-    continuar: '-> Continuar',
+    continuar: ' Siguiente ',
     agregar: '+ Agregar',
+    buscar: '+ Buscar',
     volver: '<- Volver',
-    finalizar: '-- finalizar',
+    finalizar: 'Finalizar',
     
 //saludo
 

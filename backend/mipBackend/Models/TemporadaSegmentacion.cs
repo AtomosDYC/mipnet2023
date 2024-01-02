@@ -8,20 +8,20 @@ namespace mipBackend.Models
         [Key]
         public int Id { get; set; }
 
-        public string? Nombre { get; set; }
+        public string? nombre { get; set; }
 
-        public string? Descripcion { get; set; }
+        public string? descripcion { get; set; }
 
-        public int? NumeroMeses { get; set; }
+        public int? numeromeses { get; set; }
 
-        public int? NumeroSegmentosTotal { get; set; }
+        public int? numerosegmentosTotal { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? createdat { get; set; }
 
 
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime? updatedat { get; set; }
 
-        public bool? isDeleted { get; set; }
+        public bool? isdeleted { get; set; }
 
         public DateTime? DeletedAt { get; set; }
 

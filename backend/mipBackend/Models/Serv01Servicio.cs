@@ -5,15 +5,15 @@ namespace mipBackend.Models;
 
 public partial class Serv01Servicio
 {
-    public int Serv01Llave { get; set; }
+    public int Serv01llave { get; set; }
 
-    public int? Serv02Llave { get; set; }
+    public int? Serv02llave { get; set; }
 
-    public string? Serv01Nombre { get; set; }
+    public string? Serv01nombre { get; set; }
 
-    public string? Serv01Descripcion { get; set; }
+    public string? Serv01descripcion { get; set; }
 
-    public int? Serv01Activo { get; set; }
+    public int? Serv01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -29,5 +29,5 @@ public partial class Serv01Servicio
 
     public virtual ICollection<Lnc02ServiciosLicencia> Lnc02ServiciosLicencia { get; } = new List<Lnc02ServiciosLicencia>();
 
-    public virtual Serv02TipoServicio? Serv02LlaveNavigation { get; set; }
+    public virtual Serv02TipoServicio? Serv02llaveNavigation { get; set; }
 }

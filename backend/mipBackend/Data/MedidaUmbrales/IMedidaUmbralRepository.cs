@@ -7,13 +7,13 @@ namespace mipBackend.Data.MedidaUmbrales
 
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Esp06MedidaUmbral>> GetAllMedidaUmbrales();
+        Task<IEnumerable<esp06MedidaUmbral>> GetAllMedidaUmbrales();
 
-        Task<Esp06MedidaUmbral> GetMedidaUmbralById(int id);
+        Task<esp06MedidaUmbral> GetMedidaUmbralById(int id);
 
-        Task CreateMedidaUmbral(Esp06MedidaUmbral medidaumbral);
+        Task CreateMedidaUmbral(esp06MedidaUmbral medidaumbral);
 
-        Task UpdateMedidaUmbral(Esp06MedidaUmbral medidaumbral);
+        Task UpdateMedidaUmbral(esp06MedidaUmbral medidaumbral);
 
         Task DeleteMedidaUmbral(int id);
 

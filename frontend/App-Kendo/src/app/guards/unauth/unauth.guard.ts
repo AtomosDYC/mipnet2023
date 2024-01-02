@@ -30,7 +30,7 @@ export class UnauthGuard implements CanActivate, CanActivateChild, CanLoad {
       return this.store.pipe(select(fromUser.getUserState)).pipe(
         filter(state => !state.loading),
         tap( state => {
-          console.log('antes del unauth', state);
+          //console.log('antes del unauth', state);
           if(state.email){
             this.router.navigate(['/dashboard']);
           }

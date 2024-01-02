@@ -3,25 +3,25 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Esp03EspecieBase
+public partial class esp03especieBase
 {
-    public int Esp03Llave { get; set; }
+    public int esp03llave { get; set; }
 
-    public string? Esp03Nombre { get; set; }
+    public string? esp03nombre { get; set; }
 
-    public string? Esp03Descripcion { get; set; }
+    public string? esp03descripcion { get; set; }
 
-    public int? Esp08Llave { get; set; }
+    public int? esp08llave { get; set; }
 
-    public string? Esp03ImgGrande { get; set; }
+    public string? esp03ImgGrande { get; set; }
 
-    public string? Esp03ImgPequenia { get; set; }
+    public string? esp03ImgPequenia { get; set; }
 
-    public int? Esp03Union { get; set; }
+    public int? esp03Union { get; set; }
 
-    public string? Esp03EstadoRegistro { get; set; }
+    public string? esp03EstadoRegistro { get; set; }
 
-    public int? Esp03Activo { get; set; }
+    public int? esp03activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -35,9 +35,9 @@ public partial class Esp03EspecieBase
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Esp01Especie> Esp01Especies { get; } = new List<Esp01Especie>();
+    public virtual ICollection<esp01especie> esp01especies { get; } = new List<esp01especie>();
 
-    public virtual ICollection<Esp07Union> Esp07Unions { get; } = new List<Esp07Union>();
+    public virtual ICollection<esp07Union> esp07Unions { get; } = new List<esp07Union>();
 
-    public virtual Esp08TipoBase? Esp08LlaveNavigation { get; set; }
+    public virtual esp08TipoBase? esp08llaveNavigation { get; set; }
 }

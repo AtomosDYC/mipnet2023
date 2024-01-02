@@ -5,9 +5,9 @@ namespace mipBackend.Models;
 
 public partial class Lnc05ValorLicencia
 {
-    public int Lnc05Llave { get; set; }
+    public int Lnc05llave { get; set; }
 
-    public int? Lnc01Llave { get; set; }
+    public int? Lnc01llave { get; set; }
 
     public int? Lnc05Inicio { get; set; }
 
@@ -19,5 +19,5 @@ public partial class Lnc05ValorLicencia
 
     public Guid? createby { get; set; }
 
-    public virtual Lnc01Licencia? Lnc01LlaveNavigation { get; set; }
+    public virtual Lnc01Licencia? Lnc01llaveNavigation { get; set; }
 }

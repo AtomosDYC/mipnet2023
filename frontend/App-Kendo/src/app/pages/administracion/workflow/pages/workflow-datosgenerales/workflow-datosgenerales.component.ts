@@ -94,7 +94,7 @@ export class WorkflowDatosgeneralesComponent implements OnInit {
     this._routeParams.paramMap.subscribe(params => {
       this.ID = (params.get('id'));
 
-      console.log('dentro del init()');
+      //console.log('dentro del init()');
 
       if(this.ID) {
 
@@ -148,7 +148,7 @@ export class WorkflowDatosgeneralesComponent implements OnInit {
     this._fillcomboservices.GetAllSelect(this.setTipoFlujo).subscribe(
       allrecords => {
         this.Tipoflujolist = allrecords
-        console.log('this.Tipoflujolist',this.Tipoflujolist);
+        //console.log('this.Tipoflujolist',this.Tipoflujolist);
         
       },
       error => this.errorMessage = <any>error
@@ -232,7 +232,7 @@ export class WorkflowDatosgeneralesComponent implements OnInit {
             wkf01activo:1
           }
 
-          console.log(CreateRequest);
+          //console.log(CreateRequest);
 
           
           this.store.dispatch(new fromList.Create(CreateRequest));

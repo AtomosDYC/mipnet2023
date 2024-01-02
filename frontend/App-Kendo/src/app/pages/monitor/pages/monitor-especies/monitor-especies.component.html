@@ -1,0 +1,141 @@
+
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-8"> {{ customMsgService.translate('mantenimientoMonitoresEspeciesasignadas') }} </h3>
+        <div class="card-buttons col-md-4 right">
+            <button 
+            kendoButton
+            [toggleable]="true"
+            [selected]="true"
+            (click)="OnFinalizarDatosGenerales()"
+            themeColor="light"
+        >
+            {{ customMsgService.translate('finalizar') }}
+        </button>
+                &nbsp;
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="onContinuar()"
+                    themeColor="primary"
+                >
+                    {{ customMsgService.translate('continuar') }}
+                </button>
+            
+        </div>  
+    </div>
+
+
+    <div class="card-container" *ngIf="verNuevo==true">
+        <div class="card-component">
+
+            <form class="k-form" [formGroup]="Formasignarespecie">
+                <fieldset class="k-form-fieldset">
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxtemporadaactiva" text="{{ customMsgService.translate('temporadaactiva')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="temporadaactivalist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('temporadaactiva')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxtemporadaactiva"
+                            (valueChange)="handleTemporadaChange($event)"
+                            #cbxtemporadaactiva
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorTemporadaactiva')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxtipoespecie" text="{{ customMsgService.translate('tipoespecie')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="tipoespecielist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('tipoespecie')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxtipoespecie"
+                            (valueChange)="handleTipoespecieChange($event)"
+                            #cbxtipoespecie
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorTipoespecie')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxespecie" text="{{ customMsgService.translate('especie')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="especielist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('especie')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxespecie"
+                            (valueChange)="handleEspecieChange($event)"
+                            #cbxespecie
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorespecie')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxdanioespecie" text="{{ customMsgService.translate('danioespecie')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="danioespecielist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('danioespecie')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxdanioespecie"
+                            #cbxdanioespecie
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errordanioespecie')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                
+                    <div class="k-form-buttons" style="padding-top: 20px;">
+                        <button kendoButton themeColor="secondary" (click)="OnCancelarcomunicacion()">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                        <button kendoButton themeColor="primary" (click)="onguardarcomunicacion()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="card-component">
+        <kendo-grid [data]="data$ | async">
+           
+        <ng-template kendoGridToolbarTemplate>
+            <button
+            kendoButton
+            [toggleable]="true"
+            [selected]="true"
+            (click)="OnNuevo()"
+            themeColor="primary"
+        >
+            {{ customMsgService.translate('MantNuevoasignarespecie') }}
+        </button>
+        </ng-template>
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                    <button
+                        kendoButton
+                        iconClass="fa-solid fa-trash-can"
+                        title="{{ customMsgService.translate('Delete') }}"
+                        (click)="OnEliminarespecie(dataItem.mnt01llave, dataItem.esp02llave)"
+                    ></button>
+                </ng-template>
+                </kendo-grid-command-column>
+            <kendo-grid-column field="temp02nombre" title="{{ customMsgService.translate('tipopersona') }}"></kendo-grid-column>
+            <kendo-grid-column field="esp08nombre" title="{{ customMsgService.translate('tipocomunicacion') }}"></kendo-grid-column>
+            <kendo-grid-column field="esp03nombre" title="{{ customMsgService.translate('direccion') }}"></kendo-grid-column>
+            <kendo-grid-column field="esp04nombre" title="{{ customMsgService.translate('direccion') }}"></kendo-grid-column>
+            
+        </kendo-grid>
+    </div>
+
+</div>
+        

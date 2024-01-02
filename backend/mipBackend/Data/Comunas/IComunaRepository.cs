@@ -9,11 +9,11 @@ namespace mipBackend.Data.Comunas
 
         Task<IEnumerable<ComunaResponseDto>> GetAllComunas();
 
-        Task<Sist03Comuna> GetComunaById(int id);
+        Task<sist03Comuna> GetComunaById(int id);
 
-        Task CreateComuna(Sist03Comuna region);
+        Task CreateComuna(sist03Comuna region);
 
-        Task UpdateComuna(Sist03Comuna region);
+        Task UpdateComuna(sist03Comuna region);
 
         Task DeleteComuna(int id);
 

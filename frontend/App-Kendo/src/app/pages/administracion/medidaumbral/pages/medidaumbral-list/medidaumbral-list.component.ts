@@ -70,11 +70,11 @@ export class MedidaumbralListComponent implements OnInit {
   }
 
   OnNuevo(){
-    this._Route.navigate(['/dashboard/medidaumbral/nuevo/']);
+    this._Route.navigate(['/dashboard/especies/medidaumbral/nuevo/']);
   }
 
   OnEditar(id: number){
-    this._Route.navigate(['/dashboard/medidaumbral/edit/', id.toString()]);
+    this._Route.navigate(['/dashboard/especies/medidaumbral/edit/', id.toString()]);
   }
 
   OnEliminar(id: number, estado : number){

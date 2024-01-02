@@ -5,9 +5,9 @@ namespace mipBackend.Models;
 
 public partial class Secu04TipoEncriptacion
 {
-    public Guid Secu04Llave { get; set; }
+    public Guid Secu04llave { get; set; }
 
-    public string? Secu04Nombre { get; set; }
+    public string? Secu04nombre { get; set; }
 
     public string? Secu04Proyecto { get; set; }
 
@@ -19,7 +19,7 @@ public partial class Secu04TipoEncriptacion
 
     public string? Secu04Info { get; set; }
 
-    public bool? Secu04Activo { get; set; }
+    public bool? Secu04activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

@@ -66,7 +66,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var medidaumbralModel = _mapper.Map<Esp06MedidaUmbral>(medidaumbral);
+            var medidaumbralModel = _mapper.Map<esp06MedidaUmbral>(medidaumbral);
 
             await _repository.CreateMedidaUmbral(medidaumbralModel);
             await _repository.SaveChanges();
@@ -97,7 +97,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var medidaumbralModel = _mapper.Map<Esp06MedidaUmbral>(medidaumbral);
+            var medidaumbralModel = _mapper.Map<esp06MedidaUmbral>(medidaumbral);
 
             await _repository.UpdateMedidaUmbral(medidaumbralModel);
             await _repository.SaveChanges();

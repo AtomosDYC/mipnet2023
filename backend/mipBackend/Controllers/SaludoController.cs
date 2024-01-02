@@ -67,7 +67,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var saludoModel = _mapper.Map<Per02Genero>(saludo);
+            var saludoModel = _mapper.Map<per02Genero>(saludo);
 
             await _repository.CreateSaludo(saludoModel);
             await _repository.SaveChanges();
@@ -98,7 +98,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var saludoModel = _mapper.Map<Per02Genero>(saludo);
+            var saludoModel = _mapper.Map<per02Genero>(saludo);
 
             await _repository.UpdateSaludo(saludoModel);
             await _repository.SaveChanges();

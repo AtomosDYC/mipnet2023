@@ -25,7 +25,7 @@ namespace mipBackend.Data.Plantillas
 
 
 
-        public async Task CreatePlantilla(Prf03Plantilla plantilla)
+        public async Task CreatePlantilla(prf03Plantilla plantilla)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -46,10 +46,10 @@ namespace mipBackend.Data.Plantillas
             }
 
             plantilla.fechaactivacion  = DateTime.Now;
-            plantilla.createby = Guid.Parse(usuario.Id);
+            plantilla.createby = usuario.Id;
             plantilla.prf03activo = 1;
 
-            await _contexto.Prf03Plantillas!.AddAsync(plantilla);
+            await _contexto.prf03Plantillas!.AddAsync(plantilla);
 
         }
 
@@ -59,20 +59,20 @@ namespace mipBackend.Data.Plantillas
 
 
 
-            var plantilla = await _contexto.Prf03Plantillas!
+            var plantilla = await _contexto.prf03Plantillas!
                 .FirstOrDefaultAsync(x => x.prf03llave == id);
 
-            _contexto.Prf03Plantillas!.Remove(plantilla!);
+            _contexto.prf03Plantillas!.Remove(plantilla!);
         }
 
-        public async Task<IEnumerable<Prf03Plantilla>> GetAllPlantillas()
+        public async Task<IEnumerable<prf03Plantilla>> GetAllPlantillas()
         {
-            return await _contexto.Prf03Plantillas!.ToListAsync();
+            return await _contexto.prf03Plantillas!.ToListAsync();
         }
 
-        public async Task<Prf03Plantilla> GetPlantillaById(int id)
+        public async Task<prf03Plantilla> GetPlantillaById(int id)
         {
-            return await _contexto.Prf03Plantillas!.FirstOrDefaultAsync(x => x.prf03llave == id)!;
+            return await _contexto.prf03Plantillas!.FirstOrDefaultAsync(x => x.prf03llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -80,7 +80,7 @@ namespace mipBackend.Data.Plantillas
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdatePlantilla(Prf03Plantilla request)
+        public async Task UpdatePlantilla(prf03Plantilla request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -100,23 +100,23 @@ namespace mipBackend.Data.Plantillas
                    );
             }
 
-            var plantilla = await _contexto.Prf03Plantillas!
+            var plantilla = await _contexto.prf03Plantillas!
                 .FirstOrDefaultAsync(x => x.prf03llave == request.prf03llave);
 
             plantilla.fechaactualizacion = DateTime.Now;
-            plantilla.approveby = Guid.Parse(usuario.Id);
+            plantilla.approveby = usuario.Id;
             plantilla.prf03nombre = request.prf03nombre;
             plantilla.prf03descripcion = request.prf03descripcion;
             
 
-            _contexto.Prf03Plantillas!.Update(plantilla!);
+            _contexto.prf03Plantillas!.Update(plantilla!);
 
         }
 
         public async Task DisablePlantilla(int id)
         {
 
-            var plantilla = await _contexto.Prf03Plantillas!
+            var plantilla = await _contexto.prf03Plantillas!
                 .FirstOrDefaultAsync(x => x.prf03llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -140,7 +140,7 @@ namespace mipBackend.Data.Plantillas
 
             plantilla.prf03activo = 0;
 
-            _contexto.Prf03Plantillas!.Update(plantilla);
+            _contexto.prf03Plantillas!.Update(plantilla);
            
 
         }
@@ -148,7 +148,7 @@ namespace mipBackend.Data.Plantillas
         public async Task ActivatePlantilla(int id)
         {
 
-            var plantilla = await _contexto.Prf03Plantillas!
+            var plantilla = await _contexto.prf03Plantillas!
                 .FirstOrDefaultAsync(x => x.prf03llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -172,7 +172,7 @@ namespace mipBackend.Data.Plantillas
 
             plantilla.prf03activo = 1;
 
-            _contexto.Prf03Plantillas!.Update(plantilla);
+            _contexto.prf03Plantillas!.Update(plantilla);
 
 
         }

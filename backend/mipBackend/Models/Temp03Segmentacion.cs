@@ -5,17 +5,17 @@ namespace mipBackend.Models;
 
 public partial class Temp03Segmentacion
 {
-    public int Temp03Llave { get; set; }
+    public int temp03llave { get; set; }
 
-    public string? Temp03Nombre { get; set; }
+    public string? temp03nombre { get; set; }
 
-    public string? Temp03Descripcion { get; set; }
+    public string? temp03descripcion { get; set; }
 
-    public int? Temp03NumeroMeses { get; set; }
+    public int? temp03numeromeses { get; set; }
 
-    public int? Temp03NumeroSegmentosTotal { get; set; }
+    public int? temp03numerosegmentostotal { get; set; }
 
-    public int? Temp03Activo { get; set; }
+    public int? temp03activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

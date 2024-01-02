@@ -70,11 +70,11 @@ export class TipoespecieListComponent implements OnInit {
   }
 
   OnNuevo(){
-    this._Route.navigate(['/dashboard/tipoespecie/nuevo/']);
+    this._Route.navigate(['/dashboard/especies/tipoespecie/nuevo/']);
   }
 
   OnEditar(id: number){
-    this._Route.navigate(['/dashboard/tipoespecie/edit/', id.toString()]);
+    this._Route.navigate(['/dashboard/especies/tipoespecie/edit/', id.toString()]);
   }
 
   OnEliminar(id: number, estado : number){

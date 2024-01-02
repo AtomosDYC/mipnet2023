@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public DefaultUserProfile()
         {
 
-            CreateMap<Per09DefaultUser, DefaultUserResponseDto>();
-            CreateMap<DefaultUserResponseDto, Per09DefaultUser>();
-            CreateMap<DefaultUserRequestDto, Per09DefaultUser>();
+            CreateMap<per09DefaultUser, DefaultUserResponseDto>();
+            CreateMap<DefaultUserResponseDto, per09DefaultUser>();
+            CreateMap<DefaultUserRequestDto, per09DefaultUser>();
 
         }
     }

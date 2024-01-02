@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Per04TipoComunicacion
+public partial class per04TipoComunicacion
 {
     public int per04llave { get; set; }
 
@@ -25,7 +25,7 @@ public partial class Per04TipoComunicacion
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Per05Comunicacion> Per05Comunicacions { get; } = new List<Per05Comunicacion>();
+    public virtual ICollection<per05Comunicacion> per05Comunicacions { get; } = new List<per05Comunicacion>();
 
-    public virtual ICollection<Per06TipoPersonaComunicacion> Per06TipoPersonaComunicacions { get; } = new List<Per06TipoPersonaComunicacion>();
+    public virtual ICollection<per06TipopersonaComunicacion> per06TipopersonaComunicacions { get; } = new List<per06TipopersonaComunicacion>();
 }

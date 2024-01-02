@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Mnt04TipoMonitor
 {
-    public int Mnt04Llave { get; set; }
+    public int mnt04llave { get; set; }
 
-    public string? Mnt04Nombre { get; set; }
+    public string? mnt04nombre { get; set; }
 
-    public string? Mnt04Descripcion { get; set; }
+    public string? mnt04descripcion { get; set; }
 
-    public int? Mnt04Activo { get; set; }
+    public int? mnt04activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

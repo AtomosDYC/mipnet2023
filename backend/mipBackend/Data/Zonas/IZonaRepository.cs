@@ -6,13 +6,13 @@ namespace mipBackend.Data.Zonas
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Sist02Zona>> GetAllZonas();
+        Task<IEnumerable<sist02Zona>> GetAllZonas();
 
-        Task<Sist02Zona> GetZonaById(int id);
+        Task<sist02Zona> GetZonaById(int id);
 
-        Task CreateZona(Sist02Zona zona);
+        Task CreateZona(sist02Zona zona);
 
-        Task UpdateZona(Sist02Zona zona);
+        Task UpdateZona(sist02Zona zona);
 
         Task DeleteZona(int id);
 

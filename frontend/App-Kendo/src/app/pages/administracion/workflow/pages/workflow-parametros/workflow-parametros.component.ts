@@ -142,7 +142,7 @@ export class WorkflowParametrosComponent implements OnInit {
 
           this.success$ = this.store.pipe(select(fromList.getSuccess));
 
-          console.log('this.success$', this.success$);
+          //console.log('this.success$', this.success$);
 
           this.success$.subscribe((success) => { 
             if(success) {

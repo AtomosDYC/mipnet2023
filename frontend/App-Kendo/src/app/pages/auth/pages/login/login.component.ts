@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, QueryList } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ValidatorFn, ValidationErrors, UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
@@ -20,7 +20,7 @@ import { TextBoxComponent } from '@progress/kendo-angular-inputs';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-
+  private returnUrl: string;
   loading$ !: Observable<boolean | null>;
   customStylesValidated:any;
   showSpinner: boolean = false;
@@ -28,18 +28,23 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private store:Store<fromRoot.State>,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
-    
+    this.loginForm = new FormGroup({
+      username: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required])
+    })
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   public login(): void {
 
-    this.form.markAllAsTouched();
-    if( this.form.invalid) { return; }
+    this.loginForm.markAllAsTouched();
+    if( this.loginForm.invalid) { return; }
 
-    const { username, password } = this.form.value;
+    const { username, password } = this.loginForm.value;
 
     const userLoginResquest: fromUser.EmailPasswordCredentials = {
       email :  username,

@@ -6,13 +6,13 @@ namespace mipBackend.Data.TipoParametros
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Wkf10TipoParametro>> GetAllTipoParametros();
+        Task<IEnumerable<wkf10TipoParametro>> GetAllTipoParametros();
 
-        Task<Wkf10TipoParametro> GetTipoParametroById(int id);
+        Task<wkf10TipoParametro> GetTipoParametroById(int id);
 
-        Task CreateTipoParametro(Wkf10TipoParametro tipoparametro);
+        Task CreateTipoParametro(wkf10TipoParametro tipoparametro);
 
-        Task UpdateTipoParametro(Wkf10TipoParametro tipoparametro);
+        Task UpdateTipoParametro(wkf10TipoParametro tipoparametro);
 
         Task DeleteTipoParametro(int id);
 

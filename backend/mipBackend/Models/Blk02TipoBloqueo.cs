@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Blk02TipoBloqueo
 {
-    public int Blk02Llave { get; set; }
+    public int Blk02llave { get; set; }
 
-    public string? Blk02Nombre { get; set; }
+    public string? Blk02nombre { get; set; }
 
-    public string? Blk02Descripcion { get; set; }
+    public string? Blk02descripcion { get; set; }
 
-    public int? Blk02Activo { get; set; }
+    public int? Blk02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

@@ -72,7 +72,7 @@ export class SaveEffects {
             }),
             map((plantilla: PlantillaflujoResponse) => new fromActions.CreateSuccess(plantilla, true)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -93,7 +93,7 @@ export class SaveEffects {
             }),
             map((plantilla: PlantillaflujoResponse) => new fromActions.UpdateSuccess(plantilla)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -106,9 +106,9 @@ export class SaveEffects {
       ofType(fromActions.Types.DELETE_PLANTILLAFLUJO),
       map((action: fromActions.Delete) => action.id),
       switchMap((id: string) => {
-        return this.httpClient.delete<PlantillaflujoResponse[]>(`${environment.url}api/plantilla/${id}`)
+        return this.httpClient.delete(`${environment.url}api/plantillaflujo/${id}`)
         .pipe(
-          map((plantillas: PlantillaflujoResponse[]) => new fromActions.DeleteSuccess(plantillas, true)),
+          map(() => new fromActions.DeleteSuccess(true)),
 
           catchError(err => of(new fromActions.DeleteError(err.message)))
         )

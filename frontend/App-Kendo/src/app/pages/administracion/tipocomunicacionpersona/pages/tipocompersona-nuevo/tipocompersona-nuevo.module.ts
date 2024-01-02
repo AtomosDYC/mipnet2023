@@ -15,7 +15,7 @@ import { ButtonsModule, ButtonGroupModule } from '@progress/kendo-angular-button
 import { LayoutModule, CardModule } from '@progress/kendo-angular-layout';
 import { GridModule, ExcelModule, PDFModule } from '@progress/kendo-angular-grid';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { IconsModule } from '@progress/kendo-angular-icons';
+
 import { TipopersonaListComponent } from '../../../tipopersona/pages/tipopersona-list/tipopersona-list.component';
 import { TipopercomunicacionModule } from '../../../tipopercomunicacion/tipopercomunicacion.module';
 
@@ -41,7 +41,7 @@ import { TipopercomunicacionModule } from '../../../tipopercomunicacion/tipoperc
     SharedModule,
     ButtonGroupModule,
     DropDownsModule,
-    IconsModule,
+    
     ExcelModule,
     PDFModule
     

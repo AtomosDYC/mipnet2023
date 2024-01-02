@@ -28,7 +28,7 @@ namespace mipBackend.Data.Roles
         }
 
         
-        public async Task<IEnumerable<IdentityRole>> GetAllRoles()
+        public async Task<IEnumerable<Rol>> GetAllRoles()
         {
             return await _contexto.Roles!.ToListAsync();
         }

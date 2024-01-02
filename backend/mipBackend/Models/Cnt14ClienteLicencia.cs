@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt14ClienteLicencia
+public partial class cnt14ClienteLicencia
 {
-    public int Cnt14Llave { get; set; }
+    public int cnt14llave { get; set; }
 
-    public int? Cnt01Llave { get; set; }
+    public int? cnt01llave { get; set; }
 
-    public int? Lnc01Llave { get; set; }
+    public int? Lnc01llave { get; set; }
 
-    public DateTime? Cnt14InicioFecha { get; set; }
+    public DateTime? cnt14InicioFecha { get; set; }
 
-    public DateTime? Cnt14TerminoFecha { get; set; }
+    public DateTime? cnt14TerminoFecha { get; set; }
 
-    public int? Cnt14CantUsuarios { get; set; }
+    public int? cnt14CantUsuarios { get; set; }
 
-    public bool? Cnt14Activo { get; set; }
+    public bool? cnt14activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -25,7 +25,7 @@ public partial class Cnt14ClienteLicencia
 
     public DateTime? fechaactivacion { get; set; }
 
-    public virtual Cnt01CuentaCliente Cnt01LlaveNavigation { get; set; } = null!;
+    public virtual cnt01CuentaCliente cnt01llaveNavigation { get; set; } = null!;
 
-    public virtual ICollection<Cnt17Bloqueo> Cnt17Bloqueos { get; } = new List<Cnt17Bloqueo>();
+    public virtual ICollection<cnt17Bloqueo> cnt17Bloqueos { get; } = new List<cnt17Bloqueo>();
 }

@@ -2,9 +2,9 @@
 {
     public class PlantillaFlujoRequestDto
     {
-        public int? Prf03Llave { get; set; }
+        public int? prf03llave { get; set; }
 
-        public int? Wkf01Llave { get; set; }
+        public int? wkf01llave { get; set; }
 
     }
 }

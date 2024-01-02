@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Sist05EstadoRegistro
+public partial class sist05EstadoRegistro
 {
-    public int Sist05Llave { get; set; }
+    public int sist05llave { get; set; }
 
-    public string? Sist05Nombre { get; set; }
+    public string? sist05nombre { get; set; }
 
-    public string? Sist03Descripcion { get; set; }
+    public string? sist03descripcion { get; set; }
 
-    public int? Sist03Activo { get; set; }
+    public int? sist03activo { get; set; }
 
     public DateTime? fechaeliminacion { get; set; }
 

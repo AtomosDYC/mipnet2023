@@ -10,8 +10,11 @@ import { environment } from './../../../environments/environment';
 import { State } from '../index';
 import { Store } from '@ngrx/store';
 import * as fromvisibleToast from '../notification/notification.actions';
+import { SignOut } from './user.actions';
 
-//this.store.dispatch(fromvisibleToast.onError());
+import {ActionReducer, INIT, MetaReducer} from '@ngrx/store';
+
+//this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
 
 
 type Action = fromActions.All;
@@ -43,7 +46,7 @@ export class UserEffects {
             catchError(err => {
 
               //this.notification.error("Errores al registrar nuevo usuario");
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.SignUpEmailError(err.message))
 
             })
@@ -71,7 +74,7 @@ export class UserEffects {
             catchError(err => {
 
               //this.notification.error("Credenciales incorrectas");
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.SignInEmailError(err.message))
 
             })
@@ -92,7 +95,8 @@ export class UserEffects {
           return this.httpClient.get<UserResponse>(`${environment.url}api/UserAuth`)
             .pipe(
               tap((user: UserResponse) => {
-                console.log('data del usuario en sesion que viene del servidor=>', user);
+                //console.log('data del usuario en sesion que viene del servidor=>', user);
+                
               }),
               map((user: UserResponse) => new fromActions.InitAuthorized(user.email, user || null)),
               catchError(err => of(new fromActions.InitError(err.message)))
@@ -105,6 +109,20 @@ export class UserEffects {
     )
   );
 
+  SignOut = createEffect(() => {
+    return this.actions.pipe(
+      ofType(fromActions.Types.SIGN_OUT_EMAIL),
+      map((action: fromActions.SignOut) =>  { 
+        //console.log('inside sigoout efectsw');
+        localStorage.removeItem('token');
+        this.router.navigate(['auth']);
+        
+      })
+    );
+    }, { dispatch: false }
+  );
 
-
+  
 }
+
+

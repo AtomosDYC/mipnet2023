@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Eml03TipoMailAccion
 {
-    public int Eml03Llave { get; set; }
+    public int Eml03llave { get; set; }
 
-    public string? Eml03Nombre { get; set; }
+    public string? Eml03nombre { get; set; }
 
-    public string? Eml03Descripcion { get; set; }
+    public string? Eml03descripcion { get; set; }
 
-    public int? Eml03Activo { get; set; }
+    public int? Eml03activo { get; set; }
 
     public DateTime? fechaeliminacion { get; set; }
 

@@ -48,7 +48,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var workflowparametroModel = _mapper.Map<Wkf09Parametro>(workflowparametro);
+            var workflowparametroModel = _mapper.Map<wkf09Parametro>(workflowparametro);
 
             await _repository.CreateWorkflowParametro(workflowparametroModel);
             await _repository.SaveChanges();

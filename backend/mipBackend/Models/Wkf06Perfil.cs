@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Wkf06Perfil
+public partial class wkf06perfil
 {
     public int wkf06llave { get; set; }
 
@@ -27,9 +27,9 @@ public partial class Wkf06Perfil
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Prf06PermisosUsuario> Prf06PermisosUsuarios { get; } = new List<Prf06PermisosUsuario>();
+    public virtual ICollection<prf06permisosUsuario> prf06permisosUsuarios { get; } = new List<prf06permisosUsuario>();
 
-    public virtual Wkf01Flujo? Wkf01LlaveNavigation { get; set; }
+    public virtual wkf01Flujo? wkf01llaveNavigation { get; set; }
 
-    public virtual ICollection<Wkf07PerfilesPermiso> Wkf07PerfilesPermisos { get; } = new List<Wkf07PerfilesPermiso>();
+    public virtual ICollection<wkf07perfilespermiso> wkf07perfilespermisos { get; } = new List<wkf07perfilespermiso>();
 }

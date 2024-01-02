@@ -1,24 +1,24 @@
 ﻿using mipBackend.Models;
-using mipBackend.Dtos.TipoComPersonaDtos;
+using mipBackend.Dtos.TipoCompersonaDtos;
 
-namespace mipBackend.Data.TipoComPersonas
+namespace mipBackend.Data.TipoCompersonas
 {
-    public interface ITipoComPersonaRepository
+    public interface ITipoCompersonaRepository
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Per04TipoComunicacion>> GetAllTipoComPersonas();
+        Task<IEnumerable<per04TipoComunicacion>> GetAllTipoCompersonas();
 
-        Task<Per04TipoComunicacion> GetTipoComPersonaById(int id);
+        Task<per04TipoComunicacion> GetTipoCompersonaById(int id);
 
-        Task CreateTipoComPersona(Per04TipoComunicacion tipocompersona);
+        Task CreateTipoCompersona(per04TipoComunicacion tipocompersona);
 
-        Task UpdateTipoComPersona(Per04TipoComunicacion tipocompersona);
+        Task UpdateTipoCompersona(per04TipoComunicacion tipocompersona);
 
-        Task DeleteTipoComPersona(int id);
+        Task DeleteTipoCompersona(int id);
 
-        Task DisableTipoComPersona(int id);
+        Task DisableTipoCompersona(int id);
 
-        Task ActivateTipoComPersona(int id);
+        Task ActivateTipoCompersona(int id);
     }
 }

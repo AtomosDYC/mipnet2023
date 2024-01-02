@@ -1,0 +1,40 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title col-md-8"> {{ customMsgService.translate('mantenimientoMonitoresDatosCelulares') }} </h3>
+        <div class="card-buttons col-md-4 float-right">
+            
+                <button 
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="onContinuarsincronizacion()"
+                    themeColor="primary"
+                >
+                    {{ customMsgService.translate('finalizar') }}
+                </button>
+            
+        </div> 
+    </div>
+    <div class="card-component">
+        <kendo-grid [data]="data$ | async"
+        >
+        <ng-template kendoGridToolbarTemplate>
+            <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="OnActualizarTodo()"
+                    themeColor="primary"
+                >
+                    {{ customMsgService.translate('actuaizartodo') }}
+                </button>
+        </ng-template>
+            <kendo-grid-command-column title="" [width]="110">
+                
+            </kendo-grid-command-column>
+            <kendo-grid-column field="nombretabla" title="{{ customMsgService.translate('nombretabla') }}"></kendo-grid-column>
+            <kendo-grid-column field="fechaultimaactualizacion" title="{{ customMsgService.translate('fechaultimaactualizacion') }}"></kendo-grid-column>
+                       
+        </kendo-grid>
+    </div>
+</div>

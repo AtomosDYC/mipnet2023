@@ -70,7 +70,7 @@ export class SaveEffects {
             }),
             map((zona: ZonaResponse) => new fromActions.CreateSuccess(zona)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -91,7 +91,7 @@ export class SaveEffects {
             }),
             map((zona: ZonaResponse) => new fromActions.UpdateSuccess(zona)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )

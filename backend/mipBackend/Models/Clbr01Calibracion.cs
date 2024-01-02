@@ -5,25 +5,25 @@ namespace mipBackend.Models;
 
 public partial class Clbr01Calibracion
 {
-    public int Clbr01Llave { get; set; }
+    public int Clbr01llave { get; set; }
 
-    public int? Sercl01Llave { get; set; }
+    public int? Sercl01llave { get; set; }
 
-    public int? Clbr02Llave { get; set; }
+    public int? Clbr02llave { get; set; }
 
-    public int? Cnt01Llave { get; set; }
+    public int? cnt01llave { get; set; }
 
-    public int? Temp02Llave { get; set; }
+    public int? Temp02llave { get; set; }
 
-    public string? Clbr01Nombre { get; set; }
+    public string? Clbr01nombre { get; set; }
 
     public string? Clbr01UrlPdf { get; set; }
 
-    public string? Clbr01Descripcion { get; set; }
+    public string? Clbr01descripcion { get; set; }
 
     public DateTime? Clbr01FechaCalibracion { get; set; }
 
-    public int? Clbr01Activo { get; set; }
+    public int? Clbr01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -37,5 +37,5 @@ public partial class Clbr01Calibracion
 
     public Guid? deleteby { get; set; }
 
-    public virtual Clbr02TipoCalibracion? Clbr02LlaveNavigation { get; set; }
+    public virtual Clbr02TipoCalibracion? Clbr02llaveNavigation { get; set; }
 }

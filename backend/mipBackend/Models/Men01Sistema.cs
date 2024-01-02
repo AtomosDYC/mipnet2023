@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Men01Sistema
+public partial class Men01sistema
 {
-    public int Men01Llave { get; set; }
+    public int Men01llave { get; set; }
 
     public string? Men01Url { get; set; }
 
     public string? Men01Titulo { get; set; }
 
-    public string? Men01Descripcion { get; set; }
+    public string? Men01descripcion { get; set; }
 
     public string? Men01Tooltip { get; set; }
 
@@ -21,7 +21,7 @@ public partial class Men01Sistema
 
     public string? Men01Accion { get; set; }
 
-    public int? Men01LlavePadre { get; set; }
+    public int? Men01llavePadre { get; set; }
 
     public string? Men01IconoUrl { get; set; }
 

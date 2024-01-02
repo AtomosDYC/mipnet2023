@@ -67,7 +67,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var ComunaModel = _mapper.Map<Sist03Comuna>(Comuna);
+            var ComunaModel = _mapper.Map<sist03Comuna>(Comuna);
 
             await _repository.CreateComuna(ComunaModel);
             await _repository.SaveChanges();
@@ -98,7 +98,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var ComunaModel = _mapper.Map<Sist03Comuna>(Comuna);
+            var ComunaModel = _mapper.Map<sist03Comuna>(Comuna);
 
             await _repository.UpdateComuna(ComunaModel);
             await _repository.SaveChanges();

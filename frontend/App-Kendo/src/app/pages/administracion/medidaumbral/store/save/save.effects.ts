@@ -68,11 +68,11 @@ export class SaveEffects {
           .pipe(
             delay(1000),
             tap((response: MedidaUmbralResponse) => {
-              this.router.navigate(['dashboard/medidaumbral/list']);
+              this.router.navigate(['dashboard/especies/medidaumbral/list']);
             }),
             map((medidaumbral: MedidaUmbralResponse) => new fromActions.CreateSuccess(medidaumbral)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -89,11 +89,11 @@ export class SaveEffects {
           .pipe(
             delay(1000),
             tap((response: MedidaUmbralResponse) => {
-              this.router.navigate(['dashboard/medidaumbral/list']);
+              this.router.navigate(['dashboard/especies/medidaumbral/list']);
             }),
             map((medidaumbral: MedidaUmbralResponse) => new fromActions.UpdateSuccess(medidaumbral)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="KendoNET.DynamicLinq" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
@@ -24,14 +25,33 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.23.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\NewFolder\" />
+    <Folder Include="Data\Control\" />
+    <Folder Include="Data\Bitacoras\" />
+    <Folder Include="Data\Clientes\" />
+    <Folder Include="Data\ClienteUsuarios\" />
+    <Folder Include="Data\Contactos\" />
+    <Folder Include="Data\Conteos\" />
+    <Folder Include="Data\Contratos\" />
+    <Folder Include="Data\Cotizaciones\" />
+    <Folder Include="Data\Empleados\" />
+    <Folder Include="Data\Graficos\" />
+    <Folder Include="Data\Inscripciones\" />
+    <Folder Include="Data\Licencias\" />
+    <Folder Include="Data\Trampas\" />
+    <Folder Include="EmailServices\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Services\Rut\NewFolder\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,248 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title col-md-8"> {{ customMsgService.translate('mantenimientoMonitoresTrampasAsignadas') }} </h3>
+        <div class="card-buttons col-md-4 float-right">
+            
+            <button 
+            kendoButton
+            [toggleable]="true"
+            [selected]="true"
+            (click)="OnFinalizarDatosGenerales()"
+            themeColor="light"
+            >
+                {{ customMsgService.translate('finalizar') }}
+            </button>
+            <span style="padding-left: 20px;"></span>
+            <button 
+                kendoButton
+                [toggleable]="true"
+                [selected]="true"
+                (click)="onContinuarMonitorTrampa()"
+                themeColor="primary"
+            >
+                {{ customMsgService.translate('continuar') }}
+            </button>
+            
+        </div> 
+    </div>
+
+<!--filtro de busqueda-->
+    <div class="card-container">
+        <div class="card-component">
+
+            <form class="k-form" [formGroup]="Formbuscador">
+                <fieldset class="k-form-fieldset">
+
+                    
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxtemporadaactiva" text="{{ customMsgService.translate('temporadaactiva')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="temporadaactivalist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('temporadaactiva')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxtemporadaactiva"
+                            (valueChange)="handleTemporadaChange($event)"
+                            [loading]="temporadaLoading"
+                            #cbxtemporadaactiva
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorTemporadaactiva')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxtipoespecie" text="{{ customMsgService.translate('tipoespecie')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="tipoespecielist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('tipoespecie')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxtipoespecie"
+                            (valueChange)="handleTipoespecieChange($event)"
+                            [loading]="tipoespecieLoading"
+                            #cbxtipoespecie
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorTipoespecie')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxespecie" text="{{ customMsgService.translate('especie')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="especielist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('especie')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxespecie"
+                            (valueChange)="handleEspecieChange($event)"
+                            [loading]="especieLoading"
+                            #cbxespecie
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorespecie')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxregion" text="{{ customMsgService.translate('region')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="regionlist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('region')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxregion"
+                            #cbxregion
+                            (valueChange)="handleRegionChange($event)"
+                            [loading]="regionLoading"
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorregion')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxcomuna" text="{{ customMsgService.translate('comuna')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="comunalist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('comuna')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxcomuna"
+                            #cbxcomuna
+                            (valueChange)="handleComunaChange($event)"
+                            [loading]="comunaLoading"
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorcomuna')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxestacion" text="{{ customMsgService.translate('estacion')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="estacionlist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('estacion')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxestacion"
+                            [loading]="estacionLoading"
+                            #cbxestacion
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorestacion')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="chxdisponibles" text="Visualizar solo trampas disponibles"></kendo-label>
+                        
+                        <input type="checkbox" kendoCheckBox 
+                        formControlName="chxdisponibles" #chxdisponibles
+                        text="Activar capital"
+                        />
+    
+                        
+                    </kendo-formfield>
+
+                
+                    <div class="k-form-buttons" style="padding-top: 20px;">
+                        <button kendoButton themeColor="secondary" (click)="OnCancelarcomunicacion()">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                        <button kendoButton themeColor="primary" (click)="onBuscartrampas()">{{ customMsgService.translate('buscar')}}</button>&nbsp;&nbsp;
+                        <button kendoButton themeColor="primary" (click)="onAsignarTrampas()">{{ customMsgService.translate('asignar')}}</button>
+
+
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+        <div class="card-component"  style="padding-top: 20px;">
+            <kendo-grid [data]="dataBuscar$ | async"
+            [loading]="loadGrid"
+            kendoGridSelectBy="trp01llave"
+            [(selectedKeys)]="mySelection"
+            
+            (pageChange)="pageBuscarChange($event)"
+            [pageSize]="requestBuscarstate.take"
+            [skip]="requestBuscarstate.skip"
+            [pageable]="true"
+            [loading]="loadGrid"
+            [sortable]="true"
+            [sort]="sort"
+            (sortChange)="sortBuscarChange($event)"
+            [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
+            >
+
+
+                <kendo-grid-checkbox-column
+                    [width]="45"
+                    [headerClass]="{ 'text-center': true }"
+                    [class]="{ 'text-center': true }"
+                    [resizable]="false"
+                    [columnMenu]="false"
+                    [showSelectAll]="true">
+                </kendo-grid-checkbox-column>
+                <kendo-grid-column field="trp01nombre" title="{{ customMsgService.translate('trampa') }}"></kendo-grid-column>
+                <kendo-grid-column field="temp02nombre" title="{{ customMsgService.translate('temporada') }}"></kendo-grid-column>
+                <kendo-grid-column field="esp03nombre" title="{{ customMsgService.translate('especie') }}"></kendo-grid-column>
+                <kendo-grid-column field="esp04nombre" title="{{ customMsgService.translate('danioespecie') }}"></kendo-grid-column>
+                <kendo-grid-column field="cnt08nombre" title="{{ customMsgService.translate('estacion') }}"></kendo-grid-column>
+                <kendo-grid-column field="sist03nombre" title="{{ customMsgService.translate('comuna') }}"></kendo-grid-column>
+                <kendo-grid-column field="sist04nombre" title="{{ customMsgService.translate('region') }}"></kendo-grid-column>
+                <kendo-grid-column field="usuario" title="{{ customMsgService.translate('asignadaa') }}"></kendo-grid-column>
+            </kendo-grid>
+        </div>
+    </div>
+
+    <div class="card-header-wrapper">
+        <div class="card-buttons col-md-4 float-right">
+            
+                <button 
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="onReplicarTrampa()"
+                    themeColor="primary"
+                    
+                >
+                    {{ customMsgService.translate('replicartrampas') }}
+                </button>
+            
+        </div> 
+    </div>
+
+    <div class="card-component">
+        <kendo-grid [data]="data$ | async"
+
+            [loading]="loadGrid"
+            kendoGridSelectBy="trp01llave"
+            [(selectedKeys)]="mySelection"
+            
+            (pageChange)="pageChange($event)"
+            [pageSize]="requeststate.take"
+            [skip]="requeststate.skip"
+            [pageable]="true"
+            [loading]="loadGrid"
+            [sortable]="true"
+            [sort]="sort"
+            (sortChange)="sortChange($event)"
+            [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
+
+        >
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                    <button
+                        kendoButton
+                        iconClass="fa-solid fa-trash-can"
+                        title="{{ customMsgService.translate('Delete') }}"
+                        (click)="OnEliminartrampa(dataItem.mnt01llave, dataItem.esp02llave)"
+                    ></button>
+                </ng-template>
+                </kendo-grid-command-column>
+                <kendo-grid-column field="trp01nombre" title="{{ customMsgService.translate('trampa') }}"></kendo-grid-column>
+                <kendo-grid-column field="temp02nombre" title="{{ customMsgService.translate('temporada') }}"></kendo-grid-column>
+                <kendo-grid-column field="esp03nombre" title="{{ customMsgService.translate('especie') }}"></kendo-grid-column>
+                <kendo-grid-column field="esp04nombre" title="{{ customMsgService.translate('danioespecie') }}"></kendo-grid-column>
+                <kendo-grid-column field="cnt08nombre" title="{{ customMsgService.translate('estacion') }}"></kendo-grid-column>
+                <kendo-grid-column field="sist03nombre" title="{{ customMsgService.translate('comuna') }}"></kendo-grid-column>
+                <kendo-grid-column field="sist04nombre" title="{{ customMsgService.translate('region') }}"></kendo-grid-column>
+            
+        </kendo-grid>
+    </div>
+</div>

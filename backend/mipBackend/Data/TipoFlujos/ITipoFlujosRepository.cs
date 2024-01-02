@@ -7,13 +7,13 @@ namespace mipBackend.Data.TipoFlujos
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Wkf02TipoFlujo>> GetAllTipoFlujos();
+        Task<IEnumerable<wkf02TipoFlujo>> GetAllTipoFlujos();
 
-        Task<Wkf02TipoFlujo> GetTipoFlujoById(int id);
+        Task<wkf02TipoFlujo> GetTipoFlujoById(int id);
 
-        Task CreateTipoFlujo(Wkf02TipoFlujo tipoflujo);
+        Task CreateTipoFlujo(wkf02TipoFlujo tipoflujo);
 
-        Task UpdateTipoFlujo(Wkf02TipoFlujo tipoflujo);
+        Task UpdateTipoFlujo(wkf02TipoFlujo tipoflujo);
 
         Task DeleteTipoFlujo(int id);
 

@@ -7,7 +7,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-7" style="padding: 15px; text-align: center;">
-                  <form class="k-form" [formGroup]="form">
+                  <form class="k-form" [formGroup]="loginForm" autocomplete="off">
                     <fieldset class="k-form-fieldset">
                       <h4>Inicia sesión con tu correo</h4>
                       <p class="text-medium-emphasis">Debes usar tu correo electrónico y contraseña<br> para iniciar sesión en tu cuenta</p>
@@ -43,7 +43,9 @@
             
                         <kendo-formerror>Error: Contraseña es Obligatoria</kendo-formerror>
                       </kendo-formfield>
-    
+                      <div>
+                        <a [routerLink]="['/user/forgotpassword']"> ¿Olvido su contraseña? </a>
+                      </div>
                       <div class="k-form-buttons">
                         <button kendoButton themeColor="primary" (click)="login()">
                           Iniciar Session

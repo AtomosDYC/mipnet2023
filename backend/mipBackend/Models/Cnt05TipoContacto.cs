@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt05TipoContacto
+public partial class cnt05TipoContacto
 {
-    public int Cnt05Llave { get; set; }
+    public int cnt05llave { get; set; }
 
-    public string? Cnt05Nombre { get; set; }
+    public string? cnt05nombre { get; set; }
 
-    public string? Cnt05Descripcion { get; set; }
+    public string? cnt05descripcion { get; set; }
 
-    public int? Cnt05Activo { get; set; }
+    public int? cnt05activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Cnt05TipoContacto
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Cnt04ContactoCliente> Cnt04ContactoClientes { get; } = new List<Cnt04ContactoCliente>();
+    public virtual ICollection<cnt04ContactoCliente> cnt04ContactoClientes { get; } = new List<cnt04ContactoCliente>();
 }

@@ -52,6 +52,8 @@ import {  } from './containers/static-layout/static-layout.component';
 import {  } from './containers/static-layout/static-header/static-header.component';
 import {  } from './containers/static-layout/static-footer/static-footer.component';
 
+import { NotificationsModule } from './shared/notification';
+
 import 'hammerjs';
 
 import '@progress/kendo-angular-intl/locales/en/all';
@@ -64,9 +66,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment.dev';
 import { AuthInterceptor } from './auth-interceptor';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { IconsModule } from '@progress/kendo-angular-icons';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TreeListModule } from '@progress/kendo-angular-treelist';
+import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 
 
 
@@ -95,10 +98,12 @@ import { TreeListModule } from '@progress/kendo-angular-treelist';
         ChartsModule,
         IntlModule,
         DateInputsModule,
+        IndicatorsModule,
         InputsModule,
         DropDownsModule,
         PerfectScrollbarModule,
         NotificationModule,
+        NotificationsModule,
         StoreModule.forRoot(reducers, {
             runtimeChecks: {
               strictActionImmutability: true,
@@ -108,9 +113,8 @@ import { TreeListModule } from '@progress/kendo-angular-treelist';
           EffectsModule.forRoot(effects),
           HttpClientModule,
           StoreDevtoolsModule.instrument({ maxAge: 50, logOnly: environment.production }),
-          IconsModule,
           FontAwesomeModule,
-          TreeListModule,
+          TreeListModule
     ],
     providers: [
         { provide: MessageService, useClass: CustomMessagesService },

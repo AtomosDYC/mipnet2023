@@ -3,27 +3,27 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Sist08ContactoUsuario
+public partial class sist08ContactoUsuario
 {
-    public int Sist08Llave { get; set; }
+    public int sist08llave { get; set; }
 
-    public int? Per02Llave { get; set; }
+    public int? per02llave { get; set; }
 
-    public string? Sist08Nombre { get; set; }
+    public string? sist08nombre { get; set; }
 
-    public string? Sist08Empresa { get; set; }
+    public string? sist08Empresa { get; set; }
 
-    public string? Sist08Correo { get; set; }
+    public string? sist08Correo { get; set; }
 
-    public string? Sist08Comentario { get; set; }
+    public string? sist08Comentario { get; set; }
 
-    public string? Sist08Telefono { get; set; }
+    public string? sist08Telefono { get; set; }
 
-    public string? Sist08Celular { get; set; }
+    public string? sist08Celular { get; set; }
 
-    public int? Sist08Estado { get; set; }
+    public int? sist08Estado { get; set; }
 
-    public DateTime? Sist08Fechacreacion { get; set; }
+    public DateTime? sist08Fechacreacion { get; set; }
 
-    public virtual Per02Genero? Per02LlaveNavigation { get; set; }
+    public virtual per02Genero? per02llaveNavigation { get; set; }
 }

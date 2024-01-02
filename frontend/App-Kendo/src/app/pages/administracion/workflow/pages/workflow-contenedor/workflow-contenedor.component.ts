@@ -22,7 +22,7 @@ export class WorkflowContenedorComponent implements OnInit {
       this.selectedItem = url[0]!.path;
     });
 
-    console.log(this.selectedItem);
+    //console.log(this.selectedItem);
   }
 
 }

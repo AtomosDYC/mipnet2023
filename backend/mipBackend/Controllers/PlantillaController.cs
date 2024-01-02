@@ -67,7 +67,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var plantillaModel = _mapper.Map<Prf03Plantilla>(plantilla);
+            var plantillaModel = _mapper.Map<prf03Plantilla>(plantilla);
 
             await _repository.CreatePlantilla(plantillaModel);
             await _repository.SaveChanges();
@@ -98,7 +98,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var plantillaModel = _mapper.Map<Prf03Plantilla>(plantilla);
+            var plantillaModel = _mapper.Map<prf03Plantilla>(plantilla);
 
             await _repository.UpdatePlantilla(plantillaModel);
             await _repository.SaveChanges();

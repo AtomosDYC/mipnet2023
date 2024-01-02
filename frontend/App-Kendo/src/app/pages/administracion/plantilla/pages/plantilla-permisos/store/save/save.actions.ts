@@ -102,7 +102,7 @@ export class Delete implements Action {
 
 export class DeleteSuccess implements Action {
   readonly type = Types.DELETE_PLANTILLAFLUJO_SUCCESS;
-  constructor(public plantillaflujos: PlantillaflujoResponse[], public success: boolean){}
+  constructor(public success: boolean){}
 }
 
 export class DeleteError implements Action {

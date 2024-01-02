@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public SaludoProfile()
         {
 
-            CreateMap<Per02Genero, SaludoResponseDto>();
-            CreateMap<SaludoResponseDto, Per02Genero>();
-            CreateMap<SaludoRequestDto, Per02Genero>();
+            CreateMap<per02Genero, SaludoResponseDto>();
+            CreateMap<SaludoResponseDto, per02Genero>();
+            CreateMap<SaludoRequestDto, per02Genero>();
 
         }
     }

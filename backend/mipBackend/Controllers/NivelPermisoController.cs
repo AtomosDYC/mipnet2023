@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using mipBackend.Data.NivelPermisos;
-using mipBackend.Dtos.NivelPermisoDtos;
+using mipBackend.Data.Nivelpermisos;
+using mipBackend.Dtos.NivelpermisoDtos;
 using mipBackend.Middleware;
 using mipBackend.Models;
 using System.Net;
@@ -11,16 +11,16 @@ namespace mipBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NivelPermisoController : ControllerBase
+    public class NivelpermisoController : ControllerBase
     {
-        private readonly INivelPermisoRepository _repository;
+        private readonly INivelpermisoRepository _repository;
         private IMapper _mapper;
         private HttpStatusCode httpStatusCode;
 
-        public NivelPermisoController
+        public NivelpermisoController
             (
                 AppDbContext context,
-                INivelPermisoRepository repository,
+                INivelpermisoRepository repository,
                 IMapper mapper
 
             )
@@ -30,162 +30,162 @@ namespace mipBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<NivelPermisoResponseDto>>> GetNivelPermiso()
+        public async Task<ActionResult<IEnumerable<NivelpermisoResponseDto>>> GetNivelpermiso()
         {
 
-            var NivelPermisos = await _repository.GetAllNivelPermisos();
-            return Ok(NivelPermisos);
+            var Nivelpermisos = await _repository.GetAllNivelpermisos();
+            return Ok(Nivelpermisos);
 
         }
 
-        [HttpGet("~/api/NivelPermiso/GetNivelPermisoById/{id}")]
-        [ActionName(nameof(GetNivelPermisoById))]
-        public async Task<ActionResult<NivelPermisoResponseDto>> GetNivelPermisoById(int id)
+        [HttpGet("~/api/Nivelpermiso/GetNivelpermisoById/{id}")]
+        [ActionName(nameof(GetNivelpermisoById))]
+        public async Task<ActionResult<NivelpermisoResponseDto>> GetNivelpermisoById(int id)
         {
 
 
-            var NivelPermiso = await _repository.GetNivelPermisoById(id);
+            var Nivelpermiso = await _repository.GetNivelpermisoById(id);
 
-            if (NivelPermiso == null)
+            if (Nivelpermiso == null)
             {
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la NivelPermiso por este id {id}" }
+                        new { mensaje = $"No se encontro la Nivelpermiso por este id {id}" }
                     );
             }
 
-            return Ok(_mapper.Map<NivelPermisoResponseDto>(NivelPermiso));
+            return Ok(_mapper.Map<NivelpermisoResponseDto>(Nivelpermiso));
 
         }
 
         [HttpPost]
-        public async Task<ActionResult<NivelPermisoResponseDto>> CreateNivelPermiso
+        public async Task<ActionResult<NivelpermisoResponseDto>> CreateNivelpermiso
             (
-               [FromBody] NivelPermisoRequestDto NivelPermiso
+               [FromBody] NivelpermisoRequestDto Nivelpermiso
             )
         {
 
-            var NivelPermisoModel = _mapper.Map<Wkf04NivelPermiso>(NivelPermiso);
+            var NivelpermisoModel = _mapper.Map<wkf04Nivelpermiso>(Nivelpermiso);
 
-            await _repository.CreateNivelPermiso(NivelPermisoModel);
+            await _repository.CreateNivelpermiso(NivelpermisoModel);
             await _repository.SaveChanges();
 
-            var NivelPermisoResponse = _mapper.Map<NivelPermisoResponseDto>(NivelPermisoModel);
+            var NivelpermisoResponse = _mapper.Map<NivelpermisoResponseDto>(NivelpermisoModel);
 
-            var NivelPermisodto = await _repository.GetNivelPermisoById(NivelPermisoResponse.wkf04llave);
+            var Nivelpermisodto = await _repository.GetNivelpermisoById(NivelpermisoResponse.wkf04llave);
 
-            if (NivelPermisodto == null)
+            if (Nivelpermisodto == null)
             {
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la NivelPermiso por este id {NivelPermisoResponse.wkf04llave}" }
+                        new { mensaje = $"No se encontro la Nivelpermiso por este id {NivelpermisoResponse.wkf04llave}" }
                     );
             }
 
-            return Ok(_mapper.Map<NivelPermisoResponseDto>(NivelPermisodto));
+            return Ok(_mapper.Map<NivelpermisoResponseDto>(Nivelpermisodto));
 
 
 
         }
 
         [HttpPut]
-        public async Task<ActionResult<NivelPermisoResponseDto>> UpdateNivelPermiso
+        public async Task<ActionResult<NivelpermisoResponseDto>> UpdateNivelpermiso
             (
-                [FromBody] NivelPermisoResponseDto NivelPermiso
+                [FromBody] NivelpermisoResponseDto Nivelpermiso
             )
         {
 
-            var NivelPermisoModel = _mapper.Map<Wkf04NivelPermiso>(NivelPermiso);
+            var NivelpermisoModel = _mapper.Map<wkf04Nivelpermiso>(Nivelpermiso);
 
-            await _repository.UpdateNivelPermiso(NivelPermisoModel);
+            await _repository.UpdateNivelpermiso(NivelpermisoModel);
             await _repository.SaveChanges();
 
-            var NivelPermisoResponse = _mapper.Map<NivelPermisoResponseDto>(NivelPermisoModel);
+            var NivelpermisoResponse = _mapper.Map<NivelpermisoResponseDto>(NivelpermisoModel);
 
-            var NivelPermisodto = await _repository.GetNivelPermisoById(NivelPermisoResponse.wkf04llave);
+            var Nivelpermisodto = await _repository.GetNivelpermisoById(NivelpermisoResponse.wkf04llave);
 
-            if (NivelPermisodto == null)
+            if (Nivelpermisodto == null)
             {
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la NivelPermiso por este id {NivelPermisoResponse.wkf04llave}" }
+                        new { mensaje = $"No se encontro la Nivelpermiso por este id {NivelpermisoResponse.wkf04llave}" }
                     );
             }
 
-            return Ok(_mapper.Map<NivelPermisoResponseDto>(NivelPermisodto));
+            return Ok(_mapper.Map<NivelpermisoResponseDto>(Nivelpermisodto));
 
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteNivelPermiso(int id)
+        public async Task<ActionResult> DeleteNivelpermiso(int id)
         {
 
-            var NivelPermisodto = await _repository.GetNivelPermisoById(id);
+            var Nivelpermisodto = await _repository.GetNivelpermisoById(id);
 
-            if (NivelPermisodto == null)
+            if (Nivelpermisodto == null)
             {
 
                 throw new MiddlewareException
                 (
                     HttpStatusCode.NotFound,
-                    new { mensaje = $"No se encontro la NivelPermiso por este id {id}" }
+                    new { mensaje = $"No se encontro la Nivelpermiso por este id {id}" }
                 );
             }
             else
             {
-                await _repository.DeleteNivelPermiso(id);
+                await _repository.DeleteNivelpermiso(id);
                 await _repository.SaveChanges();
             }
 
 
-            var listNivelPermisos = await _repository.GetAllNivelPermisos();
-            return Ok(_mapper.Map<NivelPermisoResponseDto[]>(listNivelPermisos));
+            var listNivelpermisos = await _repository.GetAllNivelpermisos();
+            return Ok(_mapper.Map<NivelpermisoResponseDto[]>(listNivelpermisos));
 
         }
 
-        [HttpPost("~/api/NivelPermiso/disableNivelPermiso")]
-        public async Task<ActionResult<NivelPermisoResponseDto[]>> DisableNivelPermiso
+        [HttpPost("~/api/Nivelpermiso/disableNivelpermiso")]
+        public async Task<ActionResult<NivelpermisoResponseDto[]>> DisableNivelpermiso
             (
-                 [FromBody] NivelPermisoResponseDto[] NivelPermisos
+                 [FromBody] NivelpermisoResponseDto[] Nivelpermisos
             )
         {
 
-            foreach (NivelPermisoResponseDto item in NivelPermisos)
+            foreach (NivelpermisoResponseDto item in Nivelpermisos)
             {
-                var a = _mapper.Map<NivelPermisoResponseDto>(item);
+                var a = _mapper.Map<NivelpermisoResponseDto>(item);
 
-                await _repository.DisableNivelPermiso(a.wkf04llave);
+                await _repository.DisableNivelpermiso(a.wkf04llave);
                 await _repository.SaveChanges();
             }
 
 
-            var listNivelPermisos = await _repository.GetAllNivelPermisos();
-            return Ok(_mapper.Map<NivelPermisoResponseDto[]>(listNivelPermisos));
+            var listNivelpermisos = await _repository.GetAllNivelpermisos();
+            return Ok(_mapper.Map<NivelpermisoResponseDto[]>(listNivelpermisos));
 
         }
 
 
-        [HttpPost("~/api/NivelPermiso/ActivateNivelPermiso")]
-        public async Task<ActionResult<NivelPermisoResponseDto[]>> ActivateNivelPermiso
+        [HttpPost("~/api/Nivelpermiso/ActivateNivelpermiso")]
+        public async Task<ActionResult<NivelpermisoResponseDto[]>> ActivateNivelpermiso
             (
-                 [FromBody] NivelPermisoResponseDto[] NivelPermisos
+                 [FromBody] NivelpermisoResponseDto[] Nivelpermisos
             )
         {
 
-            foreach (NivelPermisoResponseDto item in NivelPermisos)
+            foreach (NivelpermisoResponseDto item in Nivelpermisos)
             {
-                var a = _mapper.Map<NivelPermisoResponseDto>(item);
+                var a = _mapper.Map<NivelpermisoResponseDto>(item);
 
-                await _repository.ActivateNivelPermiso(a.wkf04llave);
+                await _repository.ActivateNivelpermiso(a.wkf04llave);
                 await _repository.SaveChanges();
             }
 
 
-            var listNivelPermisos = await _repository.GetAllNivelPermisos();
-            return Ok(_mapper.Map<NivelPermisoResponseDto[]>(listNivelPermisos));
+            var listNivelpermisos = await _repository.GetAllNivelpermisos();
+            return Ok(_mapper.Map<NivelpermisoResponseDto[]>(listNivelpermisos));
 
         }
 

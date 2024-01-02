@@ -63,7 +63,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var areaModel = _mapper.Map<Wkf08Area>(area);
+            var areaModel = _mapper.Map<wkf08Area>(area);
 
             await _repository.CreateArea(areaModel);
             await _repository.SaveChanges();
@@ -94,7 +94,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var areaModel = _mapper.Map<Wkf08Area>(area);
+            var areaModel = _mapper.Map<wkf08Area>(area);
 
             await _repository.UpdateArea(areaModel);
             await _repository.SaveChanges();

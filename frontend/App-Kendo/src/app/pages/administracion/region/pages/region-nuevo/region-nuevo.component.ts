@@ -51,11 +51,11 @@ export class RegionNuevoComponent implements OnInit {
     this._routeParams.paramMap.subscribe(params => {
       this.RegionID = (params.get('id'));
 
-      console.log('this.RegionID', this.RegionID);
+      //console.log('this.RegionID', this.RegionID);
 
       if(this.RegionID) {
 
-        console.log('dentro de this.RegionID', this.RegionID);
+        //console.log('dentro de this.RegionID', this.RegionID);
 
         this.store.dispatch(new fromList.Getbyid(this.RegionID));
 
@@ -64,7 +64,7 @@ export class RegionNuevoComponent implements OnInit {
           .subscribe(data => {
             if(data){
 
-              console.log('dentro del subcribe', this.RegionID);
+              //console.log('dentro del subcribe', this.RegionID);
 
                 this.regionForm = new FormGroup({
                   txtNombre: new FormControl( data.sist04nombre , [Validators.required]),
@@ -87,7 +87,7 @@ export class RegionNuevoComponent implements OnInit {
     });
 
     
-    console.log(this.regionForm);
+    //console.log(this.regionForm);
     
   }
 
@@ -99,7 +99,7 @@ export class RegionNuevoComponent implements OnInit {
 
       if(this.RegionID){
 
-        console.log('dentro del edit');
+        //console.log('dentro del edit');
 
         const { txtNombre, txtDescripcion, txtOrden } = this.regionForm.value;
 
@@ -111,14 +111,14 @@ export class RegionNuevoComponent implements OnInit {
           sist04activo : 0
         }
 
-        console.log(`create onupdate ${regionResponse}`);
+        //console.log(`create onupdate ${regionResponse}`);
 
         this.store.dispatch(new fromList.Update(regionResponse));
 
 
       } else {
 
-        console.log('dentro del onguardar');
+        //console.log('dentro del onguardar');
       
         const { txtNombre, txtDescripcion, txtOrden } = this.regionForm.value;
 

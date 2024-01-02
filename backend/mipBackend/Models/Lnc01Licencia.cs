@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Lnc01Licencia
 {
-    public int Lnc01Llave { get; set; }
+    public int Lnc01llave { get; set; }
 
-    public string? Lnc01Nombre { get; set; }
+    public string? Lnc01nombre { get; set; }
 
-    public string? Lnc01Descripcion { get; set; }
+    public string? Lnc01descripcion { get; set; }
 
-    public int? Lnc04Llave { get; set; }
+    public int? Lnc04llave { get; set; }
 
     public int? Lnc01MaximoUsuarios { get; set; }
 
@@ -25,7 +25,7 @@ public partial class Lnc01Licencia
 
     public string? Lnc01Html { get; set; }
 
-    public int? Lnc01Activo { get; set; }
+    public int? Lnc01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

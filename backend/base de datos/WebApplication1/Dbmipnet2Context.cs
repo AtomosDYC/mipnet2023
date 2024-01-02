@@ -3747,11 +3747,11 @@ public partial class Dbmipnet2Context : DbContext
             entity.Property(e => e.Prf03Llave).HasColumnName("PRF03_llave");
             entity.Property(e => e.UsrId).HasColumnName("USR_ID");
 
-            entity.HasOne(d => d.Prf03LlaveNavigation).WithMany(p => p.Prf01Perfiles)
+            entity.HasOne(d => d.Prf03LlaveNavigation).WithMany(p => p.prf01perfiles)
                 .HasForeignKey(d => d.Prf03Llave)
                 .HasConstraintName("FK_PRF01_Perfiles_PRF03_Plantilla");
 
-            entity.HasOne(d => d.Usr).WithMany(p => p.Prf01Perfiles)
+            entity.HasOne(d => d.Usr).WithMany(p => p.prf01perfiles)
                 .HasForeignKey(d => d.UsrId)
                 .HasConstraintName("FK_PRF01_Perfiles_AspNetUsers");
         });

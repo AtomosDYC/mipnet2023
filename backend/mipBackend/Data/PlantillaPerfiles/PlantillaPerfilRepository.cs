@@ -1,6 +1,6 @@
-﻿namespace mipBackend.Data.PlantillaPerfiles
+﻿namespace mipBackend.Data.Plantillaperfiles
 {
-    public class PlantillaPerfilRepository
+    public class PlantillaperfilRepository
     {
     }
 }

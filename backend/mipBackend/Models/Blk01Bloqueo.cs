@@ -5,21 +5,21 @@ namespace mipBackend.Models;
 
 public partial class Blk01Bloqueo
 {
-    public int Blk01Llave { get; set; }
+    public int Blk01llave { get; set; }
 
-    public int? Blk02Llave { get; set; }
+    public int? Blk02llave { get; set; }
 
-    public string? Blk01NombreBloqueo { get; set; }
+    public string? Blk01nombreBloqueo { get; set; }
 
-    public string? Blk01Descripcion { get; set; }
+    public string? Blk01descripcion { get; set; }
 
-    public int? Blk01Permanente { get; set; }
+    public int? Blk01permanente { get; set; }
 
     public int? Blk01MinDuraciondia { get; set; }
 
     public int? Blk01MaxDuraciondia { get; set; }
 
-    public int? Blk01Activo { get; set; }
+    public int? Blk01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -33,9 +33,9 @@ public partial class Blk01Bloqueo
 
     public Guid? deleteby { get; set; }
 
-    public virtual Blk02TipoBloqueo? Blk02LlaveNavigation { get; set; }
+    public virtual Blk02TipoBloqueo? Blk02llaveNavigation { get; set; }
 
     public virtual ICollection<Blk03BloqueoUsuario> Blk03BloqueoUsuarios { get; } = new List<Blk03BloqueoUsuario>();
 
-    public virtual ICollection<Cnt17Bloqueo> Cnt17Bloqueos { get; } = new List<Cnt17Bloqueo>();
+    public virtual ICollection<cnt17Bloqueo> cnt17Bloqueos { get; } = new List<cnt17Bloqueo>();
 }

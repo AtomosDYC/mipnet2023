@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Esp01Especie
+public partial class esp01especie
 {
-    public int Esp01Llave { get; set; }
+    public int esp01llave { get; set; }
 
-    public int? Esp03Llave { get; set; }
+    public int esp03llave { get; set; }
 
-    public int? Esp04Llave { get; set; }
+    public int? esp04llave { get; set; }
 
-    public int? Esp01Activo { get; set; }
+    public int? esp01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -27,13 +27,13 @@ public partial class Esp01Especie
 
     public virtual ICollection<Conteo04ResumenSag> Conteo04ResumenSags { get; } = new List<Conteo04ResumenSag>();
 
-    public virtual ICollection<Esp02TemporadaEspecie> Esp02TemporadaEspecies { get; } = new List<Esp02TemporadaEspecie>();
+    public virtual ICollection<esp02Temporadaespecie> esp02Temporadaespecies { get; } = new List<esp02Temporadaespecie>();
 
-    public virtual Esp03EspecieBase? Esp03LlaveNavigation { get; set; }
+    public virtual esp03especieBase? esp03llaveNavigation { get; set; }
 
-    public virtual Esp04EstadoDanio? Esp04LlaveNavigation { get; set; }
+    public virtual esp04EstadoDanio? esp04llaveNavigation { get; set; }
 
-    public virtual ICollection<Esp05Umbral> Esp05Umbrals { get; } = new List<Esp05Umbral>();
+    public virtual ICollection<esp05Umbral> esp05Umbrals { get; } = new List<esp05Umbral>();
 
     public virtual ICollection<Trp01Trampa> Trp01Trampas { get; } = new List<Trp01Trampa>();
 }

@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Eml06TipoArchivo
 {
-    public int Eml06Llave { get; set; }
+    public int Eml06llave { get; set; }
 
-    public string? Eml06Nombre { get; set; }
+    public string? Eml06nombre { get; set; }
 
-    public string? Eml06Descripcion { get; set; }
+    public string? Eml06descripcion { get; set; }
 
-    public int? Eml06Activo { get; set; }
+    public int? Eml06activo { get; set; }
 
     public DateTime? fechaeliminacion { get; set; }
 

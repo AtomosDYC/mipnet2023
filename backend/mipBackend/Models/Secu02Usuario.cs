@@ -5,7 +5,7 @@ namespace mipBackend.Models;
 
 public partial class Secu02Usuario
 {
-    public Guid Secu02Llave { get; set; }
+    public Guid userid { get; set; }
 
     public string? Secu02Usuario1 { get; set; }
 
@@ -29,7 +29,7 @@ public partial class Secu02Usuario
 
     public DateTime? Secu02FechaCambioPass { get; set; }
 
-    public bool? Secu02Activo { get; set; }
+    public bool? Secu02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -39,15 +39,19 @@ public partial class Secu02Usuario
 
     public virtual ICollection<Eml01BitacoraEmailUsuario> Eml01BitacoraEmailUsuarios { get; } = new List<Eml01BitacoraEmailUsuario>();
 
-    public virtual ICollection<Prf01Perfil> Prf01Perfiles { get; } = new List<Prf01Perfil>();
+    public virtual ICollection<prf01perfil> prf01perfiles { get; } = new List<prf01perfil>();
 
     public virtual Secu04TipoEncriptacion? Secu04TipoEncriptacionNavigation { get; set; }
 
     public virtual ICollection<Secu05UsuarioAcceso> Secu05UsuarioAccesos { get; } = new List<Secu05UsuarioAcceso>();
 
+    /*
     public virtual ICollection<Secu06UsuarioRol> Secu06UsuarioRols { get; } = new List<Secu06UsuarioRol>();
+    */
 
+    /*
     public virtual ICollection<Secu08UsuarioAplicacion> Secu08UsuarioAplicacions { get; } = new List<Secu08UsuarioAplicacion>();
+    */
 
-    public virtual ICollection<Secu10AccesoPermitido> Secu10AccesoPermitidos { get; } = new List<Secu10AccesoPermitido>();
+    public virtual ICollection<Secu10Accesopermitido> Secu10Accesopermitidos { get; } = new List<Secu10Accesopermitido>();
 }

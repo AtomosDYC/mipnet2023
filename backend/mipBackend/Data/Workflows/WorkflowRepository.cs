@@ -33,9 +33,9 @@ namespace mipBackend.Data.Workflows
         {
             using (var db = _contexto)
             {
-                var query = await (from wf in db.Wkf01Flujos!
-                                   join niv in db.Wkf03Niveles! on wf.wkf03llave equals niv.wkf03llave
-                                   join tip in db.Wkf02TipoFlujos! on niv.wkf02llave equals tip.wkf02llave
+                var query = await (from wf in db.wkf01Flujos!
+                                   join niv in db.wkf03Niveles! on wf.wkf03llave equals niv.wkf03llave
+                                   join tip in db.wkf02TipoFlujos! on niv.wkf02llave equals tip.wkf02llave
                                    where (niv.wkf03activo== 1 && wf.wkf01activo == 1 && tip.wkf02activo == 1)
                                    orderby wf.wkf01llavepadre, wf.wkf01orden,
                                    wf.wkf01prioridad
@@ -74,14 +74,14 @@ namespace mipBackend.Data.Workflows
             using (var db = _contexto)
             {
 
-                var query = await (from wf in db.Wkf01Flujos!
-                                   join niv in db.Wkf03Niveles! on wf.wkf03llave equals niv.wkf03llave
-                                   join tip in db.Wkf02TipoFlujos! on niv.wkf02llave equals tip.wkf02llave
-                                   join wf2 in db.Wkf01Flujos! on wf.wkf01llavepadre equals wf2.wkf01llave into nubpadres 
+                var query = await (from wf in db.wkf01Flujos!
+                                   join niv in db.wkf03Niveles! on wf.wkf03llave equals niv.wkf03llave
+                                   join tip in db.wkf02TipoFlujos! on niv.wkf02llave equals tip.wkf02llave
+                                   join wf2 in db.wkf01Flujos! on wf.wkf01llavepadre equals wf2.wkf01llave into nubpadres 
                                    from ct in nubpadres.DefaultIfEmpty()
-                                   join niv2 in db.Wkf03Niveles! on ct.wkf03llave equals niv2.wkf03llave into nubnivel
+                                   join niv2 in db.wkf03Niveles! on ct.wkf03llave equals niv2.wkf03llave into nubnivel
                                    from nt in nubnivel.DefaultIfEmpty()
-                                   join tip2 in db.Wkf02TipoFlujos! on nt.wkf02llave equals tip2.wkf02llave into nubtipo
+                                   join tip2 in db.wkf02TipoFlujos! on nt.wkf02llave equals tip2.wkf02llave into nubtipo
                                    from tt in nubtipo.DefaultIfEmpty()
                                    where (niv.wkf03activo == 1 && wf.wkf01activo == 1 && tip.wkf02activo == 1)
                                    where (wf.wkf01llave == id)
@@ -91,7 +91,7 @@ namespace mipBackend.Data.Workflows
                                        wkf01nombre = wf.wkf01nombre,
                                        wkf01descripcion = wf.wkf01descripcion,
 
-                                       wkf01llavepadre = ct == null ? 0 : ct.wkf01llave,
+                                       wkf01llavepadre = ct == null ? 0 : wf.wkf01llavepadre,
                                        wkf01llavepadrenombre = ct == null ? string.Empty : ct.wkf01nombre,
 
                                        wkf03llavepadre = nt == null ? 0 : nt.wkf03llave,
@@ -125,7 +125,7 @@ namespace mipBackend.Data.Workflows
         }
 
 
-        public async Task CreateDatosgenerales(Wkf01Flujo workflow)
+        public async Task CreateDatosgenerales(wkf01Flujo workflow)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -146,15 +146,15 @@ namespace mipBackend.Data.Workflows
             }
 
             workflow.fechaactivacion = DateTime.Now;
-            workflow.createby = Guid.Parse(usuario.Id);
+            workflow.createby = usuario.Id;
             workflow.wkf01estadoregistro = "AuBuCuDuEu";
             workflow.wkf01activo = 1;
 
-            await _contexto.Wkf01Flujos!.AddAsync(workflow);
+            await _contexto.wkf01Flujos!.AddAsync(workflow);
 
         }
 
-        public async Task UpdateDatosgenerales(Wkf01Flujo workflow)
+        public async Task UpdateDatosgenerales(wkf01Flujo workflow)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -174,7 +174,7 @@ namespace mipBackend.Data.Workflows
                    );
             }
 
-            var workflowUpdate = await _contexto.Wkf01Flujos!
+            var workflowUpdate = await _contexto.wkf01Flujos!
                 .FirstOrDefaultAsync(x => x.wkf01llave == workflow.wkf01llave);
 
             workflowUpdate.wkf03llave = workflow.wkf03llave;
@@ -185,15 +185,15 @@ namespace mipBackend.Data.Workflows
             workflowUpdate.wkf01prioridad   = workflow.wkf01prioridad;
 
             workflowUpdate.fechaactivacion = DateTime.Now;
-            workflowUpdate.createby = Guid.Parse(usuario.Id);
+            workflowUpdate.createby = usuario.Id;
             workflowUpdate.wkf01estadoregistro = "AuBuCuDuEu";
             workflowUpdate.wkf01activo = 1;
 
-            _contexto.Wkf01Flujos!.Update(workflowUpdate);
+            _contexto.wkf01Flujos!.Update(workflowUpdate);
             
         }
 
-        public async Task UpdateNodopadre(Wkf01Flujo request)
+        public async Task UpdateNodopadre(wkf01Flujo request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -213,14 +213,14 @@ namespace mipBackend.Data.Workflows
                    );
             }
 
-            var workflow = await _contexto.Wkf01Flujos!
+            var workflow = await _contexto.wkf01Flujos!
                 .FirstOrDefaultAsync(x => x.wkf01llave == request.wkf01llave);
 
             workflow.fechaactualizacion = DateTime.Now;
-            workflow.approveby = Guid.Parse(usuario.Id);
+            workflow.approveby = usuario.Id;
             workflow.wkf01llavepadre = request.wkf01llavepadre;
             
-            _contexto.Wkf01Flujos!.Update(workflow!);
+            _contexto.wkf01Flujos!.Update(workflow!);
 
         }
 
@@ -228,10 +228,10 @@ namespace mipBackend.Data.Workflows
         {
             using (var db = _contexto)
             {
-                var query = await (from wf in db.Wkf01Flujos!
-                                   join wf2 in db.Wkf01Flujos on wf.wkf01llavepadre equals wf2.wkf01llave
-                                   join niv2 in db.Wkf03Niveles! on wf2.wkf03llave equals niv2.wkf03llave
-                                   join tip2 in db.Wkf02TipoFlujos! on niv2.wkf02llave equals tip2.wkf02llave
+                var query = await (from wf in db.wkf01Flujos!
+                                   join wf2 in db.wkf01Flujos on wf.wkf01llavepadre equals wf2.wkf01llave
+                                   join niv2 in db.wkf03Niveles! on wf2.wkf03llave equals niv2.wkf03llave
+                                   join tip2 in db.wkf02TipoFlujos! on niv2.wkf02llave equals tip2.wkf02llave
                                    where (niv2.wkf03activo == 1 && wf2.wkf01activo == 1 && tip2.wkf02activo == 1)
                                    where (wf.wkf01llave == id)
                                    select new WorkflowResponseDto
@@ -250,9 +250,9 @@ namespace mipBackend.Data.Workflows
             }
         }
 
-        public async Task UpdateConfiguracionWeb(Wkf01Flujo request)
+        public async Task UpdateConfiguracionWeb(wkf01Flujo request)
         {
-            var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
+                var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
             if (usuario is null)
             {
@@ -270,17 +270,17 @@ namespace mipBackend.Data.Workflows
                    );
             }
 
-            var workflow = await _contexto.Wkf01Flujos!
+            var workflow = await _contexto.wkf01Flujos!
                 .FirstOrDefaultAsync(x => x.wkf01llave == request.wkf01llave);
 
             workflow.fechaactualizacion = DateTime.Now;
-            workflow.approveby = Guid.Parse(usuario.Id);
+            workflow.approveby = usuario.Id;
 
             workflow.wkf01url = request.wkf01url;
             workflow.wkf01iconourl = request.wkf01iconourl;
             workflow.wkf01visiblemenu =  request.wkf01visiblemenu;
            
-            _contexto.Wkf01Flujos!.Update(workflow!);
+            _contexto.wkf01Flujos!.Update(workflow!);
 
         }
 

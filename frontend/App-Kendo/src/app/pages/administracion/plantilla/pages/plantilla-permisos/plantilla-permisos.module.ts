@@ -9,7 +9,7 @@ import { LabelModule } from '@progress/kendo-angular-label';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { ComboBoxModule, DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { LayoutModule } from '@progress/kendo-angular-layout';
-import { IconsModule } from '@progress/kendo-angular-icons';
+
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -37,7 +37,7 @@ import { reducers, effects } from './store';
     DropDownsModule,
     ComboBoxModule,
     LayoutModule,
-    IconsModule,
+    
 
     StoreModule.forFeature('plantillaflujo', reducers),
     EffectsModule.forFeature(effects),

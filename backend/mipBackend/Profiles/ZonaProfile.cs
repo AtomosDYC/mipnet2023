@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public ZonaProfile()
         {
 
-            CreateMap<Sist02Zona, ZonaResponseDto>();
-            CreateMap<ZonaResponseDto, Sist02Zona>();
-            CreateMap<ZonaRequestDto, Sist02Zona>();
+            CreateMap<sist02Zona, ZonaResponseDto>();
+            CreateMap<ZonaResponseDto, sist02Zona>();
+            CreateMap<ZonaRequestDto, sist02Zona>();
         }
     }
 }

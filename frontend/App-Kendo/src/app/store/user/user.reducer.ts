@@ -10,6 +10,7 @@ export interface UserState {
 }
 
 
+
 const initialState : UserState = {
   entity: null,
   id: null,
@@ -44,7 +45,7 @@ export function reducer(state = initialState, action: fromActions.All | any) : U
         }
 
         case fromActions.Types.SIGIN_IN_EMAIL_SUCCESS: {
-          return {...state, loading: false, entity: action.user, email: action.email, error: null};
+          return {...state, loading: false, entity: action, id: action.id, email: action.email, error: null};
         }
 
         case fromActions.Types.SIGIN_IN_EMAIL_ERROR: {

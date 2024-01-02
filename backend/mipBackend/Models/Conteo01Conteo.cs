@@ -5,9 +5,9 @@ namespace mipBackend.Models;
 
 public partial class Conteo01Conteo
 {
-    public int Conteo01Llave { get; set; }
+    public int Conteo01llave { get; set; }
 
-    public int? Trp01Llave { get; set; }
+    public int? Trp01llave { get; set; }
 
     public int? Conteo01Valor { get; set; }
 
@@ -25,11 +25,11 @@ public partial class Conteo01Conteo
 
     public int? Conteo01EstadoConteo { get; set; }
 
-    public int? Conteo01TipoSistema { get; set; }
+    public int? Conteo01Tiposistema { get; set; }
 
-    public int? Temp02Llave { get; set; }
+    public int? Temp02llave { get; set; }
 
-    public string? Mvl01Llave { get; set; }
+    public string? Mvl01llave { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -43,5 +43,5 @@ public partial class Conteo01Conteo
 
     public Guid? deleteby { get; set; }
 
-    public virtual Temp02TemporadaBase? Temp02LlaveNavigation { get; set; }
+    public virtual Temp02TemporadaBase? Temp02llaveNavigation { get; set; }
 }

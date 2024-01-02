@@ -30,7 +30,7 @@ namespace mipBackend.Data.EstadosDanios
         }
 
 
-        public async Task CreateEstadosDanio(Esp04EstadoDanio EstadosDanio)
+        public async Task CreateEstadosDanio(esp04EstadoDanio EstadosDanio)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -51,28 +51,28 @@ namespace mipBackend.Data.EstadosDanios
             }
 
             EstadosDanio.fechaactivacion = DateTime.Now;
-            EstadosDanio.createby = Guid.Parse(usuario.Id);
+            EstadosDanio.createby = usuario.Id;
             EstadosDanio.esp04activo = 1;
 
-            await _contexto.Esp04EstadoDanios!.AddAsync(EstadosDanio);
+            await _contexto.esp04EstadoDanios!.AddAsync(EstadosDanio);
 
         }
 
         public async Task DeleteEstadosDanio(int id)
         {
 
-            var EstadosDanio = await _contexto.Esp04EstadoDanios!
+            var EstadosDanio = await _contexto.esp04EstadoDanios!
                 .FirstOrDefaultAsync(x => x.esp04llave == id);
 
-            _contexto.Esp04EstadoDanios!.Remove(EstadosDanio!);
+            _contexto.esp04EstadoDanios!.Remove(EstadosDanio!);
         }
 
         public async Task<IEnumerable<EstadosDanioResponseDto>> GetAllEstadosDanios()
         {
             using (var db = _contexto)
             {
-                var query = await (from est in db.Esp04EstadoDanios
-                                   join med in db.Esp06MedidaUmbrales! on est.esp06llave equals med.esp06llave
+                var query = await (from est in db.esp04EstadoDanios
+                                   join med in db.esp06MedidaUmbrales! on est.esp06llave equals med.esp06llave
                                    select new EstadosDanioResponseDto
                                    {
                                        esp04llave = est.esp04llave,
@@ -88,9 +88,26 @@ namespace mipBackend.Data.EstadosDanios
             }
         }
 
-        public async Task<Esp04EstadoDanio> GetEstadosDanioById(int id)
+        public async Task<EstadosDanioResponseDto> GetEstadosDanioById(int id)
         {
-            return await _contexto.Esp04EstadoDanios!.FirstOrDefaultAsync(x => x.esp04llave == id)!;
+            using (var db = _contexto)
+            {
+                var query = await (from est in db.esp04EstadoDanios
+                                   join med in db.esp06MedidaUmbrales! on est.esp06llave equals med.esp06llave
+                                   where est.esp04llave == id
+                                   select new EstadosDanioResponseDto
+                                   {
+                                       esp04llave = est.esp04llave,
+                                       esp04nombre = est.esp04nombre,
+                                       esp04descripcion = est.esp04descripcion,
+                                       esp04activo = est.esp04activo,
+                                       esp06llave = med.esp06llave,
+                                       esp06nombre = med.esp06nombre
+                                   }).FirstAsync();
+
+                return _mapper.Map<EstadosDanioResponseDto>(query);
+
+            }
         }
 
         public async Task<bool> SaveChanges()
@@ -98,7 +115,7 @@ namespace mipBackend.Data.EstadosDanios
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateEstadosDanio(Esp04EstadoDanio request)
+        public async Task UpdateEstadosDanio(esp04EstadoDanio request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -118,23 +135,23 @@ namespace mipBackend.Data.EstadosDanios
                    );
             }
 
-            var EstadosDanio = await _contexto.Esp04EstadoDanios!
+            var EstadosDanio = await _contexto.esp04EstadoDanios!
                 .FirstOrDefaultAsync(x => x.esp04llave == request.esp04llave);
 
             EstadosDanio.fechaactualizacion = DateTime.Now;
-            EstadosDanio.approveby = Guid.Parse(usuario.Id);
+            EstadosDanio.approveby = usuario.Id;
             EstadosDanio.esp04nombre = request.esp04nombre;
             EstadosDanio.esp04descripcion = request.esp04descripcion;
             EstadosDanio.esp06llave = request.esp06llave;
             
-            _contexto.Esp04EstadoDanios!.Update(EstadosDanio!);
+            _contexto.esp04EstadoDanios!.Update(EstadosDanio!);
 
         }
 
         public async Task DisableEstadosDanio(int id)
         {
 
-            var EstadosDanio = await _contexto.Esp04EstadoDanios!
+            var EstadosDanio = await _contexto.esp04EstadoDanios!
                 .FirstOrDefaultAsync(x => x.esp04llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -158,7 +175,7 @@ namespace mipBackend.Data.EstadosDanios
 
             EstadosDanio.esp04activo = 0;
 
-            _contexto.Esp04EstadoDanios!.Update(EstadosDanio);
+            _contexto.esp04EstadoDanios!.Update(EstadosDanio);
 
 
         }
@@ -166,7 +183,7 @@ namespace mipBackend.Data.EstadosDanios
         public async Task ActivateEstadosDanio(int id)
         {
 
-            var EstadosDanio = await _contexto.Esp04EstadoDanios!
+            var EstadosDanio = await _contexto.esp04EstadoDanios!
                 .FirstOrDefaultAsync(x => x.esp04llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -190,7 +207,7 @@ namespace mipBackend.Data.EstadosDanios
 
             EstadosDanio.esp04activo = 1;
 
-            _contexto.Esp04EstadoDanios!.Update(EstadosDanio);
+            _contexto.esp04EstadoDanios!.Update(EstadosDanio);
 
 
         }

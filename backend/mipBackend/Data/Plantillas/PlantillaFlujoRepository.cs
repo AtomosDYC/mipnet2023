@@ -32,7 +32,7 @@ namespace mipBackend.Data.Plantillas
 
 
 
-        public async Task CreatePlantilla(Prf04PlantillaFlujo plantilla)
+        public async Task CreatePlantilla(prf04PlantillaFlujo plantilla)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -52,19 +52,20 @@ namespace mipBackend.Data.Plantillas
                    );
             }
 
-            await _contexto.Prf04PlantillaFlujos!.AddAsync(plantilla);
+            await _contexto.prf04PlantillaFlujos!.AddAsync(plantilla);
 
         }
 
-        public async Task<IEnumerable<PlantillaFlujoResponseDto>> GetAllPlantillaFlujos()
+        public async Task<IEnumerable<PlantillaFlujoResponseDto>> GetAllPlantillaFlujos(int Id)
         {
 
             using (var db = _contexto)
             {
-                var query = await (from ppf in db.Prf04PlantillaFlujos!
-                                   join pp in db.Prf03Plantillas! on ppf.prf03llave equals pp.prf03llave
-                                   join wf in db.Wkf01Flujos! on ppf.wkf01llave equals wf.wkf01llave
-                                   where (pp.prf03llave == 1 && wf.wkf01activo == 1)
+                var query = await (from ppf in db.prf04PlantillaFlujos!
+                                   join pp in db.prf03Plantillas! on ppf.prf03llave equals pp.prf03llave
+                                   join wf in db.wkf01Flujos! on ppf.wkf01llave equals wf.wkf01llave
+                                   where (pp.prf03activo == 1 && wf.wkf01activo == 1)
+                                   where pp.prf03llave == Id
                                    orderby wf.wkf01llavepadre, wf.wkf01orden,
                                    wf.wkf01prioridad
 
@@ -89,6 +90,35 @@ namespace mipBackend.Data.Plantillas
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
+        public async Task DeletePlantilla(int id)
+        {
+
+            var plantilla = await _contexto.prf04PlantillaFlujos!
+                .FirstOrDefaultAsync(x => x.prf04llave == id);
+
+            var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
+
+            if (usuario is null)
+            {
+                throw new MiddlewareException(
+                    HttpStatusCode.Unauthorized,
+                    new { mensaje = "El usuario no es valido para hacer este camnbio" }
+                    );
+            }
+
+            if (plantilla is null)
+            {
+                throw new MiddlewareException(
+                   HttpStatusCode.BadRequest,
+                   new { mensaje = "La tipoparametro no existe en los listados" }
+                   );
+            }
+
+
+            _contexto.prf04PlantillaFlujos!.Remove(plantilla);
+
+
+        }
 
 
     }

@@ -6,17 +6,17 @@ using mipBackend.Token;
 
 using System.Net;
 using AutoMapper;
-using mipBackend.Dtos.TipoPersonaDtos;
+using mipBackend.Dtos.TipopersonaDtos;
 
-namespace mipBackend.Data.TipoPersonas 
+namespace mipBackend.Data.Tipopersonas 
 {
-    public class TipoPersonaRepository : ITipoPersonaRepository
+    public class TipopersonaRepository : ITipopersonaRepository
     {
         private readonly AppDbContext _contexto;
         private readonly IUsuarioSesion _usuarioSesion;
         private readonly UserManager<Usuario> _userManager;
 
-        public TipoPersonaRepository(
+        public TipopersonaRepository(
             AppDbContext context,
             IUsuarioSesion sesion,
             UserManager<Usuario> userManager)
@@ -28,7 +28,7 @@ namespace mipBackend.Data.TipoPersonas
 
 
 
-        public async Task CreateTipoPersona(Per03TipoPersona tipopersona)
+        public async Task CreateTipopersona(per03Tipopersona tipopersona)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -49,30 +49,30 @@ namespace mipBackend.Data.TipoPersonas
             }
 
             tipopersona.fechaactivacion = DateTime.Now;
-            tipopersona.createby = Guid.Parse(usuario.Id);
+            tipopersona.createby = usuario.Id;
             tipopersona.per03activo = 1;
 
-            await _contexto.Per03TipoPersonas!.AddAsync(tipopersona);
+            await _contexto.per03Tipopersonas!.AddAsync(tipopersona);
 
         }
 
-        public async Task DeleteTipoPersona(int id)
+        public async Task DeleteTipopersona(int id)
         {
             
-            var tipopersona = await _contexto.Per03TipoPersonas!
+            var tipopersona = await _contexto.per03Tipopersonas!
                 .FirstOrDefaultAsync(x => x.per03llave == id);
 
-            _contexto.Per03TipoPersonas!.Remove(tipopersona!);
+            _contexto.per03Tipopersonas!.Remove(tipopersona!);
         }
 
-        public async Task<IEnumerable<Per03TipoPersona>> GetAllTipoPersonas()
+        public async Task<IEnumerable<per03Tipopersona>> GetAllTipopersonas()
         {
-            return await _contexto.Per03TipoPersonas!.ToListAsync();
+            return await _contexto.per03Tipopersonas!.ToListAsync();
         }
 
-        public async Task<Per03TipoPersona> GetTipoPersonaById(int id)
+        public async Task<per03Tipopersona> GetTipopersonaById(int id)
         {
-            return await _contexto.Per03TipoPersonas!.FirstOrDefaultAsync(x => x.per03llave == id)!;
+            return await _contexto.per03Tipopersonas!.FirstOrDefaultAsync(x => x.per03llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -80,7 +80,7 @@ namespace mipBackend.Data.TipoPersonas
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateTipoPersona(Per03TipoPersona request)
+        public async Task UpdateTipopersona(per03Tipopersona request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -100,22 +100,22 @@ namespace mipBackend.Data.TipoPersonas
                    );
             }
 
-            var tipopersona = await _contexto.Per03TipoPersonas!
+            var tipopersona = await _contexto.per03Tipopersonas!
                 .FirstOrDefaultAsync(x => x.per03llave == request.per03llave);
 
             tipopersona.fechaactualizacion = DateTime.Now;
-            tipopersona.approveby = Guid.Parse(usuario.Id);
+            tipopersona.approveby = usuario.Id;
             tipopersona.per03nombre = request.per03nombre;
             tipopersona.per03descripcion = request.per03descripcion;
             
-            _contexto.Per03TipoPersonas!.Update(tipopersona!);
+            _contexto.per03Tipopersonas!.Update(tipopersona!);
 
         }
 
-        public async Task DisableTipoPersona(int id)
+        public async Task DisableTipopersona(int id)
         {
 
-            var tipopersona = await _contexto.Per03TipoPersonas!
+            var tipopersona = await _contexto.per03Tipopersonas!
                 .FirstOrDefaultAsync(x => x.per03llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -139,15 +139,15 @@ namespace mipBackend.Data.TipoPersonas
 
             tipopersona.per03activo = 0;
 
-            _contexto.Per03TipoPersonas!.Update(tipopersona);
+            _contexto.per03Tipopersonas!.Update(tipopersona);
 
 
         }
 
-        public async Task ActivateTipoPersona(int id)
+        public async Task ActivateTipopersona(int id)
         {
 
-            var tipopersona = await _contexto.Per03TipoPersonas!
+            var tipopersona = await _contexto.per03Tipopersonas!
                 .FirstOrDefaultAsync(x => x.per03llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -171,7 +171,7 @@ namespace mipBackend.Data.TipoPersonas
 
             tipopersona.per03activo = 1;
 
-            _contexto.Per03TipoPersonas!.Update(tipopersona);
+            _contexto.per03Tipopersonas!.Update(tipopersona);
 
         }
     }

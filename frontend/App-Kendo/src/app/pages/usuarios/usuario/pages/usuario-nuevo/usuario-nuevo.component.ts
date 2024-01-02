@@ -73,7 +73,7 @@ export class UsuarioNuevoComponent implements OnInit {
         username : String(email).toLowerCase()
       }
 
-      console.log('CreateRequest',CreateRequest);
+      //console.log('CreateRequest',CreateRequest);
     
       this.store.dispatch(new fromList.Create(CreateRequest));
 

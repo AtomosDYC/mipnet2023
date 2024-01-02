@@ -205,5 +205,9 @@ export const navItems = [
     path: '/',
     id: 39,
     parentId: 28,
+  },
+  {
+    text: 'Logout',
+    id: 99,
   } 
 ]

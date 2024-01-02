@@ -1,6 +1,6 @@
-﻿namespace mipBackend.Dtos.TipoEspecieDtos
+﻿namespace mipBackend.Dtos.TipoespecieDtos
 {
-    public class TipoEspecieRequestDto
+    public class TipoespecieRequestDto
     {
         public string? esp08nombre { get; set; }
 

@@ -6,13 +6,13 @@ namespace mipBackend.Data.Saludos
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Per02Genero>> GetAllSaludos();
+        Task<IEnumerable<per02Genero>> GetAllSaludos();
 
-        Task<Per02Genero> GetSaludoById(int id);
+        Task<per02Genero> GetSaludoById(int id);
 
-        Task CreateSaludo(Per02Genero region);
+        Task CreateSaludo(per02Genero region);
 
-        Task UpdateSaludo(Per02Genero region);
+        Task UpdateSaludo(per02Genero region);
 
         Task DeleteSaludo(int id);
 

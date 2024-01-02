@@ -10,9 +10,9 @@ namespace mipBackend.Profiles
         public MedidaUmbralProfile()
         {
 
-            CreateMap<Esp06MedidaUmbral, MedidaUmbralResponseDto>();
-            CreateMap<MedidaUmbralResponseDto, Esp06MedidaUmbral>();
-            CreateMap<MedidaUmbralRequestDto, Esp06MedidaUmbral>();
+            CreateMap<esp06MedidaUmbral, MedidaUmbralResponseDto>();
+            CreateMap<MedidaUmbralResponseDto, esp06MedidaUmbral>();
+            CreateMap<MedidaUmbralRequestDto, esp06MedidaUmbral>();
 
         }
 

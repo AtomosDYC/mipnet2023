@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Mvl03RegistroAcceso
 {
-    public int Mvl03Llave { get; set; }
+    public int Mvl03llave { get; set; }
 
     public Guid? ApplicationId { get; set; }
 
     public Guid? UserId { get; set; }
 
-    public int? Per01Llave { get; set; }
+    public int? per01llave { get; set; }
 
     public string? UserName { get; set; }
 
@@ -33,9 +33,9 @@ public partial class Mvl03RegistroAcceso
 
     public bool? IsApproved { get; set; }
 
-    public bool? Secu02Activo { get; set; }
+    public bool? Secu02activo { get; set; }
 
-    public string? NombreUsuario { get; set; }
+    public string? nombreUsuario { get; set; }
 
     public string? EmailUsuario { get; set; }
 

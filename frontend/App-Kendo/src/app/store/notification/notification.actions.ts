@@ -7,11 +7,13 @@ export const visualizar = createAction(
   );
 
 export const onSuccess = createAction(
-  '[Notification] onsuccess'
+  '[Notification] onsuccess',
+  props<{ success: visibleToast }>()
 );
 
 export const onError = createAction(
-  '[Notification] onsuccess'
+  '[Notification] onerror',
+  props<{ error: visibleToast }>()
 );
 
 

@@ -6,19 +6,19 @@ using mipBackend.Token;
 
 using System.Net;
 using AutoMapper;
-using mipBackend.Dtos.TipoPerComunicacionDtos;
+using mipBackend.Dtos.TipoperComunicacionDtos;
 using Microsoft.Data.SqlClient;
 
-namespace mipBackend.Data.TipoPerComunicaciones
+namespace mipBackend.Data.TipoperComunicaciones
 {
-    public class TipoPerComunicacionRepository : ITipoPerComunicacionRepository
+    public class TipoperComunicacionRepository : ITipoperComunicacionRepository
     {
         private readonly AppDbContext _contexto;
         private readonly IUsuarioSesion _usuarioSesion;
         private readonly UserManager<Usuario> _userManager;
         private IMapper _mapper;
 
-        public TipoPerComunicacionRepository(
+        public TipoperComunicacionRepository(
             AppDbContext context,
             IUsuarioSesion sesion,
             UserManager<Usuario> userManager,
@@ -32,7 +32,7 @@ namespace mipBackend.Data.TipoPerComunicaciones
 
 
 
-        public async Task CreateTipoPerComunicacion(Per06TipoPersonaComunicacion TipoPerComunicacion)
+        public async Task CreateTipoperComunicacion(per06TipopersonaComunicacion TipoperComunicacion)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -44,7 +44,7 @@ namespace mipBackend.Data.TipoPerComunicaciones
                     );
             }
 
-            if (TipoPerComunicacion is null)
+            if (TipoperComunicacion is null)
             {
                 throw new MiddlewareException(
                    HttpStatusCode.BadRequest,
@@ -52,17 +52,17 @@ namespace mipBackend.Data.TipoPerComunicaciones
                    );
             }
 
-            TipoPerComunicacion.fechaactualizacion = DateTime.Now;
-            TipoPerComunicacion.createby = Guid.Parse(usuario.Id);
+            TipoperComunicacion.fechaactualizacion = DateTime.Now;
+            TipoperComunicacion.createby = usuario.Id;
 
-            await _contexto.Per06TipoPersonaComunicaciones!.AddAsync(TipoPerComunicacion);
+            await _contexto.per06TipopersonaComunicaciones!.AddAsync(TipoperComunicacion);
 
         }
 
-        public async Task DeleteTipoPerComunicacion(TipoPerComunicacionRequestDto request)
+        public async Task DeleteTipoperComunicacion(TipoperComunicacionRequestDto request)
         {
 
-            var tipoparametro = await _contexto.Per06TipoPersonaComunicaciones!
+            var tipoparametro = await _contexto.per06TipopersonaComunicaciones!
                 .Where(x => x.per04llave == request.per04llave && x.per03llave == request.per03llave)
                 .ToListAsync();
 
@@ -70,13 +70,13 @@ namespace mipBackend.Data.TipoPerComunicaciones
 
         }
 
-        public async Task<IEnumerable<TipoPerComunicacionResponseDto>> GetAllTipoPerComunicaciones()
+        public async Task<IEnumerable<TipoperComunicacionResponseDto>> GetAllTipoperComunicaciones()
         {
-                var query = await (from tpc in _contexto.Per06TipoPersonaComunicaciones
-                                   join tp in _contexto.Per03TipoPersonas! on tpc.per03llave equals tp.per03llave
-                                   join tcp in _contexto.Per04TipoComunicaciones! on tpc.per04llave equals tcp.per04llave
+                var query = await (from tpc in _contexto.per06TipopersonaComunicaciones
+                                   join tp in _contexto.per03Tipopersonas! on tpc.per03llave equals tp.per03llave
+                                   join tcp in _contexto.per04TipoComunicaciones! on tpc.per04llave equals tcp.per04llave
                                    //where (flu.wkf02activo == 1)
-                                   select new TipoPerComunicacionResponseDto
+                                   select new TipoperComunicacionResponseDto
                                    {
                                        per03llave = tpc.per03llave,
                                        per03nombre = tp.per03nombre,
@@ -84,18 +84,18 @@ namespace mipBackend.Data.TipoPerComunicaciones
                                        per04nombre = tcp.per04nombre,
                                    }).ToListAsync();
 
-                return _mapper.Map<IEnumerable<TipoPerComunicacionResponseDto>>(query);
+                return _mapper.Map<IEnumerable<TipoperComunicacionResponseDto>>(query);
 
         }
 
-        public async Task<IEnumerable<TipoPerComunicacionResponseDto>> GetTipoPerComunicacionById(int id)
+        public async Task<IEnumerable<TipoperComunicacionResponseDto>> GetTipoperComunicacionById(int id)
         {
             
-                var query = await (from tpc in _contexto.Per06TipoPersonaComunicaciones
-                                   join tp in _contexto.Per03TipoPersonas! on tpc.per03llave equals tp.per03llave
-                                   join tcp in _contexto.Per04TipoComunicaciones! on tpc.per04llave equals tcp.per04llave
+                var query = await (from tpc in _contexto.per06TipopersonaComunicaciones
+                                   join tp in _contexto.per03Tipopersonas! on tpc.per03llave equals tp.per03llave
+                                   join tcp in _contexto.per04TipoComunicaciones! on tpc.per04llave equals tcp.per04llave
                                    where (tpc.per04llave == id)
-                                   select new TipoPerComunicacionResponseDto
+                                   select new TipoperComunicacionResponseDto
                                    {
                                        per03llave = tpc.per03llave,
                                        per03nombre = tp.per03nombre,
@@ -103,7 +103,7 @@ namespace mipBackend.Data.TipoPerComunicaciones
                                        per04nombre = tcp.per04nombre,
                                    }).ToListAsync();
 
-                return _mapper.Map<IEnumerable<TipoPerComunicacionResponseDto>>(query);
+                return _mapper.Map<IEnumerable<TipoperComunicacionResponseDto>>(query);
 
         }
 

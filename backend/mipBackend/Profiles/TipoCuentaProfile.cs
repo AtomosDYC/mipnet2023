@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public TipoCuentaProfile()
         {
 
-            CreateMap<Cnt02TipoCuenta, TipoCuentaResponseDto>();
-            CreateMap<TipoCuentaResponseDto, Cnt02TipoCuenta>();
-            CreateMap<TipoCuentaRequestDto, Cnt02TipoCuenta>();
+            CreateMap<cnt02TipoCuenta, TipoCuentaResponseDto>();
+            CreateMap<TipoCuentaResponseDto, cnt02TipoCuenta>();
+            CreateMap<TipoCuentaRequestDto, cnt02TipoCuenta>();
 
         }
     }

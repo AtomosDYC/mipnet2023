@@ -3,31 +3,31 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt19LicenciaCliente
+public partial class cnt19LicenciaCliente
 {
-    public int Cnt19Llave { get; set; }
+    public int cnt19llave { get; set; }
 
-    public int? Cnt01Llave { get; set; }
+    public int? cnt01llave { get; set; }
 
-    public int? Lnc01Llave { get; set; }
+    public int? Lnc01llave { get; set; }
 
-    public string? Cnt19NombreLicencia { get; set; }
+    public string? cnt19nombreLicencia { get; set; }
 
-    public int? Cnt19NumeroUsuario { get; set; }
+    public int? cnt19NumeroUsuario { get; set; }
 
-    public int? Cnt19NumeroDias { get; set; }
+    public int? cnt19NumeroDias { get; set; }
 
-    public DateTime? Cnt19FechaInicio { get; set; }
+    public DateTime? cnt19FechaInicio { get; set; }
 
-    public DateTime? Cnt19FechaTermino { get; set; }
+    public DateTime? cnt19FechaTermino { get; set; }
 
-    public int? Cnt19Activo { get; set; }
+    public int? cnt19activo { get; set; }
 
-    public int? Cnt23Llave { get; set; }
+    public int? cnt23llave { get; set; }
 
-    public int? Cnt19ValorReferencial { get; set; }
+    public int? cnt19ValorReferencial { get; set; }
 
-    public int? Temp02Llave { get; set; }
+    public int? Temp02llave { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -41,11 +41,11 @@ public partial class Cnt19LicenciaCliente
 
     public Guid? deleteby { get; set; }
 
-    public virtual Cnt01CuentaCliente? Cnt01LlaveNavigation { get; set; }
+    public virtual cnt01CuentaCliente? cnt01llaveNavigation { get; set; }
 
-    public virtual ICollection<Cnt15EmpleadoLicencia> Cnt15EmpleadoLicencia { get; } = new List<Cnt15EmpleadoLicencia>();
+    public virtual ICollection<cnt15EmpleadoLicencia> cnt15EmpleadoLicencia { get; } = new List<cnt15EmpleadoLicencia>();
 
-    public virtual ICollection<Cnt20LicenciaServicio> Cnt20LicenciaServicios { get; } = new List<Cnt20LicenciaServicio>();
+    public virtual ICollection<cnt20LicenciaServicio> cnt20LicenciaServicios { get; } = new List<cnt20LicenciaServicio>();
 
     public virtual ICollection<Pgo01CompraLicencia> Pgo01CompraLicencia { get; } = new List<Pgo01CompraLicencia>();
 }

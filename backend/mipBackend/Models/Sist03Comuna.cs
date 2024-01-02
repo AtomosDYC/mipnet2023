@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Sist03Comuna
+public partial class sist03Comuna
 {
     public int sist03llave { get; set; }
 
@@ -29,11 +29,11 @@ public partial class Sist03Comuna
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Cnt06ComunicacionCliente> Cnt06ComunicacionClientes { get; } = new List<Cnt06ComunicacionCliente>();
+    public virtual ICollection<cnt06ComunicacionCliente> cnt06ComunicacionClientes { get; } = new List<cnt06ComunicacionCliente>();
 
     public virtual ICollection<Conteo04ResumenSag> Conteo04ResumenSags { get; } = new List<Conteo04ResumenSag>();
 
-    public virtual Sist04Region? sist04llaveNavigation { get; set; }
+    public virtual sist04Region? sist04llaveNavigation { get; set; }
 
-    public virtual ICollection<Sist02Zona> Sist02Llaves { get; } = new List<Sist02Zona>();
+    public virtual ICollection<sist02Zona> sist02llaves { get; } = new List<sist02Zona>();
 }

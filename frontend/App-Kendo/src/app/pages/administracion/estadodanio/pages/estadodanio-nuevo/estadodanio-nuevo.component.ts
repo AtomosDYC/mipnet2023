@@ -63,6 +63,13 @@ export class EstadodanioNuevoComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.Form = new FormGroup({
+      txtNombre: new FormControl( this.listdata.esp04nombre , [Validators.required]),
+      txtDescripcion: new FormControl(this.listdata.esp04descripcion, [Validators.required]),
+      cbxMedidaumbral: new FormControl({ text: this.listdata.esp06nombre, value: this.listdata.esp06llave }, [Validators.required]),
+      
+    });
+
     this.onLoadcbx();
 
     this._routeParams.paramMap.subscribe(params => {
@@ -77,11 +84,13 @@ export class EstadodanioNuevoComponent implements OnInit {
           .subscribe(data => {
             if(data){
 
-                this.Form = new FormGroup({
-                  txtNombre: new FormControl( data.esp04nombre , [Validators.required]),
-                  txtDescripcion: new FormControl(data.esp04descripcion, [Validators.required]),
-                  cbxMedidaumbral: new FormControl({ text: data.esp06nombre, value: data.esp06llave }, [Validators.required]),
-                });
+              //console.log('data',data);
+
+              this.Form = new FormGroup({
+                txtNombre: new FormControl( data.esp04nombre , [Validators.required]),
+                txtDescripcion: new FormControl(data.esp04descripcion, [Validators.required]),
+                cbxMedidaumbral: new FormControl({value: String(data.esp06llave), description: String(data.esp06nombre)}, [Validators.required]),
+              });
 
             } else {
               
@@ -89,12 +98,7 @@ export class EstadodanioNuevoComponent implements OnInit {
           })
       }
 
-      this.Form = new FormGroup({
-        txtNombre: new FormControl( this.listdata.esp04nombre , [Validators.required]),
-        txtDescripcion: new FormControl(this.listdata.esp04descripcion, [Validators.required]),
-        cbxMedidaumbral: new FormControl({ text: this.listdata.esp06nombre, value: this.listdata.esp06llave }, [Validators.required]),
-        
-      });
+      
 
     });
     

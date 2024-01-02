@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public TipoDocumentoProfile()
         {
 
-            CreateMap<Per08TipoDocumento, TipoDocumentoResponseDto>();
-            CreateMap<TipoDocumentoResponseDto, Per08TipoDocumento>();
-            CreateMap<TipoDocumentoRequestDto, Per08TipoDocumento>();
+            CreateMap<per08TipoDocumento, TipoDocumentoResponseDto>();
+            CreateMap<TipoDocumentoResponseDto, per08TipoDocumento>();
+            CreateMap<TipoDocumentoRequestDto, per08TipoDocumento>();
 
         }
     }

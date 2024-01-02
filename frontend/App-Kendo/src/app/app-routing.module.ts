@@ -5,6 +5,8 @@ import { DefaultLayoutComponent, StaticLayoutComponent } from '../app/containers
 import { UnauthGuard } from './guards/unauth/unauth.guard';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { RegisterModule } from './pages/auth/pages/register/register.module';
+import { EmailConfirmationModule } from './pages/auth/pages/email-confirmation/email-confirmation.module';
+import { TemporadaModule } from './pages/temporada/temporada.module';
 
 const routes: Routes = [
   {
@@ -24,6 +26,19 @@ const routes: Routes = [
         path: 'user/registro',
         loadChildren:() => import('./pages/auth/pages/register/register.module').then(m=>m.RegisterModule)
 
+      },
+      {
+        path: 'user/forgotpassword',
+        loadChildren:() => import('./pages/auth/pages/forgot-password/forgot-password.module').then(m=>m.ForgotPasswordModule)
+
+      },
+      {
+        path: 'user/resetpassword',
+        loadChildren:() => import('./pages/auth/pages/reset-password/reset-password.module').then(m=>m.ResetPasswordModule)
+      },
+      {
+        path: 'mailconfirmation',
+        loadChildren:() => import('./pages/auth/pages/email-confirmation/email-confirmation.module').then(m=>m.EmailConfirmationModule)
       }
     ]
   },
@@ -44,6 +59,18 @@ const routes: Routes = [
         path: '',
         loadChildren: () =>
           import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+//cliente estacion
+      {
+        path: 'clienteusuario',
+        loadChildren: () =>
+          import('./pages/clienteusuario/clienteusuario.module').then((m) => m.ClienteusuarioModule),
+      },
+//cliente estacion
+      {
+        path: 'clienteestacion',
+        loadChildren: () =>
+          import('./pages/clienteestacion/clienteestacion.module').then((m) => m.ClienteestacionModule),
       },
 //usuarios
       {
@@ -66,7 +93,18 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/administracion/plantilla/plantilla.module').then((m) => m.PlantillaModule),
       },
+      // monitor
+      {
+        path: 'monitor',
+        loadChildren: () =>
+          import('./pages/monitor/monitor.module').then((m) => m.MonitorModule),
+      },
       //personas
+      {
+        path: 'personas',
+        loadChildren: () =>
+          import('./pages/personas/personas.module').then((m) => m.PersonasModule),
+      },
       {
         path: 'saludos',
         loadChildren: () =>
@@ -119,7 +157,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/administracion/tipoparametro/tipoparametro.module').then((m) => m.TipoparametroModule),
       },
-
+//regiones
       {
         path: 'region',
         loadChildren: () =>
@@ -135,21 +173,49 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/administracion/zona/zona.module').then((m) => m.ZonaModule),
       },
+  //especies
       {
-        path: 'tipoespecie',
+        path: 'especies/especies',
+        loadChildren: () =>
+          import('./pages/especie/especie.module').then((m) => m.EspecieModule),
+      },
+      {
+        path: 'especies/tipoespecie',
         loadChildren: () =>
           import('./pages/administracion/tipoespecie/tipoespecie.module').then((m) => m.TipoespecieModule),
       },
       {
-        path: 'medidaumbral',
+        path: 'especies/medidaumbral',
         loadChildren: () =>
           import('./pages/administracion/medidaumbral/medidaumbral.module').then((m) => m.MedidaumbralModule),
       },
       {
-        path: 'estadodanio',
+        path: 'especies/estadodanio',
         loadChildren: () =>
           import('./pages/administracion/estadodanio/estadodanio.module').then((m) => m.EstadodanioModule),
-      }
+      },
+      //especie temporada
+      {
+        path: 'especies/especietemporada',
+        loadChildren: () =>
+          import('./pages/especietemporada/especietemporada.module').then((m) => m.EspecietemporadaModule),
+      },
+      //temporada
+      {
+        path: 'temporadas/segmentartemporada',
+        loadChildren: () =>
+          import('./pages/administracion/segmentartemporada/segmentartemporada.module').then((m) => m.SegmentartemporadaModule),
+      },
+      {
+        path: 'temporadas/temporadabase',
+        loadChildren: () =>
+          import('./pages/administracion/temporadabase/temporadabase.module').then((m) => m.TemporadabaseModule),
+      },
+      {
+        path: 'temporada',
+        loadChildren: () =>
+          import('./pages/temporada/temporada.module').then((m) => m.TemporadaModule),
+      },
     ]
     }
   ];

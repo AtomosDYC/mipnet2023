@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public NivelFlujoProfile()
         {
 
-            CreateMap<Wkf03Nivel, NivelFlujoResponseDto>();
-            CreateMap<NivelFlujoResponseDto, Wkf03Nivel>();
-            CreateMap<NivelFlujoRequestDto, Wkf03Nivel>();
+            CreateMap<wkf03Nivel, NivelFlujoResponseDto>();
+            CreateMap<NivelFlujoResponseDto, wkf03Nivel>();
+            CreateMap<NivelFlujoRequestDto, wkf03Nivel>();
 
         }
 

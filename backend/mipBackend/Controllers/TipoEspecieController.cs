@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using mipBackend.Data.TipoEspecie;
-using mipBackend.Dtos.TipoEspecieDtos;
+using mipBackend.Data.Tipoespecie;
+using mipBackend.Dtos.TipoespecieDtos;
 using mipBackend.Middleware;
 using mipBackend.Models;
 using System.Net;
@@ -10,17 +10,17 @@ namespace mipBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TipoEspecieController : ControllerBase
+    public class TipoespecieController : ControllerBase
     {
-        private readonly ITipoEspecieRepository _repository;
+        private readonly ITipoespecieRepository _repository;
 
         private IMapper _mapper;
         private HttpStatusCode httpStatusCode;
 
-        public TipoEspecieController
+        public TipoespecieController
             (
 
-                ITipoEspecieRepository repository,
+                ITipoespecieRepository repository,
                 IMapper mapper
 
             )
@@ -30,21 +30,21 @@ namespace mipBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoEspecieResponseDto>>> GetTipoEspecie()
+        public async Task<ActionResult<IEnumerable<TipoespecieResponseDto>>> GetTipoespecie()
         {
 
-            var tipoespcies = await _repository.GetAllTipoEspecies();
-            return Ok(_mapper.Map<IEnumerable<TipoEspecieResponseDto>>(tipoespcies));
+            var tipoespcies = await _repository.GetAllTipoespecies();
+            return Ok(_mapper.Map<IEnumerable<TipoespecieResponseDto>>(tipoespcies));
 
         }
 
-        [HttpGet("~/api/tipoespecie/GetTipoEspecieById/{id}")]
-        [ActionName(nameof(GetTipoEspecieById))]
-        public async Task<ActionResult<TipoEspecieResponseDto>> GetTipoEspecieById(int id)
+        [HttpGet("~/api/tipoespecie/GetTipoespecieById/{id}")]
+        [ActionName(nameof(GetTipoespecieById))]
+        public async Task<ActionResult<TipoespecieResponseDto>> GetTipoespecieById(int id)
         {
 
 
-            var tipoespecie = await _repository.GetTipoEspecieById(id);
+            var tipoespecie = await _repository.GetTipoespecieById(id);
 
             if (tipoespecie == null)
             {
@@ -55,25 +55,25 @@ namespace mipBackend.Controllers
                     );
             }
 
-            return Ok(_mapper.Map<TipoEspecieResponseDto>(tipoespecie));
+            return Ok(_mapper.Map<TipoespecieResponseDto>(tipoespecie));
 
         }
 
         [HttpPost]
-        public async Task<ActionResult<TipoEspecieResponseDto>> CreateTipoEspecie
+        public async Task<ActionResult<TipoespecieResponseDto>> CreateTipoespecie
             (
-                [FromBody] TipoEspecieRequestDto tipoespecie
+                [FromBody] TipoespecieRequestDto tipoespecie
             )
         { 
 
-            var tipoespecieModel = _mapper.Map<Esp08TipoBase>(tipoespecie);
+            var tipoespecieModel = _mapper.Map<esp08TipoBase>(tipoespecie);
 
-            await _repository.CreateTipoEspecie(tipoespecieModel);
+            await _repository.CreateTipoespecie(tipoespecieModel);
             await _repository.SaveChanges();
 
-            var tipoespecieResponse = _mapper.Map<TipoEspecieResponseDto>(tipoespecieModel);
+            var tipoespecieResponse = _mapper.Map<TipoespecieResponseDto>(tipoespecieModel);
 
-            var tipoespeciedto = await _repository.GetTipoEspecieById(tipoespecieResponse.esp08llave);
+            var tipoespeciedto = await _repository.GetTipoespecieById(tipoespecieResponse.esp08llave);
 
             if (tipoespeciedto == null)
             {
@@ -84,27 +84,27 @@ namespace mipBackend.Controllers
                     );
             }
 
-            return Ok(_mapper.Map<TipoEspecieResponseDto>(tipoespeciedto));
+            return Ok(_mapper.Map<TipoespecieResponseDto>(tipoespeciedto));
 
 
 
         }
 
         [HttpPut]
-        public async Task<ActionResult<TipoEspecieResponseDto>> UpdateTipoEspecie
+        public async Task<ActionResult<TipoespecieResponseDto>> UpdateTipoespecie
             (
-                [FromBody] TipoEspecieResponseDto tipoespecie
+                [FromBody] TipoespecieResponseDto tipoespecie
             )
         {
 
-            var tipoespecieModel = _mapper.Map<Esp08TipoBase>(tipoespecie);
+            var tipoespecieModel = _mapper.Map<esp08TipoBase>(tipoespecie);
 
-            await _repository.UpdateTipoEspecie(tipoespecieModel);
+            await _repository.UpdateTipoespecie(tipoespecieModel);
             await _repository.SaveChanges();
 
-            var tipoespecieResponse = _mapper.Map<TipoEspecieResponseDto>(tipoespecieModel);
+            var tipoespecieResponse = _mapper.Map<TipoespecieResponseDto>(tipoespecieModel);
 
-            var tipoespeciedto = await _repository.GetTipoEspecieById(tipoespecieResponse.esp08llave);
+            var tipoespeciedto = await _repository.GetTipoespecieById(tipoespecieResponse.esp08llave);
 
             if (tipoespeciedto == null)
             {
@@ -115,15 +115,15 @@ namespace mipBackend.Controllers
                     );
             }
 
-            return Ok(_mapper.Map<TipoEspecieResponseDto>(tipoespeciedto));
+            return Ok(_mapper.Map<TipoespecieResponseDto>(tipoespeciedto));
 
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteTipoEspecie(int id)
+        public async Task<ActionResult> DeleteTipoespecie(int id)
         {
 
-            var tipoespeciedto = await _repository.GetTipoEspecieById(id);
+            var tipoespeciedto = await _repository.GetTipoespecieById(id);
 
             if (tipoespeciedto == null)
             {
@@ -138,62 +138,62 @@ namespace mipBackend.Controllers
             {
                 if (tipoespeciedto.esp08activo == 0)
                 {
-                    await _repository.DeleteTipoEspecie(id);
+                    await _repository.DeleteTipoespecie(id);
                     await _repository.SaveChanges();
                 }
                 else
                 {
-                    await _repository.DisableTipoEspecie(id);
+                    await _repository.DisableTipoespecie(id);
                     await _repository.SaveChanges();
                 }
             }
 
 
-            var listtipoespecies = await _repository.GetAllTipoEspecies();
-            return Ok(_mapper.Map<TipoEspecieResponseDto[]>(listtipoespecies));
+            var listtipoespecies = await _repository.GetAllTipoespecies();
+            return Ok(_mapper.Map<TipoespecieResponseDto[]>(listtipoespecies));
 
         }
 
         [HttpPost("~/api/tipoespecie/disabletipoespecie")]
-        public async Task<ActionResult<TipoEspecieResponseDto[]>> DisableTipoEspecie
+        public async Task<ActionResult<TipoespecieResponseDto[]>> DisableTipoespecie
             (
-                 [FromBody] TipoEspecieResponseDto[] tipoespecies
+                 [FromBody] TipoespecieResponseDto[] tipoespecies
             )
         {
 
-            foreach (TipoEspecieResponseDto item in tipoespecies)
+            foreach (TipoespecieResponseDto item in tipoespecies)
             {
-                var a = _mapper.Map<TipoEspecieResponseDto>(item);
+                var a = _mapper.Map<TipoespecieResponseDto>(item);
 
-                await _repository.DisableTipoEspecie(a.esp08llave);
+                await _repository.DisableTipoespecie(a.esp08llave);
                 await _repository.SaveChanges();
             }
 
 
-            var listtipoespecies = await _repository.GetAllTipoEspecies();
-            return Ok(_mapper.Map<TipoEspecieResponseDto[]>(listtipoespecies));
+            var listtipoespecies = await _repository.GetAllTipoespecies();
+            return Ok(_mapper.Map<TipoespecieResponseDto[]>(listtipoespecies));
 
         }
 
 
         [HttpPost("~/api/tipoespecie/activatetipoespecie")]
-        public async Task<ActionResult<TipoEspecieResponseDto[]>> ActivateTipoEspecie
+        public async Task<ActionResult<TipoespecieResponseDto[]>> ActivateTipoespecie
             (
-                 [FromBody] TipoEspecieResponseDto[] tipoespecies
+                 [FromBody] TipoespecieResponseDto[] tipoespecies
             )
         {
 
-            foreach (TipoEspecieResponseDto item in tipoespecies)
+            foreach (TipoespecieResponseDto item in tipoespecies)
             {
-                var a = _mapper.Map<TipoEspecieResponseDto>(item);
+                var a = _mapper.Map<TipoespecieResponseDto>(item);
 
-                await _repository.ActivateTipoEspecie(a.esp08llave);
+                await _repository.ActivateTipoespecie(a.esp08llave);
                 await _repository.SaveChanges();
             }
 
 
-            var listtipoespecies = await _repository.GetAllTipoEspecies();
-            return Ok(_mapper.Map<TipoEspecieResponseDto[]>(listtipoespecies));
+            var listtipoespecies = await _repository.GetAllTipoespecies();
+            return Ok(_mapper.Map<TipoespecieResponseDto[]>(listtipoespecies));
 
         }
     }

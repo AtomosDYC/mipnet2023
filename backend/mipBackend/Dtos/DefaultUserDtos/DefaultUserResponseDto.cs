@@ -7,7 +7,7 @@
 
         public string? per09nombre { get; set; }
 
-        public string? rolid { get; set; }
+        public Guid? rolid { get; set; }
 
         public string? rolnombre { get; set; }
 

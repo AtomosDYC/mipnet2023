@@ -5,9 +5,9 @@ namespace mipBackend.Models;
 
 public partial class Ins02RecuperarClave
 {
-    public int Ins02Llave { get; set; }
+    public int Ins02llave { get; set; }
 
-    public Guid? Secu02Llave { get; set; }
+    public Guid? userid { get; set; }
 
     public string? Ins02ClaveTemporal { get; set; }
 
@@ -21,5 +21,5 @@ public partial class Ins02RecuperarClave
 
     public DateTime? fechaactivacion { get; set; }
 
-    public virtual Sist05EstadoRegistro? Ins02EstadoNavigation { get; set; }
+    public virtual sist05EstadoRegistro? Ins02EstadoNavigation { get; set; }
 }

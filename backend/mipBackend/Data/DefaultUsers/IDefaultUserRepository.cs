@@ -10,11 +10,11 @@ namespace mipBackend.Data.DefaultUsers
 
         Task<DefaultUserResponseDto> GetAllDefaultUsers();
 
-        Task<Per09DefaultUser> GetDefaultUserById(int id);
+        Task<per09DefaultUser> GetDefaultUserById(int id);
 
-        Task CreateDefaultUser(Per09DefaultUser DefaultUser);
+        Task CreateDefaultUser(per09DefaultUser DefaultUser);
 
-        Task UpdateDefaultUser(Per09DefaultUser DefaultUser);
+        Task UpdateDefaultUser(per09DefaultUser DefaultUser);
 
     }
 }

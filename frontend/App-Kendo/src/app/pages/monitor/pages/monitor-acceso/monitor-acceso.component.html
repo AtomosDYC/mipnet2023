@@ -1,0 +1,91 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title col-md-8"> {{ customMsgService.translate('mantenimientoMonitoresDatosAcceso') }} </h3>
+        <div class="card-buttons col-md-4 float-right">
+            
+            <button 
+            kendoButton
+            [toggleable]="true"
+            [selected]="true"
+            (click)="OnFinalizarDatosGenerales()"
+            themeColor="light"
+        >
+            {{ customMsgService.translate('finalizar') }}
+        </button>
+                &nbsp;
+                <button 
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="onContinuarMonitoracceso()"
+                    themeColor="primary"
+                    
+                >
+                    {{ customMsgService.translate('continuar') }}
+                </button>
+            
+        </div> 
+    </div>
+   
+    <div class="card-component">
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+            
+            <kendo-formfield>
+                <kendo-label [for]="email" text="{{ customMsgService.translate('emailUsuario')}}"></kendo-label>
+                <kendo-textbox
+                formControlName="email"
+                #email
+                required
+                [disabled]="isloged"
+            ></kendo-textbox>
+
+            <kendo-formerror *ngIf="Form.controls['email'].errors?.['required']">Error: {{ customMsgService.translate('errorEmail')}}</kendo-formerror>
+            <kendo-formerror *ngIf="Form.controls['email'].errors?.['email']">Error: {{ customMsgService.translate('errorEmailvalid')}}</kendo-formerror>
+                
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="password" text="{{ customMsgService.translate('password')}}"></kendo-label>
+                <kendo-textbox
+                formControlName="password"
+                required
+                #password
+                [clearButton]="true"
+                [disabled]="isloged"
+                >
+            </kendo-textbox>
+
+                <kendo-formerror *ngIf="Form.controls['password'].errors?.['strong']">
+                    Debe ingresar al menos una letra mayuscula, una letra minuscula y al menos un numero.</kendo-formerror>
+
+                <kendo-formerror *ngIf="Form.controls['password'].errors?.['required']">{{ customMsgService.translate('errorPassword')}}</kendo-formerror>
+                <kendo-formerror *ngIf="Form.controls['password'].errors?.['minLength']">Debe tener minimo 6 caracteres</kendo-formerror>
+
+                <kendo-formerror>Error:</kendo-formerror>
+                    
+            </kendo-formfield>
+
+            
+            <kendo-formfield>
+                <kendo-label [for]="confirmpassword" text="{{ customMsgService.translate('confirmpassword')}}"></kendo-label>
+                <kendo-textbox
+                formControlName="confirmpassword"
+                #confirmpassword
+                required
+                [disabled]="isloged"
+            ></kendo-textbox>
+
+                <kendo-formerror>Error: {{ customMsgService.translate('errorconfirmpassword')}}</kendo-formerror>
+            </kendo-formfield>
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()" [disabled]="isloged">{{ customMsgService.translate('guardar')}}</button>
+                    
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+    

@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public RegionProfile()
         {
 
-            CreateMap<Sist04Region, RegionResponseDto>();
-            CreateMap<RegionResponseDto, Sist04Region>();
-            CreateMap<RegionRequestDto, Sist04Region>();
+            CreateMap<sist04Region, RegionResponseDto>();
+            CreateMap<RegionResponseDto, sist04Region>();
+            CreateMap<RegionRequestDto, sist04Region>();
 
         }
     }

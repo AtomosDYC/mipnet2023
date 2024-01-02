@@ -1,0 +1,89 @@
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-8"> {{ customMsgService.translate('mantenimientoespecietipodato') }} </h3>
+        <div class="card-buttons col-md-4 right">
+            
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="OnNuevoDanio()"
+                    themeColor="primary"
+                >
+                    {{ customMsgService.translate('MantNuevo') }}
+                </button>
+                &nbsp;
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="onContinuar()"
+                    themeColor="light"
+                >
+                    {{ customMsgService.translate('continuar') }}
+                </button>
+            
+        </div>  
+    </div>
+
+    <div class="card-container" *ngIf="verNuevo==true">
+        <div class="card-component">
+
+            <form class="k-form" [formGroup]="FormDanio">
+                <fieldset class="k-form-fieldset">
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxDanioEspecie" text="{{ customMsgService.translate('danioespecie')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="DanioEspecielist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('danioespecie')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxDanioEspecie"
+                            #cbxDanioEspecie
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorEspecie')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <div class="k-form-buttons">
+                        <button kendoButton themeColor="secondary" (click)="OnCancelar()">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                        <button kendoButton themeColor="primary" (click)="onguardarDanioEspecie()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="card-component">
+        <kendo-grid [data]="data$ | async"
+        
+        kendoGridSelectBy="esp01llave"
+        [(selectedKeys)]="mySelection"
+       
+        [pageable]="true"
+        [sortable]="true"
+        [pageSize]="20"
+        [reorderable]="true"
+        [resizable]="true"
+        [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
+        >
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                  <button
+                    kendoButton
+                    iconClass="fa-solid fa-trash-can"
+                    title="{{ customMsgService.translate('Delete') }}"
+                    (click)="OnEliminar(dataItem.esp01llave)"
+                  ></button>
+                </ng-template>
+              </kendo-grid-command-column>
+            <kendo-grid-column field="esp04nombre" title="{{ customMsgService.translate('Danioespecie') }}"></kendo-grid-column>
+            
+        </kendo-grid>
+    </div>
+
+</div>

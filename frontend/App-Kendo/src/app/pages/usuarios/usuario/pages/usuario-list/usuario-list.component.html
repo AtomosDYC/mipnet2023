@@ -61,39 +61,35 @@
                     iconClass="fa fa-pencil"
                     title="{{ customMsgService.translate('Edit') }}"
                     
-                    (click)="OnEditar(dataItem.id)"
+                    (click)="OnEditar(dataItem.userid)"
                   ></button>
                   <button
                     kendoButton
                     iconClass="fa-solid fa-trash-can"
                     title="{{ customMsgService.translate('Delete') }}"
-                    (click)="OnEliminar(dataItem.id)"
+                    (click)="OnEliminar(dataItem.userid)"
                   ></button>
                 </ng-template>
               </kendo-grid-command-column>
-            <kendo-grid-column field="username" title="{{ customMsgService.translate('nombre') }}"> </kendo-grid-column>
-            <kendo-grid-column field="email" title="{{ customMsgService.translate('descripcion') }}"> </kendo-grid-column>
-            <kendo-grid-column
-                field="per03activo"
-                title="{{ customMsgService.translate('estado') }}"
-                [width]="100"
-                [class]="{ 'text-center': true }"
-                [resizable]="false"
-                filter="boolean"
-                >
-                <ng-template kendoGridCellTemplate let-dataItem>
-                    <span
-                    *ngIf="dataItem.per03activo === 1"
-                    class="badge badge-success"
-                    >{{ customMsgService.translate('Activo') }}</span
-                    >
-                    <span
-                    *ngIf="dataItem.per03activo != 1"
-                    class="badge badge-danger"
-                    >{{ customMsgService.translate('Desactivado') }}</span
-                    >
+              <kendo-grid-column field="rolename" title="{{ customMsgService.translate('Rol') }}"> </kendo-grid-column>
+            <kendo-grid-column field="username" title="{{ customMsgService.translate('Username') }}"> </kendo-grid-column>
+            <kendo-grid-column field="per01nombre" title="{{ customMsgService.translate('Usuario') }}"> </kendo-grid-column>
+            <kendo-grid-column field="plantillanombre" title="{{ customMsgService.translate('Plantilla') }}"> </kendo-grid-column>
+            <kendo-grid-column field="emailconfirmed" title="{{ customMsgService.translate('confirmado') }}" [width]="150">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem" >
+                    {{OnConfirmado(dataItem.emailconfirmed)}}
                 </ng-template>
-                </kendo-grid-column>    
+            </kendo-grid-column>
+            <kendo-grid-command-column title="{{ customMsgService.translate('sendconfirmation') }}" [width]="180">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                    <button
+                    kendoButton
+                    (click)="OnSendConfirmation(dataItem.userid)"
+                  >
+                 Enviar E-Mail</button>
+                </ng-template>
+              </kendo-grid-command-column>
+                
                 
         </kendo-grid>
     </div>

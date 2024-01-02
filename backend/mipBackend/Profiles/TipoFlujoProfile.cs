@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public TipoFlujoProfile()
         {
 
-            CreateMap<Wkf02TipoFlujo, TipoFlujoResponseDto>();
-            CreateMap<TipoFlujoResponseDto, Wkf02TipoFlujo>();
-            CreateMap<TipoFlujoRequestDto, Wkf02TipoFlujo>();
+            CreateMap<wkf02TipoFlujo, TipoFlujoResponseDto>();
+            CreateMap<TipoFlujoResponseDto, wkf02TipoFlujo>();
+            CreateMap<TipoFlujoRequestDto, wkf02TipoFlujo>();
 
         }
     }

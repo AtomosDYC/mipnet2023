@@ -6,7 +6,7 @@ import { GridModule, ExcelModule, PDFModule } from '@progress/kendo-angular-grid
 import { SharedModule, InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { IconsModule } from '@progress/kendo-angular-icons';
+
 import { MedidaumbralListRoutingModule } from './medidaumbral-list-routing.module';
 import { MedidaumbralListComponent } from './medidaumbral-list.component';
 
@@ -28,7 +28,7 @@ import { MedidaumbralListComponent } from './medidaumbral-list.component';
     LabelModule,
     ButtonGroupModule,
     DropDownsModule,
-    IconsModule,
+    
     ExcelModule,
     PDFModule
   ]

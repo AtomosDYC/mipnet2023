@@ -94,9 +94,12 @@ export class WorkflowNodopadreComponent implements OnInit {
           .subscribe(data => {
             if(data){
 
-              this.handleTipoFlujoChange(data.wkf02llavepadre);
+              this.onLoadNivelflujocbx(data.wkf02llavepadre);
+              //console.log('dentro del init nivelflujo', data.wkf03llavepadre)
 
-              this.onLoadNodopadrecbx(data.wkf03llavepadre);
+              this.onLoadNodopadrecbx(data.wkf01llavepadre);
+              //console.log('dentro del init 03', data.wkf01llavepadre)
+
 
               this.Form = new FormGroup({
                 cbxTipoflujo: new FormControl({value: String(data.wkf02llavepadre), description: String(data.wkf02llavepadrenombre)}, Validators.required),
@@ -129,9 +132,12 @@ export class WorkflowNodopadreComponent implements OnInit {
 
     this.setNivelFlujo.prm1 = String(id);
 
+    //console.log('this.setNivelFlujo',this.setNivelFlujo);
+
       this._fillcomboservices.GetAllSelect(this.setNivelFlujo).subscribe(
         allrecords => {
-          this.Nivelflujolist = allrecords
+          this.Nivelflujolist = allrecords;
+          //console.log('nivelflujocbx', allrecords);
         },
         error => this.errorMessage = <any>error
       );
@@ -144,7 +150,7 @@ export class WorkflowNodopadreComponent implements OnInit {
       this._fillcomboservices.GetAllSelect(this.setNodoPadre).subscribe(
         allrecords => {
           this.Nodopadrelist = allrecords
-          console.log('allrecords', allrecords);
+          //console.log('nodo padre', allrecords);
         },
         error => this.errorMessage = <any>error
       );
@@ -198,7 +204,7 @@ export class WorkflowNodopadreComponent implements OnInit {
         
           }
 
-          console.log(CreateRequest);
+          //console.log(CreateRequest);
           
           this.store.dispatch(new fromList.UpdateNodopadre(CreateRequest));
         

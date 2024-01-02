@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Per07PersonaUsuario
+public partial class per07personaUsuario
 {
-    public int Per07Llave { get; set; }
+    public int per07llave { get; set; }
 
-    public int? Per01Llave { get; set; }
+    public int? per01llave { get; set; }
 
-    public Guid? Secu02Llave { get; set; }
+    public Guid? userid { get; set; }
 
-    public int? Per07Activo { get; set; }
+    public int? per07activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Per07PersonaUsuario
 
     public Guid? deleteby { get; set; }
 
-    public virtual Per01Persona? Per01LlaveNavigation { get; set; }
+    public virtual per01persona? per01llaveNavigation { get; set; }
 }

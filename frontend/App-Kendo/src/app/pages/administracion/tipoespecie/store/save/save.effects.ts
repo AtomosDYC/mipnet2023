@@ -68,11 +68,11 @@ export class SaveEffects {
           .pipe(
             delay(1000),
             tap((response: TipoEspecieResponse) => {
-              this.router.navigate(['dashboard/tipoespecie/list']);
+              this.router.navigate(['dashboard/especies/tipoespecie/list']);
             }),
             map((tipoespecie: TipoEspecieResponse) => new fromActions.CreateSuccess(tipoespecie)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -89,11 +89,11 @@ export class SaveEffects {
           .pipe(
             delay(1000),
             tap((response: TipoEspecieResponse) => {
-              this.router.navigate(['dashboard/tipoespecie/list']);
+              this.router.navigate(['dashboard/especies/tipoespecie/list']);
             }),
             map((tipoespecie: TipoEspecieResponse) => new fromActions.UpdateSuccess(tipoespecie)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )

@@ -9,11 +9,11 @@ namespace mipBackend.Data.EstadosDanios
 
         Task<IEnumerable<EstadosDanioResponseDto>> GetAllEstadosDanios();
 
-        Task<Esp04EstadoDanio> GetEstadosDanioById(int id);
+        Task<EstadosDanioResponseDto> GetEstadosDanioById(int id);
 
-        Task CreateEstadosDanio(Esp04EstadoDanio estadodanio);
+        Task CreateEstadosDanio(esp04EstadoDanio estadodanio);
 
-        Task UpdateEstadosDanio(Esp04EstadoDanio estadodanio);
+        Task UpdateEstadosDanio(esp04EstadoDanio estadodanio);
 
         Task DeleteEstadosDanio(int id);
 

@@ -2,7 +2,7 @@
 
 namespace mipBackend.Models
 {
-    public class Rol: IdentityRole
+    public class Rol: IdentityRole<Guid>
     {
 
     }

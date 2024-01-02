@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Prf03Plantilla
+public partial class prf03Plantilla
 {
     public int prf03llave { get; set; }
 
@@ -25,6 +25,5 @@ public partial class Prf03Plantilla
 
     public Guid? deleteby { get; set; }
 
-
-    public virtual ICollection<Prf01Perfil> Prf01Llaves { get; } = new List<Prf01Perfil>();
+    public virtual ICollection<prf01perfil> prf01perfiles { get; set; } = new List<prf01perfil>();
 }

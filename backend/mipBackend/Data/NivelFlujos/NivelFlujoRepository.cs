@@ -31,7 +31,7 @@ namespace mipBackend.Data.NivelFlujos
         }
 
 
-        public async Task CreateNivelFlujo(Wkf03Nivel nivelflujo)
+        public async Task CreateNivelFlujo(wkf03Nivel nivelflujo)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -52,27 +52,27 @@ namespace mipBackend.Data.NivelFlujos
             }
 
             nivelflujo.fechaactivacion = DateTime.Now;
-            nivelflujo.createby = Guid.Parse(usuario.Id);
+            nivelflujo.createby = usuario.Id;
             nivelflujo.wkf03activo = 1;
 
-            await _contexto.Wkf03Niveles!.AddAsync(nivelflujo);
+            await _contexto.wkf03Niveles!.AddAsync(nivelflujo);
 
         }
 
         public async Task DeleteNivelFlujo(int id)
         {
-            var NivelFlujo = await _contexto.Wkf03Niveles!
+            var NivelFlujo = await _contexto.wkf03Niveles!
                 .FirstOrDefaultAsync(x => x.wkf03llave == id);
 
-            _contexto.Wkf03Niveles!.Remove(NivelFlujo!);
+            _contexto.wkf03Niveles!.Remove(NivelFlujo!);
         }
 
         public async Task<IEnumerable<NivelFlujoResponseDto>> GetAllNivelFlujos()
         {
             using (var db = _contexto)
             {
-                var query = await (from niv in db.Wkf03Niveles
-                                   join flu in db.Wkf02TipoFlujos! on niv.wkf02llave equals flu.wkf02llave
+                var query = await (from niv in db.wkf03Niveles
+                                   join flu in db.wkf02TipoFlujos! on niv.wkf02llave equals flu.wkf02llave
                                    where (flu.wkf02activo == 1)
                                    select new NivelFlujoResponseDto
                                    {
@@ -90,9 +90,9 @@ namespace mipBackend.Data.NivelFlujos
             }
         }
 
-        public async Task<Wkf03Nivel> GetNivelFlujoById(int id)
+        public async Task<wkf03Nivel> GetNivelFlujoById(int id)
         {
-            return await _contexto.Wkf03Niveles!.FirstOrDefaultAsync(x => x.wkf03llave == id)!;
+            return await _contexto.wkf03Niveles!.FirstOrDefaultAsync(x => x.wkf03llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -100,7 +100,7 @@ namespace mipBackend.Data.NivelFlujos
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateNivelFlujo(Wkf03Nivel request)
+        public async Task UpdateNivelFlujo(wkf03Nivel request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -120,23 +120,23 @@ namespace mipBackend.Data.NivelFlujos
                    );
             }
 
-            var nivelflujo = await _contexto.Wkf03Niveles!
+            var nivelflujo = await _contexto.wkf03Niveles!
                 .FirstOrDefaultAsync(x => x.wkf03llave == request.wkf03llave);
 
             nivelflujo.fechaactualizacion = DateTime.Now;
-            nivelflujo.approveby = Guid.Parse(usuario.Id);
+            nivelflujo.approveby = usuario.Id;
             nivelflujo.wkf03nombre = request.wkf03nombre;
             nivelflujo.wkf03descripcion = request.wkf03descripcion;
             nivelflujo.wkf02llave = request.wkf02llave;
             
-            _contexto.Wkf03Niveles!.Update(nivelflujo!);
+            _contexto.wkf03Niveles!.Update(nivelflujo!);
 
         }
 
         public async Task DisableNivelFlujo(int id)
         {
 
-            var nivelflujo = await _contexto.Wkf03Niveles!
+            var nivelflujo = await _contexto.wkf03Niveles!
                 .FirstOrDefaultAsync(x => x.wkf03llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -160,7 +160,7 @@ namespace mipBackend.Data.NivelFlujos
 
             nivelflujo.wkf03activo = 0;
 
-            _contexto.Wkf03Niveles!.Update(nivelflujo);
+            _contexto.wkf03Niveles!.Update(nivelflujo);
 
 
         }
@@ -168,7 +168,7 @@ namespace mipBackend.Data.NivelFlujos
         public async Task ActivateNivelFlujo(int id)
         {
 
-            var nivelflujo = await _contexto.Wkf03Niveles!
+            var nivelflujo = await _contexto.wkf03Niveles!
                 .FirstOrDefaultAsync(x => x.wkf03llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -191,7 +191,7 @@ namespace mipBackend.Data.NivelFlujos
 
             nivelflujo.wkf03activo = 1;
 
-            _contexto.Wkf03Niveles!.Update(nivelflujo);
+            _contexto.wkf03Niveles!.Update(nivelflujo);
 
         }
 

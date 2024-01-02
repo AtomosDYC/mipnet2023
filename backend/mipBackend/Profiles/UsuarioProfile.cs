@@ -11,7 +11,9 @@ namespace mipBackend.Profiles
 
             CreateMap<Usuario, UsuarioResponseDto>();
             CreateMap<UsuarioResponseDto, Usuario>();
-            
+            CreateMap<UsuarioLoginResponseDto, Usuario>();
+            CreateMap<Usuario, UsuarioLoginResponseDto>();
+
 
         }
     }

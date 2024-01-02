@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using mipBackend.Dtos.TipoPerComunicacionDtos;
+using mipBackend.Dtos.TipoperComunicacionDtos;
 using mipBackend.Models;
 
 namespace mipBackend.Profiles
 {
-    public class TipoPerComunicacionProfile : Profile
+    public class TipoperComunicacionProfile : Profile
     {
-        public TipoPerComunicacionProfile()
+        public TipoperComunicacionProfile()
         {
 
-            CreateMap<Per06TipoPersonaComunicacion, TipoPerComunicacionResponseDto>();
-            CreateMap<TipoPerComunicacionResponseDto, Per06TipoPersonaComunicacion>();
-            CreateMap<TipoPerComunicacionRequestDto, Per06TipoPersonaComunicacion>();
+            CreateMap<per06TipopersonaComunicacion, TipoperComunicacionResponseDto>();
+            CreateMap<TipoperComunicacionResponseDto, per06TipopersonaComunicacion>();
+            CreateMap<TipoperComunicacionRequestDto, per06TipopersonaComunicacion>();
 
         }
     }

@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt12Empleado
+public partial class cnt12Empleado
 {
-    public int Cnt12Llave { get; set; }
+    public int cnt12llave { get; set; }
 
-    public int? Cnt01Llave { get; set; }
+    public int? cnt01llave { get; set; }
 
-    public int? Per01Llave { get; set; }
+    public int? per01llave { get; set; }
 
-    public int? Cnt08Llave { get; set; }
+    public int? cnt08llave { get; set; }
 
-    public int? Cnt13Llave { get; set; }
+    public int? cnt13llave { get; set; }
 
-    public string? Cnt12Cargo { get; set; }
+    public string? cnt12Cargo { get; set; }
 
-    public int? Cnt12Activo { get; set; }
+    public int? cnt12activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -31,11 +31,11 @@ public partial class Cnt12Empleado
 
     public Guid? deleteby { get; set; }
 
-    public virtual Cnt01CuentaCliente? Cnt01LlaveNavigation { get; set; }
+    public virtual cnt01CuentaCliente? cnt01llaveNavigation { get; set; }
 
-    public virtual Cnt13TipoEmpleado? Cnt13LlaveNavigation { get; set; }
+    public virtual cnt13TipoEmpleado? cnt13llaveNavigation { get; set; }
 
-    public virtual ICollection<Cnt15EmpleadoLicencia> Cnt15EmpleadoLicencia { get; } = new List<Cnt15EmpleadoLicencia>();
+    public virtual ICollection<cnt15EmpleadoLicencia> cnt15EmpleadoLicencia { get; } = new List<cnt15EmpleadoLicencia>();
 
-    public virtual Per01Persona? Per01LlaveNavigation { get; set; }
+    public virtual per01persona? per01llaveNavigation { get; set; }
 }

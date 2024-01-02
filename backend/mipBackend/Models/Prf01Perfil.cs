@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Prf01Perfil
+public partial class prf01perfil
 {
-    public int Prf01Llave { get; set; }
+    public int prf01llave { get; set; }
 
-    public int? Prf05Llave { get; set; }
+    public int? prf03llave { get; set; }
 
-    public Guid? Secu02Llave { get; set; }
+    public Guid? userid { get; set; }
 
-    public int? Prf01Activo { get; set; }
+    public int? prf01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -25,11 +25,6 @@ public partial class Prf01Perfil
 
     public Guid? deleteby { get; set; }
 
-    public virtual Prf05TipoAsignacionUsuario? Prf05LlaveNavigation { get; set; }
+    public virtual prf03Plantilla? prf03llavenavigation { get; set; }
 
-    public virtual ICollection<Prf06PermisosUsuario> Prf06PermisosUsuarios { get; } = new List<Prf06PermisosUsuario>();
-
-    public virtual Secu02Usuario? Secu02LlaveNavigation { get; set; }
-
-    public virtual ICollection<Prf03Plantilla> Prf03Llaves { get; } = new List<Prf03Plantilla>();
 }

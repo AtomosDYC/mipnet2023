@@ -24,7 +24,7 @@ namespace mipBackend.Data.Zonas
         }
 
 
-        public async Task CreateZona(Sist02Zona zona)
+        public async Task CreateZona(sist02Zona zona)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -45,30 +45,30 @@ namespace mipBackend.Data.Zonas
             }
 
             zona.fechaactivacion = DateTime.Now;
-            zona.createby = Guid.Parse(usuario.Id);
+            zona.createby = usuario.Id;
             zona.sist02activo = 1;
 
-            await _contexto.Sist02Zonas!.AddAsync(zona);
+            await _contexto.sist02Zonas!.AddAsync(zona);
 
         }
 
         public async Task DeleteZona(int id)
         {
 
-            var zona = await _contexto.Sist02Zonas!
+            var zona = await _contexto.sist02Zonas!
                 .FirstOrDefaultAsync(x => x.sist02llave == id);
 
-            _contexto.Sist02Zonas!.Remove(zona!);
+            _contexto.sist02Zonas!.Remove(zona!);
         }
 
-        public async Task<IEnumerable<Sist02Zona>> GetAllZonas()
+        public async Task<IEnumerable<sist02Zona>> GetAllZonas()
         {
-            return await _contexto.Sist02Zonas!.ToListAsync();
+            return await _contexto.sist02Zonas!.ToListAsync();
         }
 
-        public async Task<Sist02Zona> GetZonaById(int id)
+        public async Task<sist02Zona> GetZonaById(int id)
         {
-            return await _contexto.Sist02Zonas!.FirstOrDefaultAsync(x => x.sist02llave== id)!;
+            return await _contexto.sist02Zonas!.FirstOrDefaultAsync(x => x.sist02llave== id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -76,7 +76,7 @@ namespace mipBackend.Data.Zonas
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateZona(Sist02Zona request)
+        public async Task UpdateZona(sist02Zona request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -96,23 +96,23 @@ namespace mipBackend.Data.Zonas
                    );
             }
 
-            var zona = await _contexto.Sist02Zonas!
+            var zona = await _contexto.sist02Zonas!
                 .FirstOrDefaultAsync(x => x.sist02llave== request.sist02llave);
 
             zona.fechaactualizacion = DateTime.Now;
-            zona.approveby = Guid.Parse(usuario.Id);
+            zona.approveby = usuario.Id;
             zona.sist02nombre = request.sist02nombre;
             zona.sist02descripcion = request.sist02descripcion;
             zona.sist02estadoregistro = request.sist02estadoregistro;
 
-            _contexto.Sist02Zonas!.Update(zona!);
+            _contexto.sist02Zonas!.Update(zona!);
 
         }
 
         public async Task DisableZona(int id)
         {
 
-            var zona = await _contexto.Sist02Zonas!
+            var zona = await _contexto.sist02Zonas!
                 .FirstOrDefaultAsync(x => x.sist02llave== id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -136,7 +136,7 @@ namespace mipBackend.Data.Zonas
 
             zona.sist02activo = 0;
 
-            _contexto.Sist02Zonas!.Update(zona);
+            _contexto.sist02Zonas!.Update(zona);
 
 
         }
@@ -144,7 +144,7 @@ namespace mipBackend.Data.Zonas
         public async Task ActivateZona(int id)
         {
 
-            var zona = await _contexto.Sist02Zonas!
+            var zona = await _contexto.sist02Zonas!
                 .FirstOrDefaultAsync(x => x.sist02llave== id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -168,7 +168,7 @@ namespace mipBackend.Data.Zonas
 
             zona.sist02activo = 1;
 
-            _contexto.Sist02Zonas!.Update(zona);
+            _contexto.sist02Zonas!.Update(zona);
 
 
         }

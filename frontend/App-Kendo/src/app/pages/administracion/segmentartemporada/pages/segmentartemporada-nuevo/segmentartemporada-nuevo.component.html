@@ -1,0 +1,75 @@
+<div class="card-container">
+    <div class="card-header-wrapper">
+        <h3 class="card-title"> {{ customMsgService.translate('mantenimientoSegmentartemporada')}} </h3>
+    </div>
+    <div class="card-component">
+
+        <form class="k-form" [formGroup]="Form">
+            <fieldset class="k-form-fieldset">
+
+            <kendo-formfield>
+                <kendo-label [for]="txtNombre" text="{{ customMsgService.translate('nombre')}}"></kendo-label>
+                <kendo-textbox
+                    formControlName="txtNombre"
+                    #txtNombre
+                    required
+                ></kendo-textbox>
+
+                <kendo-formerror>Error: {{ customMsgService.translate('errorNombre')}}</kendo-formerror>
+            </kendo-formfield>
+            
+            
+            <kendo-formfield>
+                <kendo-label [for]="txtDescripcion" text="{{ customMsgService.translate('descripcion')}}"></kendo-label>
+                    <kendo-textbox
+                    formControlName="txtDescripcion"
+                    #txtDescripcion
+                    required
+                ></kendo-textbox>
+
+                <kendo-formerror>Error: {{ customMsgService.translate('errorDescripcion')}}</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="txtnumeromeses" text="Numero de Meses"></kendo-label>
+                <kendo-numerictextbox
+                formControlName="txtnumeromeses"
+                [style.width.px]="170"
+                [min]="0"
+                [max]="100"
+                #txtnumeromeses
+                format="n"
+                required=""
+                >
+                </kendo-numerictextbox>
+
+                <kendo-formerror>Error: Numero de Meses</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="txtnumerosegmentostotal" text="Numero de Segmentos"></kendo-label>
+                <kendo-numerictextbox
+                formControlName="txtnumerosegmentostotal"
+                [style.width.px]="170"
+                [min]="0"
+                [max]="100"
+                #txtnumerosegmentostotal
+                format="n"
+                required=""
+                >
+                </kendo-numerictextbox>
+
+                <kendo-formerror>Error: Numero de Meses</kendo-formerror>
+            </kendo-formfield>
+
+                <div class="k-form-buttons">
+                    <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/temporadas/segmentartemporada/list']">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>

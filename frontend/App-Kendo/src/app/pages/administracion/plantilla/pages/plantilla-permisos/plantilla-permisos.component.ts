@@ -112,7 +112,7 @@ export class PlantillaPermisosComponent implements OnInit {
 
   onLoadcbx():void {
 
-    this._FillPlantillaflujoService.Getdata().subscribe(
+    this._FillPlantillaflujoService.Getdata(Number(this.ID)).subscribe(
       allrecords => {
         this.data = allrecords        
       },
@@ -148,7 +148,7 @@ export class PlantillaPermisosComponent implements OnInit {
       this._fillcomboservices.GetAllSelect(this.setWorkflow).subscribe(
         allrecords => {
           this.Workflowlist = allrecords
-          console.log('allrecords', allrecords);
+          //console.log('allrecords', allrecords);
         },
         error => this.errorMessage = <any>error
       );
@@ -183,9 +183,8 @@ export class PlantillaPermisosComponent implements OnInit {
 
   }
 
-  onguardarNuevo(): void {
+  onguardarNuevoPermiso(): void {
 
-    console.log('dentro del guardar');
     this.Form.markAllAsTouched();
 
     if(this.Form.valid){
@@ -203,25 +202,46 @@ export class PlantillaPermisosComponent implements OnInit {
            
           }
 
+          this.store.dispatch(new fromList.Create(CreateRequest));
+
           this.success$ = this.store.pipe(select(fromList.getSuccess));
 
-          console.log('this.success$', this.success$);
+
 
           this.success$.subscribe((success) => { 
+
+            //console.log("dentro del ssuccess", success);
+
             if(success) {
+
+              //console.log('dentro del success');
+
+              this.Form = new FormGroup({
+                cbxTipoflujo: new FormControl(null, Validators.required),
+                cbxNivelflujo: new FormControl(null, Validators.required),
+                cbxWorkflow: new FormControl(null, [Validators.required])
+              });
 
               this.onLoadcbx();
 
             }
           })
 
-          console.log(CreateRequest);
-
           
-          this.store.dispatch(new fromList.Create(CreateRequest));
+          
         
       }
     }
   }
+
+  OnDelete(id: number){
+    
+    if (confirm("Esta seguro de eliminar este tipo de flujo de plantilla?"))
+    {
+      this.store.dispatch(new fromList.Delete(id.toString()));
+    }
+
+  }
+
 
 }

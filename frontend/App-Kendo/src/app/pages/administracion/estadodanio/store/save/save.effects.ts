@@ -68,11 +68,11 @@ export class SaveEffects {
           .pipe(
             delay(1000),
             tap((response: EstadoDanioResponse) => {
-              this.router.navigate(['dashboard/estadodanio/list']);
+              this.router.navigate(['dashboard/especies/estadodanio/list']);
             }),
             map((estadodanio: EstadoDanioResponse) => new fromActions.CreateSuccess(estadodanio)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -89,11 +89,11 @@ export class SaveEffects {
           .pipe(
             delay(1000),
             tap((response: EstadoDanioResponse) => {
-              this.router.navigate(['dashboard/estadodanio/list']);
+              this.router.navigate(['dashboard/especies/estadodanio/list']);
             }),
             map((estadodanio: EstadoDanioResponse) => new fromActions.UpdateSuccess(estadodanio)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )

@@ -96,7 +96,7 @@ export class DefaultuserListComponent implements OnInit {
     this.store.pipe(select(fromList.getDefaultUsers))
     .subscribe(data => {
 
-        console.log("data", data);
+        //console.log("data", data);
 
       if(data){
 
@@ -173,14 +173,14 @@ export class DefaultuserListComponent implements OnInit {
 
     this.Form.markAllAsTouched();
 
-    console.log('this.Form.markAllAsTouched()', this.Form.markAllAsTouched());
+    //console.log('this.Form.markAllAsTouched()', this.Form.markAllAsTouched());
 
     if(this.Form.valid){
 
       if(this.ID){
 
 
-        console.log('this.ID', this.ID);
+        //console.log('this.ID', this.ID);
 
         const { txtNombre, cbxRol, cbxTipopersona, cbxTipodocumento, cbxSaludo, cbxPlantilla } = this.Form.value;
 
@@ -216,7 +216,7 @@ export class DefaultuserListComponent implements OnInit {
            
           }
 
-          console.log('CreateRequest', CreateRequest);
+          //console.log('CreateRequest', CreateRequest);
 
           this.store.dispatch(new fromList.Create(CreateRequest));
 

@@ -30,7 +30,7 @@ namespace mipBackend.Data.Comunas
         }
 
 
-        public async Task CreateComuna(Sist03Comuna Comuna)
+        public async Task CreateComuna(sist03Comuna Comuna)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -51,10 +51,10 @@ namespace mipBackend.Data.Comunas
             }
 
             Comuna.fechaactivacion = DateTime.Now;
-            Comuna.createby = Guid.Parse(usuario.Id);
+            Comuna.createby = usuario.Id;
             Comuna.sist03activo = 1;
 
-            await _contexto.Sist03Comunas!.AddAsync(Comuna);
+            await _contexto.sist03Comunas!.AddAsync(Comuna);
 
         }
 
@@ -64,18 +64,18 @@ namespace mipBackend.Data.Comunas
 
 
 
-            var Comuna = await _contexto.Sist03Comunas!
+            var Comuna = await _contexto.sist03Comunas!
                 .FirstOrDefaultAsync(x => x.sist03llave == id);
 
-            _contexto.Sist03Comunas!.Remove(Comuna!);
+            _contexto.sist03Comunas!.Remove(Comuna!);
         }
 
         public async Task<IEnumerable<ComunaResponseDto>> GetAllComunas()
         {
             using (var db = _contexto)
             {
-               var query = await (from com in db.Sist03Comunas
-                                   join reg in db.Sist04Regiones! on com.sist04llave equals reg.sist04llave
+               var query = await (from com in db.sist03Comunas
+                                   join reg in db.sist04Regiones! on com.sist04llave equals reg.sist04llave
                              select new ComunaResponseDto
                              {
                                  sist03llave = com.sist03llave,
@@ -92,9 +92,9 @@ namespace mipBackend.Data.Comunas
             }        
         }
 
-        public async Task<Sist03Comuna> GetComunaById(int id)
+        public async Task<sist03Comuna> GetComunaById(int id)
         {
-            return await _contexto.Sist03Comunas!.FirstOrDefaultAsync(x => x.sist03llave == id)!;
+            return await _contexto.sist03Comunas!.FirstOrDefaultAsync(x => x.sist03llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -102,7 +102,7 @@ namespace mipBackend.Data.Comunas
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateComuna(Sist03Comuna request)
+        public async Task UpdateComuna(sist03Comuna request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -122,24 +122,24 @@ namespace mipBackend.Data.Comunas
                    );
             }
 
-            var Comuna = await _contexto.Sist03Comunas!
+            var Comuna = await _contexto.sist03Comunas!
                 .FirstOrDefaultAsync(x => x.sist03llave == request.sist03llave);
 
             Comuna.fechaactualizacion = DateTime.Now;
-            Comuna.approveby = Guid.Parse(usuario.Id);
+            Comuna.approveby = usuario.Id;
             Comuna.sist03nombre = request.sist03nombre;
             Comuna.sist03descripcion = request.sist03descripcion;
             Comuna.sist04llave = request.sist04llave;
             Comuna.sist03capital = request.sist03capital;
             
-            _contexto.Sist03Comunas!.Update(Comuna!);
+            _contexto.sist03Comunas!.Update(Comuna!);
 
         }
 
         public async Task DisableComuna(int id)
         {
 
-            var Comuna = await _contexto.Sist03Comunas!
+            var Comuna = await _contexto.sist03Comunas!
                 .FirstOrDefaultAsync(x => x.sist03llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -163,7 +163,7 @@ namespace mipBackend.Data.Comunas
 
             Comuna.sist03activo = 0;
 
-            _contexto.Sist03Comunas!.Update(Comuna);
+            _contexto.sist03Comunas!.Update(Comuna);
 
 
         }
@@ -171,7 +171,7 @@ namespace mipBackend.Data.Comunas
         public async Task ActivateComuna(int id)
         {
 
-            var Comuna = await _contexto.Sist03Comunas!
+            var Comuna = await _contexto.sist03Comunas!
                 .FirstOrDefaultAsync(x => x.sist03llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -195,7 +195,7 @@ namespace mipBackend.Data.Comunas
 
             Comuna.sist03activo = 1;
 
-            _contexto.Sist03Comunas!.Update(Comuna);
+            _contexto.sist03Comunas!.Update(Comuna);
 
 
         }

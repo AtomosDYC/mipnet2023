@@ -26,7 +26,7 @@ namespace mipBackend.Data.Regiones
 
 
 
-        public async Task CreateRegion(Sist04Region region)
+        public async Task CreateRegion(sist04Region region)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -47,33 +47,30 @@ namespace mipBackend.Data.Regiones
             }
 
             region.fechaactivacion  = DateTime.Now;
-            region.createby = Guid.Parse(usuario.Id);
+            region.createby = usuario.Id;
             region.sist04activo = 1;
 
-            await _contexto.Sist04Regiones!.AddAsync(region);
+            await _contexto.sist04Regiones!.AddAsync(region);
 
         }
 
         public async Task DeleteRegion(int id)
         {
 
-
-
-
-            var region = await _contexto.Sist04Regiones!
+            var region = await _contexto.sist04Regiones!
                 .FirstOrDefaultAsync(x => x.sist04llave == id);
 
-            _contexto.Sist04Regiones!.Remove(region!);
+            _contexto.sist04Regiones!.Remove(region!);
         }
 
-        public async Task<IEnumerable<Sist04Region>> GetAllRegiones()
+        public async Task<IEnumerable<sist04Region>> GetAllRegiones()
         {
-            return await _contexto.Sist04Regiones!.ToListAsync();
+            return await _contexto.sist04Regiones!.ToListAsync();
         }
 
-        public async Task<Sist04Region> GetRegionById(int id)
+        public async Task<sist04Region> GetRegionById(int id)
         {
-            return await _contexto.Sist04Regiones!.FirstOrDefaultAsync(x => x.sist04llave == id)!;
+            return await _contexto.sist04Regiones!.FirstOrDefaultAsync(x => x.sist04llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -81,7 +78,7 @@ namespace mipBackend.Data.Regiones
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateRegion(Sist04Region request)
+        public async Task UpdateRegion(sist04Region request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -101,23 +98,23 @@ namespace mipBackend.Data.Regiones
                    );
             }
 
-            var region = await _contexto.Sist04Regiones!
+            var region = await _contexto.sist04Regiones!
                 .FirstOrDefaultAsync(x => x.sist04llave == request.sist04llave);
 
             region.fechaactualizacion = DateTime.Now;
-            region.approveby = Guid.Parse(usuario.Id);
+            region.approveby = usuario.Id;
             region.sist04nombre = request.sist04nombre;
             region.sist04descripcion = request.sist04descripcion;
             region.sist04orden = request.sist04orden;
 
-            _contexto.Sist04Regiones!.Update(region!);
+            _contexto.sist04Regiones!.Update(region!);
 
         }
 
         public async Task DisableRegion(int id)
         {
 
-            var region = await _contexto.Sist04Regiones!
+            var region = await _contexto.sist04Regiones!
                 .FirstOrDefaultAsync(x => x.sist04llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -141,7 +138,7 @@ namespace mipBackend.Data.Regiones
 
             region.sist04activo = 0;
 
-            _contexto.Sist04Regiones!.Update(region);
+            _contexto.sist04Regiones!.Update(region);
            
 
         }
@@ -149,7 +146,7 @@ namespace mipBackend.Data.Regiones
         public async Task ActivateRegion(int id)
         {
 
-            var region = await _contexto.Sist04Regiones!
+            var region = await _contexto.sist04Regiones!
                 .FirstOrDefaultAsync(x => x.sist04llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -173,7 +170,7 @@ namespace mipBackend.Data.Regiones
 
             region.sist04activo = 1;
 
-            _contexto.Sist04Regiones!.Update(region);
+            _contexto.sist04Regiones!.Update(region);
 
 
         }

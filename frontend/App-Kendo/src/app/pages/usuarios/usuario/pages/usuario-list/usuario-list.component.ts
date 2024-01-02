@@ -15,6 +15,9 @@ import { IntlService } from '@progress/kendo-angular-intl';
 import { MessageService } from '@progress/kendo-angular-l10n';
 import { CustomMessagesService } from 'src/app/services/custom-messages.service';
 import {DataStateChangeEvent } from "@progress/kendo-angular-grid";
+import { HttpParams } from '@angular/common/http';
+import { CustomEncoder } from 'src/app/_helpers/custom-encoder';
+
 
 @Component({
   selector: 'app-usuario-list',
@@ -31,6 +34,7 @@ export class UsuarioListComponent implements OnInit {
   public filtro:string = '';
 
   public customMsgService: CustomMessagesService;
+
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -69,16 +73,32 @@ export class UsuarioListComponent implements OnInit {
     this.loadData();
   }
 
+  OnSendConfirmation(userid: string):void {
+    
+    //console.log('confiirmation', userid);
+
+    this.store.dispatch(new fromList.Send(userid));
+    this.loading$ = this.store.pipe(select(fromList.getLoading))!;
+    
+
+  }
+
   OnNuevo(){
     this._Route.navigate(['/dashboard/usuarios/nuevo/']);
   }
 
-  OnEditar(id: number){
-    this._Route.navigate(['/dashboard/usuarios/edit/', id.toString()]);
+  OnEditar(id: string){
+  
+    this._Route.navigate(['/dashboard/usuarios/edit/',  id]);
   }
 
   OnEliminar(id: number){
    
+  }
+
+  OnConfirmado(estado: boolean):string{
+
+    return estado ? 'confirmado' : 'sin conrfirmar';
   }
 
   OndisableRegion():void {

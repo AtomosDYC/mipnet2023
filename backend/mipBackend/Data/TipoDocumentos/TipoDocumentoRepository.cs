@@ -28,7 +28,7 @@ namespace mipBackend.Data.TipoDocumentos
 
 
 
-        public async Task CreateTipoDocumento(Per08TipoDocumento tipodocumento)
+        public async Task CreateTipoDocumento(per08TipoDocumento tipodocumento)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -49,30 +49,30 @@ namespace mipBackend.Data.TipoDocumentos
             }
 
             tipodocumento.fechaactivacion = DateTime.Now;
-            tipodocumento.createby = Guid.Parse(usuario.Id);
+            tipodocumento.createby = usuario.Id;
             tipodocumento.per08activo = 1;
 
-            await _contexto.Per08TipoDocumentos!.AddAsync(tipodocumento);
+            await _contexto.per08TipoDocumentos!.AddAsync(tipodocumento);
 
         }
 
         public async Task DeleteTipoDocumento(int id)
         {
 
-            var tipodocumento = await _contexto.Per08TipoDocumentos!
+            var tipodocumento = await _contexto.per08TipoDocumentos!
                 .FirstOrDefaultAsync(x => x.per08llave == id);
 
-            _contexto.Per08TipoDocumentos!.Remove(tipodocumento!);
+            _contexto.per08TipoDocumentos!.Remove(tipodocumento!);
         }
 
-        public async Task<IEnumerable<Per08TipoDocumento>> GetAllTipoDocumentos()
+        public async Task<IEnumerable<per08TipoDocumento>> GetAllTipoDocumentos()
         {
-            return await _contexto.Per08TipoDocumentos!.ToListAsync();
+            return await _contexto.per08TipoDocumentos!.ToListAsync();
         }
 
-        public async Task<Per08TipoDocumento> GetTipoDocumentoById(int id)
+        public async Task<per08TipoDocumento> GetTipoDocumentoById(int id)
         {
-            return await _contexto.Per08TipoDocumentos!.FirstOrDefaultAsync(x => x.per08llave == id)!;
+            return await _contexto.per08TipoDocumentos!.FirstOrDefaultAsync(x => x.per08llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -80,7 +80,7 @@ namespace mipBackend.Data.TipoDocumentos
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateTipoDocumento(Per08TipoDocumento request)
+        public async Task UpdateTipoDocumento(per08TipoDocumento request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -100,22 +100,22 @@ namespace mipBackend.Data.TipoDocumentos
                    );
             }
 
-            var tipodocumento = await _contexto.Per08TipoDocumentos!
+            var tipodocumento = await _contexto.per08TipoDocumentos!
                 .FirstOrDefaultAsync(x => x.per08llave == request.per08llave);
 
             tipodocumento.fechaactualizacion = DateTime.Now;
-            tipodocumento.approveby = Guid.Parse(usuario.Id);
+            tipodocumento.approveby = usuario.Id;
             tipodocumento.per08nombre = request.per08nombre;
             tipodocumento.per08descripcion = request.per08descripcion;
 
-            _contexto.Per08TipoDocumentos!.Update(tipodocumento!);
+            _contexto.per08TipoDocumentos!.Update(tipodocumento!);
 
         }
 
         public async Task DisableTipoDocumento(int id)
         {
 
-            var tipodocumento = await _contexto.Per08TipoDocumentos!
+            var tipodocumento = await _contexto.per08TipoDocumentos!
                 .FirstOrDefaultAsync(x => x.per08llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -139,7 +139,7 @@ namespace mipBackend.Data.TipoDocumentos
 
             tipodocumento.per08activo = 0;
 
-            _contexto.Per08TipoDocumentos!.Update(tipodocumento);
+            _contexto.per08TipoDocumentos!.Update(tipodocumento);
 
 
         }
@@ -147,7 +147,7 @@ namespace mipBackend.Data.TipoDocumentos
         public async Task ActivateTipoDocumento(int id)
         {
 
-            var tipodocumento = await _contexto.Per08TipoDocumentos!
+            var tipodocumento = await _contexto.per08TipoDocumentos!
                 .FirstOrDefaultAsync(x => x.per08llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -171,7 +171,7 @@ namespace mipBackend.Data.TipoDocumentos
 
             tipodocumento.per08activo = 1;
 
-            _contexto.Per08TipoDocumentos!.Update(tipodocumento);
+            _contexto.per08TipoDocumentos!.Update(tipodocumento);
 
         }
     }

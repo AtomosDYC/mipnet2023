@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Prf04PlantillaFlujo
+public partial class prf04PlantillaFlujo
 {
     public int prf04llave { get; set; }
 

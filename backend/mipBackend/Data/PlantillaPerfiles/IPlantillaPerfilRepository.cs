@@ -1,8 +1,8 @@
 ﻿using mipBackend.Models;
 
-namespace mipBackend.Data.PlantillaPerfiles
+namespace mipBackend.Data.Plantillaperfiles
 {
-    public interface IPlantillaPerfilRepository
+    public interface IPlantillaperfilRepository
     {
         
     }

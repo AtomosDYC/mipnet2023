@@ -9,7 +9,7 @@ import { ButtonsModule, ButtonGroupModule } from '@progress/kendo-angular-button
 import { LayoutModule, CardModule } from '@progress/kendo-angular-layout';
 import { GridModule, ExcelModule, PDFModule } from '@progress/kendo-angular-grid';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { IconsModule } from '@progress/kendo-angular-icons';
+
 
 
 
@@ -34,7 +34,7 @@ import { IconsModule } from '@progress/kendo-angular-icons';
     SharedModule,
     ButtonGroupModule,
     DropDownsModule,
-    IconsModule,
+    
     ExcelModule,
     PDFModule
   ]

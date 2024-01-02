@@ -9,8 +9,8 @@ namespace mipBackend.Profiles
         public PlantillaFlujoProfile()
         {
 
-            CreateMap<Prf04PlantillaFlujo, PlantillaFlujoResponseDto>();
-            CreateMap<PlantillaFlujoRequestDto, Prf04PlantillaFlujo>();
+            CreateMap<prf04PlantillaFlujo, PlantillaFlujoResponseDto>();
+            CreateMap<PlantillaFlujoRequestDto, prf04PlantillaFlujo>();
 
         }
     }

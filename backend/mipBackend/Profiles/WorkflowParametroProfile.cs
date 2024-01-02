@@ -10,9 +10,9 @@ namespace mipBackend.Profiles
         public WorkflowParametroProfile()
         {
 
-            CreateMap<Wkf09Parametro, WorkflowParametroResponseDto>();
-            CreateMap<WorkflowParametroResponseDto, Wkf09Parametro>();
-            CreateMap<WorkflowParametroRequestDto, Wkf09Parametro>();
+            CreateMap<wkf09Parametro, WorkflowParametroResponseDto>();
+            CreateMap<WorkflowParametroResponseDto, wkf09Parametro>();
+            CreateMap<WorkflowParametroRequestDto, wkf09Parametro>();
 
         }
 

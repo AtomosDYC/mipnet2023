@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/vm-syngenta/databases/DBmipnet2",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:SQLServerConnection"
+    }
+  }
+}

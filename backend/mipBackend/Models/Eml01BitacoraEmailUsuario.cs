@@ -5,11 +5,11 @@ namespace mipBackend.Models;
 
 public partial class Eml01BitacoraEmailUsuario
 {
-    public int Eml01Llave { get; set; }
+    public int Eml01llave { get; set; }
 
-    public int? Eml02Llave { get; set; }
+    public int? Eml02llave { get; set; }
 
-    public Guid? Secu02Llave { get; set; }
+    public Guid? userid { get; set; }
 
     public DateTime? Eml01Envio { get; set; }
 
@@ -23,9 +23,9 @@ public partial class Eml01BitacoraEmailUsuario
 
     public string? Eml01Text { get; set; }
 
-    public int? Eml04Llave { get; set; }
+    public int? Eml04llave { get; set; }
 
-    public int? Eml01Activo { get; set; }
+    public int? Eml01activo { get; set; }
 
     public int? Eml01MailPadre { get; set; }
 
@@ -35,13 +35,13 @@ public partial class Eml01BitacoraEmailUsuario
 
     public DateTime? fechaactivacion { get; set; }
 
-    public virtual Eml02MailBase? Eml02LlaveNavigation { get; set; }
+    public virtual Eml02MailBase? Eml02llaveNavigation { get; set; }
 
-    public virtual Eml04ImportanciaMail? Eml04LlaveNavigation { get; set; }
+    public virtual Eml04ImportanciaMail? Eml04llaveNavigation { get; set; }
 
     public virtual ICollection<Eml05ArchivoMail> Eml05ArchivoMails { get; } = new List<Eml05ArchivoMail>();
 
     public virtual ICollection<Frm02Formulario> Frm02Formularios { get; } = new List<Frm02Formulario>();
 
-    public virtual Secu02Usuario? Secu02LlaveNavigation { get; set; }
+    public virtual Secu02Usuario? useridNavigation { get; set; }
 }

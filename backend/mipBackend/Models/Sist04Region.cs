@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Sist04Region
+public partial class sist04Region
 {
     public int sist04llave { get; set; }
 
@@ -27,5 +27,5 @@ public partial class Sist04Region
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Sist03Comuna> Sist03Comunas { get; } = new List<Sist03Comuna>();
+    public virtual ICollection<sist03Comuna> sist03Comunas { get; } = new List<sist03Comuna>();
 }

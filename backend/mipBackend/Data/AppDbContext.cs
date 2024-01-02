@@ -2,10 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using mipBackend.Models;
 using mipBackend.Dtos.UsuarioDtos;
+using mipBackend.Dtos.MonitorDtos;
+using mipBackend.Dtos.MovilDtos;
 
 namespace mipBackend.Data
 {
-    public class AppDbContext: IdentityDbContext<Usuario>
+    public class AppDbContext: IdentityDbContext<Usuario, Rol, Guid>
     {
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
         {
@@ -29,92 +31,153 @@ namespace mipBackend.Data
                 entity.ToTable("prf03nombre");
                 */
             });
-            
+
+            /*
+            modelBuilder.Entity<AspNetRole>(entity =>
+            {
+                entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
+                    .IsUnique()
+                    .HasFilter("([NormalizedName] IS NOT NULL)");
+
+                entity.Property(e => e.Name).HasMaxLength(256);
+                entity.Property(e => e.NormalizedName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<AspNetRoleClaim>(entity =>
+            {
+                entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
+
+                entity.HasOne(d => d.Role).WithMany(p => p.AspNetRoleClaims).HasForeignKey(d => d.RoleId);
+            });
+
+            modelBuilder.Entity<AspNetUser>(entity =>
+            {
+                entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
+
+                entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+                    .IsUnique()
+                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+                entity.Property(e => e.Email).HasMaxLength(256);
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+                entity.Property(e => e.UserName).HasMaxLength(256);
+
+                entity.HasMany(d => d.Roles).WithMany(p => p.Users)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AspNetUserRole",
+                        r => r.HasOne<AspNetRole>().WithMany().HasForeignKey("RoleId"),
+                        l => l.HasOne<AspNetUser>().WithMany().HasForeignKey("UserId"),
+                        j =>
+                        {
+                            j.HasKey("UserId", "RoleId");
+                            j.ToTable("AspNetUserRoles");
+                            j.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
+                        });
+            });
+
+            modelBuilder.Entity<AspNetUserClaim>(entity =>
+            {
+                entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
+
+                entity.HasOne(d => d.User).WithMany(p => p.AspNetUserClaims).HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUserLogin>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+
+                entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
+
+                entity.HasOne(d => d.User).WithMany(p => p.AspNetUserLogins).HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUserToken>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+
+                entity.HasOne(d => d.User).WithMany(p => p.AspNetUserTokens).HasForeignKey(d => d.UserId);
+            });
+            */
+
             modelBuilder.Entity<Blk01Bloqueo>(entity =>
             {
-                entity.HasKey(e => e.Blk01Llave);
+                entity.HasKey(e => e.Blk01llave);
 
                 entity.ToTable("BLK01_Bloqueos");
 
-                entity.Property(e => e.Blk01Llave)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("BLK01_Llave");
+                entity.HasIndex(e => e.Blk02llave, "IX_BLK01_Bloqueos_BLK02_llave");
+
+                entity.Property(e => e.Blk01llave).HasColumnName("BLK01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Blk01Activo).HasColumnName("BLK01_Activo");
-                entity.Property(e => e.Blk01Descripcion)
+                entity.Property(e => e.Blk01activo).HasColumnName("BLK01_activo");
+                entity.Property(e => e.Blk01descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("BLK01_Descripcion");
+                    .HasColumnName("BLK01_descripcion");
                 entity.Property(e => e.Blk01MaxDuraciondia).HasColumnName("BLK01_MaxDuraciondia");
                 entity.Property(e => e.Blk01MinDuraciondia).HasColumnName("BLK01_MinDuraciondia");
-                entity.Property(e => e.Blk01NombreBloqueo)
+                entity.Property(e => e.Blk01nombreBloqueo)
                     .HasMaxLength(500)
-                    .HasColumnName("BLK01_NombreBloqueo");
-                entity.Property(e => e.Blk01Permanente).HasColumnName("BLK01_Permanente");
-                entity.Property(e => e.Blk02Llave)
-                    
-                    .HasColumnName("BLK02_Llave");
+                    .HasColumnName("BLK01_nombreBloqueo");
+                entity.Property(e => e.Blk01permanente).HasColumnName("BLK01_permanente");
+                entity.Property(e => e.Blk02llave).HasColumnName("BLK02_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Blk02LlaveNavigation).WithMany(p => p.Blk01Bloqueos)
-                    .HasForeignKey(d => d.Blk02Llave)
+                entity.HasOne(d => d.Blk02llaveNavigation).WithMany(p => p.Blk01Bloqueos)
+                    .HasForeignKey(d => d.Blk02llave)
                     .HasConstraintName("FK_BLK01_Bloqueos_BLK02_TipoBloqueo");
             });
 
             modelBuilder.Entity<Blk02TipoBloqueo>(entity =>
             {
-                entity.HasKey(e => e.Blk02Llave);
+                entity.HasKey(e => e.Blk02llave);
 
                 entity.ToTable("BLK02_TipoBloqueo");
 
-                entity.Property(e => e.Blk02Llave)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("BLK02_Llave");
+                entity.Property(e => e.Blk02llave).HasColumnName("BLK02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Blk02Activo).HasColumnName("BLK02_Activo");
-                entity.Property(e => e.Blk02Descripcion)
+                entity.Property(e => e.Blk02activo).HasColumnName("BLK02_activo");
+                entity.Property(e => e.Blk02descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("BLK02_Descripcion");
-                entity.Property(e => e.Blk02Nombre)
+                    .HasColumnName("BLK02_descripcion");
+                entity.Property(e => e.Blk02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("BLK02_Nombre");
+                    .HasColumnName("BLK02_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
             modelBuilder.Entity<Blk03BloqueoUsuario>(entity =>
             {
-                entity.HasKey(e => e.Blk03Llave);
+                entity.HasKey(e => e.Blk03llave);
 
                 entity.ToTable("BLK03_BloqueoUsuario");
 
-                entity.Property(e => e.Blk03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("BLK03_Llave");
+                entity.HasIndex(e => e.Blk01llave, "IX_BLK03_BloqueoUsuario_BLK01_llave");
+
+                entity.Property(e => e.Blk03llave).HasColumnName("BLK03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Blk01Llave)
-                    
-                    .HasColumnName("BLK01_Llave");
-                entity.Property(e => e.Blk03Activo).HasColumnName("BLK03_Activo");
+                entity.Property(e => e.Blk01llave).HasColumnName("BLK01_llave");
+                entity.Property(e => e.Blk03activo).HasColumnName("BLK03_activo");
                 entity.Property(e => e.Blk03FechaInicio)
                     .HasColumnType("datetime")
                     .HasColumnName("BLK03_FechaInicio");
@@ -125,1104 +188,982 @@ namespace mipBackend.Data
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
 
-                entity.HasOne(d => d.Blk01LlaveNavigation).WithMany(p => p.Blk03BloqueoUsuarios)
-                    .HasForeignKey(d => d.Blk01Llave)
+                entity.HasOne(d => d.Blk01llaveNavigation).WithMany(p => p.Blk03BloqueoUsuarios)
+                    .HasForeignKey(d => d.Blk01llave)
                     .HasConstraintName("FK_BLK03_BloqueoUsuario_BLK01_Bloqueos");
             });
 
             modelBuilder.Entity<Clbr01Calibracion>(entity =>
             {
-                entity.HasKey(e => e.Clbr01Llave);
+                entity.HasKey(e => e.Clbr01llave);
 
                 entity.ToTable("CLBR01_Calibracion");
 
-                entity.Property(e => e.Clbr01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CLBR01_Llave");
+                entity.HasIndex(e => e.Clbr02llave, "IX_CLBR01_Calibracion_CLBR02_llave");
+
+                entity.Property(e => e.Clbr01llave).HasColumnName("CLBR01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Clbr01Activo).HasColumnName("CLBR01_Activo");
-                entity.Property(e => e.Clbr01Descripcion)
+                entity.Property(e => e.Clbr01activo).HasColumnName("CLBR01_activo");
+                entity.Property(e => e.Clbr01descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("CLBR01_Descripcion");
+                    .HasColumnName("CLBR01_descripcion");
                 entity.Property(e => e.Clbr01FechaCalibracion)
                     .HasColumnType("datetime")
                     .HasColumnName("CLBR01_FechaCalibracion");
-                entity.Property(e => e.Clbr01Nombre)
+                entity.Property(e => e.Clbr01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CLBR01_Nombre");
+                    .HasColumnName("CLBR01_nombre");
                 entity.Property(e => e.Clbr01UrlPdf)
                     .HasMaxLength(1000)
                     .HasColumnName("CLBR01_UrlPdf");
-                entity.Property(e => e.Clbr02Llave)
-                    
-                    .HasColumnName("CLBR02_Llave");
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
+                entity.Property(e => e.Clbr02llave).HasColumnName("CLBR02_llave");
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Sercl01Llave)
-                    
-                    .HasColumnName("SERCL01_Llave");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Sercl01llave).HasColumnName("SERCL01_llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
 
-                entity.HasOne(d => d.Clbr02LlaveNavigation).WithMany(p => p.Clbr01Calibracions)
-                    .HasForeignKey(d => d.Clbr02Llave)
+                entity.HasOne(d => d.Clbr02llaveNavigation).WithMany(p => p.Clbr01Calibracions)
+                    .HasForeignKey(d => d.Clbr02llave)
                     .HasConstraintName("FK_CLBR01_Calibracion_CLBR02_TipoCalibracion");
             });
 
             modelBuilder.Entity<Clbr02TipoCalibracion>(entity =>
             {
-                entity.HasKey(e => e.Clbr02Llave);
+                entity.HasKey(e => e.Clbr02llave);
 
                 entity.ToTable("CLBR02_TipoCalibracion");
 
-                entity.Property(e => e.Clbr02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CLBR02_Llave");
+                entity.Property(e => e.Clbr02llave).HasColumnName("CLBR02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Clbr02Activo).HasColumnName("CLBR02_Activo");
-                entity.Property(e => e.Clbr02Descripcion)
+                entity.Property(e => e.Clbr02activo).HasColumnName("CLBR02_activo");
+                entity.Property(e => e.Clbr02descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("CLBR02_Descripcion");
-                entity.Property(e => e.Clbr02Nombre)
+                    .HasColumnName("CLBR02_descripcion");
+                entity.Property(e => e.Clbr02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CLBR02_Nombre");
+                    .HasColumnName("CLBR02_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Cnt01CuentaCliente>(entity =>
+            modelBuilder.Entity<cnt01CuentaCliente>(entity =>
             {
-                entity.HasKey(e => e.Cnt01Llave);
+                entity.HasKey(e => e.cnt01llave);
 
                 entity.ToTable("CNT01_CuentaCliente");
 
-                entity.Property(e => e.Cnt01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT01_Llave");
+                entity.HasIndex(e => e.cnt02llave, "IX_CNT01_CuentaCliente_CNT02_llave");
+
+                entity.HasIndex(e => e.cnt03llave, "IX_CNT01_CuentaCliente_CNT03_llave");
+
+                entity.HasIndex(e => e.per01llave, "IX_CNT01_CuentaCliente_PER01_llave");
+
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt01Activo).HasColumnName("CNT01_Activo");
-                entity.Property(e => e.Cnt01AnioIngreso)
+                entity.Property(e => e.cnt01activo).HasColumnName("CNT01_activo");
+                entity.Property(e => e.cnt01AnioIngreso)
                     .HasColumnType("date")
                     .HasColumnName("CNT01_anioIngreso");
-                entity.Property(e => e.Cnt01CuentaSap).HasColumnName("CNT01_CuentaSap");
-                entity.Property(e => e.Cnt01FechaIngresoSap)
+                entity.Property(e => e.cnt01CuentaSap).HasColumnName("CNT01_CuentaSap");
+                entity.Property(e => e.cnt01FechaIngresoSap)
                     .HasColumnType("datetime")
                     .HasColumnName("CNT01_FechaIngresoSap");
-                entity.Property(e => e.Cnt01Nombre)
+                entity.Property(e => e.cnt01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CNT01_Nombre");
-                entity.Property(e => e.Cnt01NumeroSap).HasColumnName("CNT01_NumeroSap");
-                entity.Property(e => e.Cnt02Llave)
-                    
-                    .HasColumnName("CNT02_Llave");
-                entity.Property(e => e.Cnt03Llave)
-                    
-                    .HasColumnName("CNT03_Llave");
+                    .HasColumnName("CNT01_nombre");
+                entity.Property(e => e.cnt01NumeroSap).HasColumnName("CNT01_NumeroSap");
+                entity.Property(e => e.cnt02llave).HasColumnName("CNT02_llave");
+                entity.Property(e => e.cnt03llave).HasColumnName("CNT03_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per01Llave)
-                    
-                    .HasColumnName("PER01_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
 
-                entity.HasOne(d => d.Cnt02LlaveNavigation).WithMany(p => p.Cnt01CuentaClientes)
-                    .HasForeignKey(d => d.Cnt02Llave)
+                entity.HasOne(d => d.cnt02llaveNavigation).WithMany(p => p.cnt01CuentaClientes)
+                    .HasForeignKey(d => d.cnt02llave)
                     .HasConstraintName("FK_CNT01_CuentaCliente_CNT02_TipoCuenta");
 
-                entity.HasOne(d => d.Cnt03LlaveNavigation).WithMany(p => p.Cnt01CuentaClientes)
-                    .HasForeignKey(d => d.Cnt03Llave)
+                entity.HasOne(d => d.cnt03llaveNavigation).WithMany(p => p.cnt01CuentaClientes)
+                    .HasForeignKey(d => d.cnt03llave)
                     .HasConstraintName("FK_CNT01_CuentaCliente_CNT03_TipoCliente");
 
-                entity.HasOne(d => d.Per01LlaveNavigation).WithMany(p => p.Cnt01CuentaClientes)
-                    .HasForeignKey(d => d.Per01Llave)
-                    .HasConstraintName("FK_CNT01_CuentaCliente_PER01_Persona");
+                entity.HasOne(d => d.per01llaveNavigation).WithMany(p => p.cnt01CuentaClientes)
+                    .HasForeignKey(d => d.per01llave)
+                    .HasConstraintName("FK_CNT01_CuentaCliente_PER01_persona");
             });
 
-            modelBuilder.Entity<Cnt02TipoCuenta>(entity =>
+            modelBuilder.Entity<cnt02TipoCuenta>(entity =>
             {
                 entity.HasKey(e => e.cnt02llave);
 
                 entity.ToTable("CNT02_TipoCuenta");
 
-                entity.Property(e => e.cnt02llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT02_Llave");
+                entity.Property(e => e.cnt02llave).HasColumnName("CNT02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.cnt02activo).HasColumnName("CNT02_Activo");
+                entity.Property(e => e.cnt02activo).HasColumnName("CNT02_activo");
                 entity.Property(e => e.cnt02descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("CNT02_Descripcion");
+                    .HasColumnName("CNT02_descripcion");
                 entity.Property(e => e.cnt02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CNT02_Nombre");
+                    .HasColumnName("CNT02_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Cnt03TipoCliente>(entity =>
+            modelBuilder.Entity<cnt03TipoCliente>(entity =>
             {
-                entity.HasKey(e => e.Cnt03Llave);
+                entity.HasKey(e => e.cnt03llave);
 
                 entity.ToTable("CNT03_TipoCliente");
 
-                entity.Property(e => e.Cnt03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT03_Llave");
+                entity.HasIndex(e => e.per03llave, "IX_CNT03_TipoCliente_PER03_llave");
+
+                entity.Property(e => e.cnt03llave).HasColumnName("CNT03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt03Activo)
-                    
-                    .HasColumnName("CNT03_Activo");
-                entity.Property(e => e.Cnt03Descripcion)
+                entity.Property(e => e.cnt03activo).HasColumnName("CNT03_activo");
+                entity.Property(e => e.cnt03descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("CNT03_Descripcion");
-                entity.Property(e => e.Cnt03Nombre)
+                    .HasColumnName("CNT03_descripcion");
+                entity.Property(e => e.cnt03nombre)
                     .HasMaxLength(50)
-                    .HasColumnName("CNT03_Nombre");
+                    .HasColumnName("CNT03_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per03Llave)
-                    
-                    .HasColumnName("PER03_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per03llave).HasColumnName("PER03_llave");
 
-                entity.HasOne(d => d.Per03LlaveNavigation).WithMany(p => p.Cnt03TipoClientes)
-                    .HasForeignKey(d => d.Per03Llave)
-                    .HasConstraintName("FK_CNT03_TipoCliente_PER03_TipoPersona");
+                entity.HasOne(d => d.per03llaveNavigation).WithMany(p => p.cnt03TipoClientes)
+                    .HasForeignKey(d => d.per03llave)
+                    .HasConstraintName("FK_CNT03_TipoCliente_PER03_Tipopersona");
             });
 
-            modelBuilder.Entity<Cnt04ContactoCliente>(entity =>
+            modelBuilder.Entity<cnt04ContactoCliente>(entity =>
             {
-                entity.HasKey(e => e.Cnt04Llave);
+                entity.HasKey(e => e.cnt04llave);
 
                 entity.ToTable("CNT04_ContactoCliente");
 
-                entity.Property(e => e.Cnt04Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT04_Llave");
+                entity.HasIndex(e => e.cnt01llave, "IX_CNT04_ContactoCliente_CNT01_llave");
+
+                entity.HasIndex(e => e.cnt05llave, "IX_CNT04_ContactoCliente_CNT05_llave");
+
+                entity.Property(e => e.cnt04llave).HasColumnName("CNT04_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
-                entity.Property(e => e.Cnt04Activo).HasColumnName("CNT04_Activo");
-                entity.Property(e => e.Cnt05Llave)
-                    
-                    .HasColumnName("CNT05_llave");
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
+                entity.Property(e => e.cnt04activo).HasColumnName("CNT04_activo");
+                entity.Property(e => e.cnt05llave).HasColumnName("CNT05_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per01Llave)
-                    
-                    .HasColumnName("PER01_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
 
-                entity.HasOne(d => d.Cnt01LlaveNavigation).WithMany(p => p.Cnt04ContactoClientes)
-                    .HasForeignKey(d => d.Cnt01Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.cnt01llaveNavigation).WithMany(p => p.cnt04ContactoClientes)
+                    .HasForeignKey(d => d.cnt01llave)
                     .HasConstraintName("FK_CNT04_ContactoCliente_CNT01_CuentaCliente1");
 
-                entity.HasOne(d => d.Cnt05LlaveNavigation).WithMany(p => p.Cnt04ContactoClientes)
-                    .HasForeignKey(d => d.Cnt05Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.cnt05llaveNavigation).WithMany(p => p.cnt04ContactoClientes)
+                    .HasForeignKey(d => d.cnt05llave)
                     .HasConstraintName("FK_CNT04_ContactoCliente_CNT05_TipoContacto");
             });
 
-            modelBuilder.Entity<Cnt05TipoContacto>(entity =>
+            modelBuilder.Entity<cnt05TipoContacto>(entity =>
             {
-                entity.HasKey(e => e.Cnt05Llave);
+                entity.HasKey(e => e.cnt05llave);
 
                 entity.ToTable("CNT05_TipoContacto");
 
-                entity.Property(e => e.Cnt05Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT05_Llave");
+                entity.Property(e => e.cnt05llave).HasColumnName("CNT05_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt05Activo).HasColumnName("CNT05_Activo");
-                entity.Property(e => e.Cnt05Descripcion)
+                entity.Property(e => e.cnt05activo).HasColumnName("CNT05_activo");
+                entity.Property(e => e.cnt05descripcion)
                     .HasMaxLength(500)
                     .HasColumnName("CNT05_descripcion");
-                entity.Property(e => e.Cnt05Nombre)
+                entity.Property(e => e.cnt05nombre)
                     .HasMaxLength(50)
-                    .HasColumnName("CNT05_Nombre");
+                    .HasColumnName("CNT05_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Cnt06ComunicacionCliente>(entity =>
+            modelBuilder.Entity<cnt06ComunicacionCliente>(entity =>
             {
-                entity.HasKey(e => e.Cnt06Llave);
+                entity.HasKey(e => e.cnt06llave);
 
                 entity.ToTable("CNT06_ComunicacionCliente");
 
-                entity.Property(e => e.Cnt06Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT06_Llave");
+                entity.HasIndex(e => e.cnt01llave, "IX_CNT06_ComunicacionCliente_CNT01_llave");
+
+                entity.HasIndex(e => e.cnt08llave, "IX_CNT06_ComunicacionCliente_CNT08_llave");
+
+                entity.HasIndex(e => e.cnt10llave, "IX_CNT06_ComunicacionCliente_CNT10_llave");
+
+                entity.HasIndex(e => e.sist03llave, "IX_CNT06_ComunicacionCliente_SIST03_llave");
+
+                entity.Property(e => e.cnt06llave).HasColumnName("CNT06_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
-                entity.Property(e => e.Cnt06Activo).HasColumnName("CNT06_Activo");
-                entity.Property(e => e.Cnt06Casilla)
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
+                entity.Property(e => e.cnt06activo).HasColumnName("CNT06_activo");
+                entity.Property(e => e.cnt06Casilla)
                     .HasMaxLength(500)
                     .HasColumnName("CNT06_casilla");
-                entity.Property(e => e.Cnt06Celular1)
+                entity.Property(e => e.cnt06Celular1)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Celular1");
-                entity.Property(e => e.Cnt06Celular2)
+                entity.Property(e => e.cnt06Celular2)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Celular2");
-                entity.Property(e => e.Cnt06CodigoPostal)
+                entity.Property(e => e.cnt06CodigoPostal)
                     .HasMaxLength(500)
                     .HasColumnName("CNT06_CodigoPostal");
-                entity.Property(e => e.Cnt06Direccion)
+                entity.Property(e => e.cnt06Direccion)
                     .HasMaxLength(500)
                     .HasColumnName("CNT06_Direccion");
-                entity.Property(e => e.Cnt06Email)
+                entity.Property(e => e.cnt06Email)
                     .HasMaxLength(250)
                     .HasColumnName("CNT06_Email");
-                entity.Property(e => e.Cnt06Fax)
+                entity.Property(e => e.cnt06Fax)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Fax");
-                entity.Property(e => e.Cnt06SitioWeb)
+                entity.Property(e => e.cnt06SitioWeb)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_SitioWeb");
-                entity.Property(e => e.Cnt06Telefono1)
+                entity.Property(e => e.cnt06Telefono1)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Telefono1");
-                entity.Property(e => e.Cnt06Telefono2)
+                entity.Property(e => e.cnt06Telefono2)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Telefono2");
-                entity.Property(e => e.Cnt06TieneCasilla).HasColumnName("CNT06_TieneCasilla");
-                entity.Property(e => e.Cnt06TipoMail)
-                    
-                    .HasColumnName("CNT06_TipoMail");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Cnt10Llave)
-                    
-                    .HasColumnName("CNT10_Llave");
+                entity.Property(e => e.cnt06TieneCasilla).HasColumnName("CNT06_TieneCasilla");
+                entity.Property(e => e.cnt06TipoMail).HasColumnName("CNT06_TipoMail");
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.cnt10llave).HasColumnName("CNT10_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Sist03Llave)
-                    
-                    .HasColumnName("SIST03_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.sist03llave).HasColumnName("SIST03_llave");
 
-                entity.HasOne(d => d.Cnt01LlaveNavigation).WithMany(p => p.Cnt06ComunicacionClientes)
-                    .HasForeignKey(d => d.Cnt01Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.cnt01llaveNavigation).WithMany(p => p.cnt06ComunicacionClientes)
+                    .HasForeignKey(d => d.cnt01llave)
                     .HasConstraintName("FK_CNT06_ComunicacionCliente_CNT01_CuentaCliente");
 
-                entity.HasOne(d => d.Cnt08LlaveNavigation).WithMany(p => p.Cnt06ComunicacionClientes)
-                    .HasForeignKey(d => d.Cnt08Llave)
+                entity.HasOne(d => d.cnt08llaveNavigation).WithMany(p => p.cnt06ComunicacionClientes)
+                    .HasForeignKey(d => d.cnt08llave)
                     .HasConstraintName("FK_CNT06_ComunicacionCliente_CNT08_Segmentacion");
 
-                entity.HasOne(d => d.Cnt10LlaveNavigation).WithMany(p => p.Cnt06ComunicacionClientes)
-                    .HasForeignKey(d => d.Cnt10Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.cnt10llaveNavigation).WithMany(p => p.cnt06ComunicacionClientes)
+                    .HasForeignKey(d => d.cnt10llave)
                     .HasConstraintName("FK_CNT06_ComunicacionCliente_CNT10_TipoComunicacion");
 
-                entity.HasOne(d => d.Sist03LlaveNavigation).WithMany(p => p.Cnt06ComunicacionClientes)
-                    .HasForeignKey(d => d.Sist03Llave)
+                entity.HasOne(d => d.sist03llaveNavigation).WithMany(p => p.cnt06ComunicacionClientes)
+                    .HasForeignKey(d => d.sist03llave)
                     .HasConstraintName("FK_CNT06_ComunicacionCliente_SIST03_Comuna");
             });
 
-            modelBuilder.Entity<Cnt07TipoSegmentacion>(entity =>
+            modelBuilder.Entity<cnt07TipoSegmentacion>(entity =>
             {
-                entity.HasKey(e => e.Cnt07Llave);
+                entity.HasKey(e => e.cnt07llave);
 
                 entity.ToTable("CNT07_TipoSegmentacion");
 
-                entity.Property(e => e.Cnt07Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT07_Llave");
+                entity.HasIndex(e => e.cnt18llave, "IX_CNT07_TipoSegmentacion_CNT18_llave");
+
+                entity.Property(e => e.cnt07llave).HasColumnName("CNT07_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt02Llave)
-                    
-                    .HasColumnName("CNT02_Llave");
-                entity.Property(e => e.Cnt07Activo).HasColumnName("CNT07_Activo");
-                entity.Property(e => e.Cnt07Descripcion)
+                entity.Property(e => e.cnt02llave).HasColumnName("CNT02_llave");
+                entity.Property(e => e.cnt07activo).HasColumnName("CNT07_activo");
+                entity.Property(e => e.cnt07descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("CNT07_Descripcion");
-                entity.Property(e => e.Cnt07Nombre)
+                    .HasColumnName("CNT07_descripcion");
+                entity.Property(e => e.cnt07nombre)
                     .HasMaxLength(50)
-                    .HasColumnName("CNT07_Nombre");
-                entity.Property(e => e.Cnt18Llave)
-                    
-                    .HasColumnName("CNT18_Llave");
+                    .HasColumnName("CNT07_nombre");
+                entity.Property(e => e.cnt18llave).HasColumnName("CNT18_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Cnt18LlaveNavigation).WithMany(p => p.Cnt07TipoSegmentacions)
-                    .HasForeignKey(d => d.Cnt18Llave)
+                entity.HasOne(d => d.cnt18llaveNavigation).WithMany(p => p.cnt07TipoSegmentacions)
+                    .HasForeignKey(d => d.cnt18llave)
                     .HasConstraintName("FK_CNT07_TipoSegmentacion_CNT18_NivelSegmentacion");
             });
 
-            modelBuilder.Entity<Cnt08Segmentacion>(entity =>
+            modelBuilder.Entity<cnt08Segmentacion>(entity =>
             {
-                entity.HasKey(e => e.Cnt08Llave);
+                entity.HasKey(e => e.cnt08llave);
 
                 entity.ToTable("CNT08_Segmentacion");
 
-                entity.Property(e => e.Cnt08Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT08_Llave");
+                entity.HasIndex(e => e.cnt01llave, "IX_CNT08_Segmentacion_CNT01_llave");
+
+                entity.HasIndex(e => e.cnt07llave, "IX_CNT08_Segmentacion_CNT07_llave");
+
+                entity.HasIndex(e => e.cnt08llavePadre, "IX_CNT08_Segmentacion_CNT08_llavePadre");
+
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
-                entity.Property(e => e.Cnt07Llave)
-                    
-                    .HasColumnName("CNT07_Llave");
-                entity.Property(e => e.Cnt08Activo).HasColumnName("CNT08_Activo");
-                entity.Property(e => e.Cnt08LlavePadre)
-                    
-                    .HasColumnName("CNT08_LlavePadre");
-                entity.Property(e => e.Cnt08Nombre)
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
+                entity.Property(e => e.cnt07llave).HasColumnName("CNT07_llave");
+                entity.Property(e => e.cnt08activo).HasColumnName("CNT08_activo");
+                entity.Property(e => e.cnt08llavePadre).HasColumnName("CNT08_llavePadre");
+                entity.Property(e => e.cnt08nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("CNT08_Nombre");
-                entity.Property(e => e.Cnt21Llave)
+                    .HasColumnName("CNT08_nombre");
+                entity.Property(e => e.cnt21llave)
                     .HasDefaultValueSql("((1))")
-                    
-                    .HasColumnName("CNT21_Llave");
+                    .HasColumnName("CNT21_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Sist03Llave)
-                    
-                    .HasColumnName("SIST03_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.sist03llave).HasColumnName("SIST03_llave");
 
-                entity.HasOne(d => d.Cnt01LlaveNavigation).WithMany(p => p.Cnt08Segmentacions)
-                    .HasForeignKey(d => d.Cnt01Llave)
+                entity.HasOne(d => d.cnt01llaveNavigation).WithMany(p => p.cnt08Segmentacions)
+                    .HasForeignKey(d => d.cnt01llave)
                     .HasConstraintName("FK_CNT08_Segmentacion_CNT01_CuentaCliente");
 
-                entity.HasOne(d => d.Cnt07LlaveNavigation).WithMany(p => p.Cnt08Segmentacions)
-                    .HasForeignKey(d => d.Cnt07Llave)
+                entity.HasOne(d => d.cnt07llaveNavigation).WithMany(p => p.cnt08Segmentacions)
+                    .HasForeignKey(d => d.cnt07llave)
                     .HasConstraintName("FK_CNT08_Segmentacion_CNT07_TipoSegmentacion");
 
-                entity.HasOne(d => d.Cnt08LlavePadreNavigation).WithMany(p => p.InverseCnt08LlavePadreNavigation)
-                    .HasForeignKey(d => d.Cnt08LlavePadre)
+                entity.HasOne(d => d.cnt08llavePadreNavigation).WithMany(p => p.Inversecnt08llavePadreNavigation)
+                    .HasForeignKey(d => d.cnt08llavePadre)
                     .HasConstraintName("FK_CNT08_Segmentacion_CNT08_Segmentacion");
             });
 
-            modelBuilder.Entity<Cnt09ComunicacionSegmentacion>(entity =>
+            modelBuilder.Entity<cnt09ComunicacionSegmentacion>(entity =>
             {
-                entity.HasKey(e => e.Cnt09Llave);
+                entity.HasKey(e => e.cnt09llave);
 
                 entity.ToTable("CNT09_ComunicacionSegmentacion");
 
-                entity.Property(e => e.Cnt09Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT09_Llave");
+                entity.HasIndex(e => e.cnt08llave, "IX_CNT09_ComunicacionSegmentacion_CNT08_llave");
+
+                entity.Property(e => e.cnt09llave).HasColumnName("CNT09_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Cnt09Activo).HasColumnName("CNT09_Activo");
-                entity.Property(e => e.Cnt09Casilla)
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.cnt09activo).HasColumnName("CNT09_activo");
+                entity.Property(e => e.cnt09Casilla)
                     .HasMaxLength(500)
                     .HasColumnName("CNT09_casilla");
-                entity.Property(e => e.Cnt09Celular1)
+                entity.Property(e => e.cnt09Celular1)
                     .HasMaxLength(50)
                     .HasColumnName("CNT09_Celular1");
-                entity.Property(e => e.Cnt09Celular2)
+                entity.Property(e => e.cnt09Celular2)
                     .HasMaxLength(50)
                     .HasColumnName("CNT09_Celular2");
-                entity.Property(e => e.Cnt09CodigoPostal)
+                entity.Property(e => e.cnt09CodigoPostal)
                     .HasMaxLength(500)
                     .HasColumnName("CNT09_CodigoPostal");
-                entity.Property(e => e.Cnt09Direccion)
+                entity.Property(e => e.cnt09Direccion)
                     .HasMaxLength(500)
                     .HasColumnName("CNT09_Direccion");
-                entity.Property(e => e.Cnt09Email)
+                entity.Property(e => e.cnt09Email)
                     .HasMaxLength(250)
                     .HasColumnName("CNT09_Email");
-                entity.Property(e => e.Cnt09Fax)
+                entity.Property(e => e.cnt09Fax)
                     .HasMaxLength(50)
                     .HasColumnName("CNT09_Fax");
-                entity.Property(e => e.Cnt09SinCasilla).HasColumnName("CNT09_SinCasilla");
-                entity.Property(e => e.Cnt09SitioWeb)
+                entity.Property(e => e.cnt09SinCasilla).HasColumnName("CNT09_SinCasilla");
+                entity.Property(e => e.cnt09SitioWeb)
                     .HasMaxLength(50)
                     .HasColumnName("CNT09_SitioWeb");
-                entity.Property(e => e.Cnt09Telefono1)
+                entity.Property(e => e.cnt09Telefono1)
                     .HasMaxLength(50)
                     .HasColumnName("CNT09_Telefono1");
-                entity.Property(e => e.Cnt09Telefono2)
+                entity.Property(e => e.cnt09Telefono2)
                     .HasMaxLength(50)
                     .HasColumnName("CNT09_Telefono2");
-                entity.Property(e => e.Cnt09TipoMail)
-                    
-                    .HasColumnName("CNT09_TipoMail");
-                entity.Property(e => e.Cnt10Llave)
-                    
-                    .HasColumnName("CNT10_Llave");
+                entity.Property(e => e.cnt09TipoMail).HasColumnName("CNT09_TipoMail");
+                entity.Property(e => e.cnt10llave).HasColumnName("CNT10_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Sist03Llave)
-                    
-                    .HasColumnName("SIST03_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.sist03llave).HasColumnName("SIST03_llave");
 
-                entity.HasOne(d => d.Cnt08LlaveNavigation).WithMany(p => p.Cnt09ComunicacionSegmentacions)
-                    .HasForeignKey(d => d.Cnt08Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.cnt08llaveNavigation).WithMany(p => p.cnt09ComunicacionSegmentacions)
+                    .HasForeignKey(d => d.cnt08llave)
                     .HasConstraintName("FK_CNT09_ComunicacionSegmentacion_CNT08_Segmentacion");
             });
 
-            modelBuilder.Entity<Cnt10TipoComunicacion>(entity =>
+            modelBuilder.Entity<cnt10TipoComunicacion>(entity =>
             {
-                entity.HasKey(e => e.Cnt10Llave);
+                entity.HasKey(e => e.cnt10llave);
 
                 entity.ToTable("CNT10_TipoComunicacion");
 
-                entity.Property(e => e.Cnt10Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT10_Llave");
+                entity.Property(e => e.cnt10llave).HasColumnName("CNT10_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt10Activo).HasColumnName("CNT10_Activo");
-                entity.Property(e => e.Cnt10Descripcion)
+                entity.Property(e => e.cnt10activo).HasColumnName("CNT10_activo");
+                entity.Property(e => e.cnt10descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("CNT10_Descripcion");
-                entity.Property(e => e.Cnt10Nombre)
+                    .HasColumnName("CNT10_descripcion");
+                entity.Property(e => e.cnt10nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CNT10_Nombre");
+                    .HasColumnName("CNT10_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Cnt11ContactoSegmentacion>(entity =>
+            modelBuilder.Entity<cnt11ContactoSegmentacion>(entity =>
             {
-                entity.HasKey(e => e.Cnt11Llave);
+                entity.HasKey(e => e.cnt11llave);
 
                 entity.ToTable("CNT11_ContactoSegmentacion");
 
-                entity.Property(e => e.Cnt11Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT11_Llave");
+                entity.HasIndex(e => e.cnt08llave, "IX_CNT11_ContactoSegmentacion_CNT08_llave");
+
+                entity.Property(e => e.cnt11llave).HasColumnName("CNT11_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt05Llave)
-                    
-                    .HasColumnName("CNT05_llave");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Cnt11Activo).HasColumnName("CNT11_Activo");
+                entity.Property(e => e.cnt05llave).HasColumnName("CNT05_llave");
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.cnt11activo).HasColumnName("CNT11_activo");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per01Llave)
-                    
-                    .HasColumnName("PER01_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
 
-                entity.HasOne(d => d.Cnt08LlaveNavigation).WithMany(p => p.Cnt11ContactoSegmentacions)
-                    .HasForeignKey(d => d.Cnt08Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.cnt08llaveNavigation).WithMany(p => p.cnt11ContactoSegmentacions)
+                    .HasForeignKey(d => d.cnt08llave)
                     .HasConstraintName("FK_CNT11_ContactoSegmentacion_CNT08_Segmentacion");
             });
 
-            modelBuilder.Entity<Cnt12Empleado>(entity =>
+            modelBuilder.Entity<cnt12Empleado>(entity =>
             {
-                entity.HasKey(e => e.Cnt12Llave);
+                entity.HasKey(e => e.cnt12llave);
 
                 entity.ToTable("CNT12_Empleados");
 
-                entity.Property(e => e.Cnt12Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT12_Llave");
+                entity.HasIndex(e => e.cnt01llave, "IX_CNT12_Empleados_CNT01_llave");
+
+                entity.HasIndex(e => e.cnt13llave, "IX_CNT12_Empleados_CNT13_llave");
+
+                entity.HasIndex(e => e.per01llave, "IX_CNT12_Empleados_PER01_llave");
+
+                entity.Property(e => e.cnt12llave).HasColumnName("CNT12_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Cnt12Activo).HasColumnName("CNT12_Activo");
-                entity.Property(e => e.Cnt12Cargo)
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.cnt12activo).HasColumnName("CNT12_activo");
+                entity.Property(e => e.cnt12Cargo)
                     .HasMaxLength(500)
                     .HasColumnName("CNT12_Cargo");
-                entity.Property(e => e.Cnt13Llave)
-                    
-                    .HasColumnName("CNT13_Llave");
+                entity.Property(e => e.cnt13llave).HasColumnName("CNT13_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per01Llave)
-                    
-                    .HasColumnName("PER01_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
 
-                entity.HasOne(d => d.Cnt01LlaveNavigation).WithMany(p => p.Cnt12Empleados)
-                    .HasForeignKey(d => d.Cnt01Llave)
+                entity.HasOne(d => d.cnt01llaveNavigation).WithMany(p => p.cnt12Empleados)
+                    .HasForeignKey(d => d.cnt01llave)
                     .HasConstraintName("FK_CNT12_Empleados_CNT01_CuentaCliente");
 
-                entity.HasOne(d => d.Cnt13LlaveNavigation).WithMany(p => p.Cnt12Empleados)
-                    .HasForeignKey(d => d.Cnt13Llave)
+                entity.HasOne(d => d.cnt13llaveNavigation).WithMany(p => p.cnt12Empleados)
+                    .HasForeignKey(d => d.cnt13llave)
                     .HasConstraintName("FK_CNT12_Empleados_CNT13_TipoEmpleado");
 
-                entity.HasOne(d => d.Per01LlaveNavigation).WithMany(p => p.Cnt12Empleados)
-                    .HasForeignKey(d => d.Per01Llave)
-                    .HasConstraintName("FK_CNT12_Empleados_PER01_Persona");
+                entity.HasOne(d => d.per01llaveNavigation).WithMany(p => p.cnt12Empleados)
+                    .HasForeignKey(d => d.per01llave)
+                    .HasConstraintName("FK_CNT12_Empleados_PER01_persona");
             });
 
-            modelBuilder.Entity<Cnt13TipoEmpleado>(entity =>
+            modelBuilder.Entity<cnt13TipoEmpleado>(entity =>
             {
-                entity.HasKey(e => e.Cnt13Llave);
+                entity.HasKey(e => e.cnt13llave);
 
                 entity.ToTable("CNT13_TipoEmpleado");
 
-                entity.Property(e => e.Cnt13Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT13_Llave");
+                entity.Property(e => e.cnt13llave).HasColumnName("CNT13_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt13Activo).HasColumnName("CNT13_Activo");
-                entity.Property(e => e.Cnt13Descripcion)
+                entity.Property(e => e.cnt13activo).HasColumnName("CNT13_activo");
+                entity.Property(e => e.cnt13descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("CNT13_Descripcion");
-                entity.Property(e => e.Cnt13Nombre)
+                    .HasColumnName("CNT13_descripcion");
+                entity.Property(e => e.cnt13nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CNT13_Nombre");
+                    .HasColumnName("CNT13_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Cnt14ClienteLicencia>(entity =>
+            modelBuilder.Entity<cnt14ClienteLicencia>(entity =>
             {
-                entity.HasKey(e => e.Cnt14Llave);
+                entity.HasKey(e => e.cnt14llave);
 
                 entity.ToTable("CNT14_ClienteLicencia");
 
-                entity.Property(e => e.Cnt14Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT14_Llave");
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
-                entity.Property(e => e.Cnt14Activo).HasColumnName("CNT14_Activo");
-                entity.Property(e => e.Cnt14CantUsuarios).HasColumnName("CNT14_CantUsuarios");
-                entity.Property(e => e.Cnt14InicioFecha)
+                entity.HasIndex(e => e.cnt01llave, "IX_CNT14_ClienteLicencia_CNT01_llave");
+
+                entity.Property(e => e.cnt14llave).HasColumnName("CNT14_llave");
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
+                entity.Property(e => e.cnt14activo).HasColumnName("CNT14_activo");
+                entity.Property(e => e.cnt14CantUsuarios).HasColumnName("CNT14_CantUsuarios");
+                entity.Property(e => e.cnt14InicioFecha)
                     .HasColumnType("datetime")
                     .HasColumnName("CNT14_InicioFecha");
-                entity.Property(e => e.Cnt14TerminoFecha)
+                entity.Property(e => e.cnt14TerminoFecha)
                     .HasColumnType("datetime")
                     .HasColumnName("CNT14_TerminoFecha");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Lnc01Llave)
-                    
-                    .HasColumnName("LNC01_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Lnc01llave).HasColumnName("LNC01_llave");
 
-                entity.HasOne(d => d.Cnt01LlaveNavigation).WithMany(p => p.Cnt14ClienteLicencia)
-                    .HasForeignKey(d => d.Cnt01Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.cnt01llaveNavigation).WithMany(p => p.cnt14ClienteLicencia)
+                    .HasForeignKey(d => d.cnt01llave)
                     .HasConstraintName("FK_CNT14_ClienteLicencia_CNT01_CuentaCliente");
             });
 
-            modelBuilder.Entity<Cnt15EmpleadoLicencia>(entity =>
+            modelBuilder.Entity<cnt15EmpleadoLicencia>(entity =>
             {
-
-
-                entity.HasKey(e => new { e.Cnt19Llave, e.Cnt12Llave }).HasName("PK_CNT15_EmpleadoLicencia_1");
+                entity.HasKey(e => new { e.cnt19llave, e.cnt12llave }).HasName("PK_CNT15_EmpleadoLicencia_1");
 
                 entity.ToTable("CNT15_EmpleadoLicencia");
 
-                entity.Property(e => e.Cnt19Llave)
-                    
-                    .HasColumnName("CNT19_Llave");
-                entity.Property(e => e.Cnt12Llave)
-                    
-                    .HasColumnName("CNT12_Llave");
-                entity.Property(e => e.Cnt15AceptaContrato).HasColumnName("CNT15_AceptaContrato");
-                entity.Property(e => e.Cnt15Fechafirma)
+                entity.HasIndex(e => e.cnt12llave, "IX_CNT15_EmpleadoLicencia_CNT12_llave");
+
+                entity.Property(e => e.cnt19llave).HasColumnName("CNT19_llave");
+                entity.Property(e => e.cnt12llave).HasColumnName("CNT12_llave");
+                entity.Property(e => e.cnt15AceptaContrato).HasColumnName("CNT15_AceptaContrato");
+                entity.Property(e => e.cnt15Fechafirma)
                     .HasColumnType("date")
                     .HasColumnName("CNT15_fechafirma");
 
-                entity.HasOne(d => d.Cnt12LlaveNavigation).WithMany(p => p.Cnt15EmpleadoLicencia)
-                    .HasForeignKey(d => d.Cnt12Llave)
+                entity.HasOne(d => d.cnt12llaveNavigation).WithMany(p => p.cnt15EmpleadoLicencia)
+                    .HasForeignKey(d => d.cnt12llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CNT15_EmpleadoLicencia_CNT12_Empleados");
 
-                entity.HasOne(d => d.Cnt19LlaveNavigation).WithMany(p => p.Cnt15EmpleadoLicencia)
-                    .HasForeignKey(d => d.Cnt19Llave)
+                entity.HasOne(d => d.cnt19llaveNavigation).WithMany(p => p.cnt15EmpleadoLicencia)
+                    .HasForeignKey(d => d.cnt19llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CNT15_EmpleadoLicencia_CNT19_LicenciaCliente");
             });
 
-            modelBuilder.Entity<Cnt16TipoBloqueoCliente>(entity =>
+            modelBuilder.Entity<cnt16TipoBloqueoCliente>(entity =>
             {
-                entity.HasKey(e => e.Cnt16Llave);
+                entity.HasKey(e => e.cnt16llave);
 
                 entity.ToTable("CNT16_TipoBloqueoCliente");
 
-                entity.Property(e => e.Cnt16Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT16_Llave");
-                entity.Property(e => e.Cnt16Activo).HasColumnName("CNT16_Activo");
-                entity.Property(e => e.Cnt16Descripcion)
+                entity.Property(e => e.cnt16llave).HasColumnName("CNT16_llave");
+                entity.Property(e => e.cnt16activo).HasColumnName("CNT16_activo");
+                entity.Property(e => e.cnt16descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("CNT16_Descripcion");
-                entity.Property(e => e.Cnt16Nombre)
+                    .HasColumnName("CNT16_descripcion");
+                entity.Property(e => e.cnt16nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CNT16_Nombre");
+                    .HasColumnName("CNT16_nombre");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Cnt17Bloqueo>(entity =>
+            modelBuilder.Entity<cnt17Bloqueo>(entity =>
             {
-                entity.HasKey(e => e.Cnt17Llave);
+                entity.HasKey(e => e.cnt17llave);
 
                 entity.ToTable("CNT17_Bloqueos");
 
-                entity.Property(e => e.Cnt17Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT17_Llave");
-                entity.Property(e => e.Blk01Llave)
-                    
-                    .HasColumnName("BLK01_Llave");
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Cnt14Llave)
-                    
-                    .HasColumnName("CNT14_Llave");
-                entity.Property(e => e.Cnt16Llave)
-                    
-                    .HasColumnName("CNT16_Llave");
-                entity.Property(e => e.Cnt17Activo).HasColumnName("CNT17_Activo");
-                entity.Property(e => e.Cnt17InicioBloqueo)
+                entity.HasIndex(e => e.Blk01llave, "IX_CNT17_Bloqueos_BLK01_llave");
+
+                entity.HasIndex(e => e.cnt01llave, "IX_CNT17_Bloqueos_CNT01_llave");
+
+                entity.HasIndex(e => e.cnt08llave, "IX_CNT17_Bloqueos_CNT08_llave");
+
+                entity.HasIndex(e => e.cnt14llave, "IX_CNT17_Bloqueos_CNT14_llave");
+
+                entity.HasIndex(e => e.cnt16llave, "IX_CNT17_Bloqueos_CNT16_llave");
+
+                entity.Property(e => e.cnt17llave).HasColumnName("CNT17_llave");
+                entity.Property(e => e.Blk01llave).HasColumnName("BLK01_llave");
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.cnt14llave).HasColumnName("CNT14_llave");
+                entity.Property(e => e.cnt16llave).HasColumnName("CNT16_llave");
+                entity.Property(e => e.cnt17activo).HasColumnName("CNT17_activo");
+                entity.Property(e => e.cnt17InicioBloqueo)
                     .HasColumnType("datetime")
                     .HasColumnName("CNT17_InicioBloqueo");
-                entity.Property(e => e.Cnt17TerminoBloqueo)
+                entity.Property(e => e.cnt17TerminoBloqueo)
                     .HasColumnType("datetime")
                     .HasColumnName("CNT17_TerminoBloqueo");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per01Llave)
-                    
-                    .HasColumnName("PER01_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
 
-                entity.HasOne(d => d.Blk01LlaveNavigation).WithMany(p => p.Cnt17Bloqueos)
-                    .HasForeignKey(d => d.Blk01Llave)
+                entity.HasOne(d => d.Blk01llaveNavigation).WithMany(p => p.cnt17Bloqueos)
+                    .HasForeignKey(d => d.Blk01llave)
                     .HasConstraintName("FK_CNT17_Bloqueos_BLK01_Bloqueos");
 
-                entity.HasOne(d => d.Cnt01LlaveNavigation).WithMany(p => p.Cnt17Bloqueos)
-                    .HasForeignKey(d => d.Cnt01Llave)
+                entity.HasOne(d => d.cnt01llaveNavigation).WithMany(p => p.cnt17Bloqueos)
+                    .HasForeignKey(d => d.cnt01llave)
                     .HasConstraintName("FK_CNT17_Bloqueos_CNT01_CuentaCliente");
 
-                entity.HasOne(d => d.Cnt08LlaveNavigation).WithMany(p => p.Cnt17Bloqueos)
-                    .HasForeignKey(d => d.Cnt08Llave)
+                entity.HasOne(d => d.cnt08llaveNavigation).WithMany(p => p.cnt17Bloqueos)
+                    .HasForeignKey(d => d.cnt08llave)
                     .HasConstraintName("FK_CNT17_Bloqueos_CNT08_Segmentacion");
 
-                entity.HasOne(d => d.Cnt14LlaveNavigation).WithMany(p => p.Cnt17Bloqueos)
-                    .HasForeignKey(d => d.Cnt14Llave)
+                entity.HasOne(d => d.cnt14llaveNavigation).WithMany(p => p.cnt17Bloqueos)
+                    .HasForeignKey(d => d.cnt14llave)
                     .HasConstraintName("FK_CNT17_Bloqueos_CNT14_ClienteLicencia");
 
-                entity.HasOne(d => d.Cnt16LlaveNavigation).WithMany(p => p.Cnt17Bloqueos)
-                    .HasForeignKey(d => d.Cnt16Llave)
+                entity.HasOne(d => d.cnt16llaveNavigation).WithMany(p => p.cnt17Bloqueos)
+                    .HasForeignKey(d => d.cnt16llave)
                     .HasConstraintName("FK_CNT17_Bloqueos_CNT16_TipoBloqueoCliente");
             });
 
-            modelBuilder.Entity<Cnt18NivelSegmentacion>(entity =>
+            modelBuilder.Entity<cnt18NivelSegmentacion>(entity =>
             {
-                entity.HasKey(e => e.Cnt18Llave);
+                entity.HasKey(e => e.cnt18llave);
 
                 entity.ToTable("CNT18_NivelSegmentacion");
 
-                entity.Property(e => e.Cnt18Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT18_Llave");
+                entity.Property(e => e.cnt18llave).HasColumnName("CNT18_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt18Activo).HasColumnName("CNT18_Activo");
-                entity.Property(e => e.Cnt18Descripccion)
+                entity.Property(e => e.cnt18activo).HasColumnName("CNT18_activo");
+                entity.Property(e => e.cnt18Descripccion)
                     .HasMaxLength(500)
                     .HasColumnName("CNT18_Descripccion");
-                entity.Property(e => e.Cnt18NivelCapa).HasColumnName("CNT18_NivelCapa");
-                entity.Property(e => e.Cnt18Nombre)
+                entity.Property(e => e.cnt18NivelCapa).HasColumnName("CNT18_NivelCapa");
+                entity.Property(e => e.cnt18nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("CNT18_Nombre");
+                    .HasColumnName("CNT18_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Cnt19LicenciaCliente>(entity =>
+            modelBuilder.Entity<cnt19LicenciaCliente>(entity =>
             {
-                entity.HasKey(e => e.Cnt19Llave);
+                entity.HasKey(e => e.cnt19llave);
 
                 entity.ToTable("CNT19_LicenciaCliente");
 
-                entity.Property(e => e.Cnt19Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT19_Llave");
+                entity.HasIndex(e => e.cnt01llave, "IX_CNT19_LicenciaCliente_CNT01_llave");
+
+                entity.Property(e => e.cnt19llave).HasColumnName("CNT19_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
-                entity.Property(e => e.Cnt19Activo).HasColumnName("CNT19_Activo");
-                entity.Property(e => e.Cnt19FechaInicio)
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
+                entity.Property(e => e.cnt19activo).HasColumnName("CNT19_activo");
+                entity.Property(e => e.cnt19FechaInicio)
                     .HasColumnType("datetime")
                     .HasColumnName("CNT19_FechaInicio");
-                entity.Property(e => e.Cnt19FechaTermino)
+                entity.Property(e => e.cnt19FechaTermino)
                     .HasColumnType("datetime")
                     .HasColumnName("CNT19_FechaTermino");
-                entity.Property(e => e.Cnt19NombreLicencia)
+                entity.Property(e => e.cnt19nombreLicencia)
                     .HasMaxLength(500)
-                    .HasColumnName("CNT19_NombreLicencia");
-                entity.Property(e => e.Cnt19NumeroDias).HasColumnName("CNT19_NumeroDias");
-                entity.Property(e => e.Cnt19NumeroUsuario).HasColumnName("CNT19_NumeroUsuario");
-                entity.Property(e => e.Cnt19ValorReferencial)
-                    
-                    .HasColumnName("CNT19_valor_referencial");
-                entity.Property(e => e.Cnt23Llave)
-                    
-                    .HasColumnName("CNT23_Llave");
+                    .HasColumnName("CNT19_nombreLicencia");
+                entity.Property(e => e.cnt19NumeroDias).HasColumnName("CNT19_NumeroDias");
+                entity.Property(e => e.cnt19NumeroUsuario).HasColumnName("CNT19_NumeroUsuario");
+                entity.Property(e => e.cnt19ValorReferencial).HasColumnName("CNT19_valor_referencial");
+                entity.Property(e => e.cnt23llave).HasColumnName("CNT23_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Lnc01Llave)
-                    
-                    .HasColumnName("LNC01_Llave");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Lnc01llave).HasColumnName("LNC01_llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
 
-                entity.HasOne(d => d.Cnt01LlaveNavigation).WithMany(p => p.Cnt19LicenciaClientes)
-                    .HasForeignKey(d => d.Cnt01Llave)
+                entity.HasOne(d => d.cnt01llaveNavigation).WithMany(p => p.cnt19LicenciaClientes)
+                    .HasForeignKey(d => d.cnt01llave)
                     .HasConstraintName("FK_CNT19_LicenciaCliente_CNT01_CuentaCliente");
             });
 
-            modelBuilder.Entity<Cnt20LicenciaServicio>(entity =>
+            modelBuilder.Entity<cnt20LicenciaServicio>(entity =>
             {
-                entity.HasKey(e => new { e.Cnt19Llave, e.Serv01Llave });
+                entity.HasKey(e => new { e.cnt19llave, e.Serv01llave });
 
                 entity.ToTable("CNT20_LicenciaServicio");
 
-                entity.Property(e => e.Cnt19Llave)
-                    
-                    .HasColumnName("CNT19_Llave");
-                entity.Property(e => e.Serv01Llave)
-                    
-                    .HasColumnName("SERV01_Llave");
-                entity.Property(e => e.Cnt20Habilitaservicio).HasColumnName("CNT20_habilitaservicio");
-                entity.Property(e => e.Cnt20Valor)
-                    
-                    .HasColumnName("CNT20_Valor");
+                entity.Property(e => e.cnt19llave).HasColumnName("CNT19_llave");
+                entity.Property(e => e.Serv01llave).HasColumnName("SERV01_llave");
+                entity.Property(e => e.cnt20Habilitaservicio).HasColumnName("CNT20_habilitaservicio");
+                entity.Property(e => e.cnt20Valor).HasColumnName("CNT20_Valor");
 
-                entity.HasOne(d => d.Cnt19LlaveNavigation).WithMany(p => p.Cnt20LicenciaServicios)
-                    .HasForeignKey(d => d.Cnt19Llave)
+                entity.HasOne(d => d.cnt19llaveNavigation).WithMany(p => p.cnt20LicenciaServicios)
+                    .HasForeignKey(d => d.cnt19llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CNT20_LicenciaServicio_CNT19_LicenciaCliente");
             });
 
-            modelBuilder.Entity<Cnt21TipoEstacion>(entity =>
+            modelBuilder.Entity<cnt21TipoEstacion>(entity =>
             {
-                entity.HasKey(e => e.Cnt21Llave);
+                entity.HasKey(e => e.cnt21llave);
 
                 entity.ToTable("CNT21_TipoEstacion");
 
-                entity.Property(e => e.Cnt21Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT21_Llave");
+                entity.Property(e => e.cnt21llave).HasColumnName("CNT21_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt21Activo).HasColumnName("CNT21_Activo");
-                entity.Property(e => e.Cnt21Descripcion)
+                entity.Property(e => e.cnt21activo).HasColumnName("CNT21_activo");
+                entity.Property(e => e.cnt21descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("CNT21_Descripcion");
-                entity.Property(e => e.Cnt21Nombre)
+                    .HasColumnName("CNT21_descripcion");
+                entity.Property(e => e.cnt21nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CNT21_Nombre");
+                    .HasColumnName("CNT21_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Cnt22EstacionTipoEstacion>(entity =>
+            modelBuilder.Entity<cnt22EstacionTipoEstacion>(entity =>
             {
-                entity.HasKey(e => new { e.Cnt08Llave, e.Cnt21Llave });
+                entity.HasKey(e => new { e.cnt08llave, e.cnt21llave });
 
                 entity.ToTable("CNT22_Estacion_TipoEstacion");
 
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Cnt21Llave)
-                    
-                    .HasColumnName("CNT21_llave");
-                entity.Property(e => e.Cnt22Estado).HasColumnName("CNT22_estado");
+                entity.HasIndex(e => e.cnt21llave, "IX_CNT22_Estacion_TipoEstacion_CNT21_llave");
 
-                entity.HasOne(d => d.Cnt08LlaveNavigation).WithMany(p => p.Cnt22EstacionTipoEstacions)
-                    .HasForeignKey(d => d.Cnt08Llave)
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.cnt21llave).HasColumnName("CNT21_llave");
+                entity.Property(e => e.cnt22Estado).HasColumnName("CNT22_estado");
+
+                entity.HasOne(d => d.cnt08llaveNavigation).WithMany(p => p.cnt22EstacionTipoEstacions)
+                    .HasForeignKey(d => d.cnt08llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CNT22_Estacion_TipoEstacion_CNT08_Segmentacion");
 
-                entity.HasOne(d => d.Cnt21LlaveNavigation).WithMany(p => p.Cnt22EstacionTipoEstacions)
-                    .HasForeignKey(d => d.Cnt21Llave)
+                entity.HasOne(d => d.cnt21llaveNavigation).WithMany(p => p.cnt22EstacionTipoEstacions)
+                    .HasForeignKey(d => d.cnt21llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CNT22_Estacion_TipoEstacion_CNT21_TipoEstacion");
             });
 
-            modelBuilder.Entity<Cnt23Tipocobro>(entity =>
+            modelBuilder.Entity<cnt23Tipocobro>(entity =>
             {
-                entity.HasKey(e => e.Cnt23Llave);
+                entity.HasKey(e => e.cnt23llave);
 
                 entity.ToTable("CNT23_Tipocobro");
 
-                entity.Property(e => e.Cnt23Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CNT23_Llave");
+                entity.Property(e => e.cnt23llave).HasColumnName("CNT23_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt23Activo).HasColumnName("CNT23_Activo");
-                entity.Property(e => e.Cnt23Descripcion)
+                entity.Property(e => e.cnt23activo).HasColumnName("CNT23_activo");
+                entity.Property(e => e.cnt23descripcion)
                     .HasMaxLength(2000)
-                    .HasColumnName("CNT23_Descripcion");
-                entity.Property(e => e.Cnt23Nombre)
+                    .HasColumnName("CNT23_descripcion");
+                entity.Property(e => e.cnt23nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("CNT23_Nombre");
+                    .HasColumnName("CNT23_nombre");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Cnt24AsociarCuenta>(entity =>
+            modelBuilder.Entity<cnt24AsociarCuenta>(entity =>
             {
-                entity.HasKey(e => new { e.Cnt01Llave, e.Cnt01CuentaLlave });
+                entity.HasKey(e => new { e.cnt01llave, e.cnt01Cuentallave });
 
                 entity.ToTable("CNT24_AsociarCuenta");
 
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
-                entity.Property(e => e.Cnt01CuentaLlave)
-                    
-                    .HasColumnName("CNT01_Cuenta_Llave");
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
+                entity.Property(e => e.cnt01Cuentallave).HasColumnName("CNT01_Cuenta_llave");
+            });
+
+            modelBuilder.Entity<Comuna>(entity =>
+            {
+                entity.HasIndex(e => e.RegionId, "IX_Comunas_RegionId");
+
+                entity.Property(e => e.isDeleted).HasColumnName("isDeleted");
+
+                entity.HasOne(d => d.Region).WithMany(p => p.Comunas).HasForeignKey(d => d.RegionId);
             });
 
             modelBuilder.Entity<Cont01Contacto>(entity =>
             {
-                entity.HasKey(e => e.Cont01Llave);
+                entity.HasKey(e => e.Cont01llave);
 
                 entity.ToTable("CONT01_Contacto");
 
-                entity.Property(e => e.Cont01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CONT01_Llave");
+                entity.HasIndex(e => e.Cont02llave, "IX_CONT01_Contacto_CONT02_llave");
+
+                entity.Property(e => e.Cont01llave).HasColumnName("CONT01_llave");
                 entity.Property(e => e.Cont01Apellido)
                     .HasMaxLength(250)
                     .HasColumnName("CONT01_Apellido");
@@ -1235,76 +1176,68 @@ namespace mipBackend.Data
                 entity.Property(e => e.Cont01Email)
                     .HasMaxLength(250)
                     .HasColumnName("CONT01_Email");
-                entity.Property(e => e.Cont01Nombre)
+                entity.Property(e => e.Cont01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CONT01_Nombre");
+                    .HasColumnName("CONT01_nombre");
                 entity.Property(e => e.Cont01PeticionContacto)
                     .HasMaxLength(500)
                     .HasColumnName("CONT01_PeticionContacto");
                 entity.Property(e => e.Cont01Telefono)
                     .HasMaxLength(250)
                     .HasColumnName("CONT01_Telefono");
-                entity.Property(e => e.Cont01Titulo)
-                    
-                    .HasColumnName("CONT01_Titulo");
-                entity.Property(e => e.Cont02Llave)
-                    
-                    .HasColumnName("CONT02_Llave");
+                entity.Property(e => e.Cont01Titulo).HasColumnName("CONT01_Titulo");
+                entity.Property(e => e.Cont02llave).HasColumnName("CONT02_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Cont02LlaveNavigation).WithMany(p => p.Cont01Contactos)
-                    .HasForeignKey(d => d.Cont02Llave)
+                entity.HasOne(d => d.Cont02llaveNavigation).WithMany(p => p.Cont01Contactos)
+                    .HasForeignKey(d => d.Cont02llave)
                     .HasConstraintName("FK_CONT01_Contacto_CONT02_TipoContacto");
             });
 
             modelBuilder.Entity<Cont02TipoContacto>(entity =>
             {
-                entity.HasKey(e => e.Cont02Llave);
+                entity.HasKey(e => e.Cont02llave);
 
                 entity.ToTable("CONT02_TipoContacto");
 
-                entity.Property(e => e.Cont02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CONT02_Llave");
-                entity.Property(e => e.Cont02Descripcion)
+                entity.Property(e => e.Cont02llave).HasColumnName("CONT02_llave");
+                entity.Property(e => e.Cont02descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("CONT02_Descripcion");
-                entity.Property(e => e.Cont02Nombre)
+                    .HasColumnName("CONT02_descripcion");
+                entity.Property(e => e.Cont02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CONT02_Nombre");
+                    .HasColumnName("CONT02_nombre");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
             modelBuilder.Entity<Conteo01Conteo>(entity =>
             {
-                entity.HasKey(e => e.Conteo01Llave);
+                entity.HasKey(e => e.Conteo01llave);
 
                 entity.ToTable("CONTEO01_Conteos");
 
-                entity.Property(e => e.Conteo01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CONTEO01_Llave");
+                entity.HasIndex(e => e.Temp02llave, "IX_CONTEO01_Conteos_TEMP02_llave");
+
+                entity.Property(e => e.Conteo01llave).HasColumnName("CONTEO01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.Conteo01EstadoConteo).HasColumnName("CONTEO01_EstadoConteo");
                 entity.Property(e => e.Conteo01EstadoVisado).HasColumnName("CONTEO01_EstadoVisado");
@@ -1317,12 +1250,8 @@ namespace mipBackend.Data
                 entity.Property(e => e.Conteo01Observacion)
                     .HasMaxLength(200)
                     .HasColumnName("CONTEO01_observacion");
-                entity.Property(e => e.Conteo01TipoSistema)
-                    
-                    .HasColumnName("CONTEO01_TipoSistema");
-                entity.Property(e => e.Conteo01Valor)
-                    
-                    .HasColumnName("CONTEO01_Valor");
+                entity.Property(e => e.Conteo01Tiposistema).HasColumnName("CONTEO01_Tiposistema");
+                entity.Property(e => e.Conteo01Valor).HasColumnName("CONTEO01_Valor");
                 entity.Property(e => e.Conteo01X)
                     .HasMaxLength(50)
                     .HasColumnName("CONTEO01_x");
@@ -1333,150 +1262,118 @@ namespace mipBackend.Data
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.Fechacreacion)
                     .HasColumnType("datetime")
                     .HasColumnName("FECHACREACION");
-                entity.Property(e => e.Mvl01Llave)
+                entity.Property(e => e.Mvl01llave)
                     .HasMaxLength(50)
-                    .HasColumnName("MVL01_Llave");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
-                entity.Property(e => e.Trp01Llave)
-                    
-                    .HasColumnName("TRP01_Llave");
+                    .HasColumnName("MVL01_llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
+                entity.Property(e => e.Trp01llave).HasColumnName("TRP01_llave");
 
-                entity.HasOne(d => d.Temp02LlaveNavigation).WithMany(p => p.Conteo01Conteos)
-                    .HasForeignKey(d => d.Temp02Llave)
+                entity.HasOne(d => d.Temp02llaveNavigation).WithMany(p => p.Conteo01Conteos)
+                    .HasForeignKey(d => d.Temp02llave)
                     .HasConstraintName("FK_CONTEO01_Conteos_TEMP02_TemporadaBase");
             });
 
             modelBuilder.Entity<Conteo02Procesado>(entity =>
             {
-                entity.HasKey(e => e.Conteo02Llave);
+                entity.HasKey(e => e.Conteo02llave);
 
                 entity.ToTable("CONTEO02_Procesados");
 
-                entity.Property(e => e.Conteo02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CONTEO02_Llave");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Conteo02Cantidad)
-                    
-                    .HasColumnName("CONTEO02_Cantidad");
+                entity.HasIndex(e => e.cnt08llave, "IX_CONTEO02_Procesados_CNT08_llave");
+
+                entity.Property(e => e.Conteo02llave).HasColumnName("CONTEO02_llave");
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.Conteo02Cantidad).HasColumnName("CONTEO02_Cantidad");
                 entity.Property(e => e.Conteo02Cotatenado)
                     .HasMaxLength(100)
                     .HasColumnName("CONTEO02_Cotatenado");
                 entity.Property(e => e.Conteo02FechaProceso)
                     .HasColumnType("datetime")
                     .HasColumnName("CONTEO02_fechaProceso");
-                entity.Property(e => e.Conteo02Promedio)
-                    
-                    .HasColumnName("CONTEO02_Promedio");
-                entity.Property(e => e.Conteo02Suma)
-                    
-                    .HasColumnName("CONTEO02_Suma");
-                entity.Property(e => e.Esp01Llave)
-                    
-                    .HasColumnName("ESP01_Llave");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.Property(e => e.Conteo02Promedio).HasColumnName("CONTEO02_Promedio");
+                entity.Property(e => e.Conteo02Suma).HasColumnName("CONTEO02_Suma");
+                entity.Property(e => e.esp01llave).HasColumnName("ESP01_llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
 
-                entity.HasOne(d => d.Cnt08LlaveNavigation).WithMany(p => p.Conteo02Procesados)
-                    .HasForeignKey(d => d.Cnt08Llave)
+                entity.HasOne(d => d.cnt08llaveNavigation).WithMany(p => p.Conteo02Procesados)
+                    .HasForeignKey(d => d.cnt08llave)
                     .HasConstraintName("FK_CONTEO02_Procesados_CNT08_Segmentacion");
             });
 
             modelBuilder.Entity<Conteo03Resumen>(entity =>
             {
-                entity.HasKey(e => e.Conteo03Llave);
+                entity.HasKey(e => e.Conteo03llave);
 
                 entity.ToTable("CONTEO03_Resumen");
 
-                entity.Property(e => e.Conteo03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CONTEO03_Llave");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Conteo03Estado).HasColumnName("CONTEO03_Estado");
-                entity.Property(e => e.Esp01Llave)
-                    
-                    .HasColumnName("ESP01_Llave");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.HasIndex(e => e.cnt08llave, "IX_CONTEO03_Resumen_CNT08_llave");
 
-                entity.HasOne(d => d.Cnt08LlaveNavigation).WithMany(p => p.Conteo03Resumen)
-                    .HasForeignKey(d => d.Cnt08Llave)
+                entity.Property(e => e.Conteo03llave).HasColumnName("CONTEO03_llave");
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.Conteo03Estado).HasColumnName("CONTEO03_Estado");
+                entity.Property(e => e.esp01llave).HasColumnName("ESP01_llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
+
+                entity.HasOne(d => d.cnt08llaveNavigation).WithMany(p => p.Conteo03Resumen)
+                    .HasForeignKey(d => d.cnt08llave)
                     .HasConstraintName("FK_CONTEO03_Resumen_CNT08_Segmentacion");
             });
 
             modelBuilder.Entity<Conteo04ResumenSag>(entity =>
             {
-                entity.HasKey(e => e.Conteo04Llave);
+                entity.HasKey(e => e.Conteo04llave);
 
                 entity.ToTable("CONTEO04_ResumenSag");
 
-                entity.Property(e => e.Conteo04Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CONTEO04_Llave");
-                entity.Property(e => e.Conteo04Estado)
-                    
-                    .HasColumnName("CONTEO04_Estado");
-                entity.Property(e => e.Esp01Llave)
-                    
-                    .HasColumnName("ESP01_Llave");
-                entity.Property(e => e.Sist03Llave)
-                    
-                    .HasColumnName("SIST03_Llave");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.HasIndex(e => e.esp01llave, "IX_CONTEO04_ResumenSag_ESP01_llave");
 
-                entity.HasOne(d => d.Esp01LlaveNavigation).WithMany(p => p.Conteo04ResumenSags)
-                    .HasForeignKey(d => d.Esp01Llave)
-                    .HasConstraintName("FK_CONTEO04_ResumenSag_ESP01_Especies");
+                entity.HasIndex(e => e.sist03llave, "IX_CONTEO04_ResumenSag_SIST03_llave");
 
-                entity.HasOne(d => d.Sist03LlaveNavigation).WithMany(p => p.Conteo04ResumenSags)
-                    .HasForeignKey(d => d.Sist03Llave)
+                entity.HasIndex(e => e.Temp02llave, "IX_CONTEO04_ResumenSag_TEMP02_llave");
+
+                entity.Property(e => e.Conteo04llave).HasColumnName("CONTEO04_llave");
+                entity.Property(e => e.Conteo04Estado).HasColumnName("CONTEO04_Estado");
+                entity.Property(e => e.esp01llave).HasColumnName("ESP01_llave");
+                entity.Property(e => e.sist03llave).HasColumnName("SIST03_llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
+
+                entity.HasOne(d => d.esp01llaveNavigation).WithMany(p => p.Conteo04ResumenSags)
+                    .HasForeignKey(d => d.esp01llave)
+                    .HasConstraintName("FK_CONTEO04_ResumenSag_ESP01_especies");
+
+                entity.HasOne(d => d.sist03llaveNavigation).WithMany(p => p.Conteo04ResumenSags)
+                    .HasForeignKey(d => d.sist03llave)
                     .HasConstraintName("FK_CONTEO04_ResumenSag_SIST03_Comuna");
 
-                entity.HasOne(d => d.Temp02LlaveNavigation).WithMany(p => p.Conteo04ResumenSags)
-                    .HasForeignKey(d => d.Temp02Llave)
+                entity.HasOne(d => d.Temp02llaveNavigation).WithMany(p => p.Conteo04ResumenSags)
+                    .HasForeignKey(d => d.Temp02llave)
                     .HasConstraintName("FK_CONTEO04_ResumenSag_TEMP02_TemporadaBase");
             });
 
             modelBuilder.Entity<Conteo05ControlReserva>(entity =>
             {
-                entity.HasKey(e => e.Conteo05Llave);
+                entity.HasKey(e => e.Conteo05llave);
 
                 entity.ToTable("CONTEO05_Control_Reserva");
 
-                entity.Property(e => e.Conteo05Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CONTEO05_Llave");
+                entity.HasIndex(e => e.userid, "IX_CONTEO05_Control_Reserva_SECU02_llave");
+
+                entity.Property(e => e.Conteo05llave).HasColumnName("CONTEO05_llave");
                 entity.Property(e => e.Conteo05ColumnaControl)
                     .HasMaxLength(1000)
                     .HasColumnName("CONTEO05_columna_control");
                 entity.Property(e => e.Conteo05Estado)
                     .HasDefaultValueSql("((1))")
                     .HasColumnName("CONTEO05_Estado");
-                entity.Property(e => e.Conteo05EstadoControl)
-                    
-                    .HasColumnName("CONTEO05_estado_control");
+                entity.Property(e => e.Conteo05EstadoControl).HasColumnName("CONTEO05_estado_control");
                 entity.Property(e => e.Conteo05Fecha)
                     .HasColumnType("datetime")
                     .HasColumnName("CONTEO05_fecha");
@@ -1495,122 +1392,110 @@ namespace mipBackend.Data
                 entity.Property(e => e.Conteo05Tercer)
                     .HasMaxLength(200)
                     .HasColumnName("CONTEO05_tercer");
-                entity.Property(e => e.Conteo05ValorControl)
-                    
-                    .HasColumnName("CONTEO05_valor_control");
+                entity.Property(e => e.Conteo05ValorControl).HasColumnName("CONTEO05_valor_control");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                    .HasColumnName("FECHAACTUALIZACION");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
 
-                entity.HasOne(d => d.Secu02LlaveNavigation).WithMany(p => p.Conteo05ControlReservas)
-                    .HasForeignKey(d => d.Secu02Llave)
+                entity.HasOne(d => d.useridNavigation).WithMany(p => p.Conteo05ControlReservas)
+                    .HasForeignKey(d => d.userid)
                     .HasConstraintName("FK_CONTEO05_Control_Reserva_SECU02_Usuario");
             });
 
             modelBuilder.Entity<Ctt01Contrato>(entity =>
             {
-                entity.HasKey(e => e.Ctt01Llave);
+                entity.HasKey(e => e.Ctt01llave);
 
                 entity.ToTable("CTT01_Contrato");
 
-                entity.Property(e => e.Ctt01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CTT01_Llave");
+                entity.HasIndex(e => e.Ctt02llave, "IX_CTT01_Contrato_CTT02_llave");
+
+                entity.Property(e => e.Ctt01llave).HasColumnName("CTT01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
-                entity.Property(e => e.Ctt01Activo).HasColumnName("CTT01_Activo");
+                entity.Property(e => e.Ctt01activo).HasColumnName("CTT01_activo");
                 entity.Property(e => e.Ctt01ContratoHtml).HasColumnName("CTT01_ContratoHtml");
-                entity.Property(e => e.Ctt01Descripcion).HasColumnName("CTT01_Descripcion");
-                entity.Property(e => e.Ctt01Nombre)
+                entity.Property(e => e.Ctt01descripcion).HasColumnName("CTT01_descripcion");
+                entity.Property(e => e.Ctt01nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("CTT01_Nombre");
-                entity.Property(e => e.Ctt02Llave)
-                    
-                    .HasColumnName("CTT02_Llave");
+                    .HasColumnName("CTT01_nombre");
+                entity.Property(e => e.Ctt02llave).HasColumnName("CTT02_llave");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Ctt02LlaveNavigation).WithMany(p => p.Ctt01Contratos)
-                    .HasForeignKey(d => d.Ctt02Llave)
+                entity.HasOne(d => d.Ctt02llaveNavigation).WithMany(p => p.Ctt01Contratos)
+                    .HasForeignKey(d => d.Ctt02llave)
                     .HasConstraintName("FK_CTT01_Contrato_CTT02_TipoContrato");
             });
 
             modelBuilder.Entity<Ctt02TipoContrato>(entity =>
             {
-                entity.HasKey(e => e.Ctt02Llave);
+                entity.HasKey(e => e.Ctt02llave);
 
                 entity.ToTable("CTT02_TipoContrato");
 
-                entity.Property(e => e.Ctt02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CTT02_Llave");
+                entity.Property(e => e.Ctt02llave).HasColumnName("CTT02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
-                entity.Property(e => e.Ctt02Activo).HasColumnName("CTT02_Activo");
-                entity.Property(e => e.Ctt02Descripcion)
+                entity.Property(e => e.Ctt02activo).HasColumnName("CTT02_activo");
+                entity.Property(e => e.Ctt02descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("CTT02_Descripcion");
-                entity.Property(e => e.Ctt02Nombre)
+                    .HasColumnName("CTT02_descripcion");
+                entity.Property(e => e.Ctt02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("CTT02_Nombre");
+                    .HasColumnName("CTT02_nombre");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
             modelBuilder.Entity<Ctzr01Cotizacion>(entity =>
             {
-                entity.HasKey(e => e.Ctzr01Llave);
+                entity.HasKey(e => e.Ctzr01llave);
 
                 entity.ToTable("CTZR01_Cotizacion");
 
-                entity.Property(e => e.Ctzr01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("CTZR01_Llave");
-                entity.Property(e => e.Ctzr01Activo).HasColumnName("CTZR01_Activo");
+                entity.Property(e => e.Ctzr01llave).HasColumnName("CTZR01_llave");
+                entity.Property(e => e.Ctzr01activo).HasColumnName("CTZR01_activo");
                 entity.Property(e => e.Ctzr01Comentario).HasColumnName("CTZR01_comentario");
                 entity.Property(e => e.Ctzr01Fecha)
                     .HasColumnType("datetime")
                     .HasColumnName("CTZR01_fecha");
-                entity.Property(e => e.Lnc01Llave)
-                    
-                    .HasColumnName("LNC01_Llave");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                entity.Property(e => e.Lnc01llave).HasColumnName("LNC01_llave");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
             });
 
             modelBuilder.Entity<Eml01BitacoraEmailUsuario>(entity =>
             {
-                entity.HasKey(e => e.Eml01Llave).HasName("PK_EML01_EmailUsuario");
+                entity.HasKey(e => e.Eml01llave).HasName("PK_EML01_EmailUsuario");
 
                 entity.ToTable("EML01_BitacoraEmailUsuario");
 
-                entity.Property(e => e.Eml01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("EML01_Llave");
-                entity.Property(e => e.Eml01Activo)
-                    
-                    .HasColumnName("EML01_Activo");
+                entity.HasIndex(e => e.Eml02llave, "IX_EML01_BitacoraEmailUsuario_EML02_llave");
+
+                entity.HasIndex(e => e.Eml04llave, "IX_EML01_BitacoraEmailUsuario_EML04_llave");
+
+                entity.HasIndex(e => e.userid, "IX_EML01_BitacoraEmailUsuario_SECU02_llave");
+
+                entity.Property(e => e.Eml01llave).HasColumnName("EML01_llave");
+                entity.Property(e => e.Eml01activo).HasColumnName("EML01_activo");
                 entity.Property(e => e.Eml01Asunto).HasColumnName("EML01_Asunto");
                 entity.Property(e => e.Eml01Contenido)
                     .HasMaxLength(50)
@@ -1619,685 +1504,618 @@ namespace mipBackend.Data
                 entity.Property(e => e.Eml01Envio)
                     .HasColumnType("datetime")
                     .HasColumnName("EML01_Envio");
-                entity.Property(e => e.Eml01MailPadre)
-                    
-                    .HasColumnName("EML01_MailPAdre");
+                entity.Property(e => e.Eml01MailPadre).HasColumnName("EML01_MailPAdre");
                 entity.Property(e => e.Eml01Para).HasColumnName("EML01_Para");
                 entity.Property(e => e.Eml01Text).HasColumnName("EML01_Text");
-                entity.Property(e => e.Eml02Llave)
-                    
-                    .HasColumnName("EML02_Llave");
-                entity.Property(e => e.Eml04Llave)
-                    
-                    .HasColumnName("EML04_Llave");
+                entity.Property(e => e.Eml02llave).HasColumnName("EML02_llave");
+                entity.Property(e => e.Eml04llave).HasColumnName("EML04_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
 
-                entity.HasOne(d => d.Eml02LlaveNavigation).WithMany(p => p.Eml01BitacoraEmailUsuarios)
-                    .HasForeignKey(d => d.Eml02Llave)
+                entity.HasOne(d => d.Eml02llaveNavigation).WithMany(p => p.Eml01BitacoraEmailUsuarios)
+                    .HasForeignKey(d => d.Eml02llave)
                     .HasConstraintName("FK_EML01_EmailUsuario_EML02_MailBase");
 
-                entity.HasOne(d => d.Eml04LlaveNavigation).WithMany(p => p.Eml01BitacoraEmailUsuarios)
-                    .HasForeignKey(d => d.Eml04Llave)
+                entity.HasOne(d => d.Eml04llaveNavigation).WithMany(p => p.Eml01BitacoraEmailUsuarios)
+                    .HasForeignKey(d => d.Eml04llave)
                     .HasConstraintName("FK_EML01_EmailUsuario_EML04_ImportanciaMail");
 
-                entity.HasOne(d => d.Secu02LlaveNavigation).WithMany(p => p.Eml01BitacoraEmailUsuarios)
-                    .HasForeignKey(d => d.Secu02Llave)
+                entity.HasOne(d => d.useridNavigation).WithMany(p => p.Eml01BitacoraEmailUsuarios)
+                    .HasForeignKey(d => d.userid)
                     .HasConstraintName("FK_EML01_BitacoraEmailUsuario_SECU02_Usuario");
             });
 
             modelBuilder.Entity<Eml02MailBase>(entity =>
             {
-                entity.HasKey(e => e.Eml02Llave);
+                entity.HasKey(e => e.Eml02llave);
 
                 entity.ToTable("EML02_MailBase");
 
-                entity.Property(e => e.Eml02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("EML02_Llave");
+                entity.HasIndex(e => e.Eml03llave, "IX_EML02_MailBase_EML03_llave");
+
+                entity.HasIndex(e => e.Eml04llave, "IX_EML02_MailBase_EML04_llave");
+
+                entity.Property(e => e.Eml02llave).HasColumnName("EML02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Eml02Activo).HasColumnName("EML02_activo");
+                entity.Property(e => e.Eml02activo).HasColumnName("EML02_activo");
                 entity.Property(e => e.Eml02Asunto).HasColumnName("EML02_Asunto");
                 entity.Property(e => e.Eml02CodigoLlamado)
                     .HasMaxLength(500)
                     .HasColumnName("EML02_CodigoLlamado");
                 entity.Property(e => e.Eml02ContenidoHtml).HasColumnName("EML02_ContenidoHtml");
                 entity.Property(e => e.Eml02ContenidoText).HasColumnName("EML02_ContenidoText");
-                entity.Property(e => e.Eml02Descripcion).HasColumnName("EML02_Descripcion");
-                entity.Property(e => e.Eml03Llave)
-                    
-                    .HasColumnName("EML03_Llave");
-                entity.Property(e => e.Eml04Llave)
-                    
-                    .HasColumnName("EML04_Llave");
+                entity.Property(e => e.Eml02descripcion).HasColumnName("EML02_descripcion");
+                entity.Property(e => e.Eml03llave).HasColumnName("EML03_llave");
+                entity.Property(e => e.Eml04llave).HasColumnName("EML04_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Eml03LlaveNavigation).WithMany(p => p.Eml02MailBases)
-                    .HasForeignKey(d => d.Eml03Llave)
+                entity.HasOne(d => d.Eml03llaveNavigation).WithMany(p => p.Eml02MailBases)
+                    .HasForeignKey(d => d.Eml03llave)
                     .HasConstraintName("FK_EML02_MailBase_EML03_TipoMailAcciones");
 
-                entity.HasOne(d => d.Eml04LlaveNavigation).WithMany(p => p.Eml02MailBases)
-                    .HasForeignKey(d => d.Eml04Llave)
+                entity.HasOne(d => d.Eml04llaveNavigation).WithMany(p => p.Eml02MailBases)
+                    .HasForeignKey(d => d.Eml04llave)
                     .HasConstraintName("FK_EML02_MailBase_EML04_ImportanciaMail");
             });
 
             modelBuilder.Entity<Eml03TipoMailAccion>(entity =>
             {
-                entity.HasKey(e => e.Eml03Llave).HasName("PK_EML03_TipoMailAcciones_1");
+                entity.HasKey(e => e.Eml03llave).HasName("PK_EML03_TipoMailAcciones_1");
 
                 entity.ToTable("EML03_TipoMailAcciones");
 
-                entity.Property(e => e.Eml03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("EML03_Llave");
+                entity.Property(e => e.Eml03llave).HasColumnName("EML03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Eml03Activo).HasColumnName("EML03_Activo");
-                entity.Property(e => e.Eml03Descripcion).HasColumnName("EML03_Descripcion");
-                entity.Property(e => e.Eml03Nombre)
+                entity.Property(e => e.Eml03activo).HasColumnName("EML03_activo");
+                entity.Property(e => e.Eml03descripcion).HasColumnName("EML03_descripcion");
+                entity.Property(e => e.Eml03nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("EML03_Nombre");
+                    .HasColumnName("EML03_nombre");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
             modelBuilder.Entity<Eml04ImportanciaMail>(entity =>
             {
-                entity.HasKey(e => e.Eml04Llave);
+                entity.HasKey(e => e.Eml04llave);
 
                 entity.ToTable("EML04_ImportanciaMail");
 
-                entity.Property(e => e.Eml04Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("EML04_Llave");
+                entity.Property(e => e.Eml04llave).HasColumnName("EML04_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Eml04Activo).HasColumnName("EML04_Activo");
-                entity.Property(e => e.Eml04Descripcion).HasColumnName("EML04_Descripcion");
-                entity.Property(e => e.Eml04Nombre)
+                entity.Property(e => e.Eml04activo).HasColumnName("EML04_activo");
+                entity.Property(e => e.Eml04descripcion).HasColumnName("EML04_descripcion");
+                entity.Property(e => e.Eml04nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("EML04_Nombre");
+                    .HasColumnName("EML04_nombre");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
             modelBuilder.Entity<Eml05ArchivoMail>(entity =>
             {
-                entity.HasKey(e => e.Eml05Llave);
+                entity.HasKey(e => e.Eml05llave);
 
                 entity.ToTable("EML05_ArchivoMail");
 
-                entity.Property(e => e.Eml05Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("EML05_Llave");
+                entity.HasIndex(e => e.Eml01llave, "IX_EML05_ArchivoMail_EML01_llave");
+
+                entity.Property(e => e.Eml05llave)
+                    .ValueGeneratedNever()
+                    .HasColumnName("EML05_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Eml01Llave)
-                    
-                    .HasColumnName("EML01_Llave");
-                entity.Property(e => e.Eml05Activo).HasColumnName("EML05_Activo");
+                entity.Property(e => e.Eml01llave).HasColumnName("EML01_llave");
+                entity.Property(e => e.Eml05activo).HasColumnName("EML05_activo");
                 entity.Property(e => e.Eml05Archivo).HasColumnName("EML05_Archivo");
                 entity.Property(e => e.Eml05Ruta).HasColumnName("EML05_Ruta");
-                entity.Property(e => e.Eml06Llave)
-                    
-                    .HasColumnName("EML06_Llave");
+                entity.Property(e => e.Eml06llave).HasColumnName("EML06_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Eml01LlaveNavigation).WithMany(p => p.Eml05ArchivoMails)
-                    .HasForeignKey(d => d.Eml01Llave)
+                entity.HasOne(d => d.Eml01llaveNavigation).WithMany(p => p.Eml05ArchivoMails)
+                    .HasForeignKey(d => d.Eml01llave)
                     .HasConstraintName("FK_EML05_ArchivoMail_EML01_EmailUsuario");
 
-                entity.HasOne(d => d.Eml05LlaveNavigation).WithOne(p => p.Eml05ArchivoMail)
-                    .HasForeignKey<Eml05ArchivoMail>(d => d.Eml05Llave)
+                entity.HasOne(d => d.Eml05llaveNavigation).WithOne(p => p.Eml05ArchivoMail)
+                    .HasForeignKey<Eml05ArchivoMail>(d => d.Eml05llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_EML05_ArchivoMail_EML06_TipoArchivo");
             });
 
             modelBuilder.Entity<Eml06TipoArchivo>(entity =>
             {
-                entity.HasKey(e => e.Eml06Llave);
+                entity.HasKey(e => e.Eml06llave);
 
                 entity.ToTable("EML06_TipoArchivo");
 
-                entity.Property(e => e.Eml06Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("EML06_Llave");
+                entity.Property(e => e.Eml06llave).HasColumnName("EML06_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Eml06Activo).HasColumnName("EML06_Activo");
-                entity.Property(e => e.Eml06Descripcion).HasColumnName("EML06_Descripcion");
-                entity.Property(e => e.Eml06Nombre)
+                entity.Property(e => e.Eml06activo).HasColumnName("EML06_activo");
+                entity.Property(e => e.Eml06descripcion).HasColumnName("EML06_descripcion");
+                entity.Property(e => e.Eml06nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("EML06_Nombre");
+                    .HasColumnName("EML06_nombre");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Esp01Especie>(entity =>
+            modelBuilder.Entity<esp01especie>(entity =>
             {
-                entity.HasKey(e => e.Esp01Llave);
+                entity.HasKey(e => e.esp01llave);
 
-                entity.ToTable("ESP01_Especies");
+                entity.ToTable("ESP01_especies");
 
-                entity.Property(e => e.Esp01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP01_Llave");
+                entity.HasIndex(e => e.esp03llave, "IX_ESP01_especies_ESP03_llave");
+
+                entity.HasIndex(e => e.esp04llave, "IX_ESP01_especies_ESP04_llave");
+
+                entity.Property(e => e.esp01llave).HasColumnName("ESP01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp01Activo).HasColumnName("ESP01_Activo");
-                entity.Property(e => e.Esp03Llave)
-                    
-                    .HasColumnName("ESP03_Llave");
-                entity.Property(e => e.Esp04Llave)
-                    
-                    .HasColumnName("ESP04_Llave");
+                entity.Property(e => e.esp01activo).HasColumnName("ESP01_activo");
+                entity.Property(e => e.esp03llave).HasColumnName("ESP03_llave");
+                entity.Property(e => e.esp04llave).HasColumnName("ESP04_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Esp03LlaveNavigation).WithMany(p => p.Esp01Especies)
-                    .HasForeignKey(d => d.Esp03Llave)
-                    .HasConstraintName("FK_ESP01_Especies_ESP03_EspecieBase");
+                entity.HasOne(d => d.esp03llaveNavigation).WithMany(p => p.esp01especies)
+                    .HasForeignKey(d => d.esp03llave)
+                    .HasConstraintName("FK_ESP01_especies_ESP03_especieBase");
 
-                entity.HasOne(d => d.Esp04LlaveNavigation).WithMany(p => p.Esp01Especies)
-                    .HasForeignKey(d => d.Esp04Llave)
-                    .HasConstraintName("FK_ESP01_Especies_ESP04_EstadoDanio");
+                entity.HasOne(d => d.esp04llaveNavigation).WithMany(p => p.esp01especies)
+                    .HasForeignKey(d => d.esp04llave)
+                    .HasConstraintName("FK_ESP01_especies_ESP04_EstadoDanio");
             });
 
-            modelBuilder.Entity<Esp02TemporadaEspecie>(entity =>
+            modelBuilder.Entity<esp02Temporadaespecie>(entity =>
             {
-                entity.HasKey(e => e.Esp02Llave);
+                entity.HasKey(e => e.esp02llave);
 
-                entity.ToTable("ESP02_TemporadaEspecie");
+                entity.ToTable("ESP02_Temporadaespecie");
 
-                entity.Property(e => e.Esp02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP02_Llave");
+                entity.HasIndex(e => e.esp01llave, "IX_ESP02_Temporadaespecie_ESP01_llave");
+
+                entity.HasIndex(e => e.Temp01llave, "IX_ESP02_Temporadaespecie_TEMP01_llave");
+
+                entity.Property(e => e.esp02llave).HasColumnName("ESP02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp01Llave)
-                    
-                    .HasColumnName("ESP01_Llave");
-                entity.Property(e => e.Esp02Activo).HasColumnName("ESP02_Activo");
-                entity.Property(e => e.Esp02InicioTemporada)
+                entity.Property(e => e.esp01llave).HasColumnName("ESP01_llave");
+                entity.Property(e => e.esp02activo).HasColumnName("ESP02_activo");
+                entity.Property(e => e.esp02InicioTemporada)
                     .HasColumnType("datetime")
                     .HasColumnName("ESP02_InicioTemporada");
-                entity.Property(e => e.Esp02Mexico).HasColumnName("ESP02_Mexico");
-                entity.Property(e => e.Esp02Sag).HasColumnName("ESP02_Sag");
-                entity.Property(e => e.Esp02TerminoTemporada)
+                entity.Property(e => e.esp02Mexico).HasColumnName("ESP02_Mexico");
+                entity.Property(e => e.esp02Sag).HasColumnName("ESP02_Sag");
+                entity.Property(e => e.esp02TerminoTemporada)
                     .HasColumnType("datetime")
                     .HasColumnName("ESP02_TerminoTemporada");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Temp01Llave)
-                    
-                    .HasColumnName("TEMP01_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Temp01llave).HasColumnName("TEMP01_llave");
 
-                entity.HasOne(d => d.Esp01LlaveNavigation).WithMany(p => p.Esp02TemporadaEspecies)
-                    .HasForeignKey(d => d.Esp01Llave)
-                    .HasConstraintName("FK_ESP02_TemporadaEspecie_ESP01_Especies");
+                entity.HasOne(d => d.esp01llaveNavigation).WithMany(p => p.esp02Temporadaespecies)
+                    .HasForeignKey(d => d.esp01llave)
+                    .HasConstraintName("FK_ESP02_Temporadaespecie_ESP01_especies");
 
-                entity.HasOne(d => d.Temp01LlaveNavigation).WithMany(p => p.Esp02TemporadaEspecies)
-                    .HasForeignKey(d => d.Temp01Llave)
-                    .HasConstraintName("FK_ESP02_TemporadaEspecie_TEMP01_Temporada");
+                entity.HasOne(d => d.Temp01llaveNavigation).WithMany(p => p.esp02Temporadaespecies)
+                    .HasForeignKey(d => d.Temp01llave)
+                    .HasConstraintName("FK_ESP02_Temporadaespecie_TEMP01_Temporada");
             });
 
-            modelBuilder.Entity<Esp03EspecieBase>(entity =>
+            modelBuilder.Entity<esp03especieBase>(entity =>
             {
-                entity.HasKey(e => e.Esp03Llave);
+                entity.HasKey(e => e.esp03llave);
 
-                entity.ToTable("ESP03_EspecieBase");
+                entity.ToTable("ESP03_especieBase");
 
-                entity.Property(e => e.Esp03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP03_Llave");
+                entity.HasIndex(e => e.esp08llave, "IX_ESP03_especieBase_ESP08_llave");
+
+                entity.Property(e => e.esp03llave).HasColumnName("ESP03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp03Activo).HasColumnName("ESP03_Activo");
-                entity.Property(e => e.Esp03Descripcion)
+                entity.Property(e => e.esp03activo).HasColumnName("ESP03_activo");
+                entity.Property(e => e.esp03descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("ESP03_Descripcion");
-                entity.Property(e => e.Esp03EstadoRegistro)
+                    .HasColumnName("ESP03_descripcion");
+                entity.Property(e => e.esp03EstadoRegistro)
                     .HasMaxLength(50)
                     .HasColumnName("ESP03_EstadoRegistro");
-                entity.Property(e => e.Esp03ImgGrande).HasColumnName("ESP03_ImgGrande");
-                entity.Property(e => e.Esp03ImgPequenia).HasColumnName("ESP03_ImgPequenia");
-                entity.Property(e => e.Esp03Nombre)
+                entity.Property(e => e.esp03ImgGrande).HasColumnName("ESP03_ImgGrande");
+                entity.Property(e => e.esp03ImgPequenia).HasColumnName("ESP03_ImgPequenia");
+                entity.Property(e => e.esp03nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("ESP03_Nombre");
-                entity.Property(e => e.Esp03Union).HasColumnName("ESP03_Union");
-                entity.Property(e => e.Esp08Llave)
-                    
-                    .HasColumnName("ESP08_llave");
+                    .HasColumnName("ESP03_nombre");
+                entity.Property(e => e.esp03Union).HasColumnName("ESP03_Union");
+                entity.Property(e => e.esp08llave).HasColumnName("ESP08_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Esp08LlaveNavigation).WithMany(p => p.Esp03EspecieBases)
-                    .HasForeignKey(d => d.Esp08Llave)
-                    .HasConstraintName("FK_ESP03_EspecieBase_ESP08_TipoBase");
+                entity.HasOne(d => d.esp08llaveNavigation).WithMany(p => p.esp03especieBases)
+                    .HasForeignKey(d => d.esp08llave)
+                    .HasConstraintName("FK_ESP03_especieBase_ESP08_TipoBase");
             });
 
-            modelBuilder.Entity<Esp04EstadoDanio>(entity =>
+            modelBuilder.Entity<esp04EstadoDanio>(entity =>
             {
                 entity.HasKey(e => e.esp04llave);
 
                 entity.ToTable("ESP04_EstadoDanio");
 
-                entity.Property(e => e.esp04llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP04_Llave");
+                entity.HasIndex(e => e.esp06llave, "IX_ESP04_EstadoDanio_ESP06_llave");
+
+                entity.Property(e => e.esp04llave).HasColumnName("ESP04_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.esp04activo).HasColumnName("ESP04_Activo");
+                entity.Property(e => e.esp04activo).HasColumnName("ESP04_activo");
                 entity.Property(e => e.esp04descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("ESP04_Descripcion");
+                    .HasColumnName("ESP04_descripcion");
                 entity.Property(e => e.esp04nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("ESP04_Nombre");
-                entity.Property(e => e.esp06llave)
-                    
-                    .HasColumnName("ESP06_Llave");
+                    .HasColumnName("ESP04_nombre");
+                entity.Property(e => e.esp06llave).HasColumnName("ESP06_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Esp06LlaveNavigation).WithMany(p => p.Esp04EstadoDanios)
+                entity.HasOne(d => d.esp06llaveNavigation).WithMany(p => p.esp04EstadoDanios)
                     .HasForeignKey(d => d.esp06llave)
                     .HasConstraintName("FK_ESP04_EstadoDanio_ESP06_MedidaUmbral");
             });
 
-            modelBuilder.Entity<Esp05Umbral>(entity =>
+            modelBuilder.Entity<esp05Umbral>(entity =>
             {
-                entity.HasKey(e => e.Esp05Llave);
+                entity.HasKey(e => e.esp05llave);
 
                 entity.ToTable("ESP05_Umbral");
 
-                entity.Property(e => e.Esp05Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP05_LLave");
+                entity.HasIndex(e => e.esp01llave, "IX_ESP05_Umbral_ESP01_llave");
+
+                entity.HasIndex(e => e.esp09llave, "IX_ESP05_Umbral_ESP09_llave");
+
+                entity.Property(e => e.esp05llave).HasColumnName("ESP05_LLave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp01Llave)
-                    
-                    .HasColumnName("ESP01_Llave");
-                entity.Property(e => e.Esp05Activo).HasColumnName("ESP05_Activo");
-                entity.Property(e => e.Esp05Color)
+                entity.Property(e => e.esp01llave).HasColumnName("ESP01_llave");
+                entity.Property(e => e.esp05activo).HasColumnName("ESP05_activo");
+                entity.Property(e => e.esp05Color)
                     .HasMaxLength(50)
                     .HasColumnName("ESP05_Color");
-                entity.Property(e => e.Esp05MaxUmbral)
-                    
-                    .HasColumnName("ESP05_MaxUmbral");
-                entity.Property(e => e.Esp05MinUmbral)
-                    
-                    .HasColumnName("ESP05_MinUmbral");
-                entity.Property(e => e.Esp09Llave)
-                    
-                    .HasColumnName("ESP09_Llave");
+                entity.Property(e => e.esp05MaxUmbral).HasColumnName("ESP05_MaxUmbral");
+                entity.Property(e => e.esp05MinUmbral).HasColumnName("ESP05_MinUmbral");
+                entity.Property(e => e.esp09llave).HasColumnName("ESP09_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Esp01LlaveNavigation).WithMany(p => p.Esp05Umbrals)
-                    .HasForeignKey(d => d.Esp01Llave)
-                    .HasConstraintName("FK_ESP05_Umbral_ESP01_Especies");
+                entity.HasOne(d => d.esp01llaveNavigation).WithMany(p => p.esp05Umbrals)
+                    .HasForeignKey(d => d.esp01llave)
+                    .HasConstraintName("FK_ESP05_Umbral_ESP01_especies");
 
-                entity.HasOne(d => d.Esp09LlaveNavigation).WithMany(p => p.Esp05Umbrals)
-                    .HasForeignKey(d => d.Esp09Llave)
+                entity.HasOne(d => d.esp09llaveNavigation).WithMany(p => p.esp05Umbrals)
+                    .HasForeignKey(d => d.esp09llave)
                     .HasConstraintName("FK_ESP05_Umbral_ESP09_TipoBaseUmbral");
             });
 
-            modelBuilder.Entity<Esp06MedidaUmbral>(entity =>
+            modelBuilder.Entity<esp06MedidaUmbral>(entity =>
             {
                 entity.HasKey(e => e.esp06llave);
 
                 entity.ToTable("ESP06_MedidaUmbral");
 
-                entity.Property(e => e.esp06llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP06_Llave");
+                entity.Property(e => e.esp06llave).HasColumnName("ESP06_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.esp06activo).HasColumnName("ESP06_Activo");
+                entity.Property(e => e.esp06activo).HasColumnName("ESP06_activo");
                 entity.Property(e => e.esp06descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("ESP06_Descripcion");
+                    .HasColumnName("ESP06_descripcion");
                 entity.Property(e => e.esp06nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("ESP06_Nombre");
+                    .HasColumnName("ESP06_nombre");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Esp07Union>(entity =>
+            modelBuilder.Entity<esp07Union>(entity =>
             {
-                entity.HasKey(e => new { e.Esp03Llave, e.Esp03LlaveUnion });
+                entity.HasKey(e => new { e.esp03llave, e.esp03llaveUnion });
 
                 entity.ToTable("ESP07_Union");
 
-                entity.Property(e => e.Esp03Llave)
-                    
-                    .HasColumnName("ESP03_Llave");
-                entity.Property(e => e.Esp03LlaveUnion)
-                    
-                    .HasColumnName("ESP03_LlaveUnion");
+                entity.Property(e => e.esp03llave).HasColumnName("ESP03_llave");
+                entity.Property(e => e.esp03llaveUnion).HasColumnName("ESP03_llaveUnion");
 
-                entity.HasOne(d => d.Esp03LlaveNavigation).WithMany(p => p.Esp07Unions)
-                    .HasForeignKey(d => d.Esp03Llave)
+                entity.HasOne(d => d.esp03llaveNavigation).WithMany(p => p.esp07Unions)
+                    .HasForeignKey(d => d.esp03llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ESP07_Union_ESP03_EspecieBase");
+                    .HasConstraintName("FK_ESP07_Union_ESP03_especieBase");
             });
 
-            modelBuilder.Entity<Esp08TipoBase>(entity =>
+            modelBuilder.Entity<esp08TipoBase>(entity =>
             {
                 entity.HasKey(e => e.esp08llave);
 
                 entity.ToTable("ESP08_TipoBase");
 
-                entity.Property(e => e.esp08llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP08_Llave");
+                entity.Property(e => e.esp08llave).HasColumnName("ESP08_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.esp08activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("ESP08_Activo");
-                entity.Property(e => e.esp08descripcion).HasColumnName("ESP08_Descripcion");
+                    .HasColumnName("ESP08_activo");
+                entity.Property(e => e.esp08descripcion).HasColumnName("ESP08_descripcion");
                 entity.Property(e => e.esp08nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("ESP08_Nombre");
+                    .HasColumnName("ESP08_nombre");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Esp09TipoBaseUmbral>(entity =>
+            modelBuilder.Entity<esp09TipoBaseUmbral>(entity =>
             {
-                entity.HasKey(e => e.Esp09Llave);
+                entity.HasKey(e => e.esp09llave);
 
                 entity.ToTable("ESP09_TipoBaseUmbral");
 
-                entity.Property(e => e.Esp09Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP09_Llave");
+                entity.Property(e => e.esp09llave).HasColumnName("ESP09_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp09Activo).HasColumnName("ESP09_Activo");
-                entity.Property(e => e.Esp09Descripcion)
+                entity.Property(e => e.esp09activo).HasColumnName("ESP09_activo");
+                entity.Property(e => e.esp09descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("ESP09_Descripcion");
-                entity.Property(e => e.Esp09Nombre)
+                    .HasColumnName("ESP09_descripcion");
+                entity.Property(e => e.esp09nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("ESP09_Nombre");
-                entity.Property(e => e.Esp09Orden).HasColumnName("ESP09_Orden");
+                    .HasColumnName("ESP09_nombre");
+                entity.Property(e => e.esp09Orden).HasColumnName("ESP09_Orden");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Esp10TipoRegla>(entity =>
+            modelBuilder.Entity<esp10TipoRegla>(entity =>
             {
-                entity.HasKey(e => e.Esp10Llave);
+                entity.HasKey(e => e.esp10llave);
 
                 entity.ToTable("ESP10_TipoRegla");
 
-                entity.Property(e => e.Esp10Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP10_Llave");
+                entity.Property(e => e.esp10llave).HasColumnName("ESP10_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp10Activo).HasColumnName("ESP10_Activo");
-                entity.Property(e => e.Esp10Descripcion)
+                entity.Property(e => e.esp10activo).HasColumnName("ESP10_activo");
+                entity.Property(e => e.esp10descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("ESP10_Descripcion");
-                entity.Property(e => e.Esp10Nombre)
+                    .HasColumnName("ESP10_descripcion");
+                entity.Property(e => e.esp10nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("ESP10_Nombre");
+                    .HasColumnName("ESP10_nombre");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
             });
 
-            modelBuilder.Entity<Esp11ReglaGrafico>(entity =>
+            modelBuilder.Entity<esp11ReglaGrafico>(entity =>
             {
-                entity.HasKey(e => e.Esp11Llave);
+                entity.HasKey(e => e.esp11llave);
 
                 entity.ToTable("ESP11_ReglaGrafico");
 
-                entity.Property(e => e.Esp11Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("ESP11_Llave");
+                entity.HasIndex(e => e.esp10llave, "IX_ESP11_ReglaGrafico_ESP10_llave");
+
+                entity.Property(e => e.esp11llave).HasColumnName("ESP11_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp03Llave)
-                    
-                    .HasColumnName("ESP03_Llave");
-                entity.Property(e => e.Esp10Llave)
-                    
-                    .HasColumnName("ESP10_Llave");
-                entity.Property(e => e.Esp11Estado).HasColumnName("ESP11_Estado");
-                entity.Property(e => e.Esp11Nombre)
+                entity.Property(e => e.esp03llave).HasColumnName("ESP03_llave");
+                entity.Property(e => e.esp10llave).HasColumnName("ESP10_llave");
+                entity.Property(e => e.esp11estado).HasColumnName("ESP11_Estado");
+                entity.Property(e => e.esp11nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("ESP11_Nombre");
-                entity.Property(e => e.Esp11Signo1)
+                    .HasColumnName("ESP11_nombre");
+                entity.Property(e => e.esp11signo1)
                     .HasMaxLength(50)
                     .HasColumnName("ESP11_Signo1");
-                entity.Property(e => e.Esp11Signo2)
+                entity.Property(e => e.esp11signo2)
                     .HasMaxLength(50)
                     .HasColumnName("ESP11_Signo2");
-                entity.Property(e => e.Esp11SignoResultado)
+                entity.Property(e => e.esp11signoresultado)
                     .HasMaxLength(50)
                     .HasColumnName("ESP11_SignoResultado");
-                entity.Property(e => e.Esp11Valor1).HasColumnName("ESP11_Valor1");
-                entity.Property(e => e.Esp11Valor2).HasColumnName("ESP11_Valor2");
-                entity.Property(e => e.Esp11ValorResultado).HasColumnName("ESP11_ValorResultado");
+                entity.Property(e => e.esp11valor1).HasColumnName("ESP11_Valor1");
+                entity.Property(e => e.esp11valor2).HasColumnName("ESP11_Valor2");
+                entity.Property(e => e.esp11valorresultado).HasColumnName("ESP11_ValorResultado");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
 
-                entity.HasOne(d => d.Esp10LlaveNavigation).WithMany(p => p.Esp11ReglaGraficos)
-                    .HasForeignKey(d => d.Esp10Llave)
+                entity.HasOne(d => d.esp10llaveNavigation).WithMany(p => p.esp11ReglaGraficos)
+                    .HasForeignKey(d => d.esp10llave)
                     .HasConstraintName("FK_ESP11_ReglaGrafico_ESP10_TipoRegla");
             });
 
             modelBuilder.Entity<Frm01TipoFormulario>(entity =>
             {
-                entity.HasKey(e => e.Frm01Llave);
+                entity.HasKey(e => e.Frm01llave);
 
                 entity.ToTable("FRM01_TipoFormulario");
 
-                entity.Property(e => e.Frm01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("FRM01_Llave");
+                entity.Property(e => e.Frm01llave).HasColumnName("FRM01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Frm01Activo).HasColumnName("FRM01_Activo");
-                entity.Property(e => e.Frm01Nombre)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Frm01activo).HasColumnName("FRM01_activo");
+                entity.Property(e => e.Frm01nombre)
                     .HasMaxLength(255)
-                    .HasColumnName("FRM01_Nombre");
+                    .HasColumnName("FRM01_nombre");
             });
 
             modelBuilder.Entity<Frm02Formulario>(entity =>
             {
-                entity.HasKey(e => e.Frm02Llave);
+                entity.HasKey(e => e.Frm02llave);
 
                 entity.ToTable("FRM02_Formulario");
 
-                entity.Property(e => e.Frm02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("FRM02_Llave");
+                entity.HasIndex(e => e.Eml01llave, "IX_FRM02_Formulario_EML01_llave");
+
+                entity.HasIndex(e => e.Frm01llave, "IX_FRM02_Formulario_FRM01_llave");
+
+                entity.Property(e => e.Frm02llave).HasColumnName("FRM02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Eml01Llave)
-                    
-                    .HasColumnName("EML01_Llave");
+                entity.Property(e => e.Eml01llave).HasColumnName("EML01_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Frm01Llave)
-                    
-                    .HasColumnName("FRM01_Llave");
-                entity.Property(e => e.Frm02Activo).HasColumnName("FRM02_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Frm01llave).HasColumnName("FRM01_llave");
+                entity.Property(e => e.Frm02activo).HasColumnName("FRM02_activo");
                 entity.Property(e => e.Frm02Celular)
                     .HasMaxLength(50)
                     .HasColumnName("FRM02_Celular");
@@ -2315,32 +2133,29 @@ namespace mipBackend.Data
                     .HasMaxLength(50)
                     .HasColumnName("FRM02_Mail");
                 entity.Property(e => e.Frm02Mensaje).HasColumnName("FRM02_Mensaje");
-                entity.Property(e => e.Frm02Nombre)
+                entity.Property(e => e.Frm02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("FRM02_Nombre");
+                    .HasColumnName("FRM02_nombre");
                 entity.Property(e => e.Frm02Telefono)
                     .HasMaxLength(50)
                     .HasColumnName("FRM02_Telefono");
 
-                entity.HasOne(d => d.Eml01LlaveNavigation).WithMany(p => p.Frm02Formularios)
-                    .HasForeignKey(d => d.Eml01Llave)
+                entity.HasOne(d => d.Eml01llaveNavigation).WithMany(p => p.Frm02Formularios)
+                    .HasForeignKey(d => d.Eml01llave)
                     .HasConstraintName("FK_FRM02_Formulario_EML01_BitacoraEmailUsuario");
 
-                entity.HasOne(d => d.Frm01LlaveNavigation).WithMany(p => p.Frm02Formularios)
-                    .HasForeignKey(d => d.Frm01Llave)
+                entity.HasOne(d => d.Frm01llaveNavigation).WithMany(p => p.Frm02Formularios)
+                    .HasForeignKey(d => d.Frm01llave)
                     .HasConstraintName("FK_FRM02_Formulario_FRM01_TipoFormulario");
             });
 
             modelBuilder.Entity<Grfc01GraficoGenerado>(entity =>
             {
-                entity.HasKey(e => e.Grfc01Llave);
+                entity.HasKey(e => e.Grfc01llave);
 
                 entity.ToTable("GRFC01_GraficoGenerado");
 
-                entity.Property(e => e.Grfc01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("GRFC01_Llave");
+                entity.Property(e => e.Grfc01llave).HasColumnName("GRFC01_llave");
                 entity.Property(e => e.Grfc01CodigoGrafico)
                     .HasMaxLength(150)
                     .HasColumnName("GRFC01_codigo_grafico");
@@ -2348,89 +2163,72 @@ namespace mipBackend.Data
                 entity.Property(e => e.Grfc01FechaGrafico)
                     .HasColumnType("datetime")
                     .HasColumnName("GRFC01_FechaGrafico");
-                entity.Property(e => e.Grfc02Llave)
-                    
-                    .HasColumnName("GRFC02_Llave");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                entity.Property(e => e.Grfc02llave).HasColumnName("GRFC02_llave");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
             });
 
             modelBuilder.Entity<Grfc02TipoGrafico>(entity =>
             {
-                entity.HasKey(e => e.Grfc02Llave);
+                entity.HasKey(e => e.Grfc02llave);
 
                 entity.ToTable("GRFC02_TipoGrafico");
 
-                entity.Property(e => e.Grfc02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("GRFC02_Llave");
+                entity.Property(e => e.Grfc02llave).HasColumnName("GRFC02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Grfc02Activo).HasColumnName("GRFC02_Activo");
-                entity.Property(e => e.Grfc02Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Grfc02activo).HasColumnName("GRFC02_activo");
+                entity.Property(e => e.Grfc02descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("GRFC02_Descripcion");
-                entity.Property(e => e.Grfc02Nombre)
+                    .HasColumnName("GRFC02_descripcion");
+                entity.Property(e => e.Grfc02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("GRFC02_Nombre");
+                    .HasColumnName("GRFC02_nombre");
             });
 
             modelBuilder.Entity<Grfc03RespaldoGrafico>(entity =>
             {
-                entity.HasKey(e => e.Grfc03Llave);
+                entity.HasKey(e => e.Grfc03llave);
 
                 entity.ToTable("GRFC03_respaldoGrafico");
 
-                entity.Property(e => e.Grfc03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("GRFC03_Llave");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Esp03Llave)
-                    
-                    .HasColumnName("ESP03_Llave");
+                entity.Property(e => e.Grfc03llave).HasColumnName("GRFC03_llave");
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.esp03llave).HasColumnName("ESP03_llave");
                 entity.Property(e => e.Grfc03Estado).HasColumnName("GRFC03_Estado");
                 entity.Property(e => e.Grfc03UltimaFecha)
                     .HasColumnType("datetime")
                     .HasColumnName("GRFC03_ultimaFecha");
                 entity.Property(e => e.Grfc03XmlDatos).HasColumnName("GRFC03_xmlDatos");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
             });
 
             modelBuilder.Entity<Ins01Inscripcion>(entity =>
             {
-                entity.HasKey(e => e.Ins01Llave);
+                entity.HasKey(e => e.Ins01llave);
 
                 entity.ToTable("INS01_Inscripcion");
 
-                entity.Property(e => e.Ins01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("INS01_Llave");
+                entity.Property(e => e.Ins01llave).HasColumnName("INS01_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Ins01Activo).HasColumnName("INS01_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Ins01activo).HasColumnName("INS01_activo");
                 entity.Property(e => e.Ins01Apellido)
                     .HasMaxLength(250)
                     .HasColumnName("INS01_Apellido");
@@ -2445,55 +2243,48 @@ namespace mipBackend.Data
                     .HasColumnName("INS01_Empresa");
                 entity.Property(e => e.Ins01fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("INS01_fechaactivacion");
+                    .HasColumnName("INS01_FechaActivacion");
                 entity.Property(e => e.Ins01FechaInscripcion)
                     .HasColumnType("datetime")
                     .HasColumnName("INS01_FechaInscripcion");
                 entity.Property(e => e.Ins01FechaNacimiento)
                     .HasColumnType("datetime")
                     .HasColumnName("INS01_FechaNacimiento");
-                entity.Property(e => e.Ins01Nombre)
+                entity.Property(e => e.Ins01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("INS01_Nombre");
+                    .HasColumnName("INS01_nombre");
                 entity.Property(e => e.Ins01Password)
                     .HasMaxLength(50)
                     .HasColumnName("INS01_Password");
-                entity.Property(e => e.Ins01Rut)
-                    
-                    .HasColumnName("INS01_Rut");
+                entity.Property(e => e.Ins01Rut).HasColumnName("INS01_Rut");
                 entity.Property(e => e.Ins01Telefono)
                     .HasMaxLength(250)
                     .HasColumnName("INS01_Telefono");
                 entity.Property(e => e.Ins01UserName)
                     .HasMaxLength(250)
                     .HasColumnName("INS01_UserName");
-                entity.Property(e => e.Per02Llave)
-                    
-                    .HasColumnName("PER02_Llave");
-                entity.Property(e => e.Sist03Llave)
-                    
-                    .HasColumnName("SIST03_Llave");
+                entity.Property(e => e.per02llave).HasColumnName("PER02_llave");
+                entity.Property(e => e.sist03llave).HasColumnName("SIST03_llave");
             });
 
             modelBuilder.Entity<Ins02RecuperarClave>(entity =>
             {
-                entity.HasKey(e => e.Ins02Llave);
+                entity.HasKey(e => e.Ins02llave);
 
                 entity.ToTable("INS02_RecuperarClave");
 
-                entity.Property(e => e.Ins02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("INS02_Llave");
+                entity.HasIndex(e => e.Ins02Estado, "IX_INS02_RecuperarClave_INS02_Estado");
+
+                entity.Property(e => e.Ins02llave).HasColumnName("INS02_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
+                    .HasColumnName("FECHAELIMINACION");
                 entity.Property(e => e.Ins02ClaveTemporal)
                     .HasMaxLength(10)
                     .HasColumnName("INS02_ClaveTemporal");
@@ -2501,7 +2292,7 @@ namespace mipBackend.Data
                 entity.Property(e => e.Ins02FechaRecupera)
                     .HasColumnType("datetime")
                     .HasColumnName("INS02_FechaRecupera");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
 
                 entity.HasOne(d => d.Ins02EstadoNavigation).WithMany(p => p.Ins02RecuperarClaves)
                     .HasForeignKey(d => d.Ins02Estado)
@@ -2510,332 +2301,290 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Lnc01Licencia>(entity =>
             {
-                entity.HasKey(e => e.Lnc01Llave);
+                entity.HasKey(e => e.Lnc01llave);
 
                 entity.ToTable("LNC01_Licencias");
 
-                entity.Property(e => e.Lnc01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("LNC01_Llave");
+                entity.Property(e => e.Lnc01llave).HasColumnName("LNC01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Lnc01Activo).HasColumnName("LNC01_Activo");
-                entity.Property(e => e.Lnc01Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Lnc01activo).HasColumnName("LNC01_activo");
+                entity.Property(e => e.Lnc01descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("LNC01_Descripcion");
+                    .HasColumnName("LNC01_descripcion");
                 entity.Property(e => e.Lnc01Html).HasColumnName("LNC01_HTML");
                 entity.Property(e => e.Lnc01Imagen)
                     .HasMaxLength(500)
                     .HasColumnName("LNC01_Imagen");
-                entity.Property(e => e.Lnc01MaximoUsuarios)
-                    
-                    .HasColumnName("LNC01_MaximoUsuarios");
-                entity.Property(e => e.Lnc01Nombre)
+                entity.Property(e => e.Lnc01MaximoUsuarios).HasColumnName("LNC01_MaximoUsuarios");
+                entity.Property(e => e.Lnc01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("LNC01_Nombre");
+                    .HasColumnName("LNC01_nombre");
                 entity.Property(e => e.Lnc01NumeroDias).HasColumnName("LNC01_NumeroDias");
                 entity.Property(e => e.Lnc01TextoDias)
                     .HasMaxLength(250)
                     .HasColumnName("LNC01_TextoDias");
                 entity.Property(e => e.Lnc01VisibleUsuario).HasColumnName("LNC01_VisibleUsuario");
-                entity.Property(e => e.Lnc04Llave)
-                    
-                    .HasColumnName("LNC04_Llave");
+                entity.Property(e => e.Lnc04llave).HasColumnName("LNC04_llave");
             });
 
             modelBuilder.Entity<Lnc02ServiciosLicencia>(entity =>
             {
-                entity.HasKey(e => new { e.Lnc01Llave, e.Serv01Llave }).HasName("PK_LNC02_ServiciosLicencia_1");
+                entity.HasKey(e => new { e.Lnc01llave, e.Serv01llave }).HasName("PK_LNC02_ServiciosLicencia_1");
 
                 entity.ToTable("LNC02_ServiciosLicencia");
 
-                entity.Property(e => e.Lnc01Llave)
-                    
-                    .HasColumnName("LNC01_Llave");
-                entity.Property(e => e.Serv01Llave)
-                    
-                    .HasColumnName("SERV01_Llave");
-                entity.Property(e => e.Lnc02Activo).HasColumnName("LNC02_Activo");
-                entity.Property(e => e.Lnc02EsIlimitado).HasColumnName("LNC02_EsIlimitado");
-                entity.Property(e => e.Lnc02NumeroElemento)
-                    
-                    .HasColumnName("LNC02_NumeroElemento");
-                entity.Property(e => e.Lnc02PermiteComparar).HasColumnName("LNC02_PermiteComparar");
+                entity.HasIndex(e => e.Serv01llave, "IX_LNC02_ServiciosLicencia_SERV01_llave");
 
-                entity.HasOne(d => d.Lnc01LlaveNavigation).WithMany(p => p.Lnc02ServiciosLicencia)
-                    .HasForeignKey(d => d.Lnc01Llave)
+                entity.Property(e => e.Lnc01llave).HasColumnName("LNC01_llave");
+                entity.Property(e => e.Serv01llave).HasColumnName("SERV01_llave");
+                entity.Property(e => e.Lnc02activo).HasColumnName("LNC02_activo");
+                entity.Property(e => e.Lnc02EsIlimitado).HasColumnName("LNC02_EsIlimitado");
+                entity.Property(e => e.Lnc02NumeroElemento).HasColumnName("LNC02_NumeroElemento");
+                entity.Property(e => e.Lnc02permiteComparar).HasColumnName("LNC02_permiteComparar");
+
+                entity.HasOne(d => d.Lnc01llaveNavigation).WithMany(p => p.Lnc02ServiciosLicencia)
+                    .HasForeignKey(d => d.Lnc01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LNC02_ServiciosLicencia_LNC01_Licencias");
 
-                entity.HasOne(d => d.Serv01LlaveNavigation).WithMany(p => p.Lnc02ServiciosLicencia)
-                    .HasForeignKey(d => d.Serv01Llave)
+                entity.HasOne(d => d.Serv01llaveNavigation).WithMany(p => p.Lnc02ServiciosLicencia)
+                    .HasForeignKey(d => d.Serv01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LNC02_ServiciosLicencia_SERV01_Servicio");
             });
 
             modelBuilder.Entity<Lnc03LicenciaContrato>(entity =>
             {
-                entity.HasKey(e => new { e.Lnc01Llave, e.Ctt01Llave }).HasName("PK_LNC03_LicenciaContrato_1");
+                entity.HasKey(e => new { e.Lnc01llave, e.Ctt01llave }).HasName("PK_LNC03_LicenciaContrato_1");
 
                 entity.ToTable("LNC03_LicenciaContrato");
 
-                entity.Property(e => e.Lnc01Llave)
-                    
-                    .HasColumnName("LNC01_Llave");
-                entity.Property(e => e.Ctt01Llave)
-                    
-                    .HasColumnName("CTT01_Llave");
-                entity.Property(e => e.Lnc03Activo).HasColumnName("LNC03_Activo");
+                entity.HasIndex(e => e.Ctt01llave, "IX_LNC03_LicenciaContrato_CTT01_llave");
+
+                entity.Property(e => e.Lnc01llave).HasColumnName("LNC01_llave");
+                entity.Property(e => e.Ctt01llave).HasColumnName("CTT01_llave");
+                entity.Property(e => e.Lnc03activo).HasColumnName("LNC03_activo");
                 entity.Property(e => e.Lnc03FirmaSimpre).HasColumnName("LNC03_FirmaSimpre");
 
-                entity.HasOne(d => d.Ctt01LlaveNavigation).WithMany(p => p.Lnc03LicenciaContratos)
-                    .HasForeignKey(d => d.Ctt01Llave)
+                entity.HasOne(d => d.Ctt01llaveNavigation).WithMany(p => p.Lnc03LicenciaContratos)
+                    .HasForeignKey(d => d.Ctt01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LNC03_LicenciaContrato_CTT01_Contrato");
 
-                entity.HasOne(d => d.Lnc01LlaveNavigation).WithMany(p => p.Lnc03LicenciaContratos)
-                    .HasForeignKey(d => d.Lnc01Llave)
+                entity.HasOne(d => d.Lnc01llaveNavigation).WithMany(p => p.Lnc03LicenciaContratos)
+                    .HasForeignKey(d => d.Lnc01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LNC03_LicenciaContrato_LNC01_Licencias");
             });
 
             modelBuilder.Entity<Lnc04TipoLicencia>(entity =>
             {
-                entity.HasKey(e => e.Lnc04Llave);
+                entity.HasKey(e => e.Lnc04llave);
 
                 entity.ToTable("LNC04_TipoLicencia");
 
-                entity.Property(e => e.Lnc04Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("LNC04_Llave");
+                entity.Property(e => e.Lnc04llave).HasColumnName("LNC04_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Lnc04Activo).HasColumnName("LNC04_Activo");
-                entity.Property(e => e.Lnc04Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Lnc04activo).HasColumnName("LNC04_activo");
+                entity.Property(e => e.Lnc04descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("LNC04_Descripcion");
-                entity.Property(e => e.Lnc04Nombre)
+                    .HasColumnName("LNC04_descripcion");
+                entity.Property(e => e.Lnc04nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("LNC04_Nombre");
+                    .HasColumnName("LNC04_nombre");
             });
 
             modelBuilder.Entity<Lnc05ValorLicencia>(entity =>
             {
-                entity.HasKey(e => e.Lnc05Llave);
+                entity.HasKey(e => e.Lnc05llave);
 
                 entity.ToTable("LNC05_valorLicencia");
 
-                entity.Property(e => e.Lnc05Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("LNC05_Llave");
+                entity.HasIndex(e => e.Lnc01llave, "IX_LNC05_valorLicencia_LNC01_llave");
+
+                entity.Property(e => e.Lnc05llave).HasColumnName("LNC05_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
-                entity.Property(e => e.Lnc01Llave)
-                    
-                    .HasColumnName("LNC01_Llave");
-                entity.Property(e => e.Lnc05Inicio)
-                   
-                    .HasColumnName("LNC05_Inicio");
-                entity.Property(e => e.Lnc05Termino)
-                    
-                    .HasColumnName("LNC05_Termino");
-                entity.Property(e => e.Lnc05Valor)
-                   
-                    .HasColumnName("LNC05_Valor");
+                    .HasColumnName("FECHAACTUALIZACION");
+                entity.Property(e => e.Lnc01llave).HasColumnName("LNC01_llave");
+                entity.Property(e => e.Lnc05Inicio).HasColumnName("LNC05_Inicio");
+                entity.Property(e => e.Lnc05Termino).HasColumnName("LNC05_Termino");
+                entity.Property(e => e.Lnc05Valor).HasColumnName("LNC05_Valor");
 
-                entity.HasOne(d => d.Lnc01LlaveNavigation).WithMany(p => p.Lnc05ValorLicencia)
-                    .HasForeignKey(d => d.Lnc01Llave)
+                entity.HasOne(d => d.Lnc01llaveNavigation).WithMany(p => p.Lnc05ValorLicencia)
+                    .HasForeignKey(d => d.Lnc01llave)
                     .HasConstraintName("FK_LNC05_valorLicencia_LNC01_Licencias");
             });
 
             modelBuilder.Entity<Lnc06Cobertura>(entity =>
             {
-                entity.HasKey(e => new { e.Lnc01Llave, e.Sist03Llave }).HasName("PK_LNC05_Cobertura");
+                entity.HasKey(e => new { e.Lnc01llave, e.sist03llave }).HasName("PK_LNC05_Cobertura");
 
                 entity.ToTable("LNC06_Cobertura");
 
-                entity.Property(e => e.Lnc01Llave)
-                    
-                    .HasColumnName("LNC01_Llave");
-                entity.Property(e => e.Sist03Llave)
-                    
-                    .HasColumnName("SIST03_Llave");
+                entity.Property(e => e.Lnc01llave).HasColumnName("LNC01_llave");
+                entity.Property(e => e.sist03llave).HasColumnName("SIST03_llave");
 
-                entity.HasOne(d => d.Lnc01LlaveNavigation).WithMany(p => p.Lnc06Coberturas)
-                    .HasForeignKey(d => d.Lnc01Llave)
+                entity.HasOne(d => d.Lnc01llaveNavigation).WithMany(p => p.Lnc06Coberturas)
+                    .HasForeignKey(d => d.Lnc01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LNC06_Cobertura_LNC01_Licencias");
             });
 
             modelBuilder.Entity<Lnc07Control>(entity =>
             {
-                entity.HasKey(e => new { e.Lnc01Llave, e.Esp03Llave });
+                entity.HasKey(e => new { e.Lnc01llave, e.esp03llave });
 
                 entity.ToTable("LNC07_Control");
 
-                entity.Property(e => e.Lnc01Llave)
-                    
-                    .HasColumnName("LNC01_Llave");
-                entity.Property(e => e.Esp03Llave)
-                    
-                    .HasColumnName("ESP03_Llave");
+                entity.Property(e => e.Lnc01llave).HasColumnName("LNC01_llave");
+                entity.Property(e => e.esp03llave).HasColumnName("ESP03_llave");
 
-                entity.HasOne(d => d.Lnc01LlaveNavigation).WithMany(p => p.Lnc07Controls)
-                    .HasForeignKey(d => d.Lnc01Llave)
+                entity.HasOne(d => d.Lnc01llaveNavigation).WithMany(p => p.Lnc07Controls)
+                    .HasForeignKey(d => d.Lnc01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LNC07_Control_LNC01_Licencias");
             });
 
             modelBuilder.Entity<Log01Bitacora>(entity =>
             {
-                entity.HasKey(e => e.Log01Llave);
+                entity.HasKey(e => e.Log01llave);
 
                 entity.ToTable("LOG01_Bitacora");
 
-                entity.Property(e => e.Log01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("LOG01_Llave");
+                entity.HasIndex(e => e.Log03llave, "IX_LOG01_Bitacora_LOG03_llave");
+
+                entity.Property(e => e.Log01llave).HasColumnName("LOG01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Log01Activo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Log01activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("LOG01_Activo");
+                    .HasColumnName("LOG01_activo");
                 entity.Property(e => e.Log01Clase).HasColumnName("LOG01_Clase");
                 entity.Property(e => e.Log01Contenido).HasColumnName("LOG01_Contenido");
                 entity.Property(e => e.Log01ElementoSerializado).HasColumnName("LOG01_elemento_serializado");
                 entity.Property(e => e.Log01Info).HasColumnName("LOG01_Info");
-                entity.Property(e => e.Log01Objeto)
-                    
-                    .HasColumnName("LOG01_objeto");
-                entity.Property(e => e.Log03Llave)
-                    
-                    .HasColumnName("LOG03_Llave");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                entity.Property(e => e.Log01Objeto).HasColumnName("LOG01_objeto");
+                entity.Property(e => e.Log03llave).HasColumnName("LOG03_llave");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
 
-                entity.HasOne(d => d.Log03LlaveNavigation).WithMany(p => p.Log01Bitacoras)
-                    .HasForeignKey(d => d.Log03Llave)
+                entity.HasOne(d => d.Log03llaveNavigation).WithMany(p => p.Log01Bitacoras)
+                    .HasForeignKey(d => d.Log03llave)
                     .HasConstraintName("FK_LOG01_Bitacora_LOG03_MensajeBitacora");
             });
 
             modelBuilder.Entity<Log02TipoBitacora>(entity =>
             {
-                entity.HasKey(e => e.Log02Llave).HasName("PK__LOG02_Ti__EA456AA523FE4082");
+                entity.HasKey(e => e.Log02llave).HasName("PK__LOG02_Ti__EA456AA523FE4082");
 
                 entity.ToTable("LOG02_TipoBitacora");
 
-                entity.Property(e => e.Log02Llave)
+                entity.Property(e => e.Log02llave)
                     .HasDefaultValueSql("(newid())")
-                    .HasColumnName("LOG02_Llave");
+                    .HasColumnName("LOG02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Log02Activo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Log02activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("LOG02_Activo");
-                entity.Property(e => e.Log02Descripcion).HasColumnName("LOG02_Descripcion");
+                    .HasColumnName("LOG02_activo");
+                entity.Property(e => e.Log02descripcion).HasColumnName("LOG02_descripcion");
                 entity.Property(e => e.Log02EsRazor).HasColumnName("LOG02_EsRazor");
-                entity.Property(e => e.Log02EsSistema)
+                entity.Property(e => e.Log02Essistema)
                     .HasDefaultValueSql("((0))")
-                    .HasColumnName("LOG02_EsSistema");
+                    .HasColumnName("LOG02_Essistema");
                 entity.Property(e => e.Log02Info).HasColumnName("LOG02_Info");
-                entity.Property(e => e.Log02Nombre)
+                entity.Property(e => e.Log02nombre)
                     .HasMaxLength(300)
-                    .HasColumnName("LOG02_Nombre");
+                    .HasColumnName("LOG02_nombre");
             });
 
             modelBuilder.Entity<Log03MensajeBitacora>(entity =>
             {
-                entity.HasKey(e => e.Log03Llave);
+                entity.HasKey(e => e.Log03llave);
 
                 entity.ToTable("LOG03_MensajeBitacora");
 
-                entity.Property(e => e.Log03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("LOG03_Llave");
+                entity.HasIndex(e => e.Log02llave, "IX_LOG03_MensajeBitacora_LOG02_llave");
+
+                entity.Property(e => e.Log03llave).HasColumnName("LOG03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Log02Llave).HasColumnName("LOG02_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Log02llave).HasColumnName("LOG02_llave");
                 entity.Property(e => e.Log03AccesoRapido)
                     .HasMaxLength(500)
                     .HasColumnName("LOG03_AccesoRapido");
-                entity.Property(e => e.Log03Activo).HasColumnName("LOG03_Activo");
-                entity.Property(e => e.Log03Descripcion).HasColumnName("LOG03_Descripcion");
+                entity.Property(e => e.Log03activo).HasColumnName("LOG03_activo");
+                entity.Property(e => e.Log03descripcion).HasColumnName("LOG03_descripcion");
                 entity.Property(e => e.Log03Info).HasColumnName("LOG03_Info");
                 entity.Property(e => e.Log03Mensaje).HasColumnName("LOG03_Mensaje");
 
-                entity.HasOne(d => d.Log02LlaveNavigation).WithMany(p => p.Log03MensajeBitacoras)
-                    .HasForeignKey(d => d.Log02Llave)
+                entity.HasOne(d => d.Log02llaveNavigation).WithMany(p => p.Log03MensajeBitacoras)
+                    .HasForeignKey(d => d.Log02llave)
                     .HasConstraintName("FK_LOG03_MensajeBitacora_LOG02_TipoBitacora");
             });
 
-            modelBuilder.Entity<Men01Sistema>(entity =>
+            modelBuilder.Entity<Men01sistema>(entity =>
             {
-                entity.HasKey(e => e.Men01Llave).HasName("PK__MEN01_Si__4F35303B75CD617E");
+                entity.HasKey(e => e.Men01llave).HasName("PK__MEN01_Si__4F35303B75CD617E");
 
-                entity.ToTable("MEN01_Sistema");
+                entity.ToTable("MEN01_sistema");
 
-                entity.Property(e => e.Men01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("MEN01_Llave");
+                entity.Property(e => e.Men01llave).HasColumnName("MEN01_llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
                     .HasColumnName("fechaactualizacion");
@@ -2851,13 +2600,11 @@ namespace mipBackend.Data
                 entity.Property(e => e.Men01Control)
                     .HasMaxLength(2000)
                     .HasColumnName("MEN01_Control");
-                entity.Property(e => e.Men01Descripcion)
+                entity.Property(e => e.Men01descripcion)
                     .HasMaxLength(2000)
                     .HasColumnName("MEN01_descripcion");
                 entity.Property(e => e.Men01IconoUrl).HasColumnName("MEN01_IconoUrl");
-                entity.Property(e => e.Men01LlavePadre)
-                    
-                    .HasColumnName("MEN01_Llave_padre");
+                entity.Property(e => e.Men01llavePadre).HasColumnName("MEN01_llave_padre");
                 entity.Property(e => e.Men01Principal).HasColumnName("MEN01_principal");
                 entity.Property(e => e.Men01Titulo)
                     .HasMaxLength(2000)
@@ -2872,141 +2619,154 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Mnt01Monitor>(entity =>
             {
-                entity.HasKey(e => e.Mnt01Llave);
+                entity.HasKey(e => e.mnt01llave);
 
                 entity.ToTable("MNT01_Monitores");
 
-                entity.Property(e => e.Mnt01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("MNT01_Llave");
+                entity.HasIndex(e => e.mnt04llave, "IX_MNT01_Monitores_MNT04_llave");
+
+                entity.Property(e => e.mnt01llave).HasColumnName("MNT01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Mnt01Activo).HasColumnName("MNT01_Activo");
-                entity.Property(e => e.Mnt01Cargo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.mnt01activo).HasColumnName("MNT01_activo");
+                entity.Property(e => e.mnt01Cargo)
                     .HasMaxLength(250)
                     .HasColumnName("MNT01_Cargo");
-                entity.Property(e => e.Mnt01Iniciolabores)
+                entity.Property(e => e.mnt01Iniciolabores)
                     .HasColumnType("datetime")
                     .HasColumnName("MNT01_iniciolabores");
-                entity.Property(e => e.Mnt04Llave)
-                    
-                    .HasColumnName("MNT04_Llave");
-                entity.Property(e => e.Per01Llave)
-                    
-                    .HasColumnName("PER01_Llave");
+                entity.Property(e => e.mnt04llave).HasColumnName("MNT04_llave");
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
 
-                entity.HasOne(d => d.Mnt04LlaveNavigation).WithMany(p => p.Mnt01Monitores)
-                    .HasForeignKey(d => d.Mnt04Llave)
+                entity.HasOne(d => d.Mnt04llaveNavigation).WithMany(p => p.Mnt01Monitores)
+                    .HasForeignKey(d => d.mnt04llave)
                     .HasConstraintName("FK_MNT01_Monitores_MNT04_TipoMonitor");
 
-                entity.HasMany(d => d.Esp02Llaves).WithMany(p => p.Mnt01Llaves)
+                entity.HasMany(d => d.esp02llaves).WithMany(p => p.Mnt01llaves)
                     .UsingEntity<Dictionary<string, object>>(
-                        "Mnt02EspeciesAsignada",
-                        r => r.HasOne<Esp02TemporadaEspecie>().WithMany()
-                            .HasForeignKey("Esp02Llave")
+                        "Mnt02especiesAsignada",
+                        r => r.HasOne<esp02Temporadaespecie>().WithMany()
+                            .HasForeignKey("esp02llave")
                             .OnDelete(DeleteBehavior.ClientSetNull)
-                            .HasConstraintName("FK_MNT02_EspeciesAsignadas_ESP02_TemporadaEspecie"),
+                            .HasConstraintName("FK_MNT02_especiesAsignadas_ESP02_Temporadaespecie"),
                         l => l.HasOne<Mnt01Monitor>().WithMany()
-                            .HasForeignKey("Mnt01Llave")
+                            .HasForeignKey("Mnt01llave")
                             .OnDelete(DeleteBehavior.ClientSetNull)
-                            .HasConstraintName("FK_MNT02_EspeciesAsignadas_MNT01_Monitores"),
+                            .HasConstraintName("FK_MNT02_especiesAsignadas_MNT01_Monitores"),
                         j =>
                         {
-                            j.HasKey("Mnt01Llave", "Esp02Llave").HasName("PK_MNT02_EspeciesAsignadas_2");
-                            j.ToTable("MNT02_EspeciesAsignadas");
+                            j.HasKey("Mnt01llave", "esp02llave").HasName("PK_MNT02_especiesAsignadas_2");
+                            j.ToTable("MNT02_especiesAsignadas");
+                            j.HasIndex(new[] { "esp02llave" }, "IX_MNT02_especiesAsignadas_esp02llave");
                         });
             });
 
-            modelBuilder.Entity<Mnt03PeriodosTrampa>(entity =>
+            modelBuilder.Entity<Mnt02EspeciesAsignada>(entity =>
             {
-                entity.HasKey(e => new { e.Mnt01Llave, e.Trp01Llave, e.Temp02Llave }).HasName("PK_MNT02_EspeciesAsignadas");
+                entity.HasKey(e => new { e.mnt01llave, e.esp02llave }).HasName("PK_MNT02_especiesAsignadas");
 
-                entity.ToTable("MNT03_PeriodosTrampas");
+                entity.ToTable("MNT02_EspeciesAsignadas");
 
-                entity.Property(e => e.Mnt01Llave)
-                    
-                    .HasColumnName("MNT01_Llave");
-                entity.Property(e => e.Trp01Llave)
-                    
-                    .HasColumnName("TRP01_Llave");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.Property(e => e.mnt01llave).HasColumnName("Mnt01Llave");
+                entity.Property(e => e.esp02llave).HasColumnName("Esp02Llave");
+
+                entity.HasIndex(new[] { "esp02llave" }, "IX_MNT02_especiesAsignadas_esp02llave");
+
+                entity.HasOne(d => d.Mnt01llaveNavigation).WithMany(p => p.Mnt02EspeciesAsignadas)
+                   .HasForeignKey(d => d.mnt01llave)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_MNT02_especiesAsignadas_MNT01_Monitores");
+
+                entity.HasOne(d => d.esp02llaveNavigation).WithMany(p => p.Mnt02EspeciesAsignadas)
+                    .HasForeignKey(d => d.esp02llave)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MNT02_especiesAsignadas_ESP02_TemporadaBase");
+
+
+            });
+
+
+            modelBuilder.Entity<Mnt03periodosTrampa>(entity =>
+            {
+                entity.HasKey(e => new { e.mnt01llave, e.trp01llave, e.temp02llave }).HasName("PK_MNT02_especiesAsignadas");
+
+                entity.ToTable("MNT03_periodosTrampas");
+
+                entity.HasIndex(e => e.temp02llave, "IX_MNT03_periodosTrampas_TEMP02_llave");
+
+                entity.Property(e => e.mnt01llave).HasColumnName("MNT01_llave");
+                entity.Property(e => e.trp01llave).HasColumnName("TRP01_llave");
+                entity.Property(e => e.temp02llave).HasColumnName("TEMP02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
-                entity.Property(e => e.Mnt03Activo).HasColumnName("MNT03_Activo");
+                    .HasColumnName("FECHAACTUALIZACION");
+                entity.Property(e => e.mnt03activo).HasColumnName("MNT03_activo");
 
-                entity.HasOne(d => d.Mnt01LlaveNavigation).WithMany(p => p.Mnt03PeriodosTrampas)
-                    .HasForeignKey(d => d.Mnt01Llave)
+                entity.HasOne(d => d.Mnt01llaveNavigation).WithMany(p => p.Mnt03periodosTrampas)
+                    .HasForeignKey(d => d.mnt01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MNT03_PeriodosTrampas_MNT01_Monitores");
+                    .HasConstraintName("FK_MNT03_periodosTrampas_MNT01_Monitores");
 
-                entity.HasOne(d => d.Temp02LlaveNavigation).WithMany(p => p.Mnt03PeriodosTrampas)
-                    .HasForeignKey(d => d.Temp02Llave)
+                entity.HasOne(d => d.Temp02llaveNavigation).WithMany(p => p.Mnt03periodosTrampas)
+                    .HasForeignKey(d => d.temp02llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MNT03_PeriodosTrampas_TEMP02_TemporadaBase");
+                    .HasConstraintName("FK_MNT03_periodosTrampas_TEMP02_TemporadaBase");
             });
 
             modelBuilder.Entity<Mnt04TipoMonitor>(entity =>
             {
-                entity.HasKey(e => e.Mnt04Llave).HasName("PK_MNT05_TipoBase");
+                entity.HasKey(e => e.mnt04llave).HasName("PK_MNT05_TipoBase");
 
                 entity.ToTable("MNT04_TipoMonitor");
 
-                entity.Property(e => e.Mnt04Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("MNT04_Llave");
+                entity.Property(e => e.mnt04llave).HasColumnName("MNT04_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Mnt04Activo).HasColumnName("MNT04_Activo");
-                entity.Property(e => e.Mnt04Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.mnt04activo).HasColumnName("MNT04_activo");
+                entity.Property(e => e.mnt04descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("MNT04_Descripcion");
-                entity.Property(e => e.Mnt04Nombre)
+                    .HasColumnName("MNT04_descripcion");
+                entity.Property(e => e.mnt04nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("MNT04_Nombre");
+                    .HasColumnName("MNT04_nombre");
             });
 
             modelBuilder.Entity<Mvl01AccesoMovil>(entity =>
             {
-                entity
-                    .HasNoKey()
-                    .ToTable("MVL01_AccesoMovil");
+
+                entity.HasKey(e => new { e.Mvl01llave, e.Mvl01IdUsuario}).HasName("PK_MVL01_AccesoMovil");
+
+                entity.ToTable("MVL01_AccesoMovil");
 
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Mvl01DiasUmbralEdicion)
-                    
-                    .HasColumnName("MVL01_dias_umbral_edicion");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Mvl01DiasUmbralEdicion).HasColumnName("MVL01_dias_umbral_edicion");
                 entity.Property(e => e.Mvl01EditaFechaMonitoreo)
                     .HasDefaultValueSql("((1))")
                     .HasColumnName("MVL01_edita_fecha_monitoreo");
@@ -3032,25 +2792,19 @@ namespace mipBackend.Data
                     .HasColumnType("datetime")
                     .HasColumnName("MVL01_fecha_ultimo_acceso");
                 entity.Property(e => e.Mvl01IdUsuario).HasColumnName("MVL01_id_usuario");
-                entity.Property(e => e.Mvl01Llave)
+                entity.Property(e => e.Mvl01llave)
                     .HasMaxLength(1000)
-                    .HasColumnName("MVL01_Llave");
+                    .HasColumnName("MVL01_llave");
                 entity.Property(e => e.Mvl01MensajeMovil).HasColumnName("MVL01_mensaje_movil");
                 entity.Property(e => e.Mvl01NumeroMovil)
                     .HasMaxLength(20)
                     .HasColumnName("MVL01_numero_movil");
-                entity.Property(e => e.Mvl01SistemaAndroid)
+                entity.Property(e => e.Mvl01sistemaAndroid)
                     .HasMaxLength(100)
                     .HasColumnName("MVL01_sistema_android");
-                entity.Property(e => e.Mvl01TamanoBasedatosCliente)
-                   
-                    .HasColumnName("MVL01_tamano_basedatos_cliente");
-                entity.Property(e => e.Mvl01UbicacionActividadX)
-                    
-                    .HasColumnName("MVL01_ubicacion_actividad_x");
-                entity.Property(e => e.Mvl01UbicacionActividadY)
-                    
-                    .HasColumnName("MVL01_ubicacion_actividad_y");
+                entity.Property(e => e.Mvl01TamanoBasedatosCliente).HasColumnName("MVL01_tamano_basedatos_cliente");
+                entity.Property(e => e.Mvl01UbicacionActividadX).HasColumnName("MVL01_ubicacion_actividad_x");
+                entity.Property(e => e.Mvl01UbicacionActividadY).HasColumnName("MVL01_ubicacion_actividad_y");
                 entity.Property(e => e.Mvl01VersionAndroid)
                     .HasMaxLength(10)
                     .HasColumnName("MVL01_version_android");
@@ -3072,22 +2826,19 @@ namespace mipBackend.Data
                 entity.Property(e => e.FechaUltimaActualizacion)
                     .HasColumnType("datetime")
                     .HasColumnName("Fecha_UltimaActualizacion");
-                entity.Property(e => e.NombreTabla)
+                entity.Property(e => e.nombreTabla)
                     .HasMaxLength(500)
-                    .HasColumnName("Nombre_Tabla");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                    .HasColumnName("nombre_Tabla");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
             });
 
             modelBuilder.Entity<Mvl03RegistroAcceso>(entity =>
             {
-                entity.HasKey(e => e.Mvl03Llave);
+                entity.HasKey(e => e.Mvl03llave);
 
                 entity.ToTable("MVL03_RegistroAcceso");
 
-                entity.Property(e => e.Mvl03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("MVL03_Llave");
+                entity.Property(e => e.Mvl03llave).HasColumnName("MVL03_llave");
                 entity.Property(e => e.Email).HasMaxLength(300);
                 entity.Property(e => e.EmailUsuario)
                     .HasMaxLength(300)
@@ -3104,53 +2855,66 @@ namespace mipBackend.Data
                 entity.Property(e => e.Mvl03Fechacreacion)
                     .HasColumnType("datetime")
                     .HasColumnName("MVL03_FECHACREACION");
-                entity.Property(e => e.NombreUsuario)
+                entity.Property(e => e.nombreUsuario)
                     .HasMaxLength(500)
                     .HasColumnName("nombre_usuario");
                 entity.Property(e => e.Password).HasMaxLength(200);
                 entity.Property(e => e.PasswordFormat).HasMaxLength(300);
-                entity.Property(e => e.Per01Llave)
-                    
-                    .HasColumnName("PER01_Llave");
-                entity.Property(e => e.Secu02Activo).HasColumnName("SECU02_Activo");
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
+                entity.Property(e => e.Secu02activo).HasColumnName("SECU02_activo");
                 entity.Property(e => e.UserName).HasMaxLength(100);
             });
 
+            modelBuilder.Entity<Mvl04AliasTablaSinc>(entity =>
+            {
+                entity.HasKey(e => e.idtabla);
+
+                entity.ToTable("MVL04_AliasTablaSinc");
+
+                entity.Property(e => e.idtabla).HasColumnName("id_tabla");
+                entity.Property(e => e.nombretabla).HasMaxLength(300)
+                    .HasColumnName("Nombre_Tabla");
+
+                entity.Property(e => e.mvl04aliastabla).HasColumnName("MVL04_AliasTabla");
+
+            });
+
+
+
             modelBuilder.Entity<Obsc01ObservacionCampo>(entity =>
             {
-                entity.HasKey(e => e.Obsc01Llave);
+                entity.HasKey(e => e.Obsc01llave);
 
                 entity.ToTable("OBSC01_ObservacionCampo");
 
-                entity.Property(e => e.Obsc01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("OBSC01_Llave");
+                entity.HasIndex(e => e.esp08llave, "IX_OBSC01_ObservacionCampo_ESP08_llave");
+
+                entity.HasIndex(e => e.Temp02llave, "IX_OBSC01_ObservacionCampo_TEMP02_llave");
+
+                entity.Property(e => e.Obsc01llave).HasColumnName("OBSC01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp08Llave)
-                    
-                    .HasColumnName("ESP08_Llave");
+                entity.Property(e => e.esp08llave).HasColumnName("ESP08_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Obsc01Activo).HasColumnName("OBSC01_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Obsc01activo).HasColumnName("OBSC01_activo");
                 entity.Property(e => e.Obsc01FechaObservacion)
                     .HasColumnType("datetime")
                     .HasColumnName("OBSC01_FechaObservacion");
                 entity.Property(e => e.Obsc01Interesado)
                     .HasDefaultValueSql("((0))")
                     .HasColumnName("OBSC01_interesado");
-                entity.Property(e => e.Obsc01Nombre)
+                entity.Property(e => e.Obsc01nombre)
                     .HasMaxLength(255)
-                    .HasColumnName("OBSC01_Nombre");
+                    .HasColumnName("OBSC01_nombre");
                 entity.Property(e => e.Obsc01Resumen)
                     .HasMaxLength(1000)
                     .IsFixedLength()
@@ -3158,92 +2922,82 @@ namespace mipBackend.Data
                 entity.Property(e => e.Obsc01UrlPdf)
                     .HasMaxLength(1000)
                     .HasColumnName("OBSC01_UrlPdf");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
 
-                entity.HasOne(d => d.Esp08LlaveNavigation).WithMany(p => p.Obsc01ObservacionCampos)
-                    .HasForeignKey(d => d.Esp08Llave)
+                entity.HasOne(d => d.esp08llaveNavigation).WithMany(p => p.Obsc01ObservacionCampos)
+                    .HasForeignKey(d => d.esp08llave)
                     .HasConstraintName("FK_OBSC01_ObservacionCampo_ESP08_TipoBase");
 
-                entity.HasOne(d => d.Temp02LlaveNavigation).WithMany(p => p.Obsc01ObservacionCampos)
-                    .HasForeignKey(d => d.Temp02Llave)
+                entity.HasOne(d => d.Temp02llaveNavigation).WithMany(p => p.Obsc01ObservacionCampos)
+                    .HasForeignKey(d => d.Temp02llave)
                     .HasConstraintName("FK_OBSC01_ObservacionCampo_TEMP02_TemporadaBase");
             });
 
             modelBuilder.Entity<Obsc02ServicioPostcosecha>(entity =>
             {
-                entity.HasKey(e => e.Obsc02Llave);
+                entity.HasKey(e => e.Obsc02llave);
 
                 entity.ToTable("OBSC02_ServicioPostcosecha");
 
-                entity.Property(e => e.Obsc02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("OBSC02_Llave");
+                entity.Property(e => e.Obsc02llave).HasColumnName("OBSC02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp08Llave)
-                    
-                    .HasColumnName("ESP08_Llave");
+                entity.Property(e => e.esp08llave).HasColumnName("ESP08_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Obsc02Activo).HasColumnName("OBSC02_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Obsc02activo).HasColumnName("OBSC02_activo");
                 entity.Property(e => e.Obsc02Fecha)
                     .HasColumnType("datetime")
                     .HasColumnName("OBSC02_Fecha");
-                entity.Property(e => e.Obsc02Nombre)
+                entity.Property(e => e.Obsc02nombre)
                     .HasMaxLength(255)
-                    .HasColumnName("OBSC02_Nombre");
+                    .HasColumnName("OBSC02_nombre");
                 entity.Property(e => e.Obsc02Resumen).HasColumnName("OBSC02_Resumen");
                 entity.Property(e => e.Obsc02UrlPdf)
                     .HasMaxLength(1000)
                     .HasColumnName("OBSC02_UrlPdf");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
             });
 
             modelBuilder.Entity<Pbcd01Publicidad>(entity =>
             {
-                entity.HasKey(e => e.Pbcd01Llave);
+                entity.HasKey(e => e.Pbcd01llave);
 
                 entity.ToTable("PBCD01_Publicidad");
 
-                entity.Property(e => e.Pbcd01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PBCD01_Llave");
+                entity.HasIndex(e => e.Pbcd02llave, "IX_PBCD01_Publicidad_PBCD02_llave");
+
+                entity.Property(e => e.Pbcd01llave).HasColumnName("PBCD01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Pbcd01Activo).HasColumnName("PBCD01_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Pbcd01activo).HasColumnName("PBCD01_activo");
                 entity.Property(e => e.Pbcd01FrasePrincipal)
                     .HasMaxLength(500)
                     .HasColumnName("PBCD01_FrasePrincipal");
                 entity.Property(e => e.Pbcd01FraseSecundaria)
                     .HasMaxLength(500)
                     .HasColumnName("PBCD01_FraseSecundaria");
-                entity.Property(e => e.Pbcd01ImagenNombre)
+                entity.Property(e => e.Pbcd01Imagennombre)
                     .HasMaxLength(500)
-                    .HasColumnName("PBCD01_ImagenNombre");
+                    .HasColumnName("PBCD01_Imagennombre");
                 entity.Property(e => e.Pbcd01Objetico)
                     .HasMaxLength(500)
                     .HasColumnName("PBCD01_Objetico");
@@ -3256,72 +3010,64 @@ namespace mipBackend.Data
                 entity.Property(e => e.Pbcd01SecuenciaHtml)
                     .HasMaxLength(500)
                     .HasColumnName("PBCD01_SecuenciaHtml");
-                entity.Property(e => e.Pbcd02Llave)
-                    
-                    .HasColumnName("PBCD02_Llave");
+                entity.Property(e => e.Pbcd02llave).HasColumnName("PBCD02_llave");
 
-                entity.HasOne(d => d.Pbcd02LlaveNavigation).WithMany(p => p.Pbcd01Publicidads)
-                    .HasForeignKey(d => d.Pbcd02Llave)
+                entity.HasOne(d => d.Pbcd02llaveNavigation).WithMany(p => p.Pbcd01Publicidads)
+                    .HasForeignKey(d => d.Pbcd02llave)
                     .HasConstraintName("FK_PBCD01_Publicidad_PBCD02_TipoPublicidad");
             });
 
             modelBuilder.Entity<Pbcd02TipoPublicidad>(entity =>
             {
-                entity.HasKey(e => e.Pbcd02Llave);
+                entity.HasKey(e => e.Pbcd02llave);
 
                 entity.ToTable("PBCD02_TipoPublicidad");
 
-                entity.Property(e => e.Pbcd02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PBCD02_Llave");
+                entity.Property(e => e.Pbcd02llave).HasColumnName("PBCD02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Pbcd02Activo).HasColumnName("PBCD02_Activo");
-                entity.Property(e => e.Pbcd02Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Pbcd02activo).HasColumnName("PBCD02_activo");
+                entity.Property(e => e.Pbcd02descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("PBCD02_Descripcion");
-                entity.Property(e => e.Pbcd02Nombre)
+                    .HasColumnName("PBCD02_descripcion");
+                entity.Property(e => e.Pbcd02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("PBCD02_Nombre");
+                    .HasColumnName("PBCD02_nombre");
             });
 
             modelBuilder.Entity<Pbcd03Programacion>(entity =>
             {
-                entity.HasKey(e => e.Pbcd03Llave);
+                entity.HasKey(e => e.Pbcd03llave);
 
                 entity.ToTable("PBCD03_Programacion");
 
-                entity.Property(e => e.Pbcd03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PBCD03_Llave");
+                entity.HasIndex(e => e.Pbcd01llave, "IX_PBCD03_Programacion_PBCD01_llave");
+
+                entity.Property(e => e.Pbcd03llave).HasColumnName("PBCD03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Pbcd01Llave)
-                    
-                    .HasColumnName("PBCD01_Llave");
-                entity.Property(e => e.Pbcd03Activo).HasColumnName("PBCD03_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Pbcd01llave).HasColumnName("PBCD01_llave");
+                entity.Property(e => e.Pbcd03activo).HasColumnName("PBCD03_activo");
                 entity.Property(e => e.Pbcd03InicioFecha)
                     .HasColumnType("datetime")
                     .HasColumnName("PBCD03_InicioFecha");
@@ -3329,37 +3075,38 @@ namespace mipBackend.Data
                     .HasColumnType("datetime")
                     .HasColumnName("PBCD03_TerminoFecha");
 
-                entity.HasOne(d => d.Pbcd01LlaveNavigation).WithMany(p => p.Pbcd03Programacions)
-                    .HasForeignKey(d => d.Pbcd01Llave)
+                entity.HasOne(d => d.Pbcd01llaveNavigation).WithMany(p => p.Pbcd03Programacions)
+                    .HasForeignKey(d => d.Pbcd01llave)
                     .HasConstraintName("FK_PBCD03_Programacion_PBCD01_Publicidad");
             });
 
-            modelBuilder.Entity<Per01Persona>(entity =>
+            modelBuilder.Entity<per01persona>(entity =>
             {
                 entity.HasKey(e => e.per01llave);
 
-                entity.ToTable("PER01_Persona");
+                entity.ToTable("PER01_persona");
 
-                entity.Property(e => e.per01llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PER01_Llave");
+                entity.HasIndex(e => e.per02llave, "IX_PER01_persona_PER02_llave");
+
+                entity.HasIndex(e => e.per03llave, "IX_PER01_persona_PER03_llave");
+
+                entity.HasIndex(e => e.per08llave, "IX_PER01_persona_PER08_llave");
+
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.per01activo).HasColumnName("PER01_Activo");
-                entity.Property(e => e.per01anioingreso)
-                    
-                    .HasColumnName("PER01_AnioIngreso");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per01activo).HasColumnName("PER01_activo");
+                entity.Property(e => e.per01anioingreso).HasColumnName("PER01_AnioIngreso");
                 entity.Property(e => e.per01cargo)
                     .HasMaxLength(500)
                     .HasColumnName("PER01_Cargo");
@@ -3371,634 +3118,565 @@ namespace mipBackend.Data
                     .HasColumnName("PER01_Giro");
                 entity.Property(e => e.per01nombrefantasia)
                     .HasMaxLength(500)
-                    .HasColumnName("PER01_NombreFantasia");
+                    .HasColumnName("PER01_nombreFantasia");
                 entity.Property(e => e.per01nombrerazon)
                     .HasMaxLength(500)
-                    .HasColumnName("PER01_NombreRazon");
-                entity.Property(e => e.per01rut)
-                    
-                    .HasColumnName("PER01_Rut");
-                entity.Property(e => e.per02llave)
-                    
-                    .HasColumnName("PER02_Llave");
-                entity.Property(e => e.per03llave)
-                    
-                    .HasColumnName("PER03_Llave");
-                entity.Property(e => e.per08llave)
+                    .HasColumnName("PER01_nombreRazon");
+                entity.Property(e => e.per01rut).HasColumnName("PER01_Rut");
+                entity.Property(e => e.per02llave).HasColumnName("PER02_llave");
+                entity.Property(e => e.per03llave).HasColumnName("PER03_llave");
+                entity.Property(e => e.per08llave).HasColumnName("PER08_llave");
 
-                   .HasColumnName("PER08_Llave");
-
-                entity.HasOne(d => d.Per02LlaveNavigation).WithMany(p => p.Per01Personas)
+                entity.HasOne(d => d.per02llaveNavigation).WithMany(p => p.per01personas)
                     .HasForeignKey(d => d.per02llave)
-                    .HasConstraintName("FK_PER01_Persona_PER02_Genero");
+                    .HasConstraintName("FK_PER01_persona_PER02_Genero");
 
-                entity.HasOne(d => d.Per03LlaveNavigation).WithMany(p => p.Per01Personas)
+                entity.HasOne(d => d.per03llaveNavigation).WithMany(p => p.per01personas)
                     .HasForeignKey(d => d.per03llave)
-                    .HasConstraintName("FK_PER01_Persona_PER03_TipoPersona");
+                    .HasConstraintName("FK_PER01_persona_PER03_Tipopersona");
+
+                entity.HasOne(d => d.per08llaveNavigation).WithMany(p => p.per01personas)
+                    .HasForeignKey(d => d.per08llave)
+                    .HasConstraintName("FK_PER01_persona_PER08_Tipodocumento");
             });
 
-            modelBuilder.Entity<Per02Genero>(entity =>
+            modelBuilder.Entity<per02Genero>(entity =>
             {
                 entity.HasKey(e => e.per02llave);
 
                 entity.ToTable("PER02_Genero");
 
-                entity.Property(e => e.per02llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PER02_Llave");
+                entity.Property(e => e.per02llave).HasColumnName("PER02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.per02activo).HasColumnName("PER02_Activo");
-                entity.Property(e => e.per02orden)
-                    
-                    .HasColumnName("PER02_Orden");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per02activo).HasColumnName("PER02_activo");
+                entity.Property(e => e.per02orden).HasColumnName("PER02_Orden");
                 entity.Property(e => e.per02titulo)
                     .HasMaxLength(50)
                     .HasColumnName("PER02_Titulo");
             });
 
-            modelBuilder.Entity<Per03TipoPersona>(entity =>
+            modelBuilder.Entity<per03Tipopersona>(entity =>
             {
                 entity.HasKey(e => e.per03llave);
 
-                entity.ToTable("PER03_TipoPersona");
+                entity.ToTable("PER03_Tipopersona");
 
-                entity.Property(e => e.per03llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PER03_Llave");
+                entity.Property(e => e.per03llave).HasColumnName("PER03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.per03activo).HasColumnName("PER03_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per03activo).HasColumnName("PER03_activo");
                 entity.Property(e => e.per03descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("PER03_Descripcion");
+                    .HasColumnName("PER03_descripcion");
                 entity.Property(e => e.per03nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("PER03_Nombre");
+                    .HasColumnName("PER03_nombre");
             });
 
-            modelBuilder.Entity<Per04TipoComunicacion>(entity =>
+            modelBuilder.Entity<per04TipoComunicacion>(entity =>
             {
                 entity.HasKey(e => e.per04llave);
 
                 entity.ToTable("PER04_TipoComunicacion");
 
-                entity.Property(e => e.per04llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PER04_Llave");
+                entity.Property(e => e.per04llave).HasColumnName("PER04_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.per04activo).HasColumnName("PER04_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per04activo).HasColumnName("PER04_activo");
                 entity.Property(e => e.per04descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("PER04_Descripcion");
+                    .HasColumnName("PER04_descripcion");
                 entity.Property(e => e.per04nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("PER04_Nombre");
+                    .HasColumnName("PER04_nombre");
             });
 
-            modelBuilder.Entity<Per05Comunicacion>(entity =>
+            modelBuilder.Entity<per05Comunicacion>(entity =>
             {
-                entity.HasKey(e => new { e.Per01Llave, e.Per04Llave, e.Per03Llave });
+                entity.HasKey(e => new { e.per01llave, e.per04llave, e.per03llave });
 
                 entity.ToTable("PER05_Comunicacion");
 
-                entity.Property(e => e.Per01Llave)
-                    
-                    .HasColumnName("PER01_Llave");
-                entity.Property(e => e.Per04Llave)
-                    
-                    .HasColumnName("PER04_Llave");
-                entity.Property(e => e.Per03Llave)
-                    
-                    .HasColumnName("PER03_Llave");
+                entity.HasIndex(e => new { e.per03llave, e.per04llave }, "IX_PER05_Comunicacion_PER03_llave_PER04_llave");
+
+                entity.HasIndex(e => e.per04llave, "IX_PER05_Comunicacion_PER04_llave");
+
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
+                entity.Property(e => e.per04llave).HasColumnName("PER04_llave");
+                entity.Property(e => e.per03llave).HasColumnName("PER03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per05Casilla)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per05casilla)
                     .HasMaxLength(500)
                     .HasColumnName("PER05_casilla");
-                entity.Property(e => e.Per05Celular1)
+                entity.Property(e => e.per05celular1)
                     .HasMaxLength(50)
                     .HasColumnName("PER05_Celular1");
-                entity.Property(e => e.Per05Celular2)
+                entity.Property(e => e.per05celular2)
                     .HasMaxLength(50)
                     .HasColumnName("PER05_Celular2");
-                entity.Property(e => e.Per05CodigoPostal)
+                entity.Property(e => e.per05codigopostal)
                     .HasMaxLength(500)
                     .HasColumnName("PER05_CodigoPostal");
-                entity.Property(e => e.Per05Direccion)
+                entity.Property(e => e.per05direccion)
                     .HasMaxLength(500)
                     .HasColumnName("PER05_Direccion");
-                entity.Property(e => e.Per05Email)
+                entity.Property(e => e.per05email)
                     .HasMaxLength(250)
                     .HasColumnName("PER05_Email");
-                entity.Property(e => e.Per05Fax)
+                entity.Property(e => e.per05fax)
                     .HasMaxLength(50)
                     .HasColumnName("PER05_Fax");
-                entity.Property(e => e.Per05SitioWeb)
+                entity.Property(e => e.per05sitioWeb)
                     .HasMaxLength(50)
                     .HasColumnName("PER05_SitioWeb");
-                entity.Property(e => e.Per05Telefono1)
+                entity.Property(e => e.per05telefono1)
                     .HasMaxLength(50)
                     .HasColumnName("PER05_Telefono1");
-                entity.Property(e => e.Per05Telefono2)
+                entity.Property(e => e.per05telefono2)
                     .HasMaxLength(50)
                     .HasColumnName("PER05_Telefono2");
-                entity.Property(e => e.Per05TieneCasilla).HasColumnName("PER05_TieneCasilla");
-                entity.Property(e => e.Sist03Llave)
-                    
-                    .HasColumnName("SIST03_Llave");
+                entity.Property(e => e.per05tienecasilla).HasColumnName("PER05_TieneCasilla");
+                entity.Property(e => e.sist03llave).HasColumnName("SIST03_llave");
 
-                entity.HasOne(d => d.Per01LlaveNavigation).WithMany(p => p.Per05Comunicacions)
-                    .HasForeignKey(d => d.Per01Llave)
+                entity.HasOne(d => d.per01llaveNavigation).WithMany(p => p.per05Comunicacions)
+                    .HasForeignKey(d => d.per01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PER05_Comunicacion_PER01_Persona");
+                    .HasConstraintName("FK_PER05_Comunicacion_PER01_persona");
 
-                entity.HasOne(d => d.Per03LlaveNavigation).WithMany(p => p.Per05Comunicacions)
-                    .HasForeignKey(d => d.Per03Llave)
+                entity.HasOne(d => d.per03llaveNavigation).WithMany(p => p.per05Comunicacions)
+                    .HasForeignKey(d => d.per03llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PER05_Comunicacion_PER03_TipoPersona");
+                    .HasConstraintName("FK_PER05_Comunicacion_PER03_Tipopersona");
 
-                entity.HasOne(d => d.Per04LlaveNavigation).WithMany(p => p.Per05Comunicacions)
-                    .HasForeignKey(d => d.Per04Llave)
+                entity.HasOne(d => d.per04llaveNavigation).WithMany(p => p.per05Comunicacions)
+                    .HasForeignKey(d => d.per04llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PER05_Comunicacion_PER04_TipoComunicacion");
 
-                entity.HasOne(d => d.Per0).WithMany(p => p.Per05Comunicacions)
-                    .HasForeignKey(d => new { d.Per03Llave, d.Per04Llave })
+                entity.HasOne(d => d.per0).WithMany(p => p.per05Comunicacions)
+                    .HasForeignKey(d => new { d.per03llave, d.per04llave })
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PER05_Comunicacion_PER06_TipoPersonaComunicacion");
+                    .HasConstraintName("FK_PER05_Comunicacion_PER06_TipopersonaComunicacion");
             });
 
-            modelBuilder.Entity<Per06TipoPersonaComunicacion>(entity =>
+            modelBuilder.Entity<per06TipopersonaComunicacion>(entity =>
             {
                 entity.HasKey(e => new { e.per03llave, e.per04llave });
 
-                entity.ToTable("PER06_TipoPersonaComunicacion");
+                entity.ToTable("PER06_TipopersonaComunicacion");
 
-                entity.Property(e => e.per03llave)
-                    
-                    .HasColumnName("PER03_Llave");
-                entity.Property(e => e.per04llave)
-                    
-                    .HasColumnName("PER04_Llave");
+                entity.HasIndex(e => e.per04llave, "IX_PER06_TipopersonaComunicacion_PER04_llave");
+
+                entity.Property(e => e.per03llave).HasColumnName("PER03_llave");
+                entity.Property(e => e.per04llave).HasColumnName("PER04_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
 
-                entity.HasOne(d => d.Per03LlaveNavigation).WithMany(p => p.Per06TipoPersonaComunicacions)
+                entity.HasOne(d => d.per03llaveNavigation).WithMany(p => p.per06TipopersonaComunicacions)
                     .HasForeignKey(d => d.per03llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PER06_TipoPersonaComunicacion_PER03_TipoPersona");
+                    .HasConstraintName("FK_PER06_TipopersonaComunicacion_PER03_Tipopersona");
 
-                entity.HasOne(d => d.Per04LlaveNavigation).WithMany(p => p.Per06TipoPersonaComunicacions)
+                entity.HasOne(d => d.per04llaveNavigation).WithMany(p => p.per06TipopersonaComunicacions)
                     .HasForeignKey(d => d.per04llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PER06_TipoPersonaComunicacion_PER04_TipoComunicacion");
+                    .HasConstraintName("FK_PER06_TipopersonaComunicacion_PER04_TipoComunicacion");
             });
 
-            modelBuilder.Entity<Per07PersonaUsuario>(entity =>
+            modelBuilder.Entity<per07personaUsuario>(entity =>
             {
-                entity.HasKey(e => e.Per07Llave);
+                entity.HasKey(e => e.per07llave);
 
-                entity.ToTable("PER07_PersonaUsuario");
+                entity.ToTable("PER07_personaUsuario");
 
-                entity.Property(e => e.Per07Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PER07_Llave");
+                entity.HasIndex(e => e.per01llave, "IX_PER07_personaUsuario_PER01_llave");
+
+                entity.Property(e => e.per07llave).HasColumnName("PER07_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Per01Llave)
-                    
-                    .HasColumnName("PER01_Llave");
-                entity.Property(e => e.Per07Activo).HasColumnName("PER07_Activo");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per01llave).HasColumnName("PER01_llave");
+                entity.Property(e => e.per07activo).HasColumnName("PER07_activo");
+                entity.Property(e => e.userid)
+                    .HasMaxLength(450)
+                    .HasColumnName("UserId");
 
-                entity.HasOne(d => d.Per01LlaveNavigation).WithMany(p => p.Per07PersonaUsuarios)
-                    .HasForeignKey(d => d.Per01Llave)
-                    .HasConstraintName("FK_PER07_PersonaUsuario_PER01_Persona");
+                entity.HasOne(d => d.per01llaveNavigation).WithMany(p => p.per07personaUsuarios)
+                    .HasForeignKey(d => d.per01llave)
+                    .HasConstraintName("FK_PER07_personaUsuario_PER01_persona");
             });
 
-            modelBuilder.Entity<Per08TipoDocumento>(entity =>
+            modelBuilder.Entity<per08TipoDocumento>(entity =>
             {
                 entity.HasKey(e => e.per08llave);
 
                 entity.ToTable("PER08_TipoDocumento");
 
-                entity.Property(e => e.per08llave)
-                    .ValueGeneratedOnAdd()
-
-                    .HasColumnName("PER08_Llave");
+                entity.Property(e => e.per08llave).HasColumnName("PER08_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.per08activo).HasColumnName("PER08_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.per08activo).HasColumnName("PER08_activo");
                 entity.Property(e => e.per08descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("PER08_Descripcion");
+                    .HasColumnName("PER08_descripcion");
                 entity.Property(e => e.per08nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("PER08_Nombre");
+                    .HasColumnName("PER08_nombre");
             });
 
-            modelBuilder.Entity<Per09DefaultUser>(entity =>
+            modelBuilder.Entity<per09DefaultUser>(entity =>
             {
                 entity.HasKey(e => e.per09llave);
 
                 entity.ToTable("PER09_DefaultUser");
 
-                entity.Property(e => e.per09llave)
-                    .ValueGeneratedOnAdd()
-
-                    .HasColumnName("PER09_Llave");
-
+                entity.Property(e => e.per09llave).HasColumnName("PER09_llave");
+                entity.Property(e => e.per09nombre)
+                    .HasMaxLength(250)
+                    .HasColumnName("PER09_nombre");
+                entity.Property(e => e.plantillaid).HasColumnName("Plantilla_id");
                 entity.Property(e => e.rolid)
                     .HasMaxLength(50)
                     .HasColumnName("Rol_id");
-
-                entity.Property(e => e.tipodocumentoid).HasColumnName("TipoDocumento_id");
-                entity.Property(e => e.tipopersonaid).HasColumnName("TipoPersona_id");
-                entity.Property(e => e.plantillaid).HasColumnName("Plantilla_id");
                 entity.Property(e => e.saludoid).HasColumnName("Saludo_id");
-                
-                entity.Property(e => e.per09nombre)
-                    .HasMaxLength(250)
-                    .HasColumnName("PER09_Nombre");
+                entity.Property(e => e.tipodocumentoid).HasColumnName("TipoDocumento_id");
+                entity.Property(e => e.tipopersonaid).HasColumnName("Tipopersona_id");
             });
 
             modelBuilder.Entity<Pgo01CompraLicencia>(entity =>
             {
-                entity.HasKey(e => e.Pgo1Llave);
+                entity.HasKey(e => e.Pgo1llave);
 
                 entity.ToTable("PGO01_CompraLicencia");
 
-                entity.Property(e => e.Pgo1Llave)
-                    
-                    .HasColumnName("PGO1_Llave");
-                entity.Property(e => e.Cnt19Llave)
-                    
-                    .HasColumnName("CNT19_Llave");
+                entity.HasIndex(e => e.cnt19llave, "IX_PGO01_CompraLicencia_CNT19_llave");
+
+                entity.HasIndex(e => e.Pgo03llave, "IX_PGO01_CompraLicencia_PGO03_llave");
+
+                entity.Property(e => e.Pgo1llave).HasColumnName("PGO1_llave");
+                entity.Property(e => e.cnt19llave).HasColumnName("CNT19_llave");
                 entity.Property(e => e.Fechacompra)
                     .HasColumnType("datetime")
                     .HasColumnName("FECHACOMPRA");
-                entity.Property(e => e.Pgo01Activo).HasColumnName("PGO01_Activo");
-                entity.Property(e => e.Pgo01TotalCompra)
-                   
-                    .HasColumnName("PGO01_TotalCompra");
-                entity.Property(e => e.Pgo03Llave)
-                    
-                    .HasColumnName("PGO03_Llave");
+                entity.Property(e => e.Pgo01activo).HasColumnName("PGO01_activo");
+                entity.Property(e => e.Pgo01TotalCompra).HasColumnName("PGO01_TotalCompra");
+                entity.Property(e => e.Pgo03llave).HasColumnName("PGO03_llave");
 
-                entity.HasOne(d => d.Cnt19LlaveNavigation).WithMany(p => p.Pgo01CompraLicencia)
-                    .HasForeignKey(d => d.Cnt19Llave)
+                entity.HasOne(d => d.cnt19llaveNavigation).WithMany(p => p.Pgo01CompraLicencia)
+                    .HasForeignKey(d => d.cnt19llave)
                     .HasConstraintName("FK_PGO01_CompraLicencia_CNT01_CuentaCliente");
 
-                entity.HasOne(d => d.Cnt19Llave1).WithMany(p => p.Pgo01CompraLicencia)
-                    .HasForeignKey(d => d.Cnt19Llave)
+                entity.HasOne(d => d.cnt19llave1).WithMany(p => p.Pgo01CompraLicencia)
+                    .HasForeignKey(d => d.cnt19llave)
                     .HasConstraintName("FK_PGO01_CompraLicencia_CNT19_LicenciaCliente");
 
-                entity.HasOne(d => d.Pgo03LlaveNavigation).WithMany(p => p.Pgo01CompraLicencia)
-                    .HasForeignKey(d => d.Pgo03Llave)
+                entity.HasOne(d => d.Pgo03llaveNavigation).WithMany(p => p.Pgo01CompraLicencia)
+                    .HasForeignKey(d => d.Pgo03llave)
                     .HasConstraintName("FK_PGO01_CompraLicencia_PGO03_FormaPago1");
             });
 
             modelBuilder.Entity<Pgo02NotificarPagoLicencia>(entity =>
             {
-                entity.HasKey(e => e.Pgo02Llave);
+                entity.HasKey(e => e.Pgo02llave);
 
                 entity.ToTable("PGO02_NotificarPagoLicencia");
 
-                entity.Property(e => e.Pgo02Llave)
-                    
-                    .HasColumnName("PGO02_Llave");
+                entity.HasIndex(e => e.Pgo01llave, "IX_PGO02_NotificarPagoLicencia_PGO01_llave");
+
+                entity.Property(e => e.Pgo02llave).HasColumnName("PGO02_llave");
                 entity.Property(e => e.Fechanotificacionpago)
                     .HasColumnType("datetime")
                     .HasColumnName("FECHANOTIFICACIONPAGO");
-                entity.Property(e => e.Pgo01Llave)
-                    
-                    .HasColumnName("PGO01_Llave");
-                entity.Property(e => e.Pgo02Activo).HasColumnName("PGO02_Activo");
+                entity.Property(e => e.Pgo01llave).HasColumnName("PGO01_llave");
+                entity.Property(e => e.Pgo02activo).HasColumnName("PGO02_activo");
                 entity.Property(e => e.Pgo02DocumentoAdjunto).HasColumnName("PGO02_DocumentoAdjunto");
 
-                entity.HasOne(d => d.Pgo01LlaveNavigation).WithMany(p => p.Pgo02NotificarPagoLicencia)
-                    .HasForeignKey(d => d.Pgo01Llave)
+                entity.HasOne(d => d.Pgo01llaveNavigation).WithMany(p => p.Pgo02NotificarPagoLicencia)
+                    .HasForeignKey(d => d.Pgo01llave)
                     .HasConstraintName("FK_PGO02_NotificarPagoLicencia_PGO01_CompraLicencia");
             });
 
             modelBuilder.Entity<Pgo03TipoPagoLicencia>(entity =>
             {
-                entity.HasKey(e => e.Pgo03Llave).HasName("PK_PGO03_FormaPago");
+                entity.HasKey(e => e.Pgo03llave).HasName("PK_PGO03_FormaPago");
 
                 entity.ToTable("PGO03_TipoPagoLicencia");
 
-                entity.Property(e => e.Pgo03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PGO03_Llave");
-                entity.Property(e => e.Pgo03Activo).HasColumnName("PGO03_Activo");
-                entity.Property(e => e.Pgo03Descripcion)
+                entity.Property(e => e.Pgo03llave).HasColumnName("PGO03_llave");
+                entity.Property(e => e.Pgo03activo).HasColumnName("PGO03_activo");
+                entity.Property(e => e.Pgo03descripcion)
                     .HasMaxLength(250)
-                    .HasColumnName("PGO03_Descripcion");
-                entity.Property(e => e.Pgo03Nombre)
+                    .HasColumnName("PGO03_descripcion");
+                entity.Property(e => e.Pgo03nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("PGO03_Nombre");
+                    .HasColumnName("PGO03_nombre");
             });
 
-            modelBuilder.Entity<Prf01Perfil>(entity =>
+            modelBuilder.Entity<prf01perfil>(entity =>
             {
-                entity.HasKey(e => e.Prf01Llave);
+                entity.HasKey(e => e.prf01llave);
 
-                entity.ToTable("PRF01_Perfiles");
+                entity.ToTable("PRF01_perfiles");
 
-                entity.Property(e => e.Prf01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PRF01_Llave");
+                entity.HasIndex(e => e.prf03llave, "IX_PRF01_perfiles_PRF05_llave");
+
+                entity.HasIndex(e => e.userid, "IX_PRF01_perfiles_SECU02_llave");
+
+                entity.Property(e => e.prf01llave).HasColumnName("PRF01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Prf01Activo).HasColumnName("PRF01_Activo");
-                entity.Property(e => e.Prf05Llave)
-                    
-                    .HasColumnName("PRF05_llave");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.prf01activo).HasColumnName("PRF01_activo");
+                entity.Property(e => e.prf03llave).HasColumnName("PRF03_llave");
+                entity.Property(e => e.userid).HasColumnName("UserId");
 
-                entity.HasOne(d => d.Prf05LlaveNavigation).WithMany(p => p.Prf01Perfiles)
-                    .HasForeignKey(d => d.Prf05Llave)
-                    .HasConstraintName("FK_PRF01_Perfiles_PRF05_TipoAsignacionUsuario");
+                entity.HasOne(d => d.prf03llavenavigation).WithMany(p => p.prf01perfiles)
+                    .HasForeignKey(d => d.prf03llave)
+                    .HasConstraintName("FK_PRF01_perfiles_PRF03_Plantilla");
 
-                entity.HasOne(d => d.Secu02LlaveNavigation).WithMany(p => p.Prf01Perfiles)
-                    .HasForeignKey(d => d.Secu02Llave)
-                    .HasConstraintName("FK_PRF01_Perfiles_SECU02_Usuario");
-
-                entity.HasMany(d => d.Prf03Llaves).WithMany(p => p.Prf01Llaves)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "Prf02PlantillasUsuario",
-                        r => r.HasOne<Prf03Plantilla>().WithMany()
-                            .HasForeignKey("Prf03Llave")
-                            .OnDelete(DeleteBehavior.ClientSetNull)
-                            .HasConstraintName("FK_PRF02_PlantillasUsuario_PRF03_Plantilla"),
-                        l => l.HasOne<Prf01Perfil>().WithMany()
-                            .HasForeignKey("Prf01Llave")
-                            .OnDelete(DeleteBehavior.ClientSetNull)
-                            .HasConstraintName("FK_PRF02_PlantillasUsuario_PRF01_Perfiles"),
-                        j =>
-                        {
-                            j.HasKey("Prf01Llave", "Prf03Llave");
-                            j.ToTable("PRF02_PlantillasUsuario");
-                        });
+               /* entity.HasOne(d => d.Usr).WithMany(p => p.prf01perfiles)
+                    .HasForeignKey(d => d.userid)
+                    .HasConstraintName("FK_PRF01_perfiles_AspNetUsers");*/
             });
 
-            modelBuilder.Entity<Prf03Plantilla>(entity =>
+            modelBuilder.Entity<prf03Plantilla>(entity =>
             {
-                entity.HasKey(e => e.prf03llave).HasName("PK_PRF03_PlantillaFlujo");
+                entity.HasKey(e => e.prf03llave).HasName("PK_PRF03_Plantillaperfil");
 
                 entity.ToTable("PRF03_Plantilla");
 
-                entity.Property(e => e.prf03llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PRF03_Llave");
+                entity.Property(e => e.prf03llave).HasColumnName("PRF03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.prf03activo).HasColumnName("PRF03_Activo");
-                entity.Property(e => e.prf03descripcion).HasColumnName("PRF03_Descripcion");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.prf03activo).HasColumnName("PRF03_activo");
+                entity.Property(e => e.prf03descripcion).HasColumnName("PRF03_descripcion");
                 entity.Property(e => e.prf03nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("PRF03_Nombre");
+                    .HasColumnName("PRF03_nombre");
             });
 
-            modelBuilder.Entity<Prf04PlantillaFlujo>(entity =>
+            modelBuilder.Entity<prf04PlantillaFlujo>(entity =>
             {
                 entity.HasKey(e => e.prf04llave).HasName("PK_PRF04_plantillaFlujo");
 
                 entity.ToTable("PRF04_PlantillaFlujo");
 
                 entity.Property(e => e.prf04llave).HasColumnName("PRF04_llave");
-                entity.Property(e => e.prf03llave).HasColumnName("PRF03_Llave");
-                entity.Property(e => e.wkf01llave).HasColumnName("WKF01_Llave");
+                entity.Property(e => e.prf03llave).HasColumnName("PRF03_llave");
+                entity.Property(e => e.wkf01llave).HasColumnName("WKF01_llave");
             });
 
-            modelBuilder.Entity<Prf05TipoAsignacionUsuario>(entity =>
+            modelBuilder.Entity<prf05TipoAsignacionUsuario>(entity =>
             {
-                entity.HasKey(e => e.Prf05Llave);
+                entity.HasKey(e => e.prf05llave);
 
                 entity.ToTable("PRF05_TipoAsignacionUsuario");
 
-                entity.Property(e => e.Prf05Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PRF05_Llave");
+                entity.Property(e => e.prf05llave).HasColumnName("PRF05_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Prf05Activo).HasColumnName("PRF05_Activo");
-                entity.Property(e => e.Prf05Descripcion).HasColumnName("PRF05_Descripcion");
-                entity.Property(e => e.Prf05Nombre)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.prf05activo).HasColumnName("PRF05_activo");
+                entity.Property(e => e.prf05descripcion).HasColumnName("PRF05_descripcion");
+                entity.Property(e => e.prf05nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("PRF05_Nombre");
+                    .HasColumnName("PRF05_nombre");
             });
 
-            modelBuilder.Entity<Prf06PermisosUsuario>(entity =>
+            modelBuilder.Entity<prf06permisosUsuario>(entity =>
             {
-                entity.HasKey(e => new { e.Prf01Llave, e.Wkf06Llave });
+                entity.HasKey(e => new { e.prf01llave, e.wkf06llave });
 
-                entity.ToTable("PRF06_PermisosUsuario");
+                entity.ToTable("PRF06_permisosUsuario");
 
-                entity.Property(e => e.Prf01Llave)
-                    
-                    .HasColumnName("PRF01_llave");
-                entity.Property(e => e.Wkf06Llave)
-                    
-                    .HasColumnName("WKF06_llave");
-                entity.Property(e => e.Prf06Activo).HasColumnName("PRF06_activo");
+                entity.HasIndex(e => e.wkf06llave, "IX_PRF06_permisosUsuario_WKF06_llave");
 
-                entity.HasOne(d => d.Prf01LlaveNavigation).WithMany(p => p.Prf06PermisosUsuarios)
-                    .HasForeignKey(d => d.Prf01Llave)
+                entity.Property(e => e.prf01llave).HasColumnName("PRF01_llave");
+                entity.Property(e => e.wkf06llave).HasColumnName("WKF06_llave");
+                entity.Property(e => e.prf06activo).HasColumnName("PRF06_activo");
+
+                entity.HasOne(d => d.wkf06llaveNavigation).WithMany(p => p.prf06permisosUsuarios)
+                    .HasForeignKey(d => d.wkf06llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PRF06_PermisosUsuario_PRF01_Perfiles");
-
-                entity.HasOne(d => d.Wkf06LlaveNavigation).WithMany(p => p.Prf06PermisosUsuarios)
-                    .HasForeignKey(d => d.Wkf06Llave)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PRF06_PermisosUsuario_WKF06_Perfiles");
+                    .HasConstraintName("FK_PRF06_permisosUsuario_WKF06_perfiles");
             });
 
             modelBuilder.Entity<Prm01Seguridad>(entity =>
             {
-                entity.HasKey(e => e.Prm01Llave);
+                entity.HasKey(e => e.Prm01llave);
 
                 entity.ToTable("PRM01_Seguridad");
 
-                entity.Property(e => e.Prm01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("PRM01_Llave");
+                entity.Property(e => e.Prm01llave).HasColumnName("PRM01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Prm01Activo).HasColumnName("PRM01_Activo");
-                entity.Property(e => e.Prm01Descripcion).HasColumnName("PRM01_Descripcion");
-                entity.Property(e => e.Prm01Nombre)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Prm01activo).HasColumnName("PRM01_activo");
+                entity.Property(e => e.Prm01descripcion).HasColumnName("PRM01_descripcion");
+                entity.Property(e => e.Prm01nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("PRM01_Nombre");
+                    .HasColumnName("PRM01_nombre");
                 entity.Property(e => e.Prm01UrlError)
                     .HasMaxLength(500)
                     .HasColumnName("PRM01_UrlError");
-                entity.Property(e => e.Prm01Valor)
-                    
-                    .HasColumnName("PRM01_valor");
+                entity.Property(e => e.Prm01Valor).HasColumnName("PRM01_valor");
+            });
+
+            modelBuilder.Entity<Region>(entity =>
+            {
+                entity.Property(e => e.isDeleted).HasColumnName("isDeleted");
             });
 
             modelBuilder.Entity<Secu01Rol>(entity =>
             {
-                entity.HasKey(e => e.Secu01Llave).HasName("PK__SECU01_R__2E718C9349B338EE");
+                entity.HasKey(e => e.Secu01llave).HasName("PK__SECU01_R__2E718C9349B338EE");
 
                 entity.ToTable("SECU01_Rol");
 
-                entity.Property(e => e.Secu01Llave)
+                entity.Property(e => e.Secu01llave)
                     .HasDefaultValueSql("(newid())")
-                    .HasColumnName("SECU01_Llave");
+                    .HasColumnName("SECU01_llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu01Activo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Secu01activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("SECU01_Activo");
-                entity.Property(e => e.Secu01Descripcion).HasColumnName("SECU01_Descripcion");
+                    .HasColumnName("SECU01_activo");
+                entity.Property(e => e.Secu01descripcion).HasColumnName("SECU01_descripcion");
                 entity.Property(e => e.Secu01Info)
                     .HasColumnType("xml")
                     .HasColumnName("SECU01_Info");
-                entity.Property(e => e.Secu01Nombre)
+                entity.Property(e => e.Secu01nombre)
                     .HasMaxLength(100)
-                    .HasColumnName("SECU01_Nombre");
+                    .HasColumnName("SECU01_nombre");
                 entity.Property(e => e.Secu01Orden).HasColumnName("SECU01_Orden");
             });
 
             modelBuilder.Entity<Secu02Usuario>(entity =>
             {
-                entity.HasKey(e => e.Secu02Llave).HasName("PK__SECU02_U__B709E3CA34F4CE22");
+                entity.HasKey(e => e.userid).HasName("PK__SECU02_U__B709E3CA34F4CE22");
 
                 entity.ToTable("SECU02_Usuario");
 
-                entity.Property(e => e.Secu02Llave)
+                entity.HasIndex(e => e.Secu04TipoEncriptacion, "IX_SECU02_Usuario_SECU04_TipoEncriptacion");
+
+                entity.Property(e => e.userid)
                     .HasDefaultValueSql("(newid())")
-                    .HasColumnName("SECU02_Llave");
+                    .HasColumnName("SECU02_llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu02Activo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Secu02activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("SECU02_Activo");
+                    .HasColumnName("SECU02_activo");
                 entity.Property(e => e.Secu02Bloqueado)
                     .HasDefaultValueSql("((0))")
                     .HasColumnName("SECU02_Bloqueado");
@@ -4036,59 +3714,59 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Secu03TipoAcceso>(entity =>
             {
-                entity.HasKey(e => e.Secu03Llave).HasName("PK__SECU03_T__7B6F14E7DEC70462");
+                entity.HasKey(e => e.Secu03llave).HasName("PK__SECU03_T__7B6F14E7DEC70462");
 
                 entity.ToTable("SECU03_TipoAcceso");
 
-                entity.Property(e => e.Secu03Llave)
+                entity.Property(e => e.Secu03llave)
                     .HasDefaultValueSql("(newsequentialid())")
-                    .HasColumnName("SECU03_Llave");
+                    .HasColumnName("SECU03_llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu03Activo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Secu03activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("SECU03_Activo");
-                entity.Property(e => e.Secu03Descripcion).HasColumnName("SECU03_Descripcion");
+                    .HasColumnName("SECU03_activo");
+                entity.Property(e => e.Secu03descripcion).HasColumnName("SECU03_descripcion");
                 entity.Property(e => e.Secu03Info)
                     .HasColumnType("xml")
                     .HasColumnName("SECU03_Info");
-                entity.Property(e => e.Secu03Nombre)
+                entity.Property(e => e.Secu03nombre)
                     .HasMaxLength(300)
-                    .HasColumnName("SECU03_Nombre");
+                    .HasColumnName("SECU03_nombre");
             });
 
             modelBuilder.Entity<Secu04TipoEncriptacion>(entity =>
             {
-                entity.HasKey(e => e.Secu04Llave).HasName("PK__SECU04_T__3412AACF89203574");
+                entity.HasKey(e => e.Secu04llave).HasName("PK__SECU04_T__3412AACF89203574");
 
                 entity.ToTable("SECU04_TipoEncriptacion");
 
-                entity.Property(e => e.Secu04Llave)
+                entity.Property(e => e.Secu04llave)
                     .ValueGeneratedNever()
-                    .HasColumnName("SECU04_Llave");
+                    .HasColumnName("SECU04_llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu04Activo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Secu04activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("SECU04_Activo");
+                    .HasColumnName("SECU04_activo");
                 entity.Property(e => e.Secu04Clase).HasColumnName("SECU04_Clase");
                 entity.Property(e => e.Secu04Funcion).HasColumnName("SECU04_Funcion");
                 entity.Property(e => e.Secu04Info)
                     .HasColumnType("xml")
                     .HasColumnName("SECU04_Info");
-                entity.Property(e => e.Secu04Nombre)
+                entity.Property(e => e.Secu04nombre)
                     .HasMaxLength(200)
-                    .HasColumnName("SECU04_Nombre");
+                    .HasColumnName("SECU04_nombre");
                 entity.Property(e => e.Secu04Parametros)
                     .HasColumnType("xml")
                     .HasColumnName("SECU04_Parametros");
@@ -4097,25 +3775,29 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Secu05UsuarioAcceso>(entity =>
             {
-                entity.HasKey(e => e.Secu05Llave).HasName("PK__SECU05_U__2980F8C26FA412CE");
+                entity.HasKey(e => e.Secu05llave).HasName("PK__SECU05_U__2980F8C26FA412CE");
 
                 entity.ToTable("SECU05_UsuarioAcceso");
 
-                entity.Property(e => e.Secu05Llave)
+                entity.HasIndex(e => e.userid, "IX_SECU05_UsuarioAcceso_SECU02_llave");
+
+                entity.HasIndex(e => e.Secu03TipoAcceso, "IX_SECU05_UsuarioAcceso_SECU03_TipoAcceso");
+
+                entity.Property(e => e.Secu05llave)
                     .HasDefaultValueSql("(newsequentialid())")
-                    .HasColumnName("SECU05_Llave");
+                    .HasColumnName("SECU05_llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
                 entity.Property(e => e.Secu03TipoAcceso).HasColumnName("SECU03_TipoAcceso");
-                entity.Property(e => e.Secu05Activo)
+                entity.Property(e => e.Secu05activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("SECU05_Activo");
+                    .HasColumnName("SECU05_activo");
                 entity.Property(e => e.Secu05Bloqueado)
                     .HasDefaultValueSql("((0))")
                     .HasColumnName("SECU05_Bloqueado");
@@ -4140,9 +3822,9 @@ namespace mipBackend.Data
                 entity.Property(e => e.Secu05Info)
                     .HasColumnType("xml")
                     .HasColumnName("SECU05_Info");
-                entity.Property(e => e.Secu05LlaveAcceso)
+                entity.Property(e => e.Secu05llaveAcceso)
                     .HasMaxLength(500)
-                    .HasColumnName("SECU05_LlaveAcceso");
+                    .HasColumnName("SECU05_llaveAcceso");
                 entity.Property(e => e.Secu05Mensaje)
                     .HasMaxLength(500)
                     .HasColumnName("SECU05_Mensaje");
@@ -4156,8 +3838,8 @@ namespace mipBackend.Data
                     .HasMaxLength(20)
                     .HasColumnName("SECU05_VersionDescarga");
 
-                entity.HasOne(d => d.Secu02LlaveNavigation).WithMany(p => p.Secu05UsuarioAccesos)
-                    .HasForeignKey(d => d.Secu02Llave)
+                entity.HasOne(d => d.useridNavigation).WithMany(p => p.Secu05UsuarioAccesos)
+                    .HasForeignKey(d => d.userid)
                     .HasConstraintName("FK_SECU05_UsuarioAcceso_SECU02_Usuario");
 
                 entity.HasOne(d => d.Secu03TipoAccesoNavigation).WithMany(p => p.Secu05UsuarioAccesos)
@@ -4167,786 +3849,707 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<Secu06UsuarioRol>(entity =>
             {
-                entity.HasKey(e => new { e.Secu01Llave, e.Secu02Llave });
+                entity
+                    .HasNoKey()
+                    .ToTable("SECU06_UsuarioRol");
 
-                entity.ToTable("SECU06_UsuarioRol");
+                entity.HasIndex(e => e.userid, "IX_SECU06_UsuarioRol_SECU02_llave");
 
-                entity.Property(e => e.Secu01Llave).HasColumnName("SECU01_Llave");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu06Activo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Secu01llave).HasColumnName("SECU01_llave");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
+                entity.Property(e => e.Secu06activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("SECU06_Activo");
-
-                entity.HasOne(d => d.Secu01LlaveNavigation).WithMany(p => p.Secu06UsuarioRols)
-                    .HasForeignKey(d => d.Secu01Llave)
+                    .HasColumnName("SECU06_activo");
+                /*
+                entity.HasOne(d => d.Secu01LlaveNavigation).WithMany()
+                    .HasForeignKey(d => d.Secu01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SECU06_UsuarioRol_SECU01_Rol");
 
-                entity.HasOne(d => d.Secu02LlaveNavigation).WithMany(p => p.Secu06UsuarioRols)
-                    .HasForeignKey(d => d.Secu02Llave)
+                entity.HasOne(d => d.useridNavigation).WithMany()
+                    .HasForeignKey(d => d.userid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SECU06_UsuarioRol_SECU02_Usuario");
+                */
             });
 
             modelBuilder.Entity<Secu07Aplicacion>(entity =>
             {
-                entity.HasKey(e => e.Secu07Llave).HasName("PK__SECU07_A__148FCE85966FFC87");
+                entity.HasKey(e => e.Secu07llave).HasName("PK__SECU07_A__148FCE85966FFC87");
 
                 entity.ToTable("SECU07_Aplicacion");
 
-                entity.Property(e => e.Secu07Llave)
+                entity.Property(e => e.Secu07llave)
                     .HasDefaultValueSql("(newid())")
-                    .HasColumnName("SECU07_Llave");
+                    .HasColumnName("SECU07_llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu07Activo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Secu07activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("SECU07_Activo");
-                entity.Property(e => e.Secu07Descripcion).HasColumnName("SECU07_Descripcion");
+                    .HasColumnName("SECU07_activo");
+                entity.Property(e => e.Secu07descripcion).HasColumnName("SECU07_descripcion");
                 entity.Property(e => e.Secu07Info)
                     .HasColumnType("xml")
                     .HasColumnName("SECU07_Info");
-                entity.Property(e => e.Secu07Nombre)
+                entity.Property(e => e.Secu07nombre)
                     .HasMaxLength(100)
-                    .HasColumnName("SECU07_Nombre");
+                    .HasColumnName("SECU07_nombre");
             });
 
             modelBuilder.Entity<Secu08UsuarioAplicacion>(entity =>
             {
-                entity.HasKey(e => new { e.Secu02Llave, e.Secu07Llave }).HasName("PK_UsuarioAplicacion");
+                entity
+                    .HasNoKey()
+                    .ToTable("SECU08_UsuarioAplicacion");
 
-                entity.ToTable("SECU08_UsuarioAplicacion");
+                entity.HasIndex(e => e.Secu07llave, "IX_SECU08_UsuarioAplicacion_SECU07_llave");
 
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
-                entity.Property(e => e.Secu07Llave).HasColumnName("SECU07_Llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasDefaultValueSql("(getdate())")
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu08Activo)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.userid)
+                    .HasMaxLength(450)
+                    .HasColumnName("SECU02_llave");
+                entity.Property(e => e.Secu07llave).HasColumnName("SECU07_llave");
+                entity.Property(e => e.Secu08activo)
                     .HasDefaultValueSql("((1))")
-                    .HasColumnName("SECU08_Activo");
+                    .HasColumnName("SECU08_activo");
                 entity.Property(e => e.Secu08Info)
                     .HasColumnType("xml")
                     .HasColumnName("SECU08_Info");
                 entity.Property(e => e.Secu08Observacion).HasColumnName("SECU08_Observacion");
 
-                entity.HasOne(d => d.Secu02LlaveNavigation).WithMany(p => p.Secu08UsuarioAplicacions)
-                    .HasForeignKey(d => d.Secu02Llave)
+                entity.HasOne(d => d.useridNavigation).WithMany()
+                    .HasForeignKey(d => d.userid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsuarioAplicacion_Usuario");
 
-                entity.HasOne(d => d.Secu07LlaveNavigation).WithMany(p => p.Secu08UsuarioAplicacions)
-                    .HasForeignKey(d => d.Secu07Llave)
+                entity.HasOne(d => d.Secu07llaveNavigation).WithMany()
+                    .HasForeignKey(d => d.Secu07llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsuarioAplicacion_Aplicacion");
             });
 
-            modelBuilder.Entity<Secu10AccesoPermitido>(entity =>
+            modelBuilder.Entity<Secu10Accesopermitido>(entity =>
             {
-                entity.HasKey(e => e.Secu10Llave);
+                entity.HasKey(e => e.Secu10llave);
 
-                entity.ToTable("SECU10_AccesoPermitido");
+                entity.ToTable("SECU10_Accesopermitido");
 
-                entity.Property(e => e.Secu10Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SECU10_Llave");
-                entity.Property(e => e.Activo).HasColumnName("activo");
+                entity.HasIndex(e => e.userid, "IX_SECU10_Accesopermitido_SECU02_llave");
+
+                entity.HasIndex(e => e.Secu03llave, "IX_SECU10_Accesopermitido_SECU03_llave");
+
+                entity.Property(e => e.Secu10llave).HasColumnName("SECU10_llave");
+                entity.Property(e => e.activo).HasColumnName("activo");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Secu02Llave).HasColumnName("SECU02_Llave");
-                entity.Property(e => e.Secu03Llave).HasColumnName("SECU03_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.userid).HasColumnName("SECU02_llave");
+                entity.Property(e => e.Secu03llave).HasColumnName("SECU03_llave");
 
-                entity.HasOne(d => d.Secu02LlaveNavigation).WithMany(p => p.Secu10AccesoPermitidos)
-                    .HasForeignKey(d => d.Secu02Llave)
-                    .HasConstraintName("FK_SECU10_AccesoPermitido_SECU02_Usuario");
+                entity.HasOne(d => d.useridNavigation).WithMany(p => p.Secu10Accesopermitidos)
+                    .HasForeignKey(d => d.userid)
+                    .HasConstraintName("FK_SECU10_Accesopermitido_SECU02_Usuario");
 
-                entity.HasOne(d => d.Secu03LlaveNavigation).WithMany(p => p.Secu10AccesoPermitidos)
-                    .HasForeignKey(d => d.Secu03Llave)
-                    .HasConstraintName("FK_SECU10_AccesoPermitido_SECU03_TipoAcceso");
+                entity.HasOne(d => d.Secu03llaveNavigation).WithMany(p => p.Secu10Accesopermitidos)
+                    .HasForeignKey(d => d.Secu03llave)
+                    .HasConstraintName("FK_SECU10_Accesopermitido_SECU03_TipoAcceso");
             });
 
-            modelBuilder.Entity<Secu11TipoPerfil>(entity =>
+            modelBuilder.Entity<Secu11Tipoperfil>(entity =>
             {
-                entity.HasKey(e => e.Prf02Llave);
+                entity.HasKey(e => e.prf02llave);
 
-                entity.ToTable("SECU11_TipoPerfil");
+                entity.ToTable("SECU11_Tipoperfil");
 
-                entity.Property(e => e.Prf02Llave)
-                    
-                    .HasColumnName("PRF02_Llave");
+                entity.Property(e => e.prf02llave).HasColumnName("PRF02_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.Fechaactulizacion)
                     .HasColumnType("datetime")
                     .HasColumnName("FECHAACTULIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Prf02Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.prf02descripcion)
                     .HasMaxLength(2000)
-                    .HasColumnName("PRF02_Descripcion");
-                entity.Property(e => e.Prf02Nombre)
+                    .HasColumnName("PRF02_descripcion");
+                entity.Property(e => e.prf02nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("PRF02_Nombre");
+                    .HasColumnName("PRF02_nombre");
             });
 
             modelBuilder.Entity<Sercl01ServiciosCliente>(entity =>
             {
-                entity.HasKey(e => e.Sercl01Llave);
+                entity.HasKey(e => e.Sercl01llave);
 
                 entity.ToTable("SERCL01_ServiciosClientes");
 
-                entity.Property(e => e.Sercl01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SERCL01_Llave");
-                entity.Property(e => e.Cnt01Llave)
-                    
-                    .HasColumnName("CNT01_Llave");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
-                entity.Property(e => e.Cnt19Llave)
-                    
-                    .HasColumnName("CNT19_Llave");
-                entity.Property(e => e.Conteo03Llave)
-                    
-                    .HasColumnName("CONTEO03_Llave");
-                entity.Property(e => e.Esp03Llave)
-                    
-                    .HasColumnName("ESP03_Llave");
-                entity.Property(e => e.Esp04Llave)
-                    
-                    .HasColumnName("ESP04_Llave");
-                entity.Property(e => e.Esp08Llave)
-                    
-                    .HasColumnName("ESP08_Llave");
-                entity.Property(e => e.Sercl01Cantidad)
-                    
-                    .HasColumnName("SERCL01_cantidad");
-                entity.Property(e => e.Sercl01Costo)
-                   
-                    .HasColumnName("SERCL01_Costo");
-                entity.Property(e => e.Sercl01TipoGrafico)
-                    
-                    .HasColumnName("SERCL01_TipoGrafico");
-                entity.Property(e => e.Serv01Llave)
-                    
-                    .HasColumnName("SERV01_Llave");
-                entity.Property(e => e.Sist03Llave)
-                    
-                    .HasColumnName("SIST03_Llave");
-                entity.Property(e => e.sist04llave)
-                    
-                    .HasColumnName("SISt04_Llave");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.Property(e => e.Sercl01llave).HasColumnName("SERCL01_llave");
+                entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
+                entity.Property(e => e.cnt19llave).HasColumnName("CNT19_llave");
+                entity.Property(e => e.Conteo03llave).HasColumnName("CONTEO03_llave");
+                entity.Property(e => e.esp03llave).HasColumnName("ESP03_llave");
+                entity.Property(e => e.esp04llave).HasColumnName("ESP04_llave");
+                entity.Property(e => e.esp08llave).HasColumnName("ESP08_llave");
+                entity.Property(e => e.Sercl01Cantidad).HasColumnName("SERCL01_cantidad");
+                entity.Property(e => e.Sercl01Costo).HasColumnName("SERCL01_Costo");
+                entity.Property(e => e.Sercl01TipoGrafico).HasColumnName("SERCL01_TipoGrafico");
+                entity.Property(e => e.Serv01llave).HasColumnName("SERV01_llave");
+                entity.Property(e => e.sist03llave).HasColumnName("SIST03_llave");
+                entity.Property(e => e.sist04llave).HasColumnName("SISt04_llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
             });
 
             modelBuilder.Entity<Sercl02MuestreoFruta>(entity =>
             {
-                entity.HasKey(e => e.Sercl02Llave);
+                entity.HasKey(e => e.Sercl02llave);
 
                 entity.ToTable("SERCL02_MuestreoFruta");
 
-                entity.Property(e => e.Sercl02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SERCL02_Llave");
+                entity.HasIndex(e => e.Sercl01llave, "IX_SERCL02_MuestreoFruta_SERCL01_llave");
+
+                entity.Property(e => e.Sercl02llave).HasColumnName("SERCL02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Sercl01Llave)
-                    
-                    .HasColumnName("SERCL01_Llave");
-                entity.Property(e => e.Sercl02Activo).HasColumnName("SERCL02_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Sercl01llave).HasColumnName("SERCL01_llave");
+                entity.Property(e => e.Sercl02activo).HasColumnName("SERCL02_activo");
                 entity.Property(e => e.Sercl02Fecha)
                     .HasColumnType("datetime")
                     .HasColumnName("SERCL02_Fecha");
-                entity.Property(e => e.Sercl02Nombre)
+                entity.Property(e => e.Sercl02nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("SERCL02_Nombre");
+                    .HasColumnName("SERCL02_nombre");
                 entity.Property(e => e.Sercl02UrlPdf)
                     .HasMaxLength(1000)
                     .HasColumnName("SERCL02_UrlPdf");
 
-                entity.HasOne(d => d.Sercl01LlaveNavigation).WithMany(p => p.Sercl02MuestreoFruta)
-                    .HasForeignKey(d => d.Sercl01Llave)
+                entity.HasOne(d => d.Sercl01llaveNavigation).WithMany(p => p.Sercl02MuestreoFruta)
+                    .HasForeignKey(d => d.Sercl01llave)
                     .HasConstraintName("FK_SERCL02_MuestreoFruta_SERCL01_ServiciosClientes");
             });
 
             modelBuilder.Entity<Sercltemp01ServiciosClientesTemporal>(entity =>
             {
-                entity.HasKey(e => e.Sercltemp01Llave);
+                entity.HasKey(e => e.Sercltemp01llave);
 
                 entity.ToTable("SERCLTEMP01_ServiciosClientes_Temporal");
 
-                entity.Property(e => e.Sercltemp01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SERCLTEMP01_Llave");
-                entity.Property(e => e.Cntemp01Llave)
-                    
-                    .HasColumnName("CNTEMP01_Llave");
-                entity.Property(e => e.Cntemp02Llave)
-                    
-                    .HasColumnName("CNTEMP02_Llave");
-                entity.Property(e => e.Conteo03Llave)
-                    
-                    .HasColumnName("CONTEO03_Llave");
-                entity.Property(e => e.Sercltemp01TipoGrafico)
-                    
-                    .HasColumnName("SERCLTEMP01_TipoGrafico");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.HasIndex(e => e.Conteo03llave, "IX_SERCLTEMP01_ServiciosClientes_Temporal_CONTEO03_llave");
 
-                entity.HasOne(d => d.Conteo03LlaveNavigation).WithMany(p => p.Sercltemp01ServiciosClientesTemporals)
-                    .HasForeignKey(d => d.Conteo03Llave)
+                entity.Property(e => e.Sercltemp01llave).HasColumnName("SERCLTEMP01_llave");
+                entity.Property(e => e.cntemp01llave).HasColumnName("CNTEMP01_llave");
+                entity.Property(e => e.cntemp02llave).HasColumnName("CNTEMP02_llave");
+                entity.Property(e => e.Conteo03llave).HasColumnName("CONTEO03_llave");
+                entity.Property(e => e.Sercltemp01TipoGrafico).HasColumnName("SERCLTEMP01_TipoGrafico");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
+
+                entity.HasOne(d => d.Conteo03llaveNavigation).WithMany(p => p.Sercltemp01ServiciosClientesTemporals)
+                    .HasForeignKey(d => d.Conteo03llave)
                     .HasConstraintName("FK_SERCLTEMP01_ServiciosClientes_Temporal_CONTEO03_Resumen");
             });
 
             modelBuilder.Entity<Serv01Servicio>(entity =>
             {
-                entity.HasKey(e => e.Serv01Llave);
+                entity.HasKey(e => e.Serv01llave);
 
                 entity.ToTable("SERV01_Servicio");
 
-                entity.Property(e => e.Serv01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SERV01_Llave");
+                entity.HasIndex(e => e.Serv02llave, "IX_SERV01_Servicio_SERV02_llave");
+
+                entity.Property(e => e.Serv01llave).HasColumnName("SERV01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Serv01Activo).HasColumnName("SERV01_Activo");
-                entity.Property(e => e.Serv01Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Serv01activo).HasColumnName("SERV01_activo");
+                entity.Property(e => e.Serv01descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("SERV01_Descripcion");
-                entity.Property(e => e.Serv01Nombre)
+                    .HasColumnName("SERV01_descripcion");
+                entity.Property(e => e.Serv01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("SERV01_Nombre");
-                entity.Property(e => e.Serv02Llave)
-                    
-                    .HasColumnName("SERV02_llave");
+                    .HasColumnName("SERV01_nombre");
+                entity.Property(e => e.Serv02llave).HasColumnName("SERV02_llave");
 
-                entity.HasOne(d => d.Serv02LlaveNavigation).WithMany(p => p.Serv01Servicios)
-                    .HasForeignKey(d => d.Serv02Llave)
+                entity.HasOne(d => d.Serv02llaveNavigation).WithMany(p => p.Serv01Servicios)
+                    .HasForeignKey(d => d.Serv02llave)
                     .HasConstraintName("FK_SERV01_Servicio_SERV02_TipoServicio");
             });
 
             modelBuilder.Entity<Serv02TipoServicio>(entity =>
             {
-                entity.HasKey(e => e.Serv02Llave);
+                entity.HasKey(e => e.Serv02llave);
 
                 entity.ToTable("SERV02_TipoServicio");
 
-                entity.Property(e => e.Serv02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SERV02_Llave");
+                entity.Property(e => e.Serv02llave).HasColumnName("SERV02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Serv02Activo).HasColumnName("SERV02_Activo");
-                entity.Property(e => e.Serv02Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Serv02activo).HasColumnName("SERV02_activo");
+                entity.Property(e => e.Serv02descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("SERV02_Descripcion");
-                entity.Property(e => e.Serv02Nombre)
+                    .HasColumnName("SERV02_descripcion");
+                entity.Property(e => e.Serv02nombre)
                     .HasMaxLength(50)
-                    .HasColumnName("SERV02_Nombre");
+                    .HasColumnName("SERV02_nombre");
             });
 
-            modelBuilder.Entity<Sist01Sistema>(entity =>
+            modelBuilder.Entity<setSelect>(entity =>
             {
-                entity.HasKey(e => e.Sist01Llave);
+                entity.HasKey(e => e.Value);
+            });
 
-                entity.ToTable("SIST01_Sistema");
+            modelBuilder.Entity<sist01sistema>(entity =>
+            {
+                entity.HasKey(e => e.sist01llave);
 
-                entity.Property(e => e.Sist01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SIST01_Llave");
+                entity.ToTable("SIST01_sistema");
+
+                entity.Property(e => e.sist01llave).HasColumnName("SIST01_llave");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Sist01Activo).HasColumnName("SIST01_Activo");
-                entity.Property(e => e.Sist01Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.sist01activo).HasColumnName("SIST01_activo");
+                entity.Property(e => e.sist01descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("SIST01_Descripcion");
-                entity.Property(e => e.Sist01EsPublica).HasColumnName("SIST01_EsPublica");
-                entity.Property(e => e.Sist01EsServicios).HasColumnName("SIST01_EsServicios");
-                entity.Property(e => e.Sist01Nombre)
+                    .HasColumnName("SIST01_descripcion");
+                entity.Property(e => e.sist01EsPublica).HasColumnName("SIST01_EsPublica");
+                entity.Property(e => e.sist01EsServicios).HasColumnName("SIST01_EsServicios");
+                entity.Property(e => e.sist01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("SIST01_Nombre");
+                    .HasColumnName("SIST01_nombre");
             });
 
-            modelBuilder.Entity<Sist02Zona>(entity =>
+            modelBuilder.Entity<sist02Zona>(entity =>
             {
                 entity.HasKey(e => e.sist02llave);
 
                 entity.ToTable("SIST02_Zona");
 
-                entity.Property(e => e.sist02llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SIST02_Llave");
+                entity.Property(e => e.sist02llave).HasColumnName("SIST02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.sist02activo).HasColumnName("SIST02_Activo");
-                entity.Property(e => e.sist02descripcion).HasColumnName("SIST02_Descripcion");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.sist02activo).HasColumnName("SIST02_activo");
+                entity.Property(e => e.sist02descripcion).HasColumnName("SIST02_descripcion");
                 entity.Property(e => e.sist02estadoregistro)
                     .HasMaxLength(50)
                     .HasColumnName("SIST02_estadoregistro");
                 entity.Property(e => e.sist02nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("SIST02_Nombre");
+                    .HasColumnName("SIST02_nombre");
 
-                entity.HasMany(d => d.sist03llaves).WithMany(p => p.Sist02Llaves)
+                entity.HasMany(d => d.sist03llaves).WithMany(p => p.sist02llaves)
                     .UsingEntity<Dictionary<string, object>>(
-                        "Sist07ZonaComuna",
-                        r => r.HasOne<Sist03Comuna>().WithMany()
-                            .HasForeignKey("Sist03Llave")
+                        "sist07ZonaComuna",
+                        r => r.HasOne<sist03Comuna>().WithMany()
+                            .HasForeignKey("sist03llave")
                             .OnDelete(DeleteBehavior.ClientSetNull)
                             .HasConstraintName("FK_SIST07_ZonaComuna_SIST03_Comuna"),
-                        l => l.HasOne<Sist02Zona>().WithMany()
-                            .HasForeignKey("Sist02Llave")
+                        l => l.HasOne<sist02Zona>().WithMany()
+                            .HasForeignKey("sist02llave")
                             .OnDelete(DeleteBehavior.ClientSetNull)
                             .HasConstraintName("FK_SIST07_ZonaComuna_SIST02_Zona"),
                         j =>
                         {
-                            j.HasKey("Sist02Llave", "Sist03Llave");
+                            j.HasKey("sist02llave", "sist03llave");
                             j.ToTable("SIST07_ZonaComuna");
+                            j.HasIndex(new[] { "sist03llave" }, "IX_SIST07_ZonaComuna_sist03llave");
                         });
             });
 
-            modelBuilder.Entity<Sist03Comuna>(entity =>
+            modelBuilder.Entity<sist03Comuna>(entity =>
             {
                 entity.HasKey(e => e.sist03llave);
 
                 entity.ToTable("SIST03_Comuna");
 
-                entity.Property(e => e.sist03llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SIST03_Llave");
+                entity.HasIndex(e => e.sist04llave, "IX_SIST03_Comuna_SIST04_llave");
+
+                entity.Property(e => e.sist03llave).HasColumnName("SIST03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.sist03activo).HasColumnName("SIST03_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.sist03activo).HasColumnName("SIST03_activo");
                 entity.Property(e => e.sist03capital).HasColumnName("SIST03_Capital");
                 entity.Property(e => e.sist03descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("SIST03_Descripcion");
+                    .HasColumnName("SIST03_descripcion");
                 entity.Property(e => e.sist03nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("SIST03_Nombre");
-                entity.Property(e => e.sist04llave)
-                    
-                    .HasColumnName("SIST04_Llave");
+                    .HasColumnName("SIST03_nombre");
+                entity.Property(e => e.sist04llave).HasColumnName("SIST04_llave");
 
-                entity.HasOne(d => d.sist04llaveNavigation).WithMany(p => p.Sist03Comunas)
+                entity.HasOne(d => d.sist04llaveNavigation).WithMany(p => p.sist03Comunas)
                     .HasForeignKey(d => d.sist04llave)
                     .HasConstraintName("FK_SIST03_Comuna_SIST04_Region");
             });
 
-            modelBuilder.Entity<Sist04Region>(entity =>
+            modelBuilder.Entity<sist04Region>(entity =>
             {
                 entity.HasKey(e => e.sist04llave);
 
                 entity.ToTable("SIST04_Region");
 
-                entity.Property(e => e.sist04llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SIST04_Llave");
+                entity.Property(e => e.sist04llave).HasColumnName("SIST04_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.sist04activo).HasColumnName("SIST04_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.sist04activo).HasColumnName("SIST04_activo");
                 entity.Property(e => e.sist04descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("SIST04_Descripcion");
+                    .HasColumnName("SIST04_descripcion");
                 entity.Property(e => e.sist04nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("SIST04_Nombre");
-                entity.Property(e => e.sist04orden)
-                    
-                    .HasColumnName("SIST04_Orden");
+                    .HasColumnName("SIST04_nombre");
+                entity.Property(e => e.sist04orden).HasColumnName("SIST04_Orden");
             });
 
-            modelBuilder.Entity<Sist05EstadoRegistro>(entity =>
+            modelBuilder.Entity<sist05EstadoRegistro>(entity =>
             {
-                entity.HasKey(e => e.Sist05Llave);
+                entity.HasKey(e => e.sist05llave);
 
                 entity.ToTable("SIST05_EstadoRegistro");
 
-                entity.Property(e => e.Sist05Llave).HasColumnName("SIST05_Llave");
+                entity.Property(e => e.sist05llave).HasColumnName("SIST05_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Sist03Activo).HasColumnName("SIST03_Activo");
-                entity.Property(e => e.Sist03Descripcion).HasColumnName("SIST03_Descripcion");
-                entity.Property(e => e.Sist05Nombre)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.sist03activo).HasColumnName("SIST03_activo");
+                entity.Property(e => e.sist03descripcion).HasColumnName("SIST03_descripcion");
+                entity.Property(e => e.sist05nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("SIST05_Nombre");
+                    .HasColumnName("SIST05_nombre");
             });
 
-            modelBuilder.Entity<Sist06EstadoGrid>(entity =>
+            modelBuilder.Entity<sist06EstadoGrid>(entity =>
             {
-                entity.HasKey(e => e.Sist06Llave);
+                entity.HasKey(e => e.sist06llave);
 
                 entity.ToTable("SIST06_EstadoGrid");
 
-                entity.Property(e => e.Sist06Llave)
-                    
-                    .HasColumnName("SIST06_Llave");
-                entity.Property(e => e.Sist06Activo).HasColumnName("SIST06_Activo");
-                entity.Property(e => e.Sist06Nombre)
+                entity.Property(e => e.sist06llave).HasColumnName("SIST06_llave");
+                entity.Property(e => e.sist06activo).HasColumnName("SIST06_activo");
+                entity.Property(e => e.sist06nombre)
                     .HasMaxLength(50)
-                    .HasColumnName("SIST06_Nombre");
+                    .HasColumnName("SIST06_nombre");
             });
 
-            modelBuilder.Entity<Sist08ContactoUsuario>(entity =>
+            modelBuilder.Entity<sist08ContactoUsuario>(entity =>
             {
-                entity.HasKey(e => e.Sist08Llave);
+                entity.HasKey(e => e.sist08llave);
 
                 entity.ToTable("SIST08_ContactoUsuario");
 
-                entity.Property(e => e.Sist08Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("SIST08_Llave");
-                entity.Property(e => e.Per02Llave)
-                    
-                    .HasColumnName("PER02_Llave");
-                entity.Property(e => e.Sist08Celular)
+                entity.HasIndex(e => e.per02llave, "IX_SIST08_ContactoUsuario_PER02_llave");
+
+                entity.Property(e => e.sist08llave).HasColumnName("SIST08_llave");
+                entity.Property(e => e.per02llave).HasColumnName("PER02_llave");
+                entity.Property(e => e.sist08Celular)
                     .HasMaxLength(15)
                     .HasColumnName("SIST08_Celular");
-                entity.Property(e => e.Sist08Comentario).HasColumnName("SIST08_Comentario");
-                entity.Property(e => e.Sist08Correo)
+                entity.Property(e => e.sist08Comentario).HasColumnName("SIST08_Comentario");
+                entity.Property(e => e.sist08Correo)
                     .HasMaxLength(50)
                     .HasColumnName("SIST08_Correo");
-                entity.Property(e => e.Sist08Empresa)
+                entity.Property(e => e.sist08Empresa)
                     .HasMaxLength(250)
                     .HasColumnName("SIST08_Empresa");
-                entity.Property(e => e.Sist08Estado).HasColumnName("SIST08_Estado");
-                entity.Property(e => e.Sist08Fechacreacion)
+                entity.Property(e => e.sist08Estado).HasColumnName("SIST08_Estado");
+                entity.Property(e => e.sist08Fechacreacion)
                     .HasColumnType("datetime")
                     .HasColumnName("SIST08_FECHACREACION");
-                entity.Property(e => e.Sist08Nombre)
+                entity.Property(e => e.sist08nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("SIST08_Nombre");
-                entity.Property(e => e.Sist08Telefono)
+                    .HasColumnName("SIST08_nombre");
+                entity.Property(e => e.sist08Telefono)
                     .HasMaxLength(15)
                     .HasColumnName("SIST08_Telefono");
 
-                entity.HasOne(d => d.Per02LlaveNavigation).WithMany(p => p.Sist08ContactoUsuarios)
-                    .HasForeignKey(d => d.Per02Llave)
+                entity.HasOne(d => d.per02llaveNavigation).WithMany(p => p.sist08ContactoUsuarios)
+                    .HasForeignKey(d => d.per02llave)
                     .HasConstraintName("FK_SIST08_ContactoUsuario_PER02_Genero");
             });
 
             modelBuilder.Entity<Temp01Temporada>(entity =>
             {
-                entity.HasKey(e => e.Temp01Llave);
+                entity.HasKey(e => e.temp01llave);
 
                 entity.ToTable("TEMP01_Temporada");
 
-                entity.Property(e => e.Temp01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("TEMP01_Llave");
+                entity.HasIndex(e => e.temp02llave, "IX_TEMP01_Temporada_TEMP02_llave");
+
+                entity.HasIndex(e => e.temp03llave, "IX_TEMP01_Temporada_TEMP03_llave");
+
+                entity.Property(e => e.temp01llave).HasColumnName("TEMP01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Temp01Activo).HasColumnName("TEMP01_Activo");
-                entity.Property(e => e.Temp01Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.temp01activo).HasColumnName("TEMP01_activo");
+                entity.Property(e => e.temp01descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("TEMP01_Descripcion");
-                entity.Property(e => e.Temp01MaxFecha)
+                    .HasColumnName("TEMP01_descripcion");
+                entity.Property(e => e.temp01maxfecha)
                     .HasColumnType("datetime")
                     .HasColumnName("TEMP01_MaxFecha");
-                entity.Property(e => e.Temp01MaxMes).HasColumnName("TEMP01_MaxMes");
-                entity.Property(e => e.Temp01MinFecha)
+                entity.Property(e => e.temp01maxmes).HasColumnName("TEMP01_MaxMes");
+                entity.Property(e => e.temp01minfecha)
                     .HasColumnType("datetime")
                     .HasColumnName("TEMP01_MinFecha");
-                entity.Property(e => e.Temp01MinMes).HasColumnName("TEMP01_MinMes");
-                entity.Property(e => e.Temp01Nombre)
+                entity.Property(e => e.temp01minmes).HasColumnName("TEMP01_MinMes");
+                entity.Property(e => e.temp01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("TEMP01_Nombre");
-                entity.Property(e => e.Temp01Periodo).HasColumnName("TEMP01_Periodo");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
-                entity.Property(e => e.Temp03Llave)
-                    
-                    .HasColumnName("TEMP03_Llave");
+                    .HasColumnName("TEMP01_nombre");
+                entity.Property(e => e.temp01periodo).HasColumnName("TEMP01_periodo");
+                entity.Property(e => e.temp02llave).HasColumnName("TEMP02_llave");
+                entity.Property(e => e.temp03llave).HasColumnName("TEMP03_llave");
 
-                entity.HasOne(d => d.Temp02LlaveNavigation).WithMany(p => p.Temp01Temporada)
-                    .HasForeignKey(d => d.Temp02Llave)
+                entity.HasOne(d => d.Temp02llaveNavigation).WithMany(p => p.Temp01Temporada)
+                    .HasForeignKey(d => d.temp02llave)
                     .HasConstraintName("FK_TEMP01_Temporada_TEMP02_TemporadaBase");
 
-                entity.HasOne(d => d.Temp03LlaveNavigation).WithMany(p => p.Temp01Temporada)
-                    .HasForeignKey(d => d.Temp03Llave)
+                entity.HasOne(d => d.Temp03llaveNavigation).WithMany(p => p.Temp01Temporada)
+                    .HasForeignKey(d => d.temp03llave)
                     .HasConstraintName("FK_TEMP01_Temporada_TEMP03_Segmentacion");
             });
 
             modelBuilder.Entity<Temp02TemporadaBase>(entity =>
             {
-                entity.HasKey(e => e.Temp02Llave);
+                entity.HasKey(e => e.temp02llave);
 
                 entity.ToTable("TEMP02_TemporadaBase");
 
-                entity.Property(e => e.Temp02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.Property(e => e.temp02llave).HasColumnName("TEMP02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Temp02Activo).HasColumnName("TEMP02_Activo");
-                entity.Property(e => e.Temp02Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.temp02activo).HasColumnName("TEMP02_activo");
+                entity.Property(e => e.temp02descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("TEMP02_Descripcion");
-                entity.Property(e => e.Temp02Nombre)
+                    .HasColumnName("TEMP02_descripcion");
+                entity.Property(e => e.temp02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("TEMP02_Nombre");
-                entity.Property(e => e.Temp02Predeterminada).HasColumnName("TEMP02_Predeterminada");
+                    .HasColumnName("TEMP02_nombre");
+                entity.Property(e => e.temp02predeterminada).HasColumnName("TEMP02_Predeterminada");
             });
 
             modelBuilder.Entity<Temp03Segmentacion>(entity =>
             {
-                entity.HasKey(e => e.Temp03Llave);
+                entity.HasKey(e => e.temp03llave);
 
                 entity.ToTable("TEMP03_Segmentacion");
 
-                entity.Property(e => e.Temp03Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("TEMP03_Llave");
+                entity.Property(e => e.temp03llave).HasColumnName("TEMP03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Temp03Activo).HasColumnName("TEMP03_Activo");
-                entity.Property(e => e.Temp03Descripcion)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.temp03activo).HasColumnName("TEMP03_activo");
+                entity.Property(e => e.temp03descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("TEMP03_Descripcion");
-                entity.Property(e => e.Temp03Nombre)
+                    .HasColumnName("TEMP03_descripcion");
+                entity.Property(e => e.temp03nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("TEMP03_Nombre");
-                entity.Property(e => e.Temp03NumeroMeses).HasColumnName("TEMP03_NumeroMeses");
-                entity.Property(e => e.Temp03NumeroSegmentosTotal).HasColumnName("TEMP03_NumeroSegmentosTotal");
+                    .HasColumnName("TEMP03_nombre");
+                entity.Property(e => e.temp03numeromeses).HasColumnName("TEMP03_NumeroMeses");
+                entity.Property(e => e.temp03numerosegmentostotal).HasColumnName("TEMP03_NumeroSegmentosTotal");
             });
 
             modelBuilder.Entity<Trp01Trampa>(entity =>
             {
-                entity.HasKey(e => e.Trp01Llave);
+                entity.HasKey(e => e.Trp01llave);
 
                 entity.ToTable("TRP01_Trampa");
 
-                entity.Property(e => e.Trp01Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("TRP01_Llave");
+                entity.HasIndex(e => e.cnt08llave, "IX_TRP01_Trampa_CNT08_llave");
+
+                entity.HasIndex(e => e.esp01llave, "IX_TRP01_Trampa_ESP01_llave");
+
+                entity.Property(e => e.Trp01llave).HasColumnName("TRP01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
-                entity.Property(e => e.Cnt08Llave)
-                    
-                    .HasColumnName("CNT08_Llave");
+                entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
-                entity.Property(e => e.Esp01Llave)
-                    
-                    .HasColumnName("ESP01_Llave");
+                entity.Property(e => e.esp01llave).HasColumnName("ESP01_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Trp01Activo).HasColumnName("TRP01_Activo");
-                entity.Property(e => e.Trp01Nombre)
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Trp01activo).HasColumnName("TRP01_activo");
+                entity.Property(e => e.Trp01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("TRP01_Nombre");
-                entity.Property(e => e.Trp01Numero)
-                    
-                    .HasColumnName("TRP01_Numero");
+                    .HasColumnName("TRP01_nombre");
+                entity.Property(e => e.Trp01Numero).HasColumnName("TRP01_Numero");
 
-                entity.HasOne(d => d.Cnt08LlaveNavigation).WithMany(p => p.Trp01Trampas)
-                    .HasForeignKey(d => d.Cnt08Llave)
+                entity.HasOne(d => d.cnt08llaveNavigation).WithMany(p => p.Trp01Trampas)
+                    .HasForeignKey(d => d.cnt08llave)
                     .HasConstraintName("FK_TRP01_Trampa_CNT08_Segmentacion");
 
-                entity.HasOne(d => d.Esp01LlaveNavigation).WithMany(p => p.Trp01Trampas)
-                    .HasForeignKey(d => d.Esp01Llave)
-                    .HasConstraintName("FK_TRP01_Trampa_ESP01_Especies");
+                entity.HasOne(d => d.esp01llaveNavigation).WithMany(p => p.Trp01Trampas)
+                    .HasForeignKey(d => d.esp01llave)
+                    .HasConstraintName("FK_TRP01_Trampa_ESP01_especies");
             });
 
             modelBuilder.Entity<Trp02Temporada>(entity =>
             {
-                entity.HasKey(e => e.Trp02Llave);
+                entity.HasKey(e => e.Trp02llave);
 
                 entity.ToTable("TRP02_Temporada");
 
-                entity.Property(e => e.Trp02Llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("TRP02_Llave");
+                entity.HasIndex(e => e.Temp02llave, "IX_TRP02_Temporada_TEMP02_llave");
+
+                entity.HasIndex(e => e.Trp01llave, "IX_TRP02_Temporada_TRP01_llave");
+
+                entity.Property(e => e.Trp02llave).HasColumnName("TRP02_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.Temp02Activo).HasColumnName("TEMP02_Activo");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
-                entity.Property(e => e.Trp01Llave)
-                    
-                    .HasColumnName("TRP01_Llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.Temp02activo).HasColumnName("TEMP02_activo");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
+                entity.Property(e => e.Trp01llave).HasColumnName("TRP01_llave");
 
-                entity.HasOne(d => d.Temp02LlaveNavigation).WithMany(p => p.Trp02Temporada)
-                    .HasForeignKey(d => d.Temp02Llave)
+                entity.HasOne(d => d.Temp02llaveNavigation).WithMany(p => p.Trp02Temporada)
+                    .HasForeignKey(d => d.Temp02llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TRP02_Temporada_TEMP02_TemporadaBase");
 
-                entity.HasOne(d => d.Trp01LlaveNavigation).WithMany(p => p.Trp02Temporada)
-                    .HasForeignKey(d => d.Trp01Llave)
+                entity.HasOne(d => d.Trp01llaveNavigation).WithMany(p => p.Trp02Temporada)
+                    .HasForeignKey(d => d.Trp01llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TRP02_Temporada_TRP01_Trampa");
             });
 
             modelBuilder.Entity<Trp03Geocordenada>(entity =>
             {
-                entity.HasKey(e => new { e.Trp01Llave, e.Temp02Llave });
+                entity.HasKey(e => new { e.Trp01llave, e.Temp02llave });
 
                 entity.ToTable("TRP03_geocordenadas");
 
-                entity.Property(e => e.Trp01Llave)
-                    
-                    .HasColumnName("TRP01_Llave");
-                entity.Property(e => e.Temp02Llave)
-                    
-                    .HasColumnName("TEMP02_Llave");
+                entity.Property(e => e.Trp01llave).HasColumnName("TRP01_llave");
+                entity.Property(e => e.Temp02llave).HasColumnName("TEMP02_llave");
                 entity.Property(e => e.X)
                     .HasMaxLength(50)
                     .HasColumnName("x");
@@ -4955,32 +4558,31 @@ namespace mipBackend.Data
                     .HasColumnName("y");
             });
 
-            modelBuilder.Entity<Wkf01Flujo>(entity =>
+            modelBuilder.Entity<wkf01Flujo>(entity =>
             {
                 entity.HasKey(e => e.wkf01llave);
 
                 entity.ToTable("WKF01_Flujo");
 
-                entity.Property(e => e.wkf01llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("WKF01_Llave");
+                entity.HasIndex(e => e.wkf03llave, "IX_WKF01_Flujo_WKF03_llave");
+
+                entity.Property(e => e.wkf01llave).HasColumnName("WKF01_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.wkf01activo).HasColumnName("WKF01_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.wkf01activo).HasColumnName("WKF01_activo");
                 entity.Property(e => e.wkf01descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("WKF01_Descripcion");
+                    .HasColumnName("WKF01_descripcion");
                 entity.Property(e => e.wkf01directorio).HasColumnName("WKF01_Directorio");
                 entity.Property(e => e.wkf01esinicio).HasColumnName("WKF01_EsInicio");
                 entity.Property(e => e.wkf01estadoregistro)
@@ -4995,339 +4597,311 @@ namespace mipBackend.Data
                 entity.Property(e => e.wkf01imagenpequena)
                     .HasMaxLength(500)
                     .HasColumnName("WKF01_ImagenPequena");
-                entity.Property(e => e.wkf01llavepadre)
-                    
-                    .HasColumnName("WKF01_LlavePadre");
+                entity.Property(e => e.wkf01llavepadre).HasColumnName("WKF01_llavePadre");
                 entity.Property(e => e.wkf01nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("WKF01_Nombre");
-                entity.Property(e => e.wkf01orden)
-                    
-                    .HasColumnName("WKF01_Orden");
-                entity.Property(e => e.wkf01prioridad)
-                    
-                    .HasColumnName("WKF01_Prioridad");
+                    .HasColumnName("WKF01_nombre");
+                entity.Property(e => e.wkf01orden).HasColumnName("WKF01_Orden");
+                entity.Property(e => e.wkf01prioridad).HasColumnName("WKF01_Prioridad");
                 entity.Property(e => e.wkf01url).HasColumnName("WKF01_url");
                 entity.Property(e => e.wkf01visiblemenu).HasColumnName("WKF01_visibleMenu");
-                entity.Property(e => e.wkf03llave)
-                    
-                    .HasColumnName("WKF03_Llave");
+                entity.Property(e => e.wkf03llave).HasColumnName("WKF03_llave");
 
-                entity.HasOne(d => d.Wkf03LlaveNavigation).WithMany(p => p.Wkf01Flujos)
+                entity.HasOne(d => d.wkf03llaveNavigation).WithMany(p => p.wkf01Flujos)
                     .HasForeignKey(d => d.wkf03llave)
                     .HasConstraintName("FK_WKF01_Flujo_WKF03_Nivel");
             });
 
-            modelBuilder.Entity<Wkf02TipoFlujo>(entity =>
+            modelBuilder.Entity<wkf02TipoFlujo>(entity =>
             {
                 entity.HasKey(e => e.wkf02llave);
 
                 entity.ToTable("WKF02_TipoFlujo");
 
-                entity.Property(e => e.wkf02llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("WKF02_Llave");
+                entity.Property(e => e.wkf02llave).HasColumnName("WKF02_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.wkf02activo).HasColumnName("WKF02_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.wkf02activo).HasColumnName("WKF02_activo");
                 entity.Property(e => e.wkf02descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("WKF02_Descripcion");
+                    .HasColumnName("WKF02_descripcion");
                 entity.Property(e => e.wkf02nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("WKF02_Nombre");
+                    .HasColumnName("WKF02_nombre");
                 entity.Property(e => e.wkf02orden).HasColumnName("WKF02_orden");
             });
 
-            modelBuilder.Entity<Wkf03Nivel>(entity =>
+            modelBuilder.Entity<wkf03Nivel>(entity =>
             {
                 entity.HasKey(e => e.wkf03llave);
 
                 entity.ToTable("WKF03_Nivel");
 
-                entity.Property(e => e.wkf03llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("WKF03_Llave");
+                entity.HasIndex(e => e.wkf02llave, "IX_WKF03_Nivel_WKF02_llave");
+
+                entity.Property(e => e.wkf03llave).HasColumnName("WKF03_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.wkf02llave)
-                    
-                    .HasColumnName("WKF02_Llave");
-                entity.Property(e => e.wkf03activo).HasColumnName("WKF03_Activo");
-                entity.Property(e => e.wkf03descripcion).HasColumnName("WKF03_Descripcion");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.wkf02llave).HasColumnName("WKF02_llave");
+                entity.Property(e => e.wkf03activo).HasColumnName("WKF03_activo");
+                entity.Property(e => e.wkf03descripcion).HasColumnName("WKF03_descripcion");
                 entity.Property(e => e.wkf03nivel1).HasColumnName("WKF03_Nivel");
                 entity.Property(e => e.wkf03nombre)
                     .HasMaxLength(250)
-                    .HasColumnName("WKF03_Nombre");
+                    .HasColumnName("WKF03_nombre");
 
-                entity.HasOne(d => d.Wkf02LlaveNavigation).WithMany(p => p.Wkf03Nivels)
+                entity.HasOne(d => d.wkf02llaveNavigation).WithMany(p => p.wkf03Nivels)
                     .HasForeignKey(d => d.wkf02llave)
                     .HasConstraintName("FK_WKF03_Nivel_WKF02_TipoFlujo");
             });
 
-            modelBuilder.Entity<Wkf04NivelPermiso>(entity =>
+            modelBuilder.Entity<wkf04Nivelpermiso>(entity =>
             {
                 entity.HasKey(e => e.wkf04llave).HasName("PK_WKF04_NivelPremiso");
 
-                entity.ToTable("WKF04_NivelPermiso");
+                entity.ToTable("WKF04_Nivelpermiso");
 
-                entity.Property(e => e.wkf04llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("WKF04_Llave");
+                entity.HasIndex(e => e.wkf03llave, "IX_WKF04_Nivelpermiso_WKF03_llave");
+
+                entity.HasIndex(e => e.wkf05llave, "IX_WKF04_Nivelpermiso_WKF05_llave");
+
+                entity.Property(e => e.wkf04llave).HasColumnName("WKF04_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.wkf03llave)
-                    
-                    .HasColumnName("WKF03_llave");
-                entity.Property(e => e.wkf04activo).HasColumnName("WKF04_Activo");
-                entity.Property(e => e.wkf05llave)
-                    
-                    .HasColumnName("WKF05_llave");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.wkf03llave).HasColumnName("WKF03_llave");
+                entity.Property(e => e.wkf04activo).HasColumnName("WKF04_activo");
+                entity.Property(e => e.wkf05llave).HasColumnName("WKF05_llave");
 
-                entity.HasOne(d => d.Wkf03LlaveNavigation).WithMany(p => p.Wkf04NivelPermisos)
+                entity.HasOne(d => d.wkf03llaveNavigation).WithMany(p => p.wkf04Nivelpermisos)
                     .HasForeignKey(d => d.wkf03llave)
-                    .HasConstraintName("FK_WKF04_NivelPermiso_WKF03_Nivel");
+                    .HasConstraintName("FK_WKF04_Nivelpermiso_WKF03_Nivel");
 
-                entity.HasOne(d => d.Wkf05LlaveNavigation).WithMany(p => p.Wkf04NivelPermisos)
+                entity.HasOne(d => d.wkf05llaveNavigation).WithMany(p => p.wkf04Nivelpermisos)
                     .HasForeignKey(d => d.wkf05llave)
-                    .HasConstraintName("FK_WKF04_NivelPermiso_WKF05_TipoPermiso");
+                    .HasConstraintName("FK_WKF04_Nivelpermiso_WKF05_Tipopermiso");
             });
 
-            modelBuilder.Entity<Wkf05TipoPermiso>(entity =>
+            modelBuilder.Entity<wkf05Tipopermiso>(entity =>
             {
-                entity.HasKey(e => e.wkf05llave).HasName("PK_WKF05_TipoPerfil");
+                entity.HasKey(e => e.wkf05llave).HasName("PK_WKF05_Tipoperfil");
 
-                entity.ToTable("WKF05_TipoPermiso");
+                entity.ToTable("WKF05_Tipopermiso");
 
-                entity.Property(e => e.wkf05llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("WKF05_Llave");
+                entity.Property(e => e.wkf05llave).HasColumnName("WKF05_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.wkf05activo).HasColumnName("WKF05_Activo");
-                entity.Property(e => e.wkf05descripcion).HasColumnName("WKF05_Descripcion");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.wkf05activo).HasColumnName("WKF05_activo");
+                entity.Property(e => e.wkf05descripcion).HasColumnName("WKF05_descripcion");
                 entity.Property(e => e.wkf05nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("WKF05_Nombre");
+                    .HasColumnName("WKF05_nombre");
                 entity.Property(e => e.wkf05sigla)
                     .HasMaxLength(2)
                     .HasColumnName("WKF05_sigla");
             });
 
-            modelBuilder.Entity<Wkf06Perfil>(entity =>
+            modelBuilder.Entity<wkf06perfil>(entity =>
             {
                 entity.HasKey(e => e.wkf06llave);
 
-                entity.ToTable("WKF06_Perfiles");
+                entity.ToTable("WKF06_perfiles");
 
-                entity.Property(e => e.wkf06llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("WKF06_llave");
+                entity.HasIndex(e => e.wkf01llave, "IX_WKF06_perfiles_WKF01_llave");
+
+                entity.Property(e => e.wkf06llave).HasColumnName("WKF06_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.wkf01llave)
-                    
-                    .HasColumnName("WKF01_Llave");
-                entity.Property(e => e.wkf06activo).HasColumnName("WKF06_Activo");
-                entity.Property(e => e.wkf06descripcion).HasColumnName("WKF06_Descripcion");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.wkf01llave).HasColumnName("WKF01_llave");
+                entity.Property(e => e.wkf06activo).HasColumnName("WKF06_activo");
+                entity.Property(e => e.wkf06descripcion).HasColumnName("WKF06_descripcion");
                 entity.Property(e => e.wkf06nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("WKF06_Nombre");
+                    .HasColumnName("WKF06_nombre");
 
-                entity.HasOne(d => d.Wkf01LlaveNavigation).WithMany(p => p.Wkf06Perfiles)
+                entity.HasOne(d => d.wkf01llaveNavigation).WithMany(p => p.wkf06perfiles)
                     .HasForeignKey(d => d.wkf01llave)
-                    .HasConstraintName("FK_WKF06_Perfiles_WKF01_Flujo");
+                    .HasConstraintName("FK_WKF06_perfiles_WKF01_Flujo");
             });
 
-            modelBuilder.Entity<Wkf07PerfilesPermiso>(entity =>
+            modelBuilder.Entity<wkf07perfilespermiso>(entity =>
             {
                 entity.HasKey(e => new { e.wkf06llave, e.wkf05llave });
 
-                entity.ToTable("WKF07_PerfilesPermiso");
+                entity.ToTable("WKF07_perfilespermiso");
 
-                entity.Property(e => e.wkf06llave)
-                    
-                    .HasColumnName("WKF06_llave");
-                entity.Property(e => e.wkf05llave)
-                    
-                    .HasColumnName("WKF05_llave");
+                entity.HasIndex(e => e.wkf05llave, "IX_WKF07_perfilespermiso_WKF05_llave");
+
+                entity.Property(e => e.wkf06llave).HasColumnName("WKF06_llave");
+                entity.Property(e => e.wkf05llave).HasColumnName("WKF05_llave");
                 entity.Property(e => e.wkf07activo).HasColumnName("WKF07_activo");
 
-                entity.HasOne(d => d.Wkf05LlaveNavigation).WithMany(p => p.Wkf07PerfilesPermisos)
+                entity.HasOne(d => d.wkf05llaveNavigation).WithMany(p => p.wkf07perfilespermisos)
                     .HasForeignKey(d => d.wkf05llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WKF07_PerfilesPermiso_WKF05_TipoPermiso");
+                    .HasConstraintName("FK_WKF07_perfilespermiso_WKF05_Tipopermiso");
 
-                entity.HasOne(d => d.Wkf06LlaveNavigation).WithMany(p => p.Wkf07PerfilesPermisos)
+                entity.HasOne(d => d.wkf06llaveNavigation).WithMany(p => p.wkf07perfilespermisos)
                     .HasForeignKey(d => d.wkf06llave)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WKF07_PerfilesPermiso_WKF06_Perfiles");
+                    .HasConstraintName("FK_WKF07_perfilespermiso_WKF06_perfiles");
             });
 
-            modelBuilder.Entity<Wkf08Area>(entity =>
+            modelBuilder.Entity<wkf08Area>(entity =>
             {
-                entity.HasKey(e => e.wfk08llave).HasName("PK_WFK08_Area");
+                entity.HasKey(e => e.wfk08llave).HasName("PK_wfk08_Area");
 
                 entity.ToTable("WKF08_Area");
 
-                entity.Property(e => e.wfk08llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("WFK08_Llave");
+                entity.Property(e => e.wfk08llave).HasColumnName("wfk08_llave");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.wfk08activo).HasColumnName("WFK08_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.wfk08activo).HasColumnName("wfk08_activo");
                 entity.Property(e => e.wfk08descripcion)
                     .HasMaxLength(500)
-                    .HasColumnName("WFK08_Descripcion");
+                    .HasColumnName("wfk08_descripcion");
                 entity.Property(e => e.wfk08nombre)
                     .HasMaxLength(50)
-                    .HasColumnName("WFK08_Nombre");
+                    .HasColumnName("wfk08_nombre");
             });
 
-            modelBuilder.Entity<Wkf09Parametro>(entity =>
+            modelBuilder.Entity<wkf09Parametro>(entity =>
             {
                 entity.HasKey(e => e.wkf09llave);
 
                 entity.ToTable("WKF09_Parametro");
 
-                entity.Property(e => e.wkf09llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("WKF09_Llave");
+                entity.HasIndex(e => e.wkf01llave, "IX_WKF09_Parametro_WKF01_llave");
+
+                entity.HasIndex(e => e.wkf10llave, "IX_WKF09_Parametro_WKF10_llave");
+
+                entity.Property(e => e.wkf09llave).HasColumnName("WKF09_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.wkf01llave)
-                    
-                    .HasColumnName("WKF01_Llave");
-                entity.Property(e => e.wkf09activo).HasColumnName("WKF09_Activo");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.wkf01llave).HasColumnName("WKF01_llave");
+                entity.Property(e => e.wkf09activo).HasColumnName("WKF09_activo");
                 entity.Property(e => e.wkf09valor)
                     .HasMaxLength(500)
                     .HasColumnName("WKF09_Valor");
                 entity.Property(e => e.wkf09variable)
                     .HasMaxLength(500)
                     .HasColumnName("WKF09_Variable");
-                entity.Property(e => e.wkf10llave)
-                    
-                    .HasColumnName("WKF10_Llave");
+                entity.Property(e => e.wkf10llave).HasColumnName("WKF10_llave");
 
-                entity.HasOne(d => d.Wkf01LlaveNavigation).WithMany(p => p.Wkf09Parametros)
+                entity.HasOne(d => d.wkf01llaveNavigation).WithMany(p => p.wkf09Parametros)
                     .HasForeignKey(d => d.wkf01llave)
                     .HasConstraintName("FK_WKF09_Parametro_WKF01_Flujo");
 
-                entity.HasOne(d => d.Wkf10LlaveNavigation).WithMany(p => p.Wkf09Parametros)
+                entity.HasOne(d => d.wkf10llaveNavigation).WithMany(p => p.wkf09Parametros)
                     .HasForeignKey(d => d.wkf10llave)
                     .HasConstraintName("FK_WKF09_Parametro_WKF10_TipoParametro");
             });
 
-            modelBuilder.Entity<Wkf10TipoParametro>(entity =>
+            modelBuilder.Entity<wkf10TipoParametro>(entity =>
             {
                 entity.HasKey(e => e.wkf10llave);
 
                 entity.ToTable("WKF10_TipoParametro");
 
-                entity.Property(e => e.wkf10llave)
-                    .ValueGeneratedOnAdd()
-                    
-                    .HasColumnName("WKF10_Llave");
+                entity.Property(e => e.wkf10llave).HasColumnName("WKF10_llave");
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
                 entity.Property(e => e.deleteby).HasColumnName("DELETE_BY");
                 entity.Property(e => e.fechaactivacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactivacion");
+                    .HasColumnName("FECHAACTIVACION");
                 entity.Property(e => e.fechaactualizacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaactualizacion");
+                    .HasColumnName("FECHAACTUALIZACION");
                 entity.Property(e => e.fechaeliminacion)
                     .HasColumnType("datetime")
-                    .HasColumnName("fechaeliminacion");
-                entity.Property(e => e.wkf10activo).HasColumnName("WKF10_Activo");
-                entity.Property(e => e.wkf10descripcion).HasColumnName("WKF10_Descripcion");
+                    .HasColumnName("FECHAELIMINACION");
+                entity.Property(e => e.wkf10activo).HasColumnName("WKF10_activo");
+                entity.Property(e => e.wkf10descripcion).HasColumnName("WKF10_descripcion");
                 entity.Property(e => e.wkf10nombre)
                     .HasMaxLength(500)
-                    .HasColumnName("WKF10_Nombre");
+                    .HasColumnName("WKF10_nombre");
             });
 
-            
+            modelBuilder.Entity<Zona>(entity =>
+            {
+                entity.Property(e => e.isDeleted).HasColumnName("isDeleted");
+            });
 
-                        
+            modelBuilder.Entity<MonitorTrampaBuscarResponseDto>().HasNoKey();
+
+            modelBuilder.Entity<MovilAccesoResponseDto>().HasNoKey();
+
+            modelBuilder.Entity<MovilPeriodoResponseDto>().HasNoKey();
+
             base.OnModelCreating(modelBuilder);
         }
-
-
 
         public virtual DbSet<UsuarioRegistroResponseDto> UsuarioRegistros { get; set; }
 
@@ -5349,53 +4923,53 @@ namespace mipBackend.Data
 
         public virtual DbSet<Clbr02TipoCalibracion>? Clbr02TipoCalibraciones { get; set; }
 
-        public virtual DbSet<Cnt01CuentaCliente>? Cnt01CuentaClientes { get; set; }
+        public virtual DbSet<cnt01CuentaCliente>? cnt01CuentaClientes { get; set; }
 
-        public virtual DbSet<Cnt02TipoCuenta>? Cnt02TipoCuentas { get; set; }
+        public virtual DbSet<cnt02TipoCuenta>? cnt02TipoCuentas { get; set; }
 
-        public virtual DbSet<Cnt03TipoCliente>? Cnt03TipoClientes { get; set; }
+        public virtual DbSet<cnt03TipoCliente>? cnt03TipoClientes { get; set; }
 
-        public virtual DbSet<Cnt04ContactoCliente>? Cnt04ContactoClientes { get; set; }
+        public virtual DbSet<cnt04ContactoCliente>? cnt04ContactoClientes { get; set; }
 
-        public virtual DbSet<Cnt05TipoContacto>? Cnt05TipoContactos { get; set; }
+        public virtual DbSet<cnt05TipoContacto>? cnt05TipoContactos { get; set; }
 
-        public virtual DbSet<Cnt06ComunicacionCliente>? Cnt06ComunicacionClientes { get; set; }
+        public virtual DbSet<cnt06ComunicacionCliente>? cnt06ComunicacionClientes { get; set; }
 
-        public virtual DbSet<Cnt07TipoSegmentacion>? Cnt07TipoSegmentaciones { get; set; }
+        public virtual DbSet<cnt07TipoSegmentacion>? cnt07TipoSegmentaciones { get; set; }
 
-        public virtual DbSet<Cnt08Segmentacion>? Cnt08Segmentaciones { get; set; }
+        public virtual DbSet<cnt08Segmentacion>? cnt08Segmentaciones { get; set; }
 
-        public virtual DbSet<Cnt09ComunicacionSegmentacion>? Cnt09ComunicacionSegmentaciones { get; set; }
+        public virtual DbSet<cnt09ComunicacionSegmentacion>? cnt09ComunicacionSegmentaciones { get; set; }
 
-        public virtual DbSet<Cnt10TipoComunicacion>? Cnt10TipoComunicaciones { get; set; }
+        public virtual DbSet<cnt10TipoComunicacion>? cnt10TipoComunicaciones { get; set; }
 
-        public virtual DbSet<Cnt11ContactoSegmentacion>? Cnt11ContactoSegmentaciones { get; set; }
+        public virtual DbSet<cnt11ContactoSegmentacion>? cnt11ContactoSegmentaciones { get; set; }
 
-        public virtual DbSet<Cnt12Empleado>? Cnt12Empleados { get; set; }
+        public virtual DbSet<cnt12Empleado>? cnt12Empleados { get; set; }
 
-        public virtual DbSet<Cnt13TipoEmpleado>? Cnt13TipoEmpleados { get; set; }
+        public virtual DbSet<cnt13TipoEmpleado>? cnt13TipoEmpleados { get; set; }
 
-        public virtual DbSet<Cnt14ClienteLicencia>? Cnt14ClienteLicencias { get; set; }
+        public virtual DbSet<cnt14ClienteLicencia>? cnt14ClienteLicencias { get; set; }
 
-        public virtual DbSet<Cnt15EmpleadoLicencia>? Cnt15EmpleadoLicencias { get; set; }
+        public virtual DbSet<cnt15EmpleadoLicencia>? cnt15EmpleadoLicencias { get; set; }
 
-        public virtual DbSet<Cnt16TipoBloqueoCliente>? Cnt16TipoBloqueoClientes { get; set; }
+        public virtual DbSet<cnt16TipoBloqueoCliente>? cnt16TipoBloqueoClientes { get; set; }
 
-        public virtual DbSet<Cnt17Bloqueo>? Cnt17Bloqueos { get; set; }
+        public virtual DbSet<cnt17Bloqueo>? cnt17Bloqueos { get; set; }
 
-        public virtual DbSet<Cnt18NivelSegmentacion>? Cnt18NivelSegmentaciones { get; set; }
+        public virtual DbSet<cnt18NivelSegmentacion>? cnt18NivelSegmentaciones { get; set; }
 
-        public virtual DbSet<Cnt19LicenciaCliente>? Cnt19LicenciaClientes { get; set; }
+        public virtual DbSet<cnt19LicenciaCliente>? cnt19LicenciaClientes { get; set; }
 
-        public virtual DbSet<Cnt20LicenciaServicio>? Cnt20LicenciaServicios { get; set; }
+        public virtual DbSet<cnt20LicenciaServicio>? cnt20LicenciaServicios { get; set; }
 
-        public virtual DbSet<Cnt21TipoEstacion>? Cnt21TipoEstaciones { get; set; }
+        public virtual DbSet<cnt21TipoEstacion>? cnt21TipoEstaciones { get; set; }
 
-        public virtual DbSet<Cnt22EstacionTipoEstacion>? Cnt22EstacionTipoEstaciones { get; set; }
+        public virtual DbSet<cnt22EstacionTipoEstacion>? cnt22EstacionTipoEstaciones { get; set; }
 
-        public virtual DbSet<Cnt23Tipocobro>? Cnt23Tipocobros { get; set; }
+        public virtual DbSet<cnt23Tipocobro>? cnt23Tipocobros { get; set; }
 
-        public virtual DbSet<Cnt24AsociarCuenta>? Cnt24AsociarCuentas { get; set; }
+        public virtual DbSet<cnt24AsociarCuenta>? cnt24AsociarCuentas { get; set; }
 
         public virtual DbSet<Cont01Contacto>? Cont01Contactos { get; set; }
 
@@ -5429,27 +5003,27 @@ namespace mipBackend.Data
 
         public virtual DbSet<Eml06TipoArchivo>? Eml06TipoArchivos { get; set; }
 
-        public virtual DbSet<Esp01Especie>? Esp01Especies { get; set; }
+        public virtual DbSet<esp01especie>? esp01especies { get; set; }
 
-        public virtual DbSet<Esp02TemporadaEspecie>? Esp02TemporadaEspecies { get; set; }
+        public virtual DbSet<esp02Temporadaespecie>? esp02Temporadaespecies { get; set; }
 
-        public virtual DbSet<Esp03EspecieBase>? Esp03EspecieBases { get; set; }
+        public virtual DbSet<esp03especieBase>? esp03especieBases { get; set; }
 
-        public virtual DbSet<Esp04EstadoDanio>? Esp04EstadoDanios { get; set; }
+        public virtual DbSet<esp04EstadoDanio>? esp04EstadoDanios { get; set; }
 
-        public virtual DbSet<Esp05Umbral>? Esp05Umbrales { get; set; }
+        public virtual DbSet<esp05Umbral>? esp05Umbrales { get; set; }
 
-        public virtual DbSet<Esp06MedidaUmbral>? Esp06MedidaUmbrales { get; set; }
+        public virtual DbSet<esp06MedidaUmbral>? esp06MedidaUmbrales { get; set; }
 
-        public virtual DbSet<Esp07Union>? Esp07Uniones { get; set; }
+        public virtual DbSet<esp07Union>? esp07Uniones { get; set; }
 
-        public virtual DbSet<Esp08TipoBase>? Esp08TipoBases { get; set; }
+        public virtual DbSet<esp08TipoBase>? esp08TipoBases { get; set; }
 
-        public virtual DbSet<Esp09TipoBaseUmbral>? Esp09TipoBaseUmbrales { get; set; }
+        public virtual DbSet<esp09TipoBaseUmbral>? esp09TipoBaseUmbrales { get; set; }
 
-        public virtual DbSet<Esp10TipoRegla>? Esp10TipoReglas { get; set; }
+        public virtual DbSet<esp10TipoRegla>? esp10TipoReglas { get; set; }
 
-        public virtual DbSet<Esp11ReglaGrafico>? Esp11ReglaGraficos { get; set; }
+        public virtual DbSet<esp11ReglaGrafico>? esp11ReglaGraficos { get; set; }
 
         public virtual DbSet<Frm01TipoFormulario>? Frm01TipoFormularios { get; set; }
 
@@ -5485,11 +5059,13 @@ namespace mipBackend.Data
 
         public virtual DbSet<Log03MensajeBitacora>? Log03MensajeBitacoras { get; set; }
 
-        public virtual DbSet<Men01Sistema>? Men01Sistemas { get; set; }
+        public virtual DbSet<Men01sistema>? Men01sistemas { get; set; }
 
         public virtual DbSet<Mnt01Monitor>? Mnt01Monitores { get; set; }
 
-        public virtual DbSet<Mnt03PeriodosTrampa>? Mnt03PeriodosTrampas { get; set; }
+        public virtual DbSet<Mnt02EspeciesAsignada>? Mnt02EspeciesAsignadas { get; set; }
+
+        public virtual DbSet<Mnt03periodosTrampa>? Mnt03periodosTrampas { get; set; }
 
         public virtual DbSet<Mnt04TipoMonitor>? Mnt04TipoMonitores { get; set; }
 
@@ -5498,6 +5074,8 @@ namespace mipBackend.Data
         public virtual DbSet<Mvl02TablaSincronizacion>? Mvl02TablaSincronizaciones { get; set; }
 
         public virtual DbSet<Mvl03RegistroAcceso>? Mvl03RegistroAccesos { get; set; }
+
+        public virtual DbSet<Mvl04AliasTablaSinc>? Mvl04AliasTablaSincas { get; set; }
 
         public virtual DbSet<Obsc01ObservacionCampo>? Obsc01ObservacionCampos { get; set; }
 
@@ -5509,23 +5087,23 @@ namespace mipBackend.Data
 
         public virtual DbSet<Pbcd03Programacion>? Pbcd03Programaciones { get; set; }
 
-        public virtual DbSet<Per01Persona>? Per01Personas { get; set; }
+        public virtual DbSet<per01persona>? per01personas { get; set; }
 
-        public virtual DbSet<Per02Genero>? Per02Generos { get; set; }
+        public virtual DbSet<per02Genero>? per02Generos { get; set; }
 
-        public virtual DbSet<Per03TipoPersona>? Per03TipoPersonas { get; set; }
+        public virtual DbSet<per03Tipopersona>? per03Tipopersonas { get; set; }
 
-        public virtual DbSet<Per04TipoComunicacion>? Per04TipoComunicaciones { get; set; }
+        public virtual DbSet<per04TipoComunicacion>? per04TipoComunicaciones { get; set; }
 
-        public virtual DbSet<Per05Comunicacion>? Per05Comunicaciones { get; set; }
+        public virtual DbSet<per05Comunicacion>? per05Comunicaciones { get; set; }
 
-        public virtual DbSet<Per06TipoPersonaComunicacion>? Per06TipoPersonaComunicaciones { get; set; }
+        public virtual DbSet<per06TipopersonaComunicacion>? per06TipopersonaComunicaciones { get; set; }
 
-        public virtual DbSet<Per07PersonaUsuario>? Per07PersonaUsuarios { get; set; }
+        public virtual DbSet<per07personaUsuario>? per07personaUsuarios { get; set; }
 
-        public virtual DbSet<Per08TipoDocumento>? Per08TipoDocumentos { get; set; }
+        public virtual DbSet<per08TipoDocumento>? per08TipoDocumentos { get; set; }
 
-        public virtual DbSet<Per09DefaultUser>? Per09DefaultUsers { get; set; }
+        public virtual DbSet<per09DefaultUser>? per09DefaultUsers { get; set; }
 
         public virtual DbSet<Pgo01CompraLicencia>? Pgo01CompraLicencias { get; set; }
 
@@ -5533,16 +5111,16 @@ namespace mipBackend.Data
 
         public virtual DbSet<Pgo03TipoPagoLicencia>? Pgo03TipoPagoLicencias { get; set; }
 
-        public virtual DbSet<Prf01Perfil>? Prf01Perfiles { get; set; }
+        public virtual DbSet<prf01perfil>? prf01perfiles { get; set; }
 
-        public virtual DbSet<Prf03Plantilla>? Prf03Plantillas { get; set; }
+        public virtual DbSet<prf03Plantilla>? prf03Plantillas { get; set; }
 
 
-        public virtual DbSet<Prf04PlantillaFlujo> Prf04PlantillaFlujos { get; set; }
+        public virtual DbSet<prf04PlantillaFlujo> prf04PlantillaFlujos { get; set; }
 
-        public virtual DbSet<Prf05TipoAsignacionUsuario>? Prf05TipoAsignacionUsuarios { get; set; }
+        public virtual DbSet<prf05TipoAsignacionUsuario>? prf05TipoAsignacionUsuarios { get; set; }
 
-        public virtual DbSet<Prf06PermisosUsuario>? Prf06PermisosUsuarios { get; set; }
+        public virtual DbSet<prf06permisosUsuario>? prf06permisosUsuarios { get; set; }
 
         public virtual DbSet<Prm01Seguridad>? Prm01Seguridades { get; set; }
 
@@ -5562,9 +5140,9 @@ namespace mipBackend.Data
 
         public virtual DbSet<Secu08UsuarioAplicacion>? Secu08UsuarioAplicaciones { get; set; }
 
-        public virtual DbSet<Secu10AccesoPermitido>? Secu10AccesoPermitidos { get; set; }
+        public virtual DbSet<Secu10Accesopermitido>? Secu10Accesopermitidos { get; set; }
 
-        public virtual DbSet<Secu11TipoPerfil>? Secu11TipoPerfiles { get; set; }
+        public virtual DbSet<Secu11Tipoperfil>? Secu11Tipoperfiles { get; set; }
 
         public virtual DbSet<Sercl01ServiciosCliente>? Sercl01ServiciosClientes { get; set; }
 
@@ -5574,19 +5152,19 @@ namespace mipBackend.Data
 
         public virtual DbSet<Serv02TipoServicio>? Serv02TipoServicios { get; set; }
 
-        public virtual DbSet<Sist01Sistema>? Sist01Sistemas { get; set; }
+        public virtual DbSet<sist01sistema>? sist01sistemas { get; set; }
 
-        public virtual DbSet<Sist02Zona>? Sist02Zonas { get; set; }
+        public virtual DbSet<sist02Zona>? sist02Zonas { get; set; }
 
-        public virtual DbSet<Sist03Comuna>? Sist03Comunas { get; set; }
+        public virtual DbSet<sist03Comuna>? sist03Comunas { get; set; }
 
-        public virtual DbSet<Sist04Region>? Sist04Regiones { get; set; }
+        public virtual DbSet<sist04Region>? sist04Regiones { get; set; }
 
-        public virtual DbSet<Sist05EstadoRegistro>? Sist05EstadoRegistros { get; set; }
+        public virtual DbSet<sist05EstadoRegistro>? sist05EstadoRegistros { get; set; }
 
-        public virtual DbSet<Sist06EstadoGrid>? Sist06EstadoGrids { get; set; }
+        public virtual DbSet<sist06EstadoGrid>? sist06EstadoGrids { get; set; }
 
-        public virtual DbSet<Sist08ContactoUsuario>? Sist08ContactoUsuarios { get; set; }
+        public virtual DbSet<sist08ContactoUsuario>? sist08ContactoUsuarios { get; set; }
 
         public virtual DbSet<Temp01Temporada>? Temp01Temporadas { get; set; }
 
@@ -5600,27 +5178,33 @@ namespace mipBackend.Data
 
         public virtual DbSet<Trp03Geocordenada>? Trp03Geocordenadas { get; set; }
 
-        public virtual DbSet<Wkf01Flujo>? Wkf01Flujos { get; set; }
+        public virtual DbSet<wkf01Flujo>? wkf01Flujos { get; set; }
 
-        public virtual DbSet<Wkf02TipoFlujo>? Wkf02TipoFlujos { get; set; }
+        public virtual DbSet<wkf02TipoFlujo>? wkf02TipoFlujos { get; set; }
 
-        public virtual DbSet<Wkf03Nivel>? Wkf03Niveles { get; set; }
+        public virtual DbSet<wkf03Nivel>? wkf03Niveles { get; set; }
 
-        public virtual DbSet<Wkf04NivelPermiso>? Wkf04NivelPermisos { get; set; }
+        public virtual DbSet<wkf04Nivelpermiso>? wkf04Nivelpermisos { get; set; }
 
-        public virtual DbSet<Wkf05TipoPermiso>? Wkf05TipoPermisos { get; set; }
+        public virtual DbSet<wkf05Tipopermiso>? wkf05Tipopermisos { get; set; }
 
-        public virtual DbSet<Wkf06Perfil>? Wkf06Perfiles { get; set; }
+        public virtual DbSet<wkf06perfil>? wkf06perfiles { get; set; }
 
-        public virtual DbSet<Wkf07PerfilesPermiso>? Wkf07PerfilesPermisos { get; set; }
+        public virtual DbSet<wkf07perfilespermiso>? wkf07perfilespermisos { get; set; }
 
-        public virtual DbSet<Wkf08Area>? Wkf08Areas { get; set; }
+        public virtual DbSet<wkf08Area>? wkf08Areas { get; set; }
 
-        public virtual DbSet<Wkf09Parametro>? Wkf09Parametros { get; set; }
+        public virtual DbSet<wkf09Parametro>? wkf09Parametros { get; set; }
 
-        public virtual DbSet<Wkf10TipoParametro>? Wkf10TipoParametros { get; set; }
+        public virtual DbSet<wkf10TipoParametro>? wkf10TipoParametros { get; set; }
 
         public DbSet<setSelect>? SetSelects { get; set; }
+
+        public DbSet<MonitorTrampaBuscarResponseDto> MonitorTrampaBuscarResponse { get; set; }
+
+        public DbSet<MovilAccesoResponseDto> MovilAccesoResponse { get; set; }
+
+        public DbSet<MovilPeriodoResponseDto> MovilPeriodoResponse { get; set; }
 
     }
 }

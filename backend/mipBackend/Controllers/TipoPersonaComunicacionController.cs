@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using mipBackend.Data.TipoPerComunicaciones;
-using mipBackend.Dtos.TipoPerComunicacionDtos;
+using mipBackend.Data.TipoperComunicaciones;
+using mipBackend.Dtos.TipoperComunicacionDtos;
 using mipBackend.Middleware;
 using mipBackend.Models;
 using System.Net;
@@ -11,16 +11,16 @@ namespace mipBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TipoPersonaComunicacionController : ControllerBase
+    public class TipopersonaComunicacionController : ControllerBase
     {
-        private readonly ITipoPerComunicacionRepository _repository;
+        private readonly ITipoperComunicacionRepository _repository;
         private IMapper _mapper;
         private HttpStatusCode httpStatusCode;
 
-        public TipoPersonaComunicacionController
+        public TipopersonaComunicacionController
             (
                 AppDbContext context,
-                ITipoPerComunicacionRepository repository,
+                ITipoperComunicacionRepository repository,
                 IMapper mapper
 
             )
@@ -30,28 +30,28 @@ namespace mipBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoPerComunicacionResponseDto>>> GetTipoPersonaComunicacion()
+        public async Task<ActionResult<IEnumerable<TipoperComunicacionResponseDto>>> GetTipopersonaComunicacion()
         {
 
-            var NivelPermisos = await _repository.GetAllTipoPerComunicaciones();
-            return Ok(NivelPermisos);
+            var Nivelpermisos = await _repository.GetAllTipoperComunicaciones();
+            return Ok(Nivelpermisos);
 
         }
 
-        [HttpGet("~/api/tipopersonacomunicacion/GetTipoPerComunicacionById/{id}")]
-        [ActionName(nameof(GetTipoPerComunicacionById))]
-        public async Task<ActionResult<TipoPerComunicacionResponseDto>> GetTipoPerComunicacionById(int id)
+        [HttpGet("~/api/tipopersonacomunicacion/GetTipoperComunicacionById/{id}")]
+        [ActionName(nameof(GetTipoperComunicacionById))]
+        public async Task<ActionResult<TipoperComunicacionResponseDto>> GetTipoperComunicacionById(int id)
         {
 
 
-            var tipopercomunicacion = await _repository.GetTipoPerComunicacionById(id);
+            var tipopercomunicacion = await _repository.GetTipoperComunicacionById(id);
 
             if (tipopercomunicacion == null)
             {
                 throw new MiddlewareException
                     (
                         HttpStatusCode.NotFound,
-                        new { mensaje = $"No se encontro la NivelPermiso por este id {id}" }
+                        new { mensaje = $"No se encontro la Nivelpermiso por este id {id}" }
                     );
             }
 
@@ -60,46 +60,46 @@ namespace mipBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TipoPerComunicacionResponseDto>> CreateTipoPersonaComunicacion
+        public async Task<ActionResult<TipoperComunicacionResponseDto>> CreateTipopersonaComunicacion
             (
-               [FromBody] TipoPerComunicacionRequestDto request
+               [FromBody] TipoperComunicacionRequestDto request
             )
         {
 
-            var requestModel = _mapper.Map<Per06TipoPersonaComunicacion>(request);
+            var requestModel = _mapper.Map<per06TipopersonaComunicacion>(request);
 
-            await _repository.CreateTipoPerComunicacion(requestModel);
+            await _repository.CreateTipoperComunicacion(requestModel);
             await _repository.SaveChanges();
 
         
-            var listTipoPerComunicaciones = await _repository.GetTipoPerComunicacionById(request.per04llave);
-            return Ok(_mapper.Map<TipoPerComunicacionResponseDto[]>(listTipoPerComunicaciones));
+            var listTipoperComunicaciones = await _repository.GetTipoperComunicacionById(request.per04llave);
+            return Ok(_mapper.Map<TipoperComunicacionResponseDto[]>(listTipoperComunicaciones));
 
         }
 
 
-        [HttpPost("~/api/TipoPersonaComunicacion/borrarTipoPerComunicacion")]
-        public async Task<ActionResult<TipoPerComunicacionResponseDto>> borrarTipoPerComunicacion(TipoPerComunicacionRequestDto request)
+        [HttpPost("~/api/TipopersonaComunicacion/borrarTipoperComunicacion")]
+        public async Task<ActionResult<TipoperComunicacionResponseDto>> borrarTipoperComunicacion(TipoperComunicacionRequestDto request)
         {
 
-            var tipoPerComunicacionResponses = await _repository.GetTipoPerComunicacionById(request.per04llave);
+            var tipoperComunicacionResponses = await _repository.GetTipoperComunicacionById(request.per04llave);
 
-            if (tipoPerComunicacionResponses == null)
+            if (tipoperComunicacionResponses == null)
             {
                 throw new MiddlewareException
                 (
                     HttpStatusCode.NotFound,
-                    new { mensaje = $"No se encontro la NivelPermiso por este id {request.per04llave}" }
+                    new { mensaje = $"No se encontro la Nivelpermiso por este id {request.per04llave}" }
                 );
             }
             else
             {
-                await _repository.DeleteTipoPerComunicacion(request);
+                await _repository.DeleteTipoperComunicacion(request);
                 await _repository.SaveChanges();
             }
             
-            var listTipoPerComunicaciones = await _repository.GetTipoPerComunicacionById(request.per04llave);
-            return Ok(_mapper.Map<TipoPerComunicacionResponseDto[]>(listTipoPerComunicaciones));
+            var listTipoperComunicaciones = await _repository.GetTipoperComunicacionById(request.per04llave);
+            return Ok(_mapper.Map<TipoperComunicacionResponseDto[]>(listTipoperComunicaciones));
 
         }
 

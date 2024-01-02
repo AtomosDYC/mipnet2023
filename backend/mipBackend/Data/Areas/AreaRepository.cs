@@ -25,7 +25,7 @@ namespace mipBackend.Data.Areas
 
 
 
-        public async Task CreateArea(Wkf08Area area)
+        public async Task CreateArea(wkf08Area area)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -48,7 +48,7 @@ namespace mipBackend.Data.Areas
             area.fechaactivacion = DateTime.Now;
             area.wfk08activo = true;
 
-            await _contexto.Wkf08Areas!.AddAsync(area);
+            await _contexto.wkf08Areas!.AddAsync(area);
 
         }
 
@@ -58,20 +58,20 @@ namespace mipBackend.Data.Areas
 
 
 
-            var area = await _contexto.Wkf08Areas!
+            var area = await _contexto.wkf08Areas!
                 .FirstOrDefaultAsync(x => x.wfk08llave== id);
 
-            _contexto.Wkf08Areas!.Remove(area!);
+            _contexto.wkf08Areas!.Remove(area!);
         }
 
-        public async Task<IEnumerable<Wkf08Area>> GetAllAreas()
+        public async Task<IEnumerable<wkf08Area>> GetAllAreas()
         {
-            return await _contexto.Wkf08Areas!.ToListAsync();
+            return await _contexto.wkf08Areas!.ToListAsync();
         }
 
-        public async Task<Wkf08Area> GetAreaById(int id)
+        public async Task<wkf08Area> GetAreaById(int id)
         {
-            return await _contexto.Wkf08Areas!.FirstOrDefaultAsync(x => x.wfk08llave == id)!;
+            return await _contexto.wkf08Areas!.FirstOrDefaultAsync(x => x.wfk08llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -79,7 +79,7 @@ namespace mipBackend.Data.Areas
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateArea(Wkf08Area request)
+        public async Task UpdateArea(wkf08Area request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -99,21 +99,21 @@ namespace mipBackend.Data.Areas
                    );
             }
 
-            var area = await _contexto.Wkf08Areas!
+            var area = await _contexto.wkf08Areas!
                 .FirstOrDefaultAsync(x => x.wfk08llave == request.wfk08llave);
 
             area.fechaactualizacion = DateTime.Now;
             area.wfk08nombre = request.wfk08nombre;
             area.wfk08descripcion = request.wfk08descripcion;
             
-            _contexto.Wkf08Areas!.Update(area!);
+            _contexto.wkf08Areas!.Update(area!);
 
         }
 
         public async Task DisableArea(int id)
         {
 
-            var area = await _contexto.Wkf08Areas!
+            var area = await _contexto.wkf08Areas!
                 .FirstOrDefaultAsync(x => x.wfk08llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -137,7 +137,7 @@ namespace mipBackend.Data.Areas
 
             area.wfk08activo = false;
 
-            _contexto.Wkf08Areas!.Update(area);
+            _contexto.wkf08Areas!.Update(area);
 
 
         }
@@ -145,7 +145,7 @@ namespace mipBackend.Data.Areas
         public async Task ActivateArea(int id)
         {
 
-            var area = await _contexto.Wkf08Areas!
+            var area = await _contexto.wkf08Areas!
                 .FirstOrDefaultAsync(x => x.wfk08llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -169,7 +169,7 @@ namespace mipBackend.Data.Areas
 
             area.wfk08activo = true;
 
-            _contexto.Wkf08Areas!.Update(area);
+            _contexto.wkf08Areas!.Update(area);
 
 
         }

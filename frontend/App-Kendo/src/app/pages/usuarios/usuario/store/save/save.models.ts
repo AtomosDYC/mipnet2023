@@ -10,8 +10,31 @@ export type UsuarioRegistroCreateRequest = Omit<usuarioregistro,
 'rolename' |
 'per01llave' |
 'per01nombre' |
-'prf03llave' |
-'prf03nombre'
+'email' |
+'emailconfirmed' |
+'tipodocumentoid' |
+'tipodocumentonombre' |
+'tipopersonaid' |
+'tipopersonanombre' |
+'plantillaid' |
+'plantillanombre' |
+'saludoid' |
+'saludonombre'
+
+>;
+
+
+export type UsuarioRegistroUpdateRequest = Omit<usuarioregistro, 
+'rolename' | 
+'name' | 
+'password' | 
+'emailconfirmed' |
+'per01llave' |
+'tipodocumentonombre' |
+'tipopersonanombre' |
+'plantillanombre' |
+'saludonombre'
+
 >;
 
 export type UsuarioRegistroCreateResponse = Omit<usuarioregistro,

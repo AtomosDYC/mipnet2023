@@ -3,21 +3,22 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Mnt03PeriodosTrampa
+public partial class Mnt03periodosTrampa
 {
-    public int Mnt01Llave { get; set; }
+    public int mnt01llave { get; set; }
 
-    public int Trp01Llave { get; set; }
+    public int trp01llave { get; set; }
 
-    public int Temp02Llave { get; set; }
+    public int temp02llave { get; set; }
 
-    public int? Mnt03Activo { get; set; }
+    public int? mnt03activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
     public Guid? approveby { get; set; }
 
-    public virtual Mnt01Monitor Mnt01LlaveNavigation { get; set; } = null!;
+    public virtual Mnt01Monitor Mnt01llaveNavigation { get; set; } = null!;
 
-    public virtual Temp02TemporadaBase Temp02LlaveNavigation { get; set; } = null!;
+    public virtual Temp02TemporadaBase Temp02llaveNavigation { get; set; } = null!;
+
 }

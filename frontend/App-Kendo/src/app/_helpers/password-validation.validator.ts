@@ -11,7 +11,7 @@ export class PasswordValidator {
         let hasUpper = /[A-Z]/.test(control.value);
         let hasLower = /[a-z]/.test(control.value);
         let NonAlpha = /[~!@#$%^&*()-+=?/<>|{}_ :;.,\`]/.test(control.value);
-        // console.log('Num, Upp, Low', hasNumber, hasUpper, hasLower);
+        // //console.log('Num, Upp, Low', hasNumber, hasUpper, hasLower);
         const valid = hasNumber && hasUpper && hasLower && NonAlpha;
         if (!valid) {
             // return what´s not valid

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Cnt13TipoEmpleado
+public partial class cnt13TipoEmpleado
 {
-    public int Cnt13Llave { get; set; }
+    public int cnt13llave { get; set; }
 
-    public string? Cnt13Nombre { get; set; }
+    public string? cnt13nombre { get; set; }
 
-    public string? Cnt13Descripcion { get; set; }
+    public string? cnt13descripcion { get; set; }
 
-    public int? Cnt13Activo { get; set; }
+    public int? cnt13activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Cnt13TipoEmpleado
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Cnt12Empleado> Cnt12Empleados { get; } = new List<Cnt12Empleado>();
+    public virtual ICollection<cnt12Empleado> cnt12Empleados { get; } = new List<cnt12Empleado>();
 }

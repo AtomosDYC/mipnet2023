@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Wkf10TipoParametro
+public partial class wkf10TipoParametro
 {
     public int wkf10llave { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Wkf10TipoParametro
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Wkf09Parametro> Wkf09Parametros { get; } = new List<Wkf09Parametro>();
+    public virtual ICollection<wkf09Parametro> wkf09Parametros { get; } = new List<wkf09Parametro>();
 }

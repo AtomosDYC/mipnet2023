@@ -6,18 +6,18 @@ using mipBackend.Token;
 
 using System.Net;
 using AutoMapper;
-using mipBackend.Dtos.NivelPermisoDtos;
+using mipBackend.Dtos.NivelpermisoDtos;
 
-namespace mipBackend.Data.NivelPermisos
+namespace mipBackend.Data.Nivelpermisos
 {
-    public class NivelPermisoRepository : INivelPermisoRepository
+    public class NivelpermisoRepository : INivelpermisoRepository
     {
         private readonly AppDbContext _contexto;
         private readonly IUsuarioSesion _usuarioSesion;
         private readonly UserManager<Usuario> _userManager;
         private IMapper _mapper;
 
-        public NivelPermisoRepository(
+        public NivelpermisoRepository(
             AppDbContext context,
             IUsuarioSesion sesion,
             UserManager<Usuario> userManager,
@@ -30,7 +30,7 @@ namespace mipBackend.Data.NivelPermisos
         }
 
 
-        public async Task CreateNivelPermiso(Wkf04NivelPermiso NivelPermiso)
+        public async Task CreateNivelpermiso(wkf04Nivelpermiso Nivelpermiso)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -42,7 +42,7 @@ namespace mipBackend.Data.NivelPermisos
                     );
             }
 
-            if (NivelPermiso is null)
+            if (Nivelpermiso is null)
             {
                 throw new MiddlewareException(
                    HttpStatusCode.BadRequest,
@@ -50,30 +50,30 @@ namespace mipBackend.Data.NivelPermisos
                    );
             }
 
-            NivelPermiso.wkf04activo = 1;
+            Nivelpermiso.wkf04activo = 1;
 
-            await _contexto.Wkf04NivelPermisos!.AddAsync(NivelPermiso);
+            await _contexto.wkf04Nivelpermisos!.AddAsync(Nivelpermiso);
 
         }
 
-        public async Task DeleteNivelPermiso(int id)
+        public async Task DeleteNivelpermiso(int id)
         {
 
-            var NivelPermiso = await _contexto.Wkf04NivelPermisos!
+            var Nivelpermiso = await _contexto.wkf04Nivelpermisos!
                 .FirstOrDefaultAsync(x => x.wkf04llave == id);
 
-            _contexto.Wkf04NivelPermisos!.Remove(NivelPermiso!);
+            _contexto.wkf04Nivelpermisos!.Remove(Nivelpermiso!);
         }
 
-        public async Task<IEnumerable<NivelPermisoResponseDto>> GetAllNivelPermisos()
+        public async Task<IEnumerable<NivelpermisoResponseDto>> GetAllNivelpermisos()
         {
             using (var db = _contexto)
             {
-                var query = await (from nivper in db.Wkf04NivelPermisos
-                                   join niv in db.Wkf03Niveles! on nivper.wkf03llave equals niv.wkf03llave
-                                   join tip in db.Wkf05TipoPermisos! on nivper.wkf05llave equals tip.wkf05llave
+                var query = await (from nivper in db.wkf04Nivelpermisos
+                                   join niv in db.wkf03Niveles! on nivper.wkf03llave equals niv.wkf03llave
+                                   join tip in db.wkf05Tipopermisos! on nivper.wkf05llave equals tip.wkf05llave
                                    where (niv.wkf03activo == 1 && tip.wkf05activo == 1)
-                                   select new NivelPermisoResponseDto
+                                   select new NivelpermisoResponseDto
                                    {
                                        wkf04llave = nivper.wkf04llave,
                                        wkf03llave = nivper.wkf03llave,
@@ -83,14 +83,14 @@ namespace mipBackend.Data.NivelPermisos
                                        wkf04activo = nivper.wkf04activo
                                    }).ToListAsync();
 
-                return _mapper.Map<IEnumerable<NivelPermisoResponseDto>>(query);
+                return _mapper.Map<IEnumerable<NivelpermisoResponseDto>>(query);
 
             }
         }
 
-        public async Task<Wkf04NivelPermiso> GetNivelPermisoById(int id)
+        public async Task<wkf04Nivelpermiso> GetNivelpermisoById(int id)
         {
-            return await _contexto.Wkf04NivelPermisos!.FirstOrDefaultAsync(x => x.wkf04llave == id)!;
+            return await _contexto.wkf04Nivelpermisos!.FirstOrDefaultAsync(x => x.wkf04llave == id)!;
         }
 
         public async Task<bool> SaveChanges()
@@ -98,7 +98,7 @@ namespace mipBackend.Data.NivelPermisos
             return ((await _contexto.SaveChangesAsync()) >= 0);
         }
 
-        public async Task UpdateNivelPermiso(Wkf04NivelPermiso request)
+        public async Task UpdateNivelpermiso(wkf04Nivelpermiso request)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -118,20 +118,20 @@ namespace mipBackend.Data.NivelPermisos
                    );
             }
 
-            var NivelPermiso = await _contexto.Wkf04NivelPermisos!
+            var Nivelpermiso = await _contexto.wkf04Nivelpermisos!
                 .FirstOrDefaultAsync(x => x.wkf04llave == request.wkf04llave);
 
-            NivelPermiso.wkf03llave = request.wkf03llave;
-            NivelPermiso.wkf05llave = request.wkf05llave;
+            Nivelpermiso.wkf03llave = request.wkf03llave;
+            Nivelpermiso.wkf05llave = request.wkf05llave;
             
-            _contexto.Wkf04NivelPermisos!.Update(NivelPermiso!);
+            _contexto.wkf04Nivelpermisos!.Update(Nivelpermiso!);
 
         }
 
-        public async Task DisableNivelPermiso(int id)
+        public async Task DisableNivelpermiso(int id)
         {
 
-            var NivelPermiso = await _contexto.Wkf04NivelPermisos!
+            var Nivelpermiso = await _contexto.wkf04Nivelpermisos!
                 .FirstOrDefaultAsync(x => x.wkf04llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -144,26 +144,26 @@ namespace mipBackend.Data.NivelPermisos
                     );
             }
 
-            if (NivelPermiso is null)
+            if (Nivelpermiso is null)
             {
                 throw new MiddlewareException(
                    HttpStatusCode.BadRequest,
-                   new { mensaje = "La NivelPermiso no existe en los listados" }
+                   new { mensaje = "La Nivelpermiso no existe en los listados" }
                    );
             }
 
 
-            NivelPermiso.wkf04llave = 0;
+            Nivelpermiso.wkf04llave = 0;
 
-            _contexto.Wkf04NivelPermisos!.Update(NivelPermiso);
+            _contexto.wkf04Nivelpermisos!.Update(Nivelpermiso);
 
 
         }
 
-        public async Task ActivateNivelPermiso(int id)
+        public async Task ActivateNivelpermiso(int id)
         {
 
-            var NivelPermiso = await _contexto.Wkf04NivelPermisos!
+            var Nivelpermiso = await _contexto.wkf04Nivelpermisos!
                 .FirstOrDefaultAsync(x => x.wkf04llave == id);
 
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
@@ -176,18 +176,18 @@ namespace mipBackend.Data.NivelPermisos
                     );
             }
 
-            if (NivelPermiso is null)
+            if (Nivelpermiso is null)
             {
                 throw new MiddlewareException(
                    HttpStatusCode.BadRequest,
-                   new { mensaje = "La NivelPermiso no existe en los listados" }
+                   new { mensaje = "La Nivelpermiso no existe en los listados" }
                    );
             }
 
 
-            NivelPermiso.wkf04activo = 1;
+            Nivelpermiso.wkf04activo = 1;
 
-            _contexto.Wkf04NivelPermisos!.Update(NivelPermiso);
+            _contexto.wkf04Nivelpermisos!.Update(Nivelpermiso);
 
 
         }

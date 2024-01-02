@@ -5,17 +5,17 @@ namespace mipBackend.Models;
 
 public partial class Sercl02MuestreoFruta
 {
-    public int Sercl02Llave { get; set; }
+    public int Sercl02llave { get; set; }
 
-    public int? Sercl01Llave { get; set; }
+    public int? Sercl01llave { get; set; }
 
-    public string? Sercl02Nombre { get; set; }
+    public string? Sercl02nombre { get; set; }
 
     public string? Sercl02UrlPdf { get; set; }
 
     public DateTime? Sercl02Fecha { get; set; }
 
-    public int? Sercl02Activo { get; set; }
+    public int? Sercl02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -29,5 +29,5 @@ public partial class Sercl02MuestreoFruta
 
     public Guid? deleteby { get; set; }
 
-    public virtual Sercl01ServiciosCliente? Sercl01LlaveNavigation { get; set; }
+    public virtual Sercl01ServiciosCliente? Sercl01llaveNavigation { get; set; }
 }

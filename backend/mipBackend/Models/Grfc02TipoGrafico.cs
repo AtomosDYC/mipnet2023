@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Grfc02TipoGrafico
 {
-    public int Grfc02Llave { get; set; }
+    public int Grfc02llave { get; set; }
 
-    public string? Grfc02Nombre { get; set; }
+    public string? Grfc02nombre { get; set; }
 
-    public string? Grfc02Descripcion { get; set; }
+    public string? Grfc02descripcion { get; set; }
 
-    public int? Grfc02Activo { get; set; }
+    public int? Grfc02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

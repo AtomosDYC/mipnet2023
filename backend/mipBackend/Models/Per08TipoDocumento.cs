@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace mipBackend.Models;
-public partial class Per08TipoDocumento
+public partial class per08TipoDocumento
 {
 
     public int per08llave { get; set; }
@@ -25,7 +25,7 @@ public partial class Per08TipoDocumento
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Per01Persona> Per01Personas { get; } = new List<Per01Persona>();
+    public virtual ICollection<per01persona> per01personas { get; } = new List<per01persona>();
 
 }
 

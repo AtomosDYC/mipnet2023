@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using mipBackend.Dtos.TipoPersonaDtos;
+using mipBackend.Dtos.TipopersonaDtos;
 using mipBackend.Models;
 
 namespace mipBackend.Profiles
 {
-    public class TipoPersonaProfile : Profile
+    public class TipopersonaProfile : Profile
     {
-        public TipoPersonaProfile()
+        public TipopersonaProfile()
         {
 
-            CreateMap<Per03TipoPersona, TipoPersonaResponseDto>();
-            CreateMap<TipoPersonaResponseDto, Per03TipoPersona>();
-            CreateMap<TipoPersonaRequestDto, Per03TipoPersona>();
+            CreateMap<per03Tipopersona, TipopersonaResponseDto>();
+            CreateMap<TipopersonaResponseDto, per03Tipopersona>();
+            CreateMap<TipopersonaRequestDto, per03Tipopersona>();
 
         }
     }

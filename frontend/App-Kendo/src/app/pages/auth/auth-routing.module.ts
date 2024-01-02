@@ -15,6 +15,24 @@ const routes: Routes = [
     loadChildren:
       () => import('./pages/register/register.module').then(m=> m.RegisterModule),
       canActivate: [UnauthGuard],
+  },
+  {
+    path:'forgotpassword',
+    loadChildren:
+      () => import('./pages/forgot-password/forgot-password.module').then(m=> m.ForgotPasswordModule),
+      canActivate: [UnauthGuard],
+  },
+  {
+    path:'resetpassword',
+    loadChildren:
+      () => import('./pages/reset-password/reset-password.module').then(m=> m.ResetPasswordModule),
+      canActivate: [UnauthGuard],
+  },
+  {
+    path:'emailconfirmation',
+    loadChildren:
+      () => import('./pages/email-confirmation/email-confirmation.module').then(m=> m.ResetPasswordModule),
+      canActivate: [UnauthGuard],
   }
 ];
 

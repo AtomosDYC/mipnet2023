@@ -27,9 +27,9 @@ export enum Types {
   UPDATE_WORKFLOW_NODOPADRE_SUCCESS = '[CREATE] Create_Workflow_nodopadre:Success',
   UPDATE_WORKFLOW_NODOPADRE_ERROR = '[CREATE] Create_Workflow_nodopadre:Error',
   
-  UPDATE_WORKFLOW_CONFIGURACIONWEB = '[CREATE] Create_Workflow_nodopadre',
-  UPDATE_WORKFLOW_CONFIGURACIONWEB_SUCCESS = '[CREATE] Create_Workflow_nodopadre:Success',
-  UPDATE_WORKFLOW_CONFIGURACIONWEB_ERROR = '[CREATE] Create_Workflow_nodopadre:Error',
+  UPDATE_WORKFLOW_CONFIGURACIONWEB = '[CREATE] Create_Workflow_configuracionweb',
+  UPDATE_WORKFLOW_CONFIGURACIONWEB_SUCCESS = '[CREATE] Create_Workflow_configuracionweb:Success',
+  UPDATE_WORKFLOW_CONFIGURACIONWEB_ERROR = '[CREATE] Create_Workflow_configuracionweb:Error',
 
   GET_WORKFLOW_NODOPADRE = '[GET] Get_workflow',
   GET_WORKFLOW_NODOPADRE_SUCCESS = '[GET] Get_workflow:Success',

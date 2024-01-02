@@ -70,7 +70,7 @@ export class SaveEffects {
             delay(1000),
             map((tipopercomunicaciones: TipoPerComunicacionResponse[]) => new fromActions.CreateSuccess(tipopercomunicaciones, true)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -88,7 +88,7 @@ export class SaveEffects {
             delay(1000),
             map((tipopercomunicaciones: TipoPerComunicacionResponse[]) => new fromActions.DeleteSuccess(tipopercomunicaciones, true)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.DeleteError(err.message));
             })
           )

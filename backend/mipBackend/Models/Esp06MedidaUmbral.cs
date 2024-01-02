@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Esp06MedidaUmbral
+public partial class esp06MedidaUmbral
 {
     public int esp06llave { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Esp06MedidaUmbral
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Esp04EstadoDanio> Esp04EstadoDanios { get; } = new List<Esp04EstadoDanio>();
+    public virtual ICollection<esp04EstadoDanio> esp04EstadoDanios { get; } = new List<esp04EstadoDanio>();
 }

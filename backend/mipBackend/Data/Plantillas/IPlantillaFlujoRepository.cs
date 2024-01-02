@@ -7,10 +7,11 @@ namespace mipBackend.Data.Plantillas
     {
         Task<bool> SaveChanges();
 
-        Task CreatePlantilla(Prf04PlantillaFlujo plantilla);
+        Task CreatePlantilla(prf04PlantillaFlujo plantilla);
 
-        Task<IEnumerable<PlantillaFlujoResponseDto>> GetAllPlantillaFlujos();
+        Task<IEnumerable<PlantillaFlujoResponseDto>> GetAllPlantillaFlujos(int Id);
 
+        Task DeletePlantilla(int id);
 
     }
 }

@@ -5,11 +5,11 @@ namespace mipBackend.Models;
 
 public partial class Log01Bitacora
 {
-    public int Log01Llave { get; set; }
+    public int Log01llave { get; set; }
 
-    public int? Log03Llave { get; set; }
+    public int? Log03llave { get; set; }
 
-    public Guid? Secu02Llave { get; set; }
+    public Guid? userid { get; set; }
 
     public string? Log01Contenido { get; set; }
 
@@ -21,7 +21,7 @@ public partial class Log01Bitacora
 
     public string? Log01Info { get; set; }
 
-    public int? Log01Activo { get; set; }
+    public int? Log01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -35,5 +35,5 @@ public partial class Log01Bitacora
 
     public Guid? deleteby { get; set; }
 
-    public virtual Log03MensajeBitacora? Log03LlaveNavigation { get; set; }
+    public virtual Log03MensajeBitacora? Log03llaveNavigation { get; set; }
 }

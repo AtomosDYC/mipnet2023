@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Sist01Sistema
+public partial class sist01sistema
 {
-    public int Sist01Llave { get; set; }
+    public int sist01llave { get; set; }
 
-    public string? Sist01Nombre { get; set; }
+    public string? sist01nombre { get; set; }
 
-    public string? Sist01Descripcion { get; set; }
+    public string? sist01descripcion { get; set; }
 
-    public bool? Sist01EsPublica { get; set; }
+    public bool? sist01EsPublica { get; set; }
 
-    public bool? Sist01EsServicios { get; set; }
+    public bool? sist01EsServicios { get; set; }
 
-    public bool? Sist01Activo { get; set; }
+    public bool? sist01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

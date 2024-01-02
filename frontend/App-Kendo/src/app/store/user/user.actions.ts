@@ -10,7 +10,6 @@ export enum Types {
   INIT_UNAUTHORIZED = '[User] Init: Unuthorized',
   INIT_ERROR = '[User] Init: Error',
 
-
   SIGIN_IN_EMAIL = '[User] Login: Start',
   SIGIN_IN_EMAIL_SUCCESS = '[User] Login: Success',
   SIGIN_IN_EMAIL_ERROR = '[User] Login: Error',
@@ -22,6 +21,10 @@ export enum Types {
   SIGN_OUT_EMAIL = '[User] Logout: Start',
   SIGIN_OUT_EMAIL_SUCCESS = '[User] Logout: Success',
   SIGIN_OUT_EMAIL_ERROR = '[User] Logout: Error',
+
+  CONFIRM_EMAIL = '[USer] ConfirmEmail : Start',
+  CONFIRM_EMAIL_SUCCESS = '[USer] ConfirmEmail : success',
+  CONFIRM_EMAIL_ERROR = '[USer] ConfirmEmail : error',
 
 }
 
@@ -45,7 +48,6 @@ export class InitError implements Action{
   readonly type = Types.INIT_ERROR;
   constructor(public error: string){}
 }
-
 
 //LOGIN
 export class SignInEmail implements Action {
@@ -97,17 +99,10 @@ export class SignOutError implements Action{
   constructor(public error:string){}
 }
 
+
 export type All =
-        Init
-      | InitAuthorized
-      | InitUnauthorized
-      | InitError
-      | SignInEmail
-      | SignInEmailSuccess
-      | SignInEmailError
-      | SignUpEmail
-      | SignUpEmailSuccess
-      | SignUpEmailError
-      | SignOut
-      | SignOutSuccess
-      | SignOutError;
+        Init | InitAuthorized | InitUnauthorized | InitError
+      | SignInEmail  | SignInEmailSuccess | SignInEmailError
+      | SignUpEmail | SignUpEmailSuccess | SignUpEmailError
+      | SignOut  | SignOutSuccess | SignOutError
+       ;

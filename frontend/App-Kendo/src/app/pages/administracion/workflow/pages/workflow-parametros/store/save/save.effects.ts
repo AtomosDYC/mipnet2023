@@ -71,7 +71,7 @@ export class SaveEffects {
           .pipe(
             map((workflowparametros: WorkflowParametroResponse[]) => new fromActions.CreateSuccess(workflowparametros, true)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )

@@ -5,17 +5,17 @@ namespace mipBackend.Models;
 
 public partial class Log03MensajeBitacora
 {
-    public int Log03Llave { get; set; }
+    public int Log03llave { get; set; }
 
-    public Guid? Log02Llave { get; set; }
+    public Guid? Log02llave { get; set; }
 
     public string? Log03AccesoRapido { get; set; }
 
-    public string? Log03Descripcion { get; set; }
+    public string? Log03descripcion { get; set; }
 
     public string? Log03Mensaje { get; set; }
 
-    public int? Log03Activo { get; set; }
+    public int? Log03activo { get; set; }
 
     public string? Log03Info { get; set; }
 
@@ -33,5 +33,5 @@ public partial class Log03MensajeBitacora
 
     public virtual ICollection<Log01Bitacora> Log01Bitacoras { get; } = new List<Log01Bitacora>();
 
-    public virtual Log02TipoBitacora? Log02LlaveNavigation { get; set; }
+    public virtual Log02TipoBitacora? Log02llaveNavigation { get; set; }
 }

@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using mipBackend.Dtos.TipoEspecieDtos;
+using mipBackend.Dtos.TipoespecieDtos;
 using mipBackend.Models;
 
 namespace mipBackend.Profiles
 {
-    public class TipoEspecieProfile : Profile
+    public class TipoespecieProfile : Profile
     {
-        public TipoEspecieProfile()
+        public TipoespecieProfile()
         {
 
-            CreateMap<Esp08TipoBase, TipoEspecieResponseDto>();
-            CreateMap<TipoEspecieResponseDto, Esp08TipoBase>();
-            CreateMap<TipoEspecieRequestDto, Esp08TipoBase>();
+            CreateMap<esp08TipoBase, TipoespecieResponseDto>();
+            CreateMap<TipoespecieResponseDto, esp08TipoBase>();
+            CreateMap<TipoespecieRequestDto, esp08TipoBase>();
 
         }
     }

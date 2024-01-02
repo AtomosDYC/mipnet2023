@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Serv02TipoServicio
 {
-    public int Serv02Llave { get; set; }
+    public int Serv02llave { get; set; }
 
-    public string? Serv02Nombre { get; set; }
+    public string? Serv02nombre { get; set; }
 
-    public string? Serv02Descripcion { get; set; }
+    public string? Serv02descripcion { get; set; }
 
-    public int? Serv02Activo { get; set; }
+    public int? Serv02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

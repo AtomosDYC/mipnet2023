@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Secu11TipoPerfil
+public partial class Secu11Tipoperfil
 {
-    public int Prf02Llave { get; set; }
+    public int prf02llave { get; set; }
 
-    public string? Prf02Nombre { get; set; }
+    public string? prf02nombre { get; set; }
 
-    public string? Prf02Descripcion { get; set; }
+    public string? prf02descripcion { get; set; }
 
     public DateTime? Fechaactulizacion { get; set; }
 

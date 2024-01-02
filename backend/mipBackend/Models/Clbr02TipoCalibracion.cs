@@ -5,13 +5,13 @@ namespace mipBackend.Models;
 
 public partial class Clbr02TipoCalibracion
 {
-    public int Clbr02Llave { get; set; }
+    public int Clbr02llave { get; set; }
 
-    public string? Clbr02Nombre { get; set; }
+    public string? Clbr02nombre { get; set; }
 
-    public string? Clbr02Descripcion { get; set; }
+    public string? Clbr02descripcion { get; set; }
 
-    public int? Clbr02Activo { get; set; }
+    public int? Clbr02activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

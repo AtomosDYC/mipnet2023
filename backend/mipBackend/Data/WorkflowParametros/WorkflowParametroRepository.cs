@@ -30,7 +30,7 @@ namespace mipBackend.Data.WorkflowParametros
 
 
 
-        public async Task CreateWorkflowParametro(Wkf09Parametro workflowparametro)
+        public async Task CreateWorkflowParametro(wkf09Parametro workflowparametro)
         {
             var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
 
@@ -51,26 +51,26 @@ namespace mipBackend.Data.WorkflowParametros
             }
 
             workflowparametro.fechaactivacion = DateTime.Now;
-            workflowparametro.createby = Guid.Parse(usuario.Id);
+            workflowparametro.createby = usuario.Id;
             workflowparametro.wkf09activo = 1;
 
-            await _contexto.Wkf09Parametros!.AddAsync(workflowparametro);
+            await _contexto.wkf09Parametros!.AddAsync(workflowparametro);
 
         }
 
-        public async Task<Wkf09Parametro> GetWorkflowParametroById(int id)
+        public async Task<wkf09Parametro> GetWorkflowParametroById(int id)
         {
-            return await _contexto.Wkf09Parametros!.FirstOrDefaultAsync(x => x.wkf09llave == id!)!;
+            return await _contexto.wkf09Parametros!.FirstOrDefaultAsync(x => x.wkf09llave == id!)!;
         }
 
 
         public async Task DeleteWorkflowParametro(int id)
         {
 
-            var workflowparametro = await _contexto.Wkf09Parametros!
+            var workflowparametro = await _contexto.wkf09Parametros!
                 .FirstOrDefaultAsync(x => x.wkf09llave == id);
 
-            _contexto.Wkf09Parametros!.Remove(workflowparametro!);
+            _contexto.wkf09Parametros!.Remove(workflowparametro!);
         }
 
         public async Task<IEnumerable<WorkflowParametroResponseDto>> GetAllWorkflowParametros(int id)
@@ -78,9 +78,9 @@ namespace mipBackend.Data.WorkflowParametros
 
             using (var db = _contexto)
             {
-                var query = await (from wkp in db.Wkf09Parametros
-                                   join wk in db.Wkf01Flujos! on wkp.wkf01llave equals wk.wkf01llave
-                                   join tp in db.Wkf10TipoParametros! on wkp.wkf10llave equals tp.wkf10llave
+                var query = await (from wkp in db.wkf09Parametros
+                                   join wk in db.wkf01Flujos! on wkp.wkf01llave equals wk.wkf01llave
+                                   join tp in db.wkf10TipoParametros! on wkp.wkf10llave equals tp.wkf10llave
                                    where wk.wkf01llave == id
                                    select new WorkflowParametroResponseDto
                                    {

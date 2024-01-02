@@ -43,7 +43,6 @@ namespace mipBackend.Controllers
         public async Task<ActionResult<EstadosDanioResponseDto>> GetEstadosDanioById(int id)
         {
 
-
             var EstadosDanio = await _repository.GetEstadosDanioById(id);
 
             if (EstadosDanio == null)
@@ -66,7 +65,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var EstadosDanioModel = _mapper.Map<Esp04EstadoDanio>(EstadosDanio);
+            var EstadosDanioModel = _mapper.Map<esp04EstadoDanio>(EstadosDanio);
 
             await _repository.CreateEstadosDanio(EstadosDanioModel);
             await _repository.SaveChanges();
@@ -97,7 +96,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var EstadosDanioModel = _mapper.Map<Esp04EstadoDanio>(EstadosDanio);
+            var EstadosDanioModel = _mapper.Map<esp04EstadoDanio>(EstadosDanio);
 
             await _repository.UpdateEstadosDanio(EstadosDanioModel);
             await _repository.SaveChanges();

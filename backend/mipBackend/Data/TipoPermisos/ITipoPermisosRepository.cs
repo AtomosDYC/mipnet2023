@@ -1,24 +1,24 @@
 ﻿using mipBackend.Models;
-using mipBackend.Dtos.TipoPermisoDtos;
+using mipBackend.Dtos.TipopermisoDtos;
 
-namespace mipBackend.Data.TipoPermisos
+namespace mipBackend.Data.Tipopermisos
 {
-    public interface ITipoPermisosRepository
+    public interface ITipopermisosRepository
     {
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Wkf05TipoPermiso>> GetAllTipoPermisos();
+        Task<IEnumerable<wkf05Tipopermiso>> GetAllTipopermisos();
 
-        Task<Wkf05TipoPermiso> GetTipoPermisoById(int id);
+        Task<wkf05Tipopermiso> GetTipopermisoById(int id);
 
-        Task CreateTipoPermiso(Wkf05TipoPermiso tipoflujo);
+        Task CreateTipopermiso(wkf05Tipopermiso tipoflujo);
 
-        Task UpdateTipoPermiso(Wkf05TipoPermiso tipoflujo);
+        Task UpdateTipopermiso(wkf05Tipopermiso tipoflujo);
 
-        Task DeleteTipoPermiso(int id);
+        Task DeleteTipopermiso(int id);
 
-        Task DisableTipoPermiso(int id);
+        Task DisableTipopermiso(int id);
 
-        Task ActivateTipoPermiso(int id);
+        Task ActivateTipopermiso(int id);
     }
 }

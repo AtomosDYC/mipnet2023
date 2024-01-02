@@ -1,6 +1,6 @@
-﻿namespace mipBackend.Dtos.TipoPermisoDtos
+﻿namespace mipBackend.Dtos.TipopermisoDtos
 {
-    public class TipoPermisoRequestDto
+    public class TipopermisoRequestDto
     {
         public string? wkf05nombre { get; set; }
 

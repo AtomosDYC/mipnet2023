@@ -1,6 +1,6 @@
-﻿namespace mipBackend.Dtos.TipoComPersonaDtos
+﻿namespace mipBackend.Dtos.TipoCompersonaDtos
 {
-    public class TipoComPersonaRequestDto
+    public class TipoCompersonaRequestDto
     {
         public string? per04nombre { get; set; }
 

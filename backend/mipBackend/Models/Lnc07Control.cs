@@ -5,9 +5,9 @@ namespace mipBackend.Models;
 
 public partial class Lnc07Control
 {
-    public int Lnc01Llave { get; set; }
+    public int Lnc01llave { get; set; }
 
-    public int Esp03Llave { get; set; }
+    public int esp03llave { get; set; }
 
-    public virtual Lnc01Licencia Lnc01LlaveNavigation { get; set; } = null!;
+    public virtual Lnc01Licencia Lnc01llaveNavigation { get; set; } = null!;
 }

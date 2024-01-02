@@ -66,7 +66,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var TipoDocumentoModel = _mapper.Map<Per08TipoDocumento>(TipoDocumento);
+            var TipoDocumentoModel = _mapper.Map<per08TipoDocumento>(TipoDocumento);
 
             await _repository.CreateTipoDocumento(TipoDocumentoModel);
             await _repository.SaveChanges();
@@ -97,7 +97,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var TipoDocumentoModel = _mapper.Map<Per08TipoDocumento>(TipoDocumento);
+            var TipoDocumentoModel = _mapper.Map<per08TipoDocumento>(TipoDocumento);
 
             await _repository.UpdateTipoDocumento(TipoDocumentoModel);
             await _repository.SaveChanges();

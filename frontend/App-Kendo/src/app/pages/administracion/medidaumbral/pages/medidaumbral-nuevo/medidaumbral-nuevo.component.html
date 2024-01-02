@@ -21,20 +21,18 @@
             
             <kendo-formfield>
                 <kendo-label [for]="txtDescripcion" text="{{ customMsgService.translate('descripcion')}}"></kendo-label>
-                <kendo-textbox
-                formControlName="txtDescripcion"
-                #txtDescripcion
-                required
-            ></kendo-textbox>
+                    <kendo-textbox
+                    formControlName="txtDescripcion"
+                    #txtDescripcion
+                    required>
+                </kendo-textbox>
 
                 <kendo-formerror>Error: {{ customMsgService.translate('errorDescripcion')}}</kendo-formerror>
             </kendo-formfield>
 
                 <div class="k-form-buttons">
-                    <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/medidaumbral/list']">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                    <button kendoButton themeColor="secondary" [routerLink]="['/dashboard/especies/medidaumbral/list']">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
                     <button kendoButton themeColor="primary" (click)="onguardarNuevo()">{{ customMsgService.translate('guardar')}}</button>
-
-
                 </div>
             </fieldset>
         </form>

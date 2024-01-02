@@ -5,11 +5,11 @@ namespace mipBackend.Models;
 
 public partial class Frm01TipoFormulario
 {
-    public int Frm01Llave { get; set; }
+    public int Frm01llave { get; set; }
 
-    public string? Frm01Nombre { get; set; }
+    public string? Frm01nombre { get; set; }
 
-    public int? Frm01Activo { get; set; }
+    public int? Frm01activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 

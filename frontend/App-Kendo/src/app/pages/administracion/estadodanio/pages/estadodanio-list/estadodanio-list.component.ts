@@ -70,11 +70,11 @@ export class EstadodanioListComponent implements OnInit {
   }
 
   OnNuevo(){
-    this._Route.navigate(['/dashboard/estadodanio/nuevo/']);
+    this._Route.navigate(['/dashboard/especies/estadodanio/nuevo/']);
   }
 
   OnEditar(id: number){
-    this._Route.navigate(['/dashboard/estadodanio/edit/', id.toString()]);
+    this._Route.navigate(['/dashboard/especies/estadodanio/edit/', id.toString()]);
   }
 
   OnEliminar(id: number, estado : number){

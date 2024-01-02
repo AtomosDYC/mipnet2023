@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public ComunaProfile()
         {
 
-            CreateMap<Sist03Comuna, ComunaResponseDto>();
-            CreateMap<ComunaResponseDto, Sist03Comuna>();
-            CreateMap<ComunaRequestDto, Sist03Comuna>();
+            CreateMap<sist03Comuna, ComunaResponseDto>();
+            CreateMap<ComunaResponseDto, sist03Comuna>();
+            CreateMap<ComunaRequestDto, sist03Comuna>();
 
         }
     }

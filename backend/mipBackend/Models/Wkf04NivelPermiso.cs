@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Wkf04NivelPermiso
+public partial class wkf04Nivelpermiso
 {
     public int wkf04llave { get; set; }
 
@@ -25,7 +25,7 @@ public partial class Wkf04NivelPermiso
 
     public Guid? deleteby { get; set; }
 
-    public virtual Wkf03Nivel? Wkf03LlaveNavigation { get; set; }
+    public virtual wkf03Nivel? wkf03llaveNavigation { get; set; }
 
-    public virtual Wkf05TipoPermiso? Wkf05LlaveNavigation { get; set; }
+    public virtual wkf05Tipopermiso? wkf05llaveNavigation { get; set; }
 }

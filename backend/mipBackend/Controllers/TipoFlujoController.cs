@@ -67,7 +67,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var tipoflujoModel = _mapper.Map<Wkf02TipoFlujo>(tipoflujo);
+            var tipoflujoModel = _mapper.Map<wkf02TipoFlujo>(tipoflujo);
 
             await _repository.CreateTipoFlujo(tipoflujoModel);
             await _repository.SaveChanges();
@@ -98,7 +98,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var tipoflujoModel = _mapper.Map<Wkf02TipoFlujo>(tipoflujo);
+            var tipoflujoModel = _mapper.Map<wkf02TipoFlujo>(tipoflujo);
 
             await _repository.UpdateTipoFlujo(tipoflujoModel);
             await _repository.SaveChanges();

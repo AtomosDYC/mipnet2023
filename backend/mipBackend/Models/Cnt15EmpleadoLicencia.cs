@@ -5,17 +5,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mipBackend.Models;
 
-public partial class Cnt15EmpleadoLicencia
+public partial class cnt15EmpleadoLicencia
 {
-    public int Cnt19Llave { get; set; }
+    public int cnt19llave { get; set; }
 
-    public int Cnt12Llave { get; set; }
+    public int cnt12llave { get; set; }
 
-    public int? Cnt15AceptaContrato { get; set; }
+    public int? cnt15AceptaContrato { get; set; }
 
-    public DateTime? Cnt15Fechafirma { get; set; }
+    public DateTime? cnt15Fechafirma { get; set; }
 
-    public virtual Cnt12Empleado Cnt12LlaveNavigation { get; set; } = null!;
+    public virtual cnt12Empleado cnt12llaveNavigation { get; set; } = null!;
 
-    public virtual Cnt19LicenciaCliente Cnt19LlaveNavigation { get; set; } = null!;
+    public virtual cnt19LicenciaCliente cnt19llaveNavigation { get; set; } = null!;
 }

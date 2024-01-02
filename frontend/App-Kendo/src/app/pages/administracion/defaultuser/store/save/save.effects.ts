@@ -72,7 +72,7 @@ export class SaveEffects {
             }),
             map((defaultuser: DefaultUserResponse) => new fromActions.CreateSuccess(defaultuser)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )
@@ -93,7 +93,7 @@ export class SaveEffects {
             }),
             map((defaultuser: DefaultUserResponse) => new fromActions.UpdateSuccess(defaultuser)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError());
+              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
               return of(new fromActions.CreateError(err.message));
             })
           )

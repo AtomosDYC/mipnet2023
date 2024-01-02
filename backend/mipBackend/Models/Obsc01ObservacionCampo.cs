@@ -5,17 +5,17 @@ namespace mipBackend.Models;
 
 public partial class Obsc01ObservacionCampo
 {
-    public int Obsc01Llave { get; set; }
+    public int Obsc01llave { get; set; }
 
-    public int? Esp08Llave { get; set; }
+    public int? esp08llave { get; set; }
 
-    public int? Temp02Llave { get; set; }
+    public int? Temp02llave { get; set; }
 
-    public string? Obsc01Nombre { get; set; }
+    public string? Obsc01nombre { get; set; }
 
     public string? Obsc01Resumen { get; set; }
 
-    public int? Obsc01Activo { get; set; }
+    public int? Obsc01activo { get; set; }
 
     public DateTime? Obsc01FechaObservacion { get; set; }
 
@@ -35,7 +35,7 @@ public partial class Obsc01ObservacionCampo
 
     public Guid? deleteby { get; set; }
 
-    public virtual Esp08TipoBase? Esp08LlaveNavigation { get; set; }
+    public virtual esp08TipoBase? esp08llaveNavigation { get; set; }
 
-    public virtual Temp02TemporadaBase? Temp02LlaveNavigation { get; set; }
+    public virtual Temp02TemporadaBase? Temp02llaveNavigation { get; set; }
 }

@@ -67,7 +67,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var tipoparametroModel = _mapper.Map<Wkf10TipoParametro>(tipoparametro);
+            var tipoparametroModel = _mapper.Map<wkf10TipoParametro>(tipoparametro);
 
             await _repository.CreateTipoParametro(tipoparametroModel);
             await _repository.SaveChanges();
@@ -98,7 +98,7 @@ namespace mipBackend.Controllers
             )
         {
 
-            var tipoparametroModel = _mapper.Map<Wkf10TipoParametro>(tipoparametro);
+            var tipoparametroModel = _mapper.Map<wkf10TipoParametro>(tipoparametro);
 
             await _repository.UpdateTipoParametro(tipoparametroModel);
             await _repository.SaveChanges();

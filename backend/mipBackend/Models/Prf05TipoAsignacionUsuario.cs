@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Prf05TipoAsignacionUsuario
+public partial class prf05TipoAsignacionUsuario
 {
-    public int Prf05Llave { get; set; }
+    public int prf05llave { get; set; }
 
-    public string? Prf05Nombre { get; set; }
+    public string? prf05nombre { get; set; }
 
-    public string? Prf05Descripcion { get; set; }
+    public string? prf05descripcion { get; set; }
 
-    public int? Prf05Activo { get; set; }
+    public int? prf05activo { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Prf05TipoAsignacionUsuario
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Prf01Perfil> Prf01Perfiles { get; } = new List<Prf01Perfil>();
+    public virtual ICollection<prf01perfil> prf01perfiles { get; } = new List<prf01perfil>();
 }

@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using mipBackend.Dtos.TipoPermisoDtos;
+using mipBackend.Dtos.TipopermisoDtos;
 using mipBackend.Models;
 
 namespace mipBackend.Profiles
 {
-    public class TipoPermisoProfile : Profile
+    public class TipopermisoProfile : Profile
     {
-        public TipoPermisoProfile()
+        public TipopermisoProfile()
         {
 
-            CreateMap<Wkf05TipoPermiso, TipoPermisoResponseDto>();
-            CreateMap<TipoPermisoResponseDto, Wkf05TipoPermiso>();
-            CreateMap<TipoPermisoRequestDto, Wkf05TipoPermiso>();
+            CreateMap<wkf05Tipopermiso, TipopermisoResponseDto>();
+            CreateMap<TipopermisoResponseDto, wkf05Tipopermiso>();
+            CreateMap<TipopermisoRequestDto, wkf05Tipopermiso>();
 
         }
 

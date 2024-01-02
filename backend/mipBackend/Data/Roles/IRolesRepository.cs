@@ -7,7 +7,7 @@ namespace mipBackend.Data.Roles
     public interface IRolesRepository
     {
   
-        Task<IEnumerable<IdentityRole>> GetAllRoles();
+        Task<IEnumerable<Rol>> GetAllRoles();
 
     }
 }

@@ -1,0 +1,111 @@
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-10"> {{ customMsgService.translate('mantenimientoPersonas') }} </h3>
+        <div class="card-buttons col-md-2 right">
+            <kendo-buttongroup selection="single">
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="OnNuevo()"
+                >
+                    {{ customMsgService.translate('MantNuevo') }}
+                </button>
+            </kendo-buttongroup>
+        </div>  
+        <span></span>
+    </div>
+
+    
+
+    <form class="k-form" [formGroup]="Form" (keyup.enter)="SubmitSearch(Form.value)">
+        <kendo-textbox
+                [placeholder]="customMsgService.translate('gridSearch')"
+                kendoTextBox
+                [clearButton]="true"
+                class="col-md-12"
+                formControlName="txtSearch"
+                #txtSearch
+            >
+            </kendo-textbox>
+    </form>
+
+    <div class="card-component">
+        <kendo-grid [data]="data$ | async"
+        
+        kendoGridSelectBy="per01llave"
+        [(selectedKeys)]="mySelection"
+        
+        (pageChange)="pageChange($event)"
+        [pageSize]="requeststate.take"
+        [skip]="requeststate.skip"
+        [pageable]="true"
+        [loading]="loadGrid"
+        [sortable]="true"
+        [sort]="sort"
+        (sortChange)="sortChange($event)"
+        [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
+        >
+        <ng-template kendoGridToolbarTemplate>
+            
+            <button type="button" [svgIcon]="svgpdf" kendoButton (click)="onactivateRegion()">{{ customMsgService.translate('MantActivar') }}</button>
+            <button type="button" [svgIcon]="svgpdf" kendoButton (click)="OndisableRegion()">{{ customMsgService.translate('MantDesactivar') }}</button>
+            <button kendoButton kendoGridExcelCommand type="button" [svgIcon]="svgpdf">
+                {{ customMsgService.translate('MantExpExcel') }}
+            </button>
+            <button kendoButton kendoGridPDFCommand [svgIcon]="svgpdf">{{ customMsgService.translate('MantExpPDF') }}</button>
+        </ng-template>
+
+
+            <kendo-grid-checkbox-column
+                [width]="45"
+                [headerClass]="{ 'text-center': true }"
+                [class]="{ 'text-center': true }"
+                [resizable]="false"
+                [columnMenu]="false"
+                [showSelectAll]="true">
+            </kendo-grid-checkbox-column>
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                    <button
+                    kendoButton
+                    iconClass="fa fa-pencil"
+                    title="{{ customMsgService.translate('Edit') }}"
+                    
+                    (click)="OnEditar(dataItem.per01llave)"
+                  ></button>
+                  <button
+                    kendoButton
+                    iconClass="fa-solid fa-trash-can"
+                    title="{{ customMsgService.translate('Delete') }}"
+                    (click)="OnEliminar(dataItem.per01llave, dataItem.per01activo)"
+                  ></button>
+                </ng-template>
+              </kendo-grid-command-column>
+            <kendo-grid-column field="per01nombrerazon" title="{{ customMsgService.translate('nombre') }}"> </kendo-grid-column>
+            <kendo-grid-column
+                field="per01activo"
+                title="{{ customMsgService.translate('estado') }}"
+                [width]="100"
+                [class]="{ 'text-center': true }"
+                [resizable]="false"
+                filter="boolean"
+                >
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span
+                    *ngIf="dataItem.per01activo === 1"
+                    class="badge badge-success"
+                    >{{ customMsgService.translate('Activo') }}</span
+                    >
+                    <span
+                    *ngIf="dataItem.per01activo != 1"
+                    class="badge badge-danger"
+                    >{{ customMsgService.translate('Desactivado') }}</span
+                    >
+                </ng-template>
+                </kendo-grid-column>    
+                
+        </kendo-grid>
+    </div>
+
+</div>

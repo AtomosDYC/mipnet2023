@@ -9,9 +9,9 @@ namespace mipBackend.Profiles
         public TipoParametroProfile()
         {
 
-            CreateMap<Wkf10TipoParametro, TipoParametroResponseDto>();
-            CreateMap<TipoParametroResponseDto, Wkf10TipoParametro>();
-            CreateMap<TipoParametroRequestDto, Wkf10TipoParametro>();
+            CreateMap<wkf10TipoParametro, TipoParametroResponseDto>();
+            CreateMap<TipoParametroResponseDto, wkf10TipoParametro>();
+            CreateMap<TipoParametroRequestDto, wkf10TipoParametro>();
 
         }
     }

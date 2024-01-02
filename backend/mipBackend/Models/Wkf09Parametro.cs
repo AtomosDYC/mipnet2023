@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Wkf09Parametro
+public partial class wkf09Parametro
 {
     public int wkf09llave { get; set; }
 
@@ -29,7 +29,7 @@ public partial class Wkf09Parametro
 
     public Guid? deleteby { get; set; }
 
-    public virtual Wkf01Flujo? Wkf01LlaveNavigation { get; set; }
+    public virtual wkf01Flujo? wkf01llaveNavigation { get; set; }
 
-    public virtual Wkf10TipoParametro? Wkf10LlaveNavigation { get; set; }
+    public virtual wkf10TipoParametro? wkf10llaveNavigation { get; set; }
 }

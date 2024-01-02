@@ -9,7 +9,7 @@ import { LabelModule } from '@progress/kendo-angular-label';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule, ComboBoxModule } from '@progress/kendo-angular-dropdowns';
 import { LayoutModule } from '@progress/kendo-angular-layout';
-import { IconsModule } from '@progress/kendo-angular-icons';
+
 
 
 @NgModule({
@@ -30,7 +30,7 @@ import { IconsModule } from '@progress/kendo-angular-icons';
     DropDownsModule,
     ComboBoxModule,
     LayoutModule,
-    IconsModule,
+    
   ]
 })
 export class WorkflowConfiguracionwebModule { }

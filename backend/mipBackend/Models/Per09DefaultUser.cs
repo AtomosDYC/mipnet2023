@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models
 {
-    public class Per09DefaultUser
+    public class per09DefaultUser
     {
         public int per09llave { get; set; }
 
         public string? per09nombre { get; set; }
 
-        public string? rolid { get; set; }
+        public Guid? rolid { get; set; }
 
         public int? tipodocumentoid { get; set; }
 

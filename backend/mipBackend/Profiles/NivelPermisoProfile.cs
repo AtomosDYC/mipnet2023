@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using mipBackend.Dtos.NivelPermisoDtos;
+using mipBackend.Dtos.NivelpermisoDtos;
 using mipBackend.Models;
 
 namespace mipBackend.Profiles
 {
-    public class NivelPermisoProfile : Profile
+    public class NivelpermisoProfile : Profile
     {
-        public NivelPermisoProfile()
+        public NivelpermisoProfile()
         {
 
-            CreateMap<Wkf04NivelPermiso, NivelPermisoResponseDto>();
-            CreateMap<NivelPermisoResponseDto, Wkf04NivelPermiso>();
-            CreateMap<NivelPermisoRequestDto, Wkf04NivelPermiso>();
+            CreateMap<wkf04Nivelpermiso, NivelpermisoResponseDto>();
+            CreateMap<NivelpermisoResponseDto, wkf04Nivelpermiso>();
+            CreateMap<NivelpermisoRequestDto, wkf04Nivelpermiso>();
 
         }
     }

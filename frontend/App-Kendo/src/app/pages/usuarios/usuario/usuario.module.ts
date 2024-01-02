@@ -13,7 +13,7 @@ import { reducers, effects } from './store';
   imports: [
     CommonModule,
     UsuarioRoutingModule,
-    StoreModule.forFeature('usuarios', reducers),
+    StoreModule.forFeature('usuarioregistro', reducers),
     EffectsModule.forFeature(effects),
   ]
 })

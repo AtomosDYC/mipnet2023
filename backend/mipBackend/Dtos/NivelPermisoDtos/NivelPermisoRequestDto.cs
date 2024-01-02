@@ -1,6 +1,6 @@
-﻿namespace mipBackend.Dtos.NivelPermisoDtos
+﻿namespace mipBackend.Dtos.NivelpermisoDtos
 {
-    public class NivelPermisoRequestDto
+    public class NivelpermisoRequestDto
     {
         public int? wkf03llave { get; set; }
 

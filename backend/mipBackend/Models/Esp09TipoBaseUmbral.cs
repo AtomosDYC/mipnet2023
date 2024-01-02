@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Esp09TipoBaseUmbral
+public partial class esp09TipoBaseUmbral
 {
-    public int Esp09Llave { get; set; }
+    public int esp09llave { get; set; }
 
-    public string? Esp09Nombre { get; set; }
+    public string? esp09nombre { get; set; }
 
-    public string? Esp09Descripcion { get; set; }
+    public string? esp09descripcion { get; set; }
 
-    public int? Esp09Activo { get; set; }
+    public int? esp09activo { get; set; }
 
-    public int? Esp09Orden { get; set; }
+    public int? esp09Orden { get; set; }
 
     public DateTime? fechaactualizacion { get; set; }
 
@@ -27,5 +27,5 @@ public partial class Esp09TipoBaseUmbral
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Esp05Umbral> Esp05Umbrals { get; } = new List<Esp05Umbral>();
+    public virtual ICollection<esp05Umbral> esp05Umbrals { get; } = new List<esp05Umbral>();
 }

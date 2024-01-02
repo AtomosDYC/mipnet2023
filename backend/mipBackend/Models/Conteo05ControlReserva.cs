@@ -5,7 +5,7 @@ namespace mipBackend.Models;
 
 public partial class Conteo05ControlReserva
 {
-    public int Conteo05Llave { get; set; }
+    public int Conteo05llave { get; set; }
 
     public string? Conteo05TablaControl { get; set; }
 
@@ -15,7 +15,7 @@ public partial class Conteo05ControlReserva
 
     public string? Conteo05IdMovil { get; set; }
 
-    public Guid? Secu02Llave { get; set; }
+    public Guid? userid { get; set; }
 
     public int? Conteo05EstadoControl { get; set; }
 
@@ -31,5 +31,5 @@ public partial class Conteo05ControlReserva
 
     public DateTime fechaactualizacion { get; set; }
 
-    public virtual Secu02Usuario? Secu02LlaveNavigation { get; set; }
+    public virtual Secu02Usuario? useridNavigation { get; set; }
 }

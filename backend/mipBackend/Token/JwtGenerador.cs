@@ -12,7 +12,7 @@ namespace mipBackend.Token
         {
             var claims = new List<Claim> {
                 new Claim(JwtRegisteredClaimNames.NameId, usuario.UserName!),
-                new Claim("userId", usuario.Id),
+                new Claim("userId", usuario.Id.ToString()),
                 new Claim("email", usuario.Email),
             };
 
@@ -20,7 +20,7 @@ namespace mipBackend.Token
 
             var credenciales = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var tokenDescripcion = new SecurityTokenDescriptor
+            var tokendescripcion = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(30),
@@ -29,7 +29,7 @@ namespace mipBackend.Token
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var token = tokenHandler.CreateToken(tokenDescripcion); 
+            var token = tokenHandler.CreateToken(tokendescripcion); 
 
             return tokenHandler.WriteToken(token);  
 

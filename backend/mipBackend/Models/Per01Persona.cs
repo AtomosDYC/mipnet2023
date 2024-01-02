@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace mipBackend.Models;
 
-public partial class Per01Persona
+public partial class per01persona
 {
     public int per01llave { get; set; }
 
-    public int? per01rut { get; set; }
+    public int per01rut { get; set; }
 
-    public int? per03llave { get; set; }
+    public int per03llave { get; set; }
 
     public int? per08llave { get; set; }
 
@@ -41,15 +41,17 @@ public partial class Per01Persona
 
     public Guid? deleteby { get; set; }
 
-    public virtual ICollection<Cnt01CuentaCliente> Cnt01CuentaClientes { get; } = new List<Cnt01CuentaCliente>();
+    public virtual ICollection<cnt01CuentaCliente> cnt01CuentaClientes { get; } = new List<cnt01CuentaCliente>();
 
-    public virtual ICollection<Cnt12Empleado> Cnt12Empleados { get; } = new List<Cnt12Empleado>();
+    public virtual ICollection<cnt12Empleado> cnt12Empleados { get; } = new List<cnt12Empleado>();
 
-    public virtual Per02Genero? Per02LlaveNavigation { get; set; }
+    public virtual per02Genero? per02llaveNavigation { get; set; }
 
-    public virtual Per03TipoPersona? Per03LlaveNavigation { get; set; }
+    public virtual per03Tipopersona? per03llaveNavigation { get; set; }
 
-    public virtual ICollection<Per05Comunicacion> Per05Comunicacions { get; } = new List<Per05Comunicacion>();
+    public virtual per08TipoDocumento? per08llaveNavigation { get; set; }
 
-    public virtual ICollection<Per07PersonaUsuario> Per07PersonaUsuarios { get; } = new List<Per07PersonaUsuario>();
+    public virtual ICollection<per05Comunicacion> per05Comunicacions { get; } = new List<per05Comunicacion>();
+
+    public virtual ICollection<per07personaUsuario> per07personaUsuarios { get; } = new List<per07personaUsuario>();
 }
