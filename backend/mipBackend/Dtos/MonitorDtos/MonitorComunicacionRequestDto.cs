@@ -32,5 +32,6 @@
         public string? per05fax { get; set; }
 
         public string? per05SitioWeb { get; set; }
+
     }
 }

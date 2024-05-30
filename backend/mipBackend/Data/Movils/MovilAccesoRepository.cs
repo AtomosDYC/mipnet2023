@@ -385,7 +385,17 @@ namespace mipBackend.Data.Movils
                     );
             }
 
-            
+            var existe_usuario = await _userManager.FindByIdAsync(request.id_usuario.ToString());
+
+            if (existe_usuario is null)
+            {
+                throw new MiddlewareException(
+                    HttpStatusCode.Unauthorized,
+                    new { mensaje = "El usuario Ingresado no es valido" }
+                    );
+            }
+
+
 
             var listardto = new MovilAccesoCreateRequestDto();
             listardto.id_movil = request.id_movil;

@@ -72,3 +72,5 @@ C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBacke
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\mipBackend.pdb
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\mipBackend.genruntimeconfig.cache
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\ref\mipBackend.dll
+C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\bin\Release\net6.0\KendoNET.DynamicLinq.dll
+C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\bin\Release\net6.0\System.Linq.Dynamic.Core.dll

@@ -216,6 +216,17 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/temporada/temporada.module').then((m) => m.TemporadaModule),
       },
+      //monitoreo
+      {
+        path: 'monitoreos/monitoreo',
+        loadChildren: () =>
+          import('./pages/monitoreo/monitoreo.module').then((m) => m.MonitoreoModule),
+      },
+      {
+        path: 'monitoreo/visarmonitoreo',
+        loadChildren: () =>
+          import('./pages/visarmonitoreo/visarmonitoreo.module').then((m) => m.VisarmonitoreoModule),
+      },
     ]
     }
   ];

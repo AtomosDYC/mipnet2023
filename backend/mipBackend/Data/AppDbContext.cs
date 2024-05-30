@@ -4,6 +4,7 @@ using mipBackend.Models;
 using mipBackend.Dtos.UsuarioDtos;
 using mipBackend.Dtos.MonitorDtos;
 using mipBackend.Dtos.MovilDtos;
+using mipBackend.Dtos.ClienteEstacionDtos;
 
 namespace mipBackend.Data
 {
@@ -474,38 +475,38 @@ namespace mipBackend.Data
                 entity.Property(e => e.approveby).HasColumnName("APPROVE_BY");
                 entity.Property(e => e.cnt01llave).HasColumnName("CNT01_llave");
                 entity.Property(e => e.cnt06activo).HasColumnName("CNT06_activo");
-                entity.Property(e => e.cnt06Casilla)
+                entity.Property(e => e.cnt06casilla)
                     .HasMaxLength(500)
                     .HasColumnName("CNT06_casilla");
-                entity.Property(e => e.cnt06Celular1)
+                entity.Property(e => e.cnt06celular1)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Celular1");
-                entity.Property(e => e.cnt06Celular2)
+                entity.Property(e => e.cnt06celular2)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Celular2");
-                entity.Property(e => e.cnt06CodigoPostal)
+                entity.Property(e => e.cnt06codigopostal)
                     .HasMaxLength(500)
                     .HasColumnName("CNT06_CodigoPostal");
-                entity.Property(e => e.cnt06Direccion)
+                entity.Property(e => e.cnt06direccion)
                     .HasMaxLength(500)
                     .HasColumnName("CNT06_Direccion");
-                entity.Property(e => e.cnt06Email)
+                entity.Property(e => e.cnt06email)
                     .HasMaxLength(250)
                     .HasColumnName("CNT06_Email");
-                entity.Property(e => e.cnt06Fax)
+                entity.Property(e => e.cnt06fax)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Fax");
-                entity.Property(e => e.cnt06SitioWeb)
+                entity.Property(e => e.cnt06sitioweb)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_SitioWeb");
-                entity.Property(e => e.cnt06Telefono1)
+                entity.Property(e => e.cnt06telefono1)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Telefono1");
-                entity.Property(e => e.cnt06Telefono2)
+                entity.Property(e => e.cnt06telefono2)
                     .HasMaxLength(50)
                     .HasColumnName("CNT06_Telefono2");
-                entity.Property(e => e.cnt06TieneCasilla).HasColumnName("CNT06_TieneCasilla");
-                entity.Property(e => e.cnt06TipoMail).HasColumnName("CNT06_TipoMail");
+                entity.Property(e => e.cnt06tienecasilla).HasColumnName("CNT06_TieneCasilla");
+                entity.Property(e => e.cnt06tipomail).HasColumnName("CNT06_TipoMail");
                 entity.Property(e => e.cnt08llave).HasColumnName("CNT08_llave");
                 entity.Property(e => e.cnt10llave).HasColumnName("CNT10_llave");
                 entity.Property(e => e.createby).HasColumnName("CREATE_BY");
@@ -4900,6 +4901,10 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<MovilPeriodoResponseDto>().HasNoKey();
 
+            modelBuilder.Entity<MovilControlReservaResponseDto>().HasNoKey();
+
+            modelBuilder.Entity<ClienteEstacionActivaResponseDto>().HasNoKey();
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -5205,6 +5210,10 @@ namespace mipBackend.Data
         public DbSet<MovilAccesoResponseDto> MovilAccesoResponse { get; set; }
 
         public DbSet<MovilPeriodoResponseDto> MovilPeriodoResponse { get; set; }
+
+        public DbSet<MovilControlReservaResponseDto> MovilControlReservaResponse { get; set; }
+
+        public DbSet<ClienteEstacionActivaResponseDto> ClienteEstacionActivaResponse { get; set; }
 
     }
 }

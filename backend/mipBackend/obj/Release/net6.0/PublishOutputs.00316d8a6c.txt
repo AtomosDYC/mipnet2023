@@ -5,6 +5,7 @@ C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBacke
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\mipBackend.runtimeconfig.json
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\mipBackend.pdb
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\AutoMapper.dll
+C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\KendoNET.DynamicLinq.dll
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\MailKit.dll
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -37,6 +38,7 @@ C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBacke
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\System.Drawing.Common.dll
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\System.Linq.Dynamic.Core.dll
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\System.Runtime.Caching.dll
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 C:\Users\56987\OneDrive\Escritorio\proyectos\mip2023\mipnet2023\backend\mipBackend\obj\Release\net6.0\PubTmp\Out\System.Security.Permissions.dll

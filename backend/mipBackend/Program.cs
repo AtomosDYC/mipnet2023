@@ -42,6 +42,9 @@ using mipBackend.Data.EspecieTemporada;
 using mipBackend.Data.Monitores;
 using mipBackend.Data.Personas;
 using mipBackend.Data.Movils;
+using mipBackend.Data.ClienteEstaciones;
+
+
 
 
 using mipBackend.Middleware;
@@ -122,6 +125,8 @@ builder.Services.AddScoped<IMonitorTrampaRepository, MonitorTrampaRepository>();
 builder.Services.AddScoped<IMovilAccesoRepository, MovilAccesoRepository>();
 builder.Services.AddScoped<IMovilPeriodoRepository, MovilPeriodoRepository>();
 builder.Services.AddScoped<IMovilTablaSincroRepository, MovilTablaSincroRepository>();
+builder.Services.AddScoped<IMovilControlReservaRepository, MovilControlReservaRepository>();
+builder.Services.AddScoped<IMovilMonitoreoRepository, MovilMonitoreoRepository>();
 
 
 
@@ -129,6 +134,11 @@ builder.Services.AddScoped<IMovilTablaSincroRepository, MovilTablaSincroReposito
 builder.Services.AddScoped<IPersonaRepository, PersonaRepository>();
 builder.Services.AddScoped<IPersonaComunicacionRepository, PersonaComunicacionRepository>();
 builder.Services.AddScoped<IPersonaAccesoRepository, PersonaAccesoRepository>();
+
+//cliente estacion
+builder.Services.AddScoped<IClienteEstacionRepository, ClienteEstacionRepository>();
+builder.Services.AddScoped<IClienteEstacionComunicacionRepository, ClienteEstacionComunicacionRepository>();
+builder.Services.AddScoped<IClienteEstacionContactoRepository, ClienteEstacionContactoRepository>();
 
 // Add services to the container.
 

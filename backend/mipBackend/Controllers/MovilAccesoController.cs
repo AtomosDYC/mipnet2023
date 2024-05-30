@@ -35,13 +35,13 @@ namespace mipBackend.Controllers
 
         [HttpPost("~/api/movil/GetMonitorMovilAcceso")]
         [ActionName(nameof(GetMonitorMovilAcceso))]
-        public async Task<ActionResult<DataSourceResult>> GetMonitorMovilAcceso
+        public async Task<ActionResult<IEnumerable<MovilAccesoResponseDto>>> GetMonitorMovilAcceso
            (
-               [FromBody] DataSourceRequest requestModel
+               [FromBody] MovilAccesoRequestDto request
            )
         {
 
-            var dataretorno = await _repository.GetMonitorMovilAcceso(requestModel);
+            var dataretorno = await _repository.listMovilAcceso(request);
             return Ok(dataretorno);
 
         }
@@ -121,9 +121,9 @@ namespace mipBackend.Controllers
 
         }
 
-        [HttpPost("~/api/movil/registrar_sincro_movil")]
-        [ActionName(nameof(registrar_sincro_movil))]
-        public async Task<ActionResult<bool>> registrar_sincro_movil(
+        [HttpPost("~/api/movil/registrarsincromovil")]
+        [ActionName(nameof(registrarsincromovil))]
+        public async Task<ActionResult<bool>> registrarsincromovil(
             [FromBody] MovilAccesoSincroResponseDto request
             )
         {

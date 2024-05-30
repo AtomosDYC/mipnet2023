@@ -305,6 +305,16 @@ namespace mipBackend.Data.Movils
         }
 
 
+        public async Task<DateTime> GetDatetimeServer() 
+        {
+            DateTime obx_fecharetorno = DateTime.Now;
+
+
+
+
+            return obx_fecharetorno;
+        }
+
 
     }
 }

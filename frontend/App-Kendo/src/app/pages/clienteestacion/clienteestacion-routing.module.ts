@@ -10,6 +10,31 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'nuevo',
+    loadChildren: () => import('./pages/clienteestacion-nuevo/clienteestacion-nuevo.module').then(m=>m.ClienteestacionNuevoModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'datosgenerales',
+    loadChildren: () => import('./pages/clienteestacion-nuevo/clienteestacion-nuevo.module').then(m=>m.ClienteestacionNuevoModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'datoscomunicacion',
+    loadChildren: () => import('./pages/clienteestacion-nuevo/clienteestacion-nuevo.module').then(m=>m.ClienteestacionNuevoModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'datoscontacto',
+    loadChildren: () => import('./pages/clienteestacion-nuevo/clienteestacion-nuevo.module').then(m=>m.ClienteestacionNuevoModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'estaciones',
+    loadChildren: () => import('./pages/clienteestacion-nuevo/clienteestacion-nuevo.module').then(m=>m.ClienteestacionNuevoModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: 'list'

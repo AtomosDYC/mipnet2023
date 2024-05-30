@@ -32,7 +32,7 @@ export const getSuccess = createSelector(
 
 export const getMonitorbyrut = createSelector(
   getListState,
-  (state: ListState) =>  state.persona
+  (state: ListState) =>  state.monitor
 )
 
 

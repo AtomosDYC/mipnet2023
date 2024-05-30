@@ -1,4 +1,5 @@
-﻿namespace mipBackend.Dtos.MovilDtos
+﻿
+namespace mipBackend.Dtos.MovilDtos
 {
     public class MovilAccesoActividadRequestDto
     {

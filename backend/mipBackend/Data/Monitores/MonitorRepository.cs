@@ -283,7 +283,6 @@ namespace mipBackend.Data.Monitores
 
         }
 
-       
         public async Task DeleteMonitores(int id)
         {
             

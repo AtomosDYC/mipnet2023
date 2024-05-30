@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, UrlSegment, UrlSerializer } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import {  ActivatedRoute, UrlSegment } from '@angular/router';
+
 
 
 @Component({

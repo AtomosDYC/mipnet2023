@@ -1,0 +1,307 @@
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-8"> {{ customMsgService.translate('mantenimientoclienteestacioncontacto') }} </h3>
+        <div class="card-buttons col-md-4 right">
+            <button 
+            kendoButton
+            [toggleable]="true"
+            [selected]="true"
+            (click)="OnFinalizarDatosGenerales()"
+            themeColor="light"
+        >
+            {{ customMsgService.translate('finalizar') }}
+        </button>
+                &nbsp;
+                <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="onContinuar()"
+                    themeColor="primary"
+                >
+                    {{ customMsgService.translate('continuar') }}
+                </button>
+            
+        </div>  
+    </div>
+
+
+    <div class="card-container" *ngIf="verNuevo==true">
+        <div class="card-component">
+
+            <form class="k-form" [formGroup]="Formcontacto">
+                <fieldset class="k-form-fieldset">
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxtipocontacto" text="{{ customMsgService.translate('tipocontacto')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="tipocontactolist"
+                            placeholder="{{ customMsgService.translate('Seleccione')}} {{ customMsgService.translate('tipocontacto')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxtipocontacto"
+                            #cbxtipocontacto
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errortipopersona')}}</kendo-formerror>                    
+                    </kendo-formfield>
+    
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxtipodocumento" text="{{ customMsgService.translate('tipodocumento')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="tipodocumentolist"
+                            placeholder="{{ customMsgService.translate('Seleccione')}} {{ customMsgService.translate('tipodocumento')}}"
+                            textField="description"
+                            valueField="value"
+                            (valueChange)="handleTipodocumentoChange($event)"
+                            formControlName="cbxtipodocumento"
+                            #cbxtipodocumento
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errortipodocumento')}}</kendo-formerror>                    
+                    </kendo-formfield>
+    
+                    <div *ngIf= "VisibleRut==1">
+    
+                        <kendo-formfield>
+                            <kendo-label [for]="txtrut" text="{{ customMsgService.translate('rut')}}"></kendo-label>
+                            <kendo-textbox
+                                formControlName="txtrut"
+                                #txtrut
+                                (inputBlur)="inputBlur()"
+                                (blur)="inputBlur()"
+                            ></kendo-textbox>
+    
+                            <kendo-formerror>Error: {{ customMsgService.translate('errorrut')}}</kendo-formerror>
+                            <span *ngIf="rutnovalido">El rut no es valido</span><br>
+                        </kendo-formfield>
+    
+                    </div>
+    
+                    <div *ngIf= "VisibleRut==2">
+    
+                        <kendo-formfield>
+                            <kendo-label [for]="txtdni" text="{{ customMsgService.translate('dni')}}"></kendo-label>
+                            <kendo-textbox
+                                formControlName="txtdni"
+                                #txtdni
+                                
+                            ></kendo-textbox>
+    
+                            <kendo-formerror>Error: {{ customMsgService.translate('errorrut')}}</kendo-formerror>
+                        </kendo-formfield>
+    
+                    </div>
+                    <div *ngIf= "VisibleRut==3">
+    
+                        <kendo-formfield>
+                            <kendo-label [for]="txtpasaporte" text="{{ customMsgService.translate('pasaporte')}}"></kendo-label>
+                            <kendo-textbox
+                                formControlName="txtpasaporte"
+                                #txtpasaporte
+                            ></kendo-textbox>
+    
+                            <kendo-formerror>Error: {{ customMsgService.translate('errorrut')}}</kendo-formerror>
+                        </kendo-formfield>
+    
+                    </div>
+    
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxtipopersona" text="{{ customMsgService.translate('tipopersona')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="tipopersonalist"
+                            placeholder="{{ customMsgService.translate('Seleccione')}} {{ customMsgService.translate('tipopersona')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxtipopersona"
+                            #cbxtipopersona
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errortipopersona')}}</kendo-formerror>                    
+                    </kendo-formfield>
+    
+    
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxtitulo" text="{{ customMsgService.translate('saludo')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="titulolist"
+                            placeholder="{{ customMsgService.translate('Seleccione')}} {{ customMsgService.translate('saludo')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxtitulo"
+                            #cbxtitulo
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorsaludo')}}</kendo-formerror>                    
+                    </kendo-formfield>
+    
+                    <kendo-formfield>
+                        <kendo-label [for]="txtNombre" text="{{ customMsgService.translate('nombrecontacto')}}"></kendo-label>
+                        <kendo-textbox
+                            formControlName="txtNombre"
+                            #txtNombre
+                            required
+                        ></kendo-textbox>
+    
+                        <kendo-formerror>Error: {{ customMsgService.translate('errornombre')}}</kendo-formerror>
+                    </kendo-formfield>
+
+                    <br/>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxregion" text="{{ customMsgService.translate('region')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="Regionlist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('region')}}"
+                            textField="description"
+                            valueField="value"
+                            (valueChange)="handleRegionChange($event)"
+                            formControlName="cbxregion"
+                            #cbxregion
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorregion')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="cbxcomuna" text="{{ customMsgService.translate('comuna')}} "></kendo-label>
+                        <kendo-combobox
+                            [data]="Comunalist"
+                            placeholder="{{ customMsgService.translate('seleccione')}} {{ customMsgService.translate('comuna')}}"
+                            textField="description"
+                            valueField="value"
+                            formControlName="cbxcomuna"
+                            #cbxcomuna
+                        >
+                        </kendo-combobox>
+                        <kendo-formerror>Error: {{ customMsgService.translate('errorcomuna')}}</kendo-formerror>                    
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txtdireccion" text="{{ customMsgService.translate('direccion')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txtdireccion"
+                        #txtdireccion
+                        ></kendo-textbox>
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txtcasilla" text="{{ customMsgService.translate('casilla')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txtcasilla"
+                        #txtcasilla
+                        ></kendo-textbox>
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txtcodigopostal" text="{{ customMsgService.translate('codigopostal')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txtcodigopostal"
+                        #txtcodigopostal
+                        ></kendo-textbox>
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txtemail" text="{{ customMsgService.translate('email')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txtemail"
+                        #txtemail
+                        ></kendo-textbox>
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txttelefono1" text="{{ customMsgService.translate('telefono')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txttelefono1"
+                        #txttelefono1
+                        ></kendo-textbox>
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txttelefono2" text="{{ customMsgService.translate('telefono2')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txttelefono2"
+                        #txttelefono2
+                        ></kendo-textbox>
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txtcelular1" text="{{ customMsgService.translate('celular')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txtcelular1"
+                        #txtcelular1
+                        ></kendo-textbox>
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txtcelular2" text="{{ customMsgService.translate('celular2')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txtcelular2"
+                        #txtcelular2
+                        ></kendo-textbox>
+                    </kendo-formfield>
+
+                    <kendo-formfield>
+                        <kendo-label [for]="txtsitioweb" text="{{ customMsgService.translate('sitioweb')}}"></kendo-label>
+                        <kendo-textbox
+                        formControlName="txtsitioweb"
+                        #txtsitioweb
+                        ></kendo-textbox>
+                    </kendo-formfield>
+
+                    <div class="k-form-buttons" style="padding-top: 20px;">
+                        <button kendoButton themeColor="secondary" (click)="OnCancelarcontacto()">{{ customMsgService.translate('cancelar')}}</button>  &nbsp;&nbsp;
+                        <button kendoButton themeColor="primary" (click)="onguardarcontacto()">{{ customMsgService.translate('guardar')}}</button>
+
+
+                    </div>
+
+
+
+
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="card-component">
+        <kendo-grid [data]="data$ | async"
+        >
+        <ng-template kendoGridToolbarTemplate>
+            <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="OnNuevo()"
+                    themeColor="primary"
+                >
+                    {{ customMsgService.translate('MantNuevocontacto') }}
+                </button>
+        </ng-template>
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                    <button
+                    kendoButton
+                    iconClass="fa fa-pencil"
+                    title="{{ customMsgService.translate('Edit') }}"
+                    
+                    (click)="OnEditarcontacto(dataItem.cnt01lave, dataItem.cnt06llave)"
+                  ></button>
+                  <button
+                    kendoButton
+                    iconClass="fa-solid fa-trash-can"
+                    title="{{ customMsgService.translate('Delete') }}"
+                    (click)="OnEliminarcontacto(dataItem.cnt01llave, dataItem.cnt06llave)"
+                  ></button>
+                </ng-template>
+              </kendo-grid-command-column>
+            <kendo-grid-column field="per01nombrerazon" title="{{ customMsgService.translate('Contacto') }}"></kendo-grid-column>
+            <kendo-grid-column field="cnt05nombre" title="{{ customMsgService.translate('tipocontacto') }}"></kendo-grid-column>
+            <kendo-grid-column field="per05email" title="{{ customMsgService.translate('email') }}"></kendo-grid-column>
+            <kendo-grid-column field="per05celular1" title="{{ customMsgService.translate('celular') }}"></kendo-grid-column>
+        </kendo-grid>
+    </div>
+
+</div>
+ 

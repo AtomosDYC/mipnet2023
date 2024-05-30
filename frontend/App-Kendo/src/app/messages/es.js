@@ -1,9 +1,25 @@
 // Custom Messages
 export const esCustomMessages = {
+
+    tipocontacto:'Tipo Contacto',
+    nombrecontacto: 'Nombre contacto',
+    mantenimientoclienteestacioncontacto:'Datos de Contacto',
+    MantNuevocontacto:'Nuevo contacto',
+
+    tipocliente: 'Tipo Cliente',
+    errorcbxTipocliente: 'El tipo de cliente es de ingreso obligatorio',
+    nombrefantasia: 'Nombre Fantasia',
+
+    mantenimientoclienteestacionDatosGenerales: 'Datos Generales',
+    mantenimientoclienteestacioncomunicacion:'Datos de Comunicación',
+
     mantenimientoregion: 'Mantenimiento de regiones',
     mantenimientoSaludo: 'Mantenimiento de Saludos',
 
     descargarpdf:'Descargar en PDF',
+
+    //clienteestacion
+    mantenimientoClienteestacion: 'Clientes estaciones', 
 
     //eespecie temporada
     mantenimientoEspecietemporada: 'Mantenimiento de Temporadas de Especies',

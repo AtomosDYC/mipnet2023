@@ -70,6 +70,17 @@ namespace mipBackend.Controllers
 
         }
 
+        [HttpPost("~/api/movilsincro/get_server_date")]
+        [ActionName(nameof(get_server_date))]
+        public async Task<ActionResult<DateTime>> get_server_date()
+        {
+
+            DateTime retorno = await _repository.GetDatetimeServer();
+
+            return Ok(retorno);
+
+        }
+
 
     }
 }

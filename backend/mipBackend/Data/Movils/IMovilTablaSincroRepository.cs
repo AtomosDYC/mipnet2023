@@ -13,7 +13,9 @@ namespace mipBackend.Data.Movils
 
         Task<DataSourceResult> GetTablaSincro(MovilSincroRequestDto request);
 
-        Task<int> UpdateTablaSincro(MovilUpdateTablaSincroRequestDto request); 
+        Task<int> UpdateTablaSincro(MovilUpdateTablaSincroRequestDto request);
+
+        Task<DateTime> GetDatetimeServer();
 
     }
 }
