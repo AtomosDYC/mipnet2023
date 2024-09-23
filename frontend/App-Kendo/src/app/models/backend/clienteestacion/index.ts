@@ -95,3 +95,12 @@ export interface Clienteestacioncontacto{
 export interface Clienteestacioncontactos{
   clienteestacioncontactos: Clienteestacioncontacto[];
 }
+
+export interface MenuEstacion {
+  text?: string;
+  selected?: boolean;
+  path?: string;
+  id?: number;
+  disabled?: boolean;
+  parentId?: number;
+}

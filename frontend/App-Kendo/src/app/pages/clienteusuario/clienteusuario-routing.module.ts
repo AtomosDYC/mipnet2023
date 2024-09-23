@@ -10,6 +10,16 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'nuevo',
+    loadChildren: () => import('./pages/clienteusuario-nuevo/clienteusuario-nuevo.module').then(m=>m.ClienteusuarioNuevoModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'datosgenerales',
+    loadChildren: () => import('./pages/clienteusuario-nuevo/clienteusuario-nuevo.module').then(m=>m.ClienteusuarioNuevoModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: 'list'

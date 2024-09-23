@@ -70,10 +70,6 @@ namespace mipBackend.Controllers
 
         }
 
-        
-
-        
-
 
         [HttpPost("~/api/clienteestacion/createclienteestacion")]
         [ActionName(nameof(createclienteestacion))]

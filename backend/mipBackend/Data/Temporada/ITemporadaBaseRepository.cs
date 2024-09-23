@@ -1,5 +1,6 @@
 ﻿using mipBackend.Models;
 using mipBackend.Dtos.TemporadaDtos;
+using KendoNET.DynamicLinq;
 
 namespace mipBackend.Data.Temporada
 {
@@ -8,7 +9,7 @@ namespace mipBackend.Data.Temporada
 
         Task<bool> SaveChanges();
 
-        Task<IEnumerable<Temp02TemporadaBase>> GetAllTemporadaBase();
+        Task<DataSourceResult> GetAllTemporadaBase(DataSourceRequest requestModel);
 
         Task<Temp02TemporadaBase> GetTemporadaBaseById(int id);
 

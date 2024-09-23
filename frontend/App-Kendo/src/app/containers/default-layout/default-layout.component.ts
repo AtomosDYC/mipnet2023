@@ -11,7 +11,7 @@ import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 import { MessageService } from '@progress/kendo-angular-l10n';
 import { CustomMessagesService } from '../../services/custom-messages.service';
 import { DrawerComponent, DrawerSelectEvent, DrawerMode, DrawerItem, DrawerItemExpandedFn } from '@progress/kendo-angular-layout';
-import { navItems } from './_nav';
+
 
 import {
   SVGIcon,
@@ -23,9 +23,6 @@ import {
 } from "@progress/kendo-svg-icons";
 
 import { MenuService } from '../../services/menu.service';
-import { getExpanded } from '../../store/menu/save.selectors';
-import { MenuExpanded } from '../../store/menu/save.actions';
-import { error } from 'console';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,8 +38,6 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy{
     public loading$: Observable<boolean | null | undefined>
 
     public menuSvg: SVGIcon = menuIcon;
-
-    public navItems: Array<DrawerItem> = navItems;
 
     public expandedIndices = [2];
 
@@ -90,13 +85,17 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy{
       this.isAuthorized$ = this.store.pipe(select(fromUser.getIsAuthorized)) as Observable<boolean>;
     
     
+    
       this._Menu.GetMenu().subscribe(
         allrecords => {
-          this.DataMenu = allrecords     
+          this.DataMenu = allrecords   ;
+          console.log(allrecords);  
         },
         error => this.errorMessage = <any>error
       );
 
+
+      
       this.setDrawerConfig();
 
       window.addEventListener('resize', () => {
@@ -118,10 +117,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy{
       this.loading$.subscribe(
         success => {
 
-          console.log('dentro del loading, dentro del loading, ', success)
-
           this.onVisibleLoader(success);
-          
 
         }
       )
@@ -173,7 +169,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy{
 
     public onSelect(ev: DrawerSelectEvent): void {
 
-        //console.log('dentro del onselect',ev);
+        console.log('dentro del onselect',ev);
 
         this.selected = ev.item.text;
         const current = ev.item.id;

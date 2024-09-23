@@ -43,7 +43,8 @@ using mipBackend.Data.Monitores;
 using mipBackend.Data.Personas;
 using mipBackend.Data.Movils;
 using mipBackend.Data.ClienteEstaciones;
-
+using mipBackend.Data.Estaciones;
+using mipBackend.Data.ClienteUsuarios;
 
 
 
@@ -139,6 +140,12 @@ builder.Services.AddScoped<IPersonaAccesoRepository, PersonaAccesoRepository>();
 builder.Services.AddScoped<IClienteEstacionRepository, ClienteEstacionRepository>();
 builder.Services.AddScoped<IClienteEstacionComunicacionRepository, ClienteEstacionComunicacionRepository>();
 builder.Services.AddScoped<IClienteEstacionContactoRepository, ClienteEstacionContactoRepository>();
+
+//cliente usuario
+builder.Services.AddScoped<IClienteUsuarioRepository, ClienteUsuarioRepository>();
+
+//estaciones
+builder.Services.AddScoped<IEstacionRepository, EstacionRepository>();
 
 // Add services to the container.
 

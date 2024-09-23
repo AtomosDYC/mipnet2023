@@ -1,18 +1,23 @@
 import { TemporadaBaseResponse } from './save.models';
 import * as fromActions from './save.actions';
+import { GridDataResult } from '@progress/kendo-angular-grid';
 
 
 export interface ListState {
   temporadabases: TemporadaBaseResponse[] | null;
   temporadabase: TemporadaBaseResponse | null;
+  temporadabasesource: GridDataResult | null;
   loading: boolean | null;
+  success: boolean | null;
   error: string | null;
 }
 
 export const initialState: ListState = {
   temporadabases: null,
   temporadabase: null,
+  temporadabasesource: null,
   loading: null,
+  success: null,
   error: null
 }
 
@@ -20,16 +25,16 @@ export const initialState: ListState = {
 export function reducer(state: ListState = initialState, action: fromActions.All | any) {
     switch(action.type){
 
-      case fromActions.Types.READ: {
+      case fromActions.Types.READ_TEMPORADABASE: {
         return {...state, loading: true, error: null}
       }
 
-      case fromActions.Types.READ_SUCCESS: {
-        return {...state, loading: false, temporadabases: action.temporadabases}
+      case fromActions.Types.READ_TEMPORADABASE_SUCCESS: {
+        return {...state, loading: false, temporadabasesource: action.temporadabasesource}
       }
 
-      case fromActions.Types.READ_ERROR: { 
-        return  {...state, loading: false, error: action.error}
+      case fromActions.Types.READ_TEMPORADABASE_ERROR: { 
+        return  {...state, loading: false, error: action.error, temporadabasesource: null}
       }
 
 
@@ -93,11 +98,11 @@ export function reducer(state: ListState = initialState, action: fromActions.All
       }
 
       case fromActions.Types.DESACTIVATE_TEMPORADABASE_SUCCESS: {
-        return {...state, loading: false, error: null, temporadabases: action.temporadabases}
+        return {...state, loading: false, error: null, temporadabasesource: action.temporadabasesource}
       }
 
       case fromActions.Types.DESACTIVATE_TEMPORADABASE_ERROR: {
-        return  {...state, loading: false, error: action.error}
+        return  {...state, loading: false, error: action.error, temporadabasesource: null}
       }
 
 
@@ -107,11 +112,11 @@ export function reducer(state: ListState = initialState, action: fromActions.All
 
       case fromActions.Types.ACTIVATE_TEMPORADABASE_SUCCESS: {
 
-        return {...state, loading: false, error: null, temporadabases: action.temporadabases}
+        return {...state, loading: false, error: null, temporadabasesource: action.temporadabasesource}
       }
 
       case fromActions.Types.ACTIVATE_TEMPORADABASE_ERROR: {
-        return  {...state, loading: false, error: action.error}
+        return  {...state, loading: false, error: action.error, temporadabasesource: null}
       }
 
 

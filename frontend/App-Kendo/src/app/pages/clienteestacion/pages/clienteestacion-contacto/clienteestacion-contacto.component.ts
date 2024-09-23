@@ -28,6 +28,7 @@ import { State as RequestState } from "@progress/kendo-data-query";
 import { GridDataResult } from '@progress/kendo-angular-grid';
 
 import { RutService } from 'rut-chileno';
+import  { calcularVerificador } from '../../../../_helpers/rut';
 import { getLoading } from '../../../administracion/comuna/store/save/save.selectors';
 
 
@@ -98,8 +99,9 @@ export class ClienteestacionContactoComponent implements OnInit {
   }
 
   setTipoContactoeditar: SetSelect = {
-    tablename : 'tipo_contacto',
-    prm1 : '1'
+    tablename : 'tipo_contacto_libre_cliente_editar',
+    prm1 : '1',
+    prm2 : '1'
   }
   
   setRegion: SetSelect = {
@@ -334,10 +336,11 @@ export class ClienteestacionContactoComponent implements OnInit {
       );
   }
 
-  onLoadcbxtipocontactoupdate():void {
+  onLoadcbxtipocontactoupdate(id:number):void {
 
-    this.setTipocontacto.prm1 = '1';
-    this._fillcomboservices.GetAllSelect(this.setTipocontacto).subscribe(
+    this.setTipocontacto.prm1 = String(this.ID);
+    this.setTipocontacto.prm2 = String(id);
+    this._fillcomboservices.GetAllSelect(this.setTipoContactoeditar).subscribe(
       allrecords => {
         this.tipocontactolist = allrecords
       },
@@ -348,6 +351,7 @@ export class ClienteestacionContactoComponent implements OnInit {
 
   OnNuevo(){
 
+    this.onLoadcbx();
     this.verNuevo = true;
     this.contactoID = '0';
 
@@ -355,7 +359,7 @@ export class ClienteestacionContactoComponent implements OnInit {
 
   onContinuar(){
     if(this.ID) {
-      this._Route.navigate(['/dashboard/clienteestacion/datoscontacto', this.ID]);
+      this._Route.navigate(['/dashboard/clienteestacion/estaciones', this.ID]);
     }
 
   }
@@ -452,7 +456,9 @@ export class ClienteestacionContactoComponent implements OnInit {
            this.success$ = this.store.pipe(select(fromList.getSuccess));
  
            this.success$.subscribe((success) => { 
-             if(success) {
+             if(success) 
+              
+            {
  
                this.verNuevo = false;
                this.OnLimpiarFormulario();
@@ -471,48 +477,94 @@ export class ClienteestacionContactoComponent implements OnInit {
 
       this.loading$ = this.store.pipe(select(fromList.getLoadingContacto));
 
-      /*
-
         const findRequest : requestsearch = {
           cnt01llave: Number(this.ID),
-          cnt06llave : Number(id_contacto)
+          cnt04llave : Number(id_contacto)
         }
 
         //console.log('editar buscar datos por los ides', findRequest)
 
-        this.store.dispatch(new fromList.GetClienteestacionCommunicacionbyid(findRequest));
+        this.store.dispatch(new fromList.GetClienteestacioncontactobyid(findRequest));
 
         this.store.pipe(select(fromList.getClienteestacioncontactobyidselector))
         .subscribe(data => {
           if(data){
             
-            this.contactoID = data.cnt06llave.toString();
+            this.contactoID = data.cnt04llave.toString();
             this.onLoadcbx();
 
             this.onLoadcbxcomunna(data.sist04llave);
-            this.onLoadcbxtipocontactoupdate();
+            this.onLoadcbxtipocontactoupdate(Number(id_contacto));
+
+            this.contactoID = data.cnt04llave.toString();
+
+              let digitoverificador = ''; 
+              let rutiformat : string | boolean | undefined = ''; 
+              let rut;
+              let dni;
+              let pasaporte;
+
+              this.VisibleRut = data.per08llave;
+              if(data.per08llave==1)
+              {
+
+                if(data.per01rut){
+                  digitoverificador =  calcularVerificador(data.per01rut.toString());
+                }
+
+                rutiformat = this.rutService.getRutChile(0 , data.per01rut.toString()+digitoverificador);
+                
+                if(!rutiformat)
+                {
+                  this.rutnovalido = true;
+                } else {
+                  rut = this.rutService.getRutChileForm(1, rutiformat.toString());
+                }
+
+              } 
+              else if(data.per08llave==2) 
+              {
+                dni = data.per01rut;
+
+              } 
+              else if(data.per08llave==3) 
+              {
+                pasaporte = data.per01rut;
+              } 
+              else 
+              {
+
+              }
 
             this.Formcontacto = new FormGroup({
 
-              cbxtipocontacto: new FormControl( {value: String(data.cnt10llave), description: String(data.cnt10nombre)} , [Validators.required]),
+              cbxtipocontacto: new FormControl( {value: String(data.cnt05llave), description: String(data.cnt05nombre)}),
+              cbxtipodocumento: new FormControl ( {value: String(data.per08llave), description: String(data.per08nombre)}),
+              txtrut: new FormControl( data.per01rut ),
+              txtdni: new FormControl( data.per01rut ),
+              txtpasaporte: new FormControl( data.per01rut ),
+              cbxtipopersona: new FormControl ( {value: String(data.per03llave), description: String(data.per03nombre)}),
+              cbxtitulo: new FormControl ( {value: String(data.per02llave), description: String(data.per02titulo)}),
+              txtNombre: new FormControl ( data.per01nombrerazon ),
+          
               cbxregion: new FormControl( {value: String(data.sist04llave), description: String(data.sist04nombre)} ),
               cbxcomuna: new FormControl( {value: String(data.sist03llave), description: String(data.sist03nombre)} ),
-              txtdireccion: new FormControl( data.cnt06direccion ),
-              txtcasilla: new FormControl( data.cnt06casilla ),
-              txtcodigopostal: new FormControl( data.cnt06codigopostal ),
-              txtemail: new FormControl( data.cnt06email ),
-              txttelefono1: new FormControl( data.cnt06telefono1 ),
-              txttelefono2: new FormControl( data.cnt06telefono2 ),
-              txtcelular1: new FormControl( data.cnt06celular1 ),
-              txtcelular2: new FormControl( data.cnt06celular2 ),
-              txtfax: new FormControl( data.cnt06fax ),
-              txtsitioweb: new FormControl( data.cnt06sitioweb ) 
+              txtdireccion: new FormControl( data.per05direccion ),
+              txtcasilla: new FormControl( data.per05casilla ),
+              txtcodigopostal: new FormControl( data.per05codigopostal ),
+              txtemail: new FormControl( data.per05email ),
+              txttelefono1: new FormControl( data.per05telefono1 ),
+              txttelefono2: new FormControl( data.per05telefono2 ),
+              txtcelular1: new FormControl( data.per05celular1 ),
+              txtcelular2: new FormControl( data.per05celular2 ),
+              txtfax: new FormControl( data.per05fax ),
+              txtsitioweb: new FormControl( data.per05sitioWeb ) 
             });
           
             this.verNuevo = true;
           } 
         });
-        */
+        
     }
   
   }
@@ -522,10 +574,10 @@ export class ClienteestacionContactoComponent implements OnInit {
 
       this.loading$ = this.store.pipe(select(fromList.getLoadingContacto));
 
-      /*
+      
         const DeleteRequest : requestsearch = {
           cnt01llave: Number(this.ID),
-          cnt06llave : Number(id_contacto)
+          cnt04llave : Number(id_contacto)
         }
 
         this.store.dispatch(new fromList.DeleteClienteestacioncontacto(DeleteRequest));
@@ -544,7 +596,7 @@ export class ClienteestacionContactoComponent implements OnInit {
           }
         })
 
-      */
+      
     }
     
     

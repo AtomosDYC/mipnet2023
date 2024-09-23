@@ -7,13 +7,16 @@
         
         <kendo-drawer-container>
             <kendo-drawer
-                #drawer
-                [items]="clienteestacionItems"
+                #drawerestacion
+                [items]="DataMenuEstacion"
                 mode="push"
+                [mini]="mini"
                 [autoCollapse]="false"
-                [mini]="false"
-                [expanded]="true"
+                [isItemExpanded]="isItemExpanded"
                 (select)="onSelect($event)"
+                [animation]="true"
+                [width]="300" 
+                [expanded]="true"
                 
             >
             </kendo-drawer>

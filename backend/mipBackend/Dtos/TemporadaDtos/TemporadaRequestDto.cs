@@ -1,4 +1,7 @@
-﻿namespace mipBackend.Dtos.TemporadaDtos
+﻿using KendoNET.DynamicLinq;
+
+
+namespace mipBackend.Dtos.TemporadaDtos
 {
     public class TemporadaRequestDto
     {
@@ -23,4 +26,21 @@
         public int? temp01periodo { get; set; }
 
     }
+
+    public class TemporadaDesactivarRequestDto 
+    {
+        public TemporadaBaseResponseDto[]? ids { get; set; }
+
+        public DataSourceRequest? filtro { get; set; }
+
+    }
+
+    public class TemporadaEliminarRequestDto
+    {
+        public string? id { get; set; }
+
+        public DataSourceRequest? filtro { get; set; }
+
+    }
+
 }

@@ -1,11 +1,13 @@
 import {Action} from '@ngrx/store';
-import { TemporadaBaseResponse, TemporadaBasesCreaterequest, TemporadaBasesResponse } from './save.models';
+import { TemporadaBaseResponse, TemporadaBasesCreaterequest, TemporadaBasesResponse, TemporadabasedesactivateResponse } from './save.models';
+import { GridDataResult } from '@progress/kendo-angular-grid';
 
+import { State as RequestState } from "@progress/kendo-data-query";
 
 export enum Types {
-  READ = '[TemporadaBase] Read',
-  READ_SUCCESS = '[TemporadaBase] Read:Success',
-  READ_ERROR = '[TemporadaBase] Read:Error',
+  READ_TEMPORADABASE = '[TemporadaBase] Read',
+  READ_TEMPORADABASE_SUCCESS = '[TemporadaBase] Read:Success',
+  READ_TEMPORADABASE_ERROR = '[TemporadaBase] Read:Error',
 
   GET_TEMPORADABASE = '[GET] Get_temporadabase',
   GET_TEMPORADABASE_SUCCESS = '[GET] Get_temporadabase:Success',
@@ -33,122 +35,122 @@ export enum Types {
 
 }
 
-export class Read implements Action {
-  readonly type = Types.READ;
-  constructor(){}
+export class Readtemporadabase implements Action {
+  readonly type = Types.READ_TEMPORADABASE;
+  constructor(public temporadabase: RequestState){}
 }
 
-export class ReadSuccess implements Action {
-  readonly type = Types.READ_SUCCESS;
-  constructor(public temporadabases: TemporadaBaseResponse[]){}
+export class ReadtemporadabaseSuccess implements Action {
+  readonly type = Types.READ_TEMPORADABASE_SUCCESS;
+  constructor(public temporadabasesource: GridDataResult){}
 }
 
-export class ReadError implements Action {
-  readonly type = Types.READ_ERROR;
+export class ReadtemporadabaseError implements Action {
+  readonly type = Types.READ_TEMPORADABASE_ERROR;
   constructor(public error: string){}
 }
 
-export class Getbyid implements Action {
+export class Getbyidtemporadabase implements Action {
   readonly type = Types.GET_TEMPORADABASE;
   constructor(public id: string){}
 }
 
-export class GetbyidSuccess implements Action {
+export class GetbyidtemporadabaseSuccess implements Action {
   readonly type = Types.GET_TEMPORADABASE_SUCCESS;
   constructor(public temporadabase: TemporadaBaseResponse){}
 }
 
-export class GetbyidError implements Action {
+export class GetbyidtemporadabaseError implements Action {
   readonly type = Types.GET_TEMPORADABASE_ERROR;
   constructor(public error: string){}
 }
 
-export class Create implements Action {
+export class Createtemporadabase implements Action {
   readonly type = Types.CREATE_TEMPORADABASE;
   constructor(public temporadabase: TemporadaBasesCreaterequest){}
 }
 
-export class CreateSuccess implements Action {
+export class CreatetemporadabaseSuccess implements Action {
   readonly type = Types.CREATE_TEMPORADABASE_SUCCESS;
   constructor(public temporadabase: TemporadaBaseResponse){}
 }
 
-export class CreateError implements Action {
+export class CreatetemporadabaseError implements Action {
   readonly type = Types.CREATE_TEMPORADABASE_ERROR;
   constructor(public error: string) {}
 }
 
-export class Update implements Action {
+export class Updatetemporadabase implements Action {
   readonly type = Types.UPDATE_TEMPORADABASE;
   constructor(public temporadabase: TemporadaBaseResponse){}
 }
 
-export class UpdateSuccess implements Action {
+export class UpdatetemporadabaseSuccess implements Action {
   readonly type = Types.UPDATE_TEMPORADABASE_SUCCESS;
   constructor(public temporadabase: TemporadaBaseResponse){}
 }
 
-export class UpdateError implements Action {
+export class UpdatetemporadabaseError implements Action {
   readonly type = Types.UPDATE_TEMPORADABASE_ERROR;
   constructor(public error: string) {}
 }
 
 //eliminar
-export class Delete implements Action {
+export class Deletetemporadabase implements Action {
   readonly type = Types.DELETE_TEMPORADABASE;
   constructor(public id: string){}
 }
 
-export class DeleteSuccess implements Action {
+export class DeletetemporadabaseSuccess implements Action {
   readonly type = Types.DELETE_TEMPORADABASE_SUCCESS;
   constructor(public temporadabases: TemporadaBaseResponse[]){}
 }
 
-export class DeleteError implements Action {
+export class DeletetemporadabaseError implements Action {
   readonly type = Types.DELETE_TEMPORADABASE_ERROR;
   constructor(public error: string) {}
 }
 
 //desactivar
-export class Activate implements Action {
+export class Activatetemporadabase implements Action {
   readonly type = Types.ACTIVATE_TEMPORADABASE;
-  constructor(public temporadabases: TemporadaBaseResponse[]){}
+  constructor(public temporadabases: TemporadabasedesactivateResponse){}
 }
 
 
-export class ActivateSuccess implements Action {
+export class ActivatetemporadabaseSuccess implements Action {
   readonly type = Types.ACTIVATE_TEMPORADABASE_SUCCESS;
-  constructor(public temporadabases: TemporadaBaseResponse[]){}
+  constructor(public temporadabasesource: GridDataResult){}
 }
 
-export class ActivateError implements Action {
+export class ActivatetemporadabaseError implements Action {
   readonly type = Types.ACTIVATE_TEMPORADABASE_ERROR;
   constructor(public error: string) {}
 }
 
 //desactivar
-export class Desactivate implements Action {
+export class Desactivatetemporadabase implements Action {
   readonly type = Types.DESACTIVATE_TEMPORADABASE;
-  constructor(public temporadabases: TemporadaBaseResponse[]){}
+  constructor(public temporadabases: TemporadabasedesactivateResponse){}
 }
 
-export class DesactivateSuccess implements Action {
+export class DesactivatetemporadabaseSuccess implements Action {
   readonly type = Types.DESACTIVATE_TEMPORADABASE_SUCCESS;
-  constructor(public temporadabases: TemporadaBaseResponse[]){}
+  constructor(public temporadabasesource: GridDataResult){}
 }
 
-export class DesactivateError implements Action {
+export class DesactivatetemporadabaseError implements Action {
   readonly type = Types.DESACTIVATE_TEMPORADABASE_ERROR;
   constructor(public error: string) {}
 }
 
 export type All =
-  Read | ReadSuccess | ReadError
-| Getbyid | GetbyidSuccess | GetbyidError
-| Create | CreateSuccess | CreateError
-| Update | UpdateSuccess | UpdateError
-| Delete | DeleteSuccess | DeleteError
-| Desactivate | DesactivateSuccess | DesactivateError
-| Activate | ActivateSuccess | ActivateError
+  Readtemporadabase | ReadtemporadabaseSuccess | ReadtemporadabaseError
+| Getbyidtemporadabase | GetbyidtemporadabaseSuccess | GetbyidtemporadabaseError
+| Createtemporadabase | CreatetemporadabaseSuccess | CreatetemporadabaseError
+| Updatetemporadabase | UpdatetemporadabaseSuccess | UpdatetemporadabaseError
+| Deletetemporadabase | DeletetemporadabaseSuccess | DeletetemporadabaseError
+| Desactivatetemporadabase | DesactivatetemporadabaseSuccess | DesactivatetemporadabaseError
+| Activatetemporadabase | ActivatetemporadabaseSuccess | ActivatetemporadabaseError
 
 

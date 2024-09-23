@@ -13,6 +13,7 @@ import { MessageService } from '@progress/kendo-angular-l10n';
 import { CustomMessagesService } from 'src/app/services/custom-messages.service';
 import { CompositeFilterDescriptor, SortDescriptor } from "@progress/kendo-data-query";
 
+
 import { State as RequestState } from "@progress/kendo-data-query";
 
 import { GridDataResult, PageChangeEvent } from "@progress/kendo-angular-grid";
@@ -22,7 +23,7 @@ import {
   filePdfIcon, SVGIcon,
 } from "@progress/kendo-svg-icons";
 import { FormControl, FormGroup } from '@angular/forms';
-import { clienteestaciondesactivateRequest } from '../../store/save/save.models';
+import { clienteestaciondesactivateRequest, menuclienteestacionRequest } from '../../store/save/save.models';
 
 
 @Component({
@@ -162,16 +163,35 @@ export class ClienteestacionListComponent implements OnInit {
  
 
   OnNuevo(){
+
+    const request: menuclienteestacionRequest = {};
+
+    this.store.dispatch(new fromList.GetClienteEstacionmenu(request));
+
     this.store.dispatch(new fromMenu.MenuExpanded(false));
     this._Route.navigate(['/dashboard/clienteestacion/datosgenerales']);
   }
 
   OnEditar(id: number){
+
+    const request: menuclienteestacionRequest = 
+    {
+      cnt01llave : id
+    };
+
+    const llave = btoa(id.toString()); 
+    
+
+    this.store.dispatch(new fromList.GetClienteEstacionmenu(request));
+
     this.store.dispatch(new fromMenu.MenuExpanded(false));
-    this._Route.navigate(['/dashboard/clienteestacion/datosgenerales/', id.toString()]);
+
+    this._Route.navigate(['/dashboard/clienteestacion/datosgenerales/', llave]);
   }
 
   OnEliminar(id: number, estado : number){
+
+
     
     if(estado == 0){
       if (confirm("Esta seguro de eliminar el cliente estación?"))

@@ -1,6 +1,14 @@
 // Custom Messages
 export const esCustomMessages = {
 
+    mantenimientoClienteusuario:'Clientes Usuarios',
+    //estaciones en cliente estacion
+    mantenimientoestaciones:'Estaciones',
+    MantNuevoEstaciones:'Nueva Estación',
+    ultimoingreso:'Ultimo Ingreso',
+    clienteusuariopasadas:'Cliente usuario sin servicio para esta temporada',
+
+    //tipo contacto cliente estacion
     tipocontacto:'Tipo Contacto',
     nombrecontacto: 'Nombre contacto',
     mantenimientoclienteestacioncontacto:'Datos de Contacto',
@@ -20,6 +28,8 @@ export const esCustomMessages = {
 
     //clienteestacion
     mantenimientoClienteestacion: 'Clientes estaciones', 
+
+
 
     //eespecie temporada
     mantenimientoEspecietemporada: 'Mantenimiento de Temporadas de Especies',

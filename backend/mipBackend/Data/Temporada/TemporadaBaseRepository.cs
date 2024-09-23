@@ -7,6 +7,7 @@ using mipBackend.Token;
 using System.Net;
 using AutoMapper;
 using mipBackend.Dtos.TemporadaDtos;
+using KendoNET.DynamicLinq;
 
 namespace mipBackend.Data.Temporada
 {
@@ -57,23 +58,104 @@ namespace mipBackend.Data.Temporada
 
         }
 
-        public async Task DeleteTemporadaBase(int id)
+
+
+        public async Task<DataSourceResult> GetAllTemporadaBase(DataSourceRequest requestModel)
         {
 
-            var TemporadaBase = await _contexto.Temp02TemporadaBases!
-                .FirstOrDefaultAsync(x => x.temp02llave == id);
+            var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
+            string quecontenga = "";
 
-            _contexto.Temp02TemporadaBases!.Remove(TemporadaBase!);
-        }
 
-        public async Task<IEnumerable<Temp02TemporadaBase>> GetAllTemporadaBase()
-        {
-            return await _contexto.Temp02TemporadaBases!.ToListAsync();
+            if (usuario is null)
+            {
+                throw new MiddlewareException(
+                    HttpStatusCode.Unauthorized,
+                    new { mensaje = "El usuario no es valido para hacer esta insercion" }
+                    );
+            }
+
+            using (var db = _contexto)
+            {
+
+                Filter filter = new Filter();
+                if (filter != null)
+                {
+                    IEnumerable<Filter> fil = requestModel.Filter!.Filters;
+                    if (fil != null)
+                    {
+                        foreach (var item in fil)
+                        {
+                            quecontenga = item.Value.ToString();
+                        };
+                    }
+                }
+
+                var query = await (from temp2 in db.Temp02TemporadaBases!
+
+                                   where temp2.temp02nombre!.Contains(quecontenga)
+                                   orderby temp2.temp02nombre
+
+                                   select new TemporadaBaseResponseDto
+                                   {
+
+                                       temp02llave = temp2.temp02llave,
+                                       temp02nombre = temp2.temp02nombre,
+                                       temp02descripcion = temp2.temp02descripcion,
+                                       temp02predeterminada = temp2.temp02predeterminada,
+                                       temp02activo = temp2.temp02activo
+
+
+                                   }).ToDataSourceResultAsync(requestModel.Take, requestModel.Skip, requestModel.Sort, filter);
+
+
+
+
+
+                return query;
+            }
         }
 
         public async Task<Temp02TemporadaBase> GetTemporadaBaseById(int id)
         {
-            return await _contexto.Temp02TemporadaBases!.FirstOrDefaultAsync(x => x.temp02llave == id)!;
+            var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
+            string quecontenga = "";
+
+
+            if (usuario is null)
+            {
+                throw new MiddlewareException(
+                    HttpStatusCode.Unauthorized,
+                    new { mensaje = "El usuario no es valido para hacer esta insercion" }
+                    );
+            }
+
+            using (var db = _contexto)
+            {
+
+                var query = await (from temp2 in db.Temp02TemporadaBases!
+
+                                   where temp2.temp02llave == id
+                                   orderby temp2.temp02nombre
+
+                                   select new Temp02TemporadaBase
+                                   {
+
+                                       temp02llave = temp2.temp02llave,
+                                       temp02nombre = temp2.temp02nombre,
+                                       temp02descripcion = temp2.temp02descripcion,
+                                       temp02predeterminada = temp2.temp02predeterminada,
+                                       temp02activo = temp2.temp02activo
+
+
+                                   }).FirstAsync();
+
+
+
+
+
+                return query;
+            }
         }
 
         public async Task<bool> SaveChanges()
@@ -113,6 +195,26 @@ namespace mipBackend.Data.Temporada
 
 
             _contexto.Temp02TemporadaBases!.Update(TemporadaBase!);
+
+        }
+
+        public async Task DeleteTemporadaBase(int id)
+        {
+
+            var TemporadaBase = await _contexto.Temp02TemporadaBases!
+                .FirstOrDefaultAsync(x => x.temp02llave == id);
+
+
+            if (TemporadaBase.temp02activo == 0)
+            {
+
+                _contexto.Temp02TemporadaBases!.Remove(TemporadaBase!);
+
+            }
+            else
+            {
+                await DisableTemporadaBase(id);
+            }
 
         }
 

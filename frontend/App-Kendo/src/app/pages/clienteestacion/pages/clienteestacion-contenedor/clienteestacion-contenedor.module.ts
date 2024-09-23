@@ -6,6 +6,7 @@ import { ClienteestacionComunicacionModule } from '../clienteestacion-comunicaci
 import { ClienteestacionContactoModule } from '../clienteestacion-contacto/clienteestacion-contacto.module';
 import { ClienteestacionEstacionesComponent } from '../clienteestacion-estaciones/clienteestacion-estaciones.component';
 import { ClienteestacionEstacionesModule } from '../clienteestacion-estaciones/clienteestacion-estaciones.module';
+import { EstacionDatosgeneralesModule } from '../estacion-datosgenerales/estacion-datosgenerales.module';
 
 
 
@@ -21,7 +22,8 @@ import { ClienteestacionEstacionesModule } from '../clienteestacion-estaciones/c
     ClienteestacionDatosgeneralesModule,
     ClienteestacionComunicacionModule,
     ClienteestacionContactoModule,
-    ClienteestacionEstacionesModule
+    ClienteestacionEstacionesModule,
+    EstacionDatosgeneralesModule
   ]
 })
 export class ClienteestacionContenedorModule { }

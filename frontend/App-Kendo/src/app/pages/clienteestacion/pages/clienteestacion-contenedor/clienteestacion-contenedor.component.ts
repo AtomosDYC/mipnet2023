@@ -19,6 +19,13 @@ export class ClienteestacionContenedorComponent implements OnInit {
 
     this.router.parent?.url.subscribe(path =>{
       const url: UrlSegment[] = path.map(path =>{ return path })
+
+      console.log('this.router',this.router);
+      console.log('this.router.parent?.url',this.router.parent?.url);
+      console.log('url',url);
+
+      
+
       this.selectedItem = url[0]!.path;
     });
 

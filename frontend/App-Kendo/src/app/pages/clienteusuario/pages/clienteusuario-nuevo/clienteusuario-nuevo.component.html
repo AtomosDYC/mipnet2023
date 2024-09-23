@@ -1,0 +1,32 @@
+<div class="card-container">
+    
+    <div class="row">
+        <div class="card-header-wrapper">
+            <h3 class="card-title">Mantenimiento De Cliente Usuario</h3>
+        </div>
+        
+        <kendo-drawer-container>
+            <kendo-drawer
+                #drawerestacion
+                [items]="DataMenuEstacion"
+                mode="push"
+                [mini]="mini"
+                [autoCollapse]="false"
+                [isItemExpanded]="isItemExpanded"
+                (select)="onSelect($event)"
+                [animation]="true"
+                [width]="300" 
+                [expanded]="true"
+                
+            >
+            </kendo-drawer>
+
+            <kendo-drawer-content>
+                <app-clienteusuario-contenedor></app-clienteusuario-contenedor>
+            </kendo-drawer-content>
+
+        </kendo-drawer-container>
+
+    </div>
+
+</div>

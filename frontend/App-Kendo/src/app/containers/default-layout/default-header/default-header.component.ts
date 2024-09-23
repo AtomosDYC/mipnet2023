@@ -66,6 +66,7 @@ export class DefaultHeaderComponent {
   }
 
   public onButtonClick(): void {
+    console.log('emitiendo evento del menu principal');
       this.toggle.emit();
   }
 }

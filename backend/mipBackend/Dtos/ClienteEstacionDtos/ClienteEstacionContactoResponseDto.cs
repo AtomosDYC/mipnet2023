@@ -33,5 +33,9 @@
 		public string? per05sitioWeb { get; set; }
 		public Guid? createby { get; set; }
 
-	}
+        public static implicit operator ClienteEstacionContactoResponseDto(ClienteEstacionActivaResponseDto v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

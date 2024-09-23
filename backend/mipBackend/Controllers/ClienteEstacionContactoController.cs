@@ -45,6 +45,28 @@ namespace mipBackend.Controllers
 
         }
 
+
+        [HttpPost("~/api/clienteestacioncontacto/getclienteestacioncontactobyid")]
+        [ActionName(nameof(getclienteestacioncontactobyid))]
+        public async Task<ActionResult<ClienteEstacionComunicacionResponseDto?>> getclienteestacioncontactobyid(
+            [FromBody] ClienteEstacionContactoRequestDto requestModel)
+        {
+
+            var clienteestacion = await _repository.GetAllClienteEstacionContactoById(requestModel);
+
+            if (clienteestacion == null)
+            {
+                throw new MiddlewareException
+                    (
+                        HttpStatusCode.NotFound,
+                        new { mensaje = $"No se encontro el los datos de contacto del cliente estacion" }
+                    );
+            }
+
+            return Ok(clienteestacion);
+
+        }
+
         [HttpPost("~/api/clienteestacioncontacto/createclienteestacioncontacto")]
         [ActionName(nameof(createclienteestacioncontacto ))]
         public async Task<ActionResult<ClienteEstacionResponseDto>> createclienteestacioncontacto
@@ -56,6 +78,21 @@ namespace mipBackend.Controllers
             var dataretorno = await _repository.CreateClienteEstacionContacto(request);
 
             return Ok(dataretorno);
+
+        }
+
+        [HttpPost("~/api/clienteestacioncontacto/deleteclienteestacioncontacto")]
+        [ActionName(nameof(deleteclienteestacioncontacto))]
+        public async Task<ActionResult<bool>> deleteclienteestacioncontacto
+            (
+            [FromBody] ClienteEstacionContactoRequestDto request
+            )
+        {
+
+            await _repository.DeleteClienteEstacionContacto(request);
+            bool dataretorno = await _repository.SaveChanges();
+
+            return Ok();
 
         }
 

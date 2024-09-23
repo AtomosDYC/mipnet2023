@@ -27,8 +27,38 @@ export type ClienteestacioncontactoRequest = Omit<Clienteestacioncontacto,
   'createby'
 >;
 
+
+
 export type ClienteestacioncontactobyidRequest = Omit<Clienteestacioncontacto, 
-'cnt10llave'
+
+'cnt05llave' |
+'cnt05nombre' |
+'per01llave' |
+'per02llave' |
+'per02titulo' |
+'per03llave' |
+'per03nombre' |
+'per08llave' |
+'per08nombre' |
+'per01rut' |
+'per01nombrerazon' |
+'per01activo' |
+'per05direccion' |
+'sist03llave' |
+'sist03nombre' |
+'sist04llave' |
+'sist04nombre' |
+'per05casilla' |
+'per05tienecasilla' |
+'per05codigopostal' |
+'per05email' |
+'per05telefono1' |
+'per05telefono2' |
+'per05celular1' |
+'per05celular2' |
+'per05fax' |
+'per05sitioWeb' |
+'createby'
 >;
 
 

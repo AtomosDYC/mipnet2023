@@ -1,1 +1,59 @@
-<p>clienteestacion-estaciones works!</p>
+<div class="card-container">
+    <div class="card-header-wrapper col-lg-12">
+        <h3 class="card-title col-md-8"> {{ customMsgService.translate('mantenimientoestaciones') }} </h3>
+        <div class="card-buttons col-md-4 right">
+            <button 
+            kendoButton
+            [toggleable]="true"
+            [selected]="true"
+            (click)="OnFinalizarDatosGenerales()"
+            themeColor="light"
+        >
+            {{ customMsgService.translate('finalizar') }}
+        </button>
+                
+            
+        </div>  
+    </div>
+
+
+    <div class="card-component">
+        <kendo-grid [data]="data$ | async"
+        >
+        <ng-template kendoGridToolbarTemplate>
+            <button
+                    kendoButton
+                    [toggleable]="true"
+                    [selected]="true"
+                    (click)="OnNuevo()"
+                    themeColor="primary"
+                >
+                    {{ customMsgService.translate('MantNuevoEstaciones') }}
+                </button>
+        </ng-template>
+            <kendo-grid-command-column title="" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                    <button
+                    kendoButton
+                    iconClass="fa fa-pencil"
+                    title="{{ customMsgService.translate('Edit') }}"
+                    
+                    (click)="OnEditarcomunicacion(dataItem.cnt01lave, dataItem.cnt06llave)"
+                  ></button>
+                  <button
+                    kendoButton
+                    iconClass="fa-solid fa-trash-can"
+                    title="{{ customMsgService.translate('Delete') }}"
+                    (click)="OnEliminarcomunicacion(dataItem.cnt01llave, dataItem.cnt06llave)"
+                  ></button>
+                </ng-template>
+              </kendo-grid-command-column>
+            <kendo-grid-column field="cnt08nombre" title="{{ customMsgService.translate('estacion') }}"></kendo-grid-column>
+            <kendo-grid-column field="sist03nombre" title="{{ customMsgService.translate('comuna') }}"></kendo-grid-column>
+            <kendo-grid-column field="sist04nombre" title="{{ customMsgService.translate('region') }}"></kendo-grid-column>
+            
+        </kendo-grid>
+    </div>
+
+</div>
+ 

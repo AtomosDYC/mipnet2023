@@ -1,8 +1,9 @@
 import {Action} from '@ngrx/store';
-import {  ClienteEstacionRequest, ClienteEstacionResponse, ClienteEstacionRequestUpdate, clienteestaciondesactivateRequest } from './save.models';
+import {  ClienteEstacionRequest, ClienteEstacionResponse, ClienteEstacionRequestUpdate, MenuEstacionResponse } from './save.models';
 
 import { State as RequestState } from "@progress/kendo-data-query";
 import { GridDataResult } from "@progress/kendo-angular-grid";
+import { clienteestaciondesactivateRequest, menuclienteestacionRequest } from 'src/app/pages/clienteestacion/store/save';
 
 export enum Types {
   READ_CLIENTEESTACIONACTIVA = '[ClienteEstacion] Read_ClienteEstacionActiva',
@@ -36,6 +37,10 @@ export enum Types {
   DESACTIVATE_CLIENTEESTACION = '[CLIENTEESTACION] desactivate_ClienteEstacion',
   DESACTIVATE_CLIENTEESTACION_SUCCESS = '[CLIENTEESTACION] desactivate_ClienteEstacion:Success',
   DESACTIVATE_CLIENTEESTACION_ERROR = '[CLIENTEESTACION] desactivate_ClienteEstacion:Error',
+
+  GET_CLIENTEESTACION_MENU = '[ClienteEstacion] Get_ClienteEstacion_menu',
+  GET_CLIENTEESTACION_MENU_SUCCESS = '[ClienteEstacion] Get_ClienteEstacion_menu:Success',
+  GET_CLIENTEESTACION_MENU_ERROR = '[ClienteEstacion] Get_ClienteEstacion_menu:Error',
   
 }
 
@@ -162,12 +167,26 @@ export class DesactivateClienteEstacionError implements Action {
   constructor(public error: string) {}
 }
 
+export class GetClienteEstacionmenu implements Action {
+  readonly type = Types.GET_CLIENTEESTACION_MENU;
+  constructor(public menuclienteestacion: menuclienteestacionRequest){}
+}
 
+export class GetClienteEstacionmenuSuccess implements Action {
+  readonly type = Types.GET_CLIENTEESTACION_MENU_SUCCESS;
+  constructor(public menuusuario: MenuEstacionResponse[]){}
+}
+
+export class GetClienteEstacionmenuError implements Action {
+  readonly type = Types.GET_CLIENTEESTACION_MENU_ERROR;
+  constructor(public error: string){}
+}
 
 export type All =
 ReadClienteEstacionActiva | ReadClienteEstacionActivaSuccess | ReadClienteEstacionActivaError |
 GetClienteEstacionbyid | GetClienteEstacionbyidSuccess | GetClienteEstacionbyidError |
 GetClienteEstacionbyrut | GetClienteEstacionbyrutSuccess | GetClienteEstacionbyrutError |
+GetClienteEstacionmenu | GetClienteEstacionmenuSuccess | GetClienteEstacionmenuError |
 CreateClienteEstacion | CreateClienteEstacionSuccess | CreateClienteEstacionError |
 UpdateClienteEstacion | UpdateClienteEstacionSuccess | UpdateClienteEstacionError |
 DeleteClienteEstacion | DeleteClienteEstacionSuccess | DeleteClienteEstacionError |

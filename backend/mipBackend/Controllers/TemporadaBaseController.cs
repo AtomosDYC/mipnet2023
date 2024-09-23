@@ -5,6 +5,7 @@ using mipBackend.Dtos.TemporadaDtos;
 using mipBackend.Middleware;
 using mipBackend.Models;
 using System.Net;
+using KendoNET.DynamicLinq;
 
 namespace mipBackend.Controllers
 {
@@ -29,16 +30,20 @@ namespace mipBackend.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TemporadaBaseResponseDto>>> GetTemporadaBases()
+        [HttpPost("~/api/temporadabase/gettemporadabases")]
+        [ActionName(nameof(gettemporadabases))]
+        public async Task<ActionResult<DataSourceResult>> gettemporadabases
+            (
+                [FromBody] DataSourceRequest requestModel
+            )
         {
 
-            var TemporadaBases = await _repository.GetAllTemporadaBase();
-            return Ok(_mapper.Map<IEnumerable<TemporadaBaseResponseDto>>(TemporadaBases));
+            DataSourceResult? TemporadaBases = await _repository.GetAllTemporadaBase(requestModel);
+            return Ok(TemporadaBases);
 
         }
 
-        [HttpGet("~/api/TemporadaBase/GetTemporadaBaseById/{id}")]
+        [HttpGet("~/api/temporadabase/GetTemporadaBaseById/{id}")]
         [ActionName(nameof(GetTemporadaBaseById))]
         public async Task<ActionResult<TemporadaBaseResponseDto>> GetTemporadaBaseById(int id)
         {
@@ -59,7 +64,8 @@ namespace mipBackend.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("~/api/temporadabase/CreateTemporadaBase")]
+        [ActionName(nameof(CreateTemporadaBase))]
         public async Task<ActionResult<TemporadaBaseResponseDto>> CreateTemporadaBase
             (
                [FromBody] TemporadaBaseRequestDto TemporadaBase
@@ -119,49 +125,31 @@ namespace mipBackend.Controllers
 
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteTemporadaBase(int id)
-        {
-
-            var TemporadaBasedto = await _repository.GetTemporadaBaseById(id);
-
-            if (TemporadaBasedto == null)
-            {
-
-                throw new MiddlewareException
-                (
-                    HttpStatusCode.NotFound,
-                    new { mensaje = $"No se encontro la TemporadaBase por este id {id}" }
-                );
-            }
-            else
-            {
-                if (TemporadaBasedto.temp02activo == 0)
-                {
-                    await _repository.DeleteTemporadaBase(id);
-                    await _repository.SaveChanges();
-                }
-                else
-                {
-                    await _repository.DisableTemporadaBase(id);
-                    await _repository.SaveChanges();
-                }
-            }
-
-
-            var listTemporadaBases = await _repository.GetAllTemporadaBase();
-            return Ok(_mapper.Map<TemporadaBaseResponseDto[]>(listTemporadaBases));
-
-        }
-
-        [HttpPost("~/api/TemporadaBase/disableTemporadaBase")]
-        public async Task<ActionResult<TemporadaBaseResponseDto[]>> DisableTemporadaBase
+        [HttpPost("~/api/temporadabase/DeleteTemporadaBase")]
+        [ActionName(nameof(DeleteTemporadaBase))]
+        public async Task<ActionResult> DeleteTemporadaBase
             (
-                 [FromBody] TemporadaBaseResponseDto[] TemporadaBases
+                [FromBody] TemporadaEliminarRequestDto TemporadaBase
             )
         {
 
-            foreach (TemporadaBaseResponseDto item in TemporadaBases)
+           +66666666666666            await _repository.DeleteTemporadaBase(TemporadaBase.id);
+            bool dataretorno = await _repository.SaveChanges();
+           
+
+            return Ok();
+
+        }
+
+        [HttpPost("~/api/temporadabase/disableTemporadaBase")]
+        [ActionName(nameof(DisableTemporadaBase))]
+        public async Task<ActionResult<DataSourceResult>> DisableTemporadaBase
+            (
+                 [FromBody] TemporadaDesactivarRequestDto TemporadaBases
+            )
+        {
+
+            foreach (TemporadaBaseResponseDto item in TemporadaBases.ids)
             {
                 var a = _mapper.Map<TemporadaBaseResponseDto>(item);
 
@@ -170,20 +158,22 @@ namespace mipBackend.Controllers
             }
 
 
-            var listTemporadaBases = await _repository.GetAllTemporadaBase();
-            return Ok(_mapper.Map<TemporadaBaseResponseDto[]>(listTemporadaBases));
+
+            DataSourceResult? Temporada = await _repository.GetAllTemporadaBase(TemporadaBases.filtro);
+            return Ok(Temporada);
 
         }
 
 
-        [HttpPost("~/api/TemporadaBase/ActivateTemporadaBase")]
-        public async Task<ActionResult<TemporadaBaseResponseDto[]>> ActivateTemporadaBase
+        [HttpPost("~/api/temporadabase/ActivateTemporadaBase")]
+        [ActionName(nameof(ActivateTemporadaBase))]
+        public async Task<ActionResult<DataSourceResult>> ActivateTemporadaBase
             (
-                 [FromBody] TemporadaBaseResponseDto[] TemporadaBases
+                 [FromBody] TemporadaDesactivarRequestDto TemporadaBases
             )
         {
 
-            foreach (TemporadaBaseResponseDto item in TemporadaBases)
+            foreach (TemporadaBaseResponseDto item in TemporadaBases.ids)
             {
                 var a = _mapper.Map<TemporadaBaseResponseDto>(item);
 
@@ -192,8 +182,8 @@ namespace mipBackend.Controllers
             }
 
 
-            var listTemporadaBases = await _repository.GetAllTemporadaBase();
-            return Ok(_mapper.Map<TemporadaBaseResponseDto[]>(listTemporadaBases));
+            DataSourceResult? Temporada = await _repository.GetAllTemporadaBase(TemporadaBases.filtro);
+            return Ok(Temporada);
 
         }
     }

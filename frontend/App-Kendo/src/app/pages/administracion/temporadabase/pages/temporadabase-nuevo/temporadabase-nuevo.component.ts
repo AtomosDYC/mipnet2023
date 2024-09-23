@@ -53,7 +53,7 @@ export class TemporadabaseNuevoComponent implements OnInit {
 
       if(this.ID) {
 
-        this.store.dispatch(new fromList.Getbyid(this.ID));
+        this.store.dispatch(new fromList.Getbyidtemporadabase(this.ID));
 
         this.loading$ = this.store.pipe(select(fromList.getLoading))!;
         this.store.pipe(select(fromList.getTemporadaBasebyid))
@@ -106,7 +106,7 @@ export class TemporadabaseNuevoComponent implements OnInit {
           temp02activo : 0
         }
 
-        this.store.dispatch(new fromList.Update(DataResponse));
+        this.store.dispatch(new fromList.Updatetemporadabase(DataResponse));
 
       } else {
       
@@ -126,7 +126,7 @@ export class TemporadabaseNuevoComponent implements OnInit {
         
           //console.log('predeterminada', CreateRequest );
           
-          this.store.dispatch(new fromList.Create(CreateRequest));
+          this.store.dispatch(new fromList.Createtemporadabase(CreateRequest));
 
       }
     }

@@ -9,4 +9,9 @@ export interface TemporadaBase{
   export interface TemporadaBases{
     temporadabase: TemporadaBase[];
   }
+
+  
+  export interface TemporadaBases{
+    temporadabase: TemporadaBase[];
+  }
   

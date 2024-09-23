@@ -20,6 +20,7 @@ namespace mipBackend.Data.ClienteEstaciones
         private readonly IUsuarioSesion _usuarioSesion;
         private readonly UserManager<Usuario> _userManager;
         private IMapper _mapper;
+        private ClienteEstacionContactoResponseDto? resultado;
 
         public ClienteEstacionContactoRepository(
             AppDbContext context,
@@ -107,38 +108,114 @@ namespace mipBackend.Data.ClienteEstaciones
         }
 
 
-        public async Task<ClienteEstacionContactoResponseDto> GetAllClienteEstacionContactoById(ClienteEstacionContactoRequestDto request)
+        public async Task<ClienteEstacionContactoResponseDto?> GetAllClienteEstacionContactoById(ClienteEstacionContactoRequestDto request)
         {
+
+            var usuario = await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
+
+            if (usuario is null)
+            {
+                throw new MiddlewareException(
+                    HttpStatusCode.Unauthorized,
+                    new { mensaje = "El usuario no es valido para hacer esta insercion" }
+                    );
+            }
 
             using (var db = _contexto)
             {
 
-                var query = await (from cnt04 in db.cnt04ContactoClientes
-                                   join cnt05 in db.cnt05TipoContactos! on cnt04.cnt05llave equals cnt05.cnt05llave
-                                   join cnt01 in db.cnt01CuentaClientes! on cnt04.cnt01llave equals cnt01.cnt01llave
-                                   join c2 in db.cnt02TipoCuentas! on cnt01.cnt02llave equals c2.cnt02llave
-                                   join per in db.per01personas! on cnt01.per01llave equals per.per01llave
-                                   join gen in db.per02Generos! on per.per02llave equals gen.per02llave
-                                   join c3 in db.cnt03TipoClientes! on cnt01.cnt03llave equals c3.cnt03llave
-                                   join p3 in db.per03Tipopersonas! on per.per03llave equals p3.per03llave
-                                   
+                var query = await (from c4 in db.cnt04ContactoClientes
+                                   join c5 in db.cnt05TipoContactos! on c4.cnt05llave equals c5.cnt05llave
+                                   join c in db.cnt01CuentaClientes! on c4.cnt01llave equals c.cnt01llave
 
+                                   join p1 in db.per01personas! on c4.per01llave equals p1.per01llave
+                                   join p2 in db.per02Generos! on p1.per02llave equals p2.per02llave
+                                   join p8 in db.per08TipoDocumentos! on p1.per08llave equals p8.per08llave
+                                   join p3 in db.per03Tipopersonas! on p1.per03llave equals p3.per03llave
 
-                                   where (cnt01.cnt01llave == request.cnt01llave) &&
-                                   (cnt04.cnt04llave == request.cnt04llave)
+                                   join p5 in db.per05Comunicaciones! on p1.per01llave equals p5.per01llave into p5Group
+                                   from p5 in p5Group.DefaultIfEmpty()
+
+                                   join s3 in db.sist03Comunas! on p5.sist03llave equals s3.sist03llave into s3Group
+                                   from s3 in s3Group.DefaultIfEmpty()
+
+                                   join s4 in db.sist04Regiones! on s3.sist04llave equals s4.sist04llave into s4Group
+                                   from s4 in s4Group.DefaultIfEmpty()
+
+                                   join p4 in db.per04TipoComunicaciones! on p5.per04llave equals p4.per04llave into p4Group
+                                   from p4 in p4Group.DefaultIfEmpty()
+
+                                   where (c.cnt01llave == request.cnt01llave && c4.cnt04llave == request.cnt04llave && p4.per04nombre == "laboral")
 
                                    select new ClienteEstacionContactoResponseDto
                                    {
-                                       cnt01llave  = cnt01.cnt01llave,
-                                       
+
+                                       cnt01llave = c.cnt01llave,
+                                       cnt04llave = c4.cnt04llave,
+                                       cnt05llave = c5.cnt05llave,
+                                       cnt05nombre = c5.cnt05nombre,
+                                       per01llave = p1.per01llave,
+                                       per02llave = p2.per02llave,
+                                       per02titulo = p2.per02titulo,
+                                       per03llave = p3.per03llave,
+                                       per03nombre = p3.per03nombre,
+                                       per08llave = p8.per08llave,
+                                       per08nombre = p8.per08nombre,
+                                       per01rut = p1.per01rut,
+                                       per01nombrerazon = p1.per01nombrerazon,
+                                       per01activo = p1.per01activo,
+                                       per05direccion = p5.per05direccion,
+                                       sist03llave = s3.sist03llave,
+                                       sist03nombre = s3.sist03nombre,
+                                       sist04llave = s4.sist04llave,
+                                       sist04nombre = s4.sist04nombre,
+                                       per05casilla = p5.per05casilla,
+                                       per05tienecasilla = p5.per05tienecasilla,
+                                       per05codigopostal = p5.per05codigopostal,
+                                       per05email = p5.per05email,
+                                       per05telefono1 = p5.per05telefono1,
+                                       per05telefono2 = p5.per05telefono2,
+                                       per05celular1 = p5.per05celular1,
+                                       per05celular2 = p5.per05celular2,
+                                       per05fax = p5.per05fax,
+                                       per05sitioWeb = p5.per05sitioWeb,
+                                       createby = c.createby
+
                                    }
-
-
                                    ).FirstAsync();
 
-
-
                 return query;
+
+                /*
+            string sql = "EXEC pa_mipnet_clienteestacion_contacto_obtener_s @cnt01_llave, @cnt04_llave";
+
+            List<SqlParameter> parms = new List<SqlParameter>
+            {
+                // Create parameter(s)    
+                new SqlParameter { ParameterName = "@cnt01_llave", Value = cnt01 , DbType = System.Data.DbType.Int32 },
+                new SqlParameter { ParameterName = "@cnt04_llave", Value = cnt04 , DbType = System.Data.DbType.Int32 }
+
+            };
+
+            try
+            {
+
+                var query = await _contexto.ClienteEstacionContactoResponse!.FromSqlRaw(sql, parms.ToArray()).FirstOrDefaultAsync();
+
+                ClienteEstacionContactoResponseDto? resutado = query;
+
+
+                return resultado;
+
+            }
+            catch (SqlException ex)
+            {
+                throw new MiddlewareException(
+                   HttpStatusCode.BadRequest,
+                   new { mensaje = ex.Message }
+                   );
+            }
+                */
 
             }
 

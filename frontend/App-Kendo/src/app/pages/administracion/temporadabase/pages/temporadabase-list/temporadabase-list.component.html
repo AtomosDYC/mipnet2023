@@ -7,7 +7,7 @@
                     kendoButton
                     [toggleable]="true"
                     [selected]="true"
-                    (click)="OnNuevo()"
+                    (click)="OnNuevoTemporadabase()"
                 >
                     {{ customMsgService.translate('MantNuevo') }}
                 </button>
@@ -15,36 +15,43 @@
         </div>  
         <span></span>
     </div>
-
+    
+    <form class="k-form" [formGroup]="Form" (keyup.enter)="SubmitSearch(Form.value)">
+        <kendo-textbox
+                [placeholder]="customMsgService.translate('gridSearch')"
+                kendoTextBox
+                [clearButton]="true"
+                class="col-md-12"
+                formControlName="txtSearch"
+                #txtSearch
+            >
+            </kendo-textbox>
+    </form>
 
     <div class="card-component">
-        <kendo-grid [data]="loadData() | async"
+        <kendo-grid [data]="data$ | async"
         
         kendoGridSelectBy="temp02llave"
         [(selectedKeys)]="mySelection"
        
+        (pageChange)="pageChange($event)"
+        [pageSize]="requeststate.take"
+        [skip]="requeststate.skip"
         [pageable]="true"
+        [loading]="loadGrid"
         [sortable]="true"
-        [pageSize]="20"
-        [reorderable]="true"
-        [resizable]="true"
+        [sort]="sort"
+        (sortChange)="sortChange($event)"
         [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
         >
         <ng-template kendoGridToolbarTemplate>
-            <kendo-textbox
-                [placeholder]="customMsgService.translate('gridSearch')"
-                kendoTextBox
-                (valueChange)="onFilter($event)"
-                class="col-md-12"
-            >
-            </kendo-textbox>
-            <kendo-grid-spacer></kendo-grid-spacer>
-            <button type="button" icon="k-i-check k-i-checkmark" kendoButton (click)="onactivateRegion()">{{ customMsgService.translate('MantActivar') }}</button>
-            <button type="button" icon="k-i-close k-i-x" kendoButton (click)="OndisableRegion()">{{ customMsgService.translate('MantDesactivar') }}</button>
-            <button kendoButton kendoGridExcelCommand type="button" icon="file-excel">
+            
+            <button type="button" [svgIcon]="svgpdf" kendoButton (click)="onactivateTemporadabase()">{{ customMsgService.translate('MantActivar') }}</button>
+            <button type="button" [svgIcon]="svgpdf" kendoButton (click)="OndisableTemporadabase()">{{ customMsgService.translate('MantDesactivar') }}</button>
+            <button kendoButton kendoGridExcelCommand type="button" [svgIcon]="svgpdf">
                 {{ customMsgService.translate('MantExpExcel') }}
             </button>
-            <button kendoButton kendoGridPDFCommand icon="file-pdf">{{ customMsgService.translate('MantExpPDF') }}</button>
+            <button kendoButton kendoGridPDFCommand [svgIcon]="svgpdf">{{ customMsgService.translate('MantExpPDF') }}</button>
         </ng-template>
 
 
@@ -63,13 +70,13 @@
                     iconClass="fa fa-pencil"
                     title="{{ customMsgService.translate('Edit') }}"
                     
-                    (click)="OnEditar(dataItem.temp02llave)"
+                    (click)="OnEditarTemporadabase(dataItem.temp02llave)"
                   ></button>
                   <button
                     kendoButton
                     iconClass="fa-solid fa-trash-can"
                     title="{{ customMsgService.translate('Delete') }}"
-                    (click)="OnEliminar(dataItem.temp02llave, dataItem.temp02activo)"
+                    (click)="OnEliminarTemporadabase(dataItem.temp02llave, dataItem.temp02activo)"
                   ></button>
                 </ng-template>
               </kendo-grid-command-column>

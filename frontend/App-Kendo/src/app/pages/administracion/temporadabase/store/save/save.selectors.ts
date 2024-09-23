@@ -4,7 +4,6 @@ import { getTemporadaBaseState , TemporadaBaseState} from '../index';
 
 import { ListState } from './save.reducer';
 
-
 export const getListState = createSelector(
   getTemporadaBaseState,
   (state: TemporadaBaseState) => state.list
@@ -17,13 +16,17 @@ export const getLoading = createSelector(
 
 export const getTemporadaBases = createSelector(
   getListState,
-  (state: ListState) => state.temporadabases
+  (state: ListState) => state.temporadabasesource
 )
 
 export const getTemporadaBasebyid = createSelector(
-    getListState,
-    (state: ListState) =>  state.temporadabase
-  )
+  getListState,
+  (state: ListState) =>  state.temporadabase
+)
 
+export const getSuccess = createSelector(
+  getListState,
+  (state: ListState) => state.success
+)
 
 

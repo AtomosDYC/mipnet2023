@@ -13,7 +13,7 @@ namespace mipBackend.Data.ClienteEstaciones
 
         Task<DataSourceResult> GetAllClienteEstacionContactoDatasource(DataSourceRequest requestModel);
 
-        Task<ClienteEstacionContactoResponseDto> GetAllClienteEstacionContactoById(ClienteEstacionContactoRequestDto request);
+        Task<ClienteEstacionContactoResponseDto?> GetAllClienteEstacionContactoById(ClienteEstacionContactoRequestDto request);
 
         Task<ClienteEstacionContactoResponseDto> CreateClienteEstacionContacto(ClienteEstacionContactoRequestDto request);
 

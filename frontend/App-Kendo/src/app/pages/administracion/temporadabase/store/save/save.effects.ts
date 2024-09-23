@@ -7,12 +7,15 @@ import { catchError, delay, map, switchMap, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import * as fromActions from './save.actions';
 
-import { TemporadaBasesCreaterequest, TemporadaBaseResponse, TemporadaBasesResponse } from './save.models';
+import { TemporadaBasesCreaterequest, TemporadaBaseResponse, TemporadaBasesResponse, TemporadabasedesactivateResponse } from './save.models';
 import { environment } from '../../../../../../environments/environment';
+
+import { State as RequestState } from "@progress/kendo-data-query";
 
 import * as fromvisibleToast from '../../../../../store/notification/notification.actions';
 import { Store } from '@ngrx/store';
 import { State } from '../../../../../store/index';
+import { GridDataResult } from '@progress/kendo-angular-grid';
 
 type Action = fromActions.All;
 
@@ -27,31 +30,38 @@ export class SaveEffects {
 
   ) { }
 
-  read: Observable<Action> = createEffect( () =>
-      this.actions.pipe(
-        ofType(fromActions.Types.READ),
-        switchMap( () =>
-          this.httpClient.get<TemporadaBaseResponse[]>(`${environment.url}api/temporadabase`)
-          .pipe(
-            //delay(1000),
-            map((temporadabases: TemporadaBaseResponse[]) => new fromActions.ReadSuccess(temporadabases) ),
-            catchError(err => of(new fromActions.ReadError(err.message)))
-          )
+  readtemporadabase: Observable<Action> = createEffect(() =>
+    this.actions.pipe(
+      ofType(fromActions.Types.READ_TEMPORADABASE),
+      map((action: fromActions.Readtemporadabase) => action.temporadabase),
+      switchMap((request: RequestState) =>
+        this.httpClient.post<GridDataResult>(`${environment.url}api/temporadabase/gettemporadabases`, request)
+        .pipe(
+          //delay(1000),
+          map((temporadabasesource: GridDataResult) => new fromActions.ReadtemporadabaseSuccess(temporadabasesource)),
+          catchError(err => {
+            this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
+            return of(new fromActions.ReadtemporadabaseError(err.message));
+          })
         )
       )
+    )
   );
 
 
-  getbyid: Observable<Action> = createEffect(() =>
+  getbyidtemporadabase: Observable<Action> = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.Types.GET_TEMPORADABASE),
-      map((action: fromActions.Getbyid) => action.id),
+      map((action: fromActions.Getbyidtemporadabase) => action.id),
       switchMap((id: string) => {
         return this.httpClient.get<TemporadaBaseResponse>(`${environment.url}api/temporadabase/GetTemporadaBaseById/${id}`)
         .pipe(
-          map((temporadabase: TemporadaBaseResponse) => new fromActions.GetbyidSuccess(temporadabase)),
+          map((temporadabase: TemporadaBaseResponse) => new fromActions.GetbyidtemporadabaseSuccess(temporadabase)),
 
-          catchError(err => of(new fromActions.GetbyidError(err.message)))
+          catchError(err => {
+            this.store.dispatch(fromvisibleToast.onError({error: {visible:true, mensaje: 'No hay Temporadas Bases Registrados al ID ingresado', type:'error'}}));
+            return of(new fromActions.GetbyidtemporadabaseError(err.message));
+          })
         )
       }
       )
@@ -59,31 +69,33 @@ export class SaveEffects {
   );
 
 
-  create: Observable<Action> = createEffect(() =>
+  createtemporadabase: Observable<Action> = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.Types.CREATE_TEMPORADABASE),
-      map((action: fromActions.Create) => action.temporadabase),
+      map((action: fromActions.Createtemporadabase) => action.temporadabase),
       switchMap((request: TemporadaBasesCreaterequest) =>
-        this.httpClient.post<TemporadaBaseResponse>(`${environment.url}api/temporadabase`, request)
+        this.httpClient.post<TemporadaBaseResponse>(`${environment.url}api/temporadabase/CreateTemporadaBase`, request)
           .pipe(
             delay(1000),
             tap((response: TemporadaBaseResponse) => {
               this.router.navigate(['dashboard/temporadas/temporadabase/list']);
             }),
-            map((temporadabase: TemporadaBaseResponse) => new fromActions.CreateSuccess(temporadabase)),
+            map((temporadabase: TemporadaBaseResponse) => new fromActions.CreatetemporadabaseSuccess(temporadabase)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
-              return of(new fromActions.CreateError(err.message));
+              if(err){
+                this.store.dispatch(fromvisibleToast.onError({error: {visible:true, mensaje: err.error.errores.mensaje, type:'error'}}));
+              }
+              return of(new fromActions.CreatetemporadabaseError(err.message));
             })
           )
       )
     )
   );
 
-  update: Observable<Action> = createEffect(() =>
+  updatetemporadabase: Observable<Action> = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.Types.UPDATE_TEMPORADABASE),
-      map((action: fromActions.Update) => action.temporadabase),
+      map((action: fromActions.Updatetemporadabase) => action.temporadabase),
       switchMap((request: TemporadaBaseResponse) =>
         this.httpClient.put<TemporadaBaseResponse>(`${environment.url}api/temporadabase`, request)
           .pipe(
@@ -91,42 +103,56 @@ export class SaveEffects {
             tap((response: TemporadaBaseResponse) => {
               this.router.navigate(['dashboard/temporadas/temporadabase/list']);
             }),
-            map((temporadabase: TemporadaBaseResponse) => new fromActions.UpdateSuccess(temporadabase)),
+            map((temporadabase: TemporadaBaseResponse) => new fromActions.UpdatetemporadabaseSuccess(temporadabase)),
             catchError(err => {
-              this.store.dispatch(fromvisibleToast.onError(err.error.errores.mensaje));
-              return of(new fromActions.CreateError(err.message));
+              if(err){
+                this.store.dispatch(fromvisibleToast.onError({error: {visible:true, mensaje: err.error.errores.mensaje, type:'error'}}));
+              }
+              return of(new fromActions.UpdatetemporadabaseError(err.message));
             })
           )
       )
     )
   );
 
-  Delete: Observable<Action> = createEffect(() =>
+  Deletetemporadabase: Observable<Action> = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.Types.DELETE_TEMPORADABASE),
-      map((action: fromActions.Delete) => action.id),
+      map((action: fromActions.Deletetemporadabase) => action.id),
       switchMap((id: string) => {
         return this.httpClient.delete<TemporadaBaseResponse[]>(`${environment.url}api/temporadabase/${id}`)
         .pipe(
-          map((temporadabases: TemporadaBaseResponse[]) => new fromActions.DeleteSuccess(temporadabases)),
+          map((temporadabases: TemporadaBaseResponse[]) => new fromActions.DeletetemporadabaseSuccess(temporadabases)),
 
-          catchError(err => of(new fromActions.DeleteError(err.message)))
+          catchError(err => {
+            if(err){
+              this.store.dispatch(fromvisibleToast.onError({error: {visible:true, mensaje: err.error.errores.mensaje, type:'error'}}));
+            }
+            return of(new fromActions.DeletetemporadabaseError(err.message));
+          })
+
         )
       }
       )
     )
   );
 
-  Desactivate: Observable<Action> = createEffect(() =>
+  Desactivatetemporadabase: Observable<Action> = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.Types.DESACTIVATE_TEMPORADABASE),
-      map((action: fromActions.Desactivate) => action.temporadabases),
-      switchMap((temporadabases: TemporadaBaseResponse[]) => {
-        return this.httpClient.post<TemporadaBaseResponse[]>(`${environment.url}api/temporadabase/disabletemporadabase/`, temporadabases)
+      map((action: fromActions.Desactivatetemporadabase) => action.temporadabases),
+      switchMap((temporadabases: TemporadabasedesactivateResponse) => {
+        return this.httpClient.post<GridDataResult>(`${environment.url}api/temporadabase/disabletemporadabase/`, temporadabases)
         .pipe(
-          map((temporadabases: TemporadaBaseResponse[]) => new fromActions.DesactivateSuccess(temporadabases)),
+          map((temporadabasesource: GridDataResult) => new fromActions.DesactivatetemporadabaseSuccess(temporadabasesource)),
 
-          catchError(err => of(new fromActions.DesactivateError(err.message)))
+          catchError(err => {
+            if(err){
+              this.store.dispatch(fromvisibleToast.onError({error: {visible:true, mensaje: err.error.errores.mensaje, type:'error'}}));
+            }
+            return of(new fromActions.DesactivatetemporadabaseError(err.message));
+          })
+
         )
       }
 
@@ -134,16 +160,21 @@ export class SaveEffects {
     )
   );
 
-  Activate: Observable<Action> = createEffect(() =>
+  Activatetemporadabase: Observable<Action> = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.Types.ACTIVATE_TEMPORADABASE),
-      map((action: fromActions.Activate) => action.temporadabases),
-      switchMap((temporadabases: TemporadaBaseResponse[]) => {
-        return this.httpClient.post<TemporadaBaseResponse[]>(`${environment.url}api/temporadabase/activatetemporadabase/`, temporadabases)
+      map((action: fromActions.Activatetemporadabase) => action.temporadabases),
+      switchMap((temporadabases: TemporadabasedesactivateResponse) => {
+        return this.httpClient.post<GridDataResult>(`${environment.url}api/temporadabase/activatetemporadabase/`, temporadabases)
         .pipe(
-          map((temporadabases: TemporadaBaseResponse[]) => new fromActions.ActivateSuccess(temporadabases)),
+          map((temporadabasesource: GridDataResult) => new fromActions.ActivatetemporadabaseSuccess(temporadabasesource)),
 
-          catchError(err => of(new fromActions.ActivateError(err.message)))
+          catchError(err => {
+            if(err){
+              this.store.dispatch(fromvisibleToast.onError({error: {visible:true, mensaje: err.error.errores.mensaje, type:'error'}}));
+            }
+            return of(new fromActions.ActivatetemporadabaseError(err.message));
+          })
         )
       }
       )

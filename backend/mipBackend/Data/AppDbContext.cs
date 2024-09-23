@@ -5,6 +5,9 @@ using mipBackend.Dtos.UsuarioDtos;
 using mipBackend.Dtos.MonitorDtos;
 using mipBackend.Dtos.MovilDtos;
 using mipBackend.Dtos.ClienteEstacionDtos;
+using mipBackend.Dtos.ClienteUsuarioDtos;
+using mipBackend.Dtos.EstacionDtos;
+
 
 namespace mipBackend.Data
 {
@@ -3386,6 +3389,7 @@ namespace mipBackend.Data
                 entity.Property(e => e.per08nombre)
                     .HasMaxLength(250)
                     .HasColumnName("PER08_nombre");
+
             });
 
             modelBuilder.Entity<per09DefaultUser>(entity =>
@@ -4905,6 +4909,14 @@ namespace mipBackend.Data
 
             modelBuilder.Entity<ClienteEstacionActivaResponseDto>().HasNoKey();
 
+            modelBuilder.Entity<ClienteUsuarioActivaResponseDto>().HasNoKey();
+
+            modelBuilder.Entity<ClienteEstacionContactoResponseDto>().HasNoKey();
+
+            modelBuilder.Entity<EstacionResponseDto>().HasNoKey();
+
+            modelBuilder.Entity<MenuEstacionResponseDto>().HasNoKey();
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -5214,6 +5226,16 @@ namespace mipBackend.Data
         public DbSet<MovilControlReservaResponseDto> MovilControlReservaResponse { get; set; }
 
         public DbSet<ClienteEstacionActivaResponseDto> ClienteEstacionActivaResponse { get; set; }
+
+        public DbSet<ClienteUsuarioActivaResponseDto> ClienteUsuarioActivaResponse { get; set; }
+
+        public DbSet<ClienteEstacionContactoResponseDto> ClienteEstacionContactoResponse { get; set; }
+
+        public DbSet<EstacionResponseDto> EstacionResponse { get; set; }
+
+        public DbSet<MenuEstacionResponseDto> MenuEstacionResponse { get; set; }
+
+
 
     }
 }

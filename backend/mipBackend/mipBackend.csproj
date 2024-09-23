@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>  </UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,7 +40,6 @@
     <Folder Include="Data\Control\" />
     <Folder Include="Data\Bitacoras\" />
     <Folder Include="Data\Clientes\" />
-    <Folder Include="Data\ClienteUsuarios\" />
     <Folder Include="Data\Contactos\" />
     <Folder Include="Data\Conteos\" />
     <Folder Include="Data\Contratos\" />

@@ -100,9 +100,10 @@ export class ClienteestacionDatosgeneralesComponent implements OnInit {
     );
 
     this._routeParams.paramMap.subscribe(params => {
-      this.ID = (params.get('id'));
+      if(params.get('id')) {
 
-      if(this.ID) {
+        const llave : String  | null = (params.get('id'));
+        this.ID = atob(llave!.toString());
 
         this.isDisabledContinuarDG = false;
 

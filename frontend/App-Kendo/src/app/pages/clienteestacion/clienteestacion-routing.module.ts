@@ -34,6 +34,22 @@ const routes: Routes = [
     loadChildren: () => import('./pages/clienteestacion-nuevo/clienteestacion-nuevo.module').then(m=>m.ClienteestacionNuevoModule),
     canActivate: [AuthGuard]
   },
+  { 
+    path: 'estaciones/:id', 
+    loadChildren: () => import('./pages/clienteestacion-nuevo/clienteestacion-nuevo.module').then(m=>m.ClienteestacionNuevoModule),
+    canActivate: [AuthGuard]
+   },
+   {
+    path: 'estaciones/:id/datosgenerales', 
+    loadChildren: () => import('./pages/clienteestacion-nuevo/clienteestacion-nuevo.module').then(m=>m.ClienteestacionNuevoModule),
+    canActivate: [AuthGuard]
+    },
+   {
+    path: 'estaciones/:id/datosgenerales/:idestacion', 
+    loadChildren: () => import('./pages/clienteestacion-nuevo/clienteestacion-nuevo.module').then(m=>m.ClienteestacionNuevoModule),
+    canActivate: [AuthGuard]
+ },
+
   {
     path: '**',
     pathMatch: 'full',

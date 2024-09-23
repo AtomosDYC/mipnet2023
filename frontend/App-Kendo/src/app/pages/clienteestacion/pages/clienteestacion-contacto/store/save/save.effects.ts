@@ -53,7 +53,7 @@ export class SaveEffects {
   );
 
   
-  GetClienteEstacionComunicacionbyid: Observable<Action> = createEffect(() =>
+  GetClienteestacioncontactobyid: Observable<Action> = createEffect(() =>
   this.actions.pipe(
     ofType(fromActions.Types.GET_CLIENTEESTACION_CONTACTO_BYID),
     map((action: fromActions.GetClienteestacioncontactobyid) => action.requestbyid),

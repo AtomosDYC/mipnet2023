@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import * as fromRoot from '../../../../store';
+import { select, Store } from '@ngrx/store';
 
 import { clienteestacionItems } from './_nav';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Path } from '@progress/kendo-drawing';
-import { DrawerSelectEvent } from '@progress/kendo-angular-layout';
+import { DrawerComponent, DrawerItemExpandedFn, DrawerMode, DrawerSelectEvent } from '@progress/kendo-angular-layout';
+
+import { MenuService } from '../../../../services/menu.service';
+import { MenuestacionService } from '../../../../services/menuestacion.service';
+
+
 
 interface Item {
   text: string;
@@ -20,70 +27,128 @@ interface Item {
 })
 export class ClienteestacionNuevoComponent implements OnInit {
 
-  public clienteestacionItems: Array<Item> = clienteestacionItems;
-  
-  public selected = "Tipo Comunicacion";
-
   public ID: string | null;
 
-  constructor(private router: Router, 
-    private _routeParams: ActivatedRoute) { 
+  public selected = "Tipo Comunicacion";
+  public expandedIndices = [1];
 
+  private _Menu;
+  public DataMenuEstacion = clienteestacionItems;
+  private errorMessage;
+  public mode: DrawerMode = 'push';
+  public mini = false;
+  public expandible: boolean =  true;
+
+  @ViewChild('drawerestacion')
+  drawer!: DrawerComponent;
+
+  
+  public isItemExpanded: DrawerItemExpandedFn = (item): boolean => {
+    return this.expandedIndices.indexOf(item.id) >= 0;
+};
+
+
+  public toggleDrawer(drawer: DrawerComponent): void {
+    if(drawer){
+      //drawer.toggle();
+    }
+  }
+
+
+  constructor(private router: Router, 
+    private store: Store<fromRoot.State>,
+    private _routeParams: ActivatedRoute,
+    MenuestacionService: MenuestacionService) { 
+      this._Menu = MenuestacionService;
     }
 
   ngOnInit(): void {
 
-    //console.log('url',this._routeParams.snapshot);
-    const rutas = this.router.url.split('/')
-    const largo = rutas.length;
+    console.log('dentro del contenedor nuevo');
 
     this._routeParams.paramMap.subscribe(params => {
-      this.ID = (params.get('id'));
+      const llave = (params.get('id'));
 
-      if(this.ID) {
+      if(llave) {
+        this.ID = atob(llave);
+      
+        this._Menu.GetMenuEstacion(llave.toString(), this.ID.toString()).subscribe(
+            allrecords => {
 
-        const dato =  this.clienteestacionItems.map((item:Item)=>{
-          var d:Item;
-          if(item.path.split('/')[3] == this.router.url.split('/')[3]){
-            d = {
-              text: item.text,
-              path: item.path,
-              id: item.id,
-              disabled: false,
-              selected:true,
-            }
-          } else {
-            d = {
-              text: item.text,
-              path: item.path,
-              id: item.id,
-              disabled: false,
-              selected:false,
-            }
-          }
-         return d;
-        });
+              this.DataMenuEstacion = allrecords   ;  
+
+            },
+            error => this.errorMessage = <any>error
+          );
+
+          this.setDrawerConfig();
+
+          window.addEventListener('resize', () => {
+              this.setDrawerConfig();
+          });
+
+          this.toggleDrawer(this.drawer);
+        }
+      });
+
+    }
+
+  public setDrawerConfig() {
     
-        this.clienteestacionItems = dato;
-        //console.log('cliente estacion dato',dato);
+    const pageWidth = window.innerWidth;
+    if (pageWidth <= 840) {
+        this.mode = 'overlay';
+        this.mini = false;
+    } else {
+        this.mode = 'push';
+        this.mini = true;
+    }
 
-      }
-    });
-
-  }
+}
 
   public onSelect(ev: DrawerSelectEvent): void {
+
+    console.log('dentro del onselect de la estacion',ev);
+
     this.selected = ev.item.text;
     const current = ev.item.id;
 
-    if(ev.item.path){
-      if(this.ID) {
-        this.router.navigate([ev.item.path + this.ID]);
-      } else {
-        this.router.navigate([ev.item.path]);
+    if (this.expandedIndices.indexOf(current) >= 0) {
+      //console.log('esta opcion tiene hijos');
+
+      this.expandedIndices = this.expandedIndices.filter(
+          (id) => id !== current
+      );
+      if(ev.item.path){
+
+        console.log('ev.item.path',ev.item.path);
+       
+        if(ev.item.path == 'default.aspx')
+        {
+
+        } else {
+          this.router.navigate([ev.item.path]);
+          
+        }
       }
+
+    } else {
+
+      //console.log('esta opcion no tiene hijos');
+      this.expandedIndices.push(current);
+      if(ev.item.path){
+
+        console.log('ev.item.path 2 ',ev.item.path);
+        
+        
+        this.router.navigate([ev.item.path]);
+        
+      } 
+
     }
 
-  }
+    
+    this.selected = ev.item.text;
+}
 
 }
